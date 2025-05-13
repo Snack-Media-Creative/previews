@@ -1,2 +1,2 @@
-# previews
-Previews for Snack Media
+# preview Email for Mizuno
+Previews for Mizuno Email May 2025
