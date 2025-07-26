@@ -11,7 +11,6 @@
 
 <!-- snack load gdpr -->
 <script src='https://widgets.snack-projects.co.uk/gdpr/snack-cmp_v3.min.js' id='snack-cmp' async></script>
-<script src="scripts/snack-creative-ad-code.js"></script>
 
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
@@ -20,6 +19,128 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 </style>
 
 
+<script>
+  // --SNACK CREATIVE AD CODE--
+  // --BUILT BY ATB_MD_01/01/23 -- DO NOT MODIFY
+
+  function getQueryParams() {
+    const params = {};
+    const queryString = window.location.search.slice(1); // Remove "?"
+    queryString.split("&").forEach((part) => {
+      const [key, value] = part.split("=");
+      if (key && value) {
+        params[decodeURIComponent(key)] = decodeURIComponent(value);
+      }
+    });
+    return params;
+  }
+
+  function getPageName() {
+    const url = window.location.pathname;
+    const pageName = url.split("/").pop().split("?")[0].split("#")[0];
+    return pageName;
+  }
+
+  const pageName = getPageName();
+
+  // Load external scripts
+  const scripts = [
+    {
+      src: "//securepubads.g.doubleclick.net/tag/js/gpt.js",
+      async: true,
+    },
+  ];
+
+  scripts.forEach((script) => {
+    const el = document.createElement("script");
+    el.src = script.src;
+    if (script.defer) el.defer = true;
+    else if (script.async) el.async = true;
+    if (script.onload) el.onload = script.onload;
+    document.head.appendChild(el);
+  });
+
+  window.googletag = window.googletag || { cmd: [] };
+
+  googletag.cmd.push(function () {
+    // Size mappings
+    const crown = googletag
+      .sizeMapping()
+      .addSize([1210, 0], [468, 60])
+      .addSize([992, 0], [468, 60])
+      .addSize([768, 0], [468, 60])
+      .addSize([320, 0], [468, 60])
+      .addSize([0, 0], [468, 60])
+      .build();
+
+    const interscroller = googletag
+      .sizeMapping()
+      .addSize([1210, 0], [970, 250])
+      .addSize([992, 0], [300, 250])
+      .addSize([768, 0], [300, 250])
+      .addSize([320, 0], [300, 250])
+      .addSize([0, 0], [300, 250])
+      .build();
+
+    const footer = googletag
+      .sizeMapping()
+      .addSize([1210, 0], [728, 90])
+      .addSize([992, 0], [728, 90])
+      .addSize([768, 0], [728, 90])
+      .addSize([320, 0], [320, 100])
+      .addSize([0, 0], [320, 100])
+      .build();
+
+    // Ad slots with real GAM unit paths
+    const adSlots = [
+      {
+        name: "crownUnit",
+        size: [468, 60],
+        mapping: crown,
+        path: "/6428571/Snack-creative.com/Snack-creative.com-crown",
+      },
+      {
+        name: "interscrollerUnit",
+        size: [970, 250],
+        mapping: interscroller,
+        path: "/6428571/Snack-creative.com/Snack-creative.com-interscroller",
+      },
+      {
+        name: "footerUnit",
+        size: [320, 100],
+        mapping: footer,
+        path: "/6428571/Snack-creative.com/Snack-creative.com-footer",
+      },
+    ];
+
+    adSlots.forEach((slot) => {
+      googletag
+        .defineSlot(slot.path, slot.size, slot.name)
+        .defineSizeMapping(slot.mapping)
+        .addService(googletag.pubads());
+    });
+
+    googletag.pubads().enableLazyLoad({
+      fetchMarginPercent: 5,
+      renderMarginPercent: 2,
+      mobileScaling: 2.0,
+    });
+
+    googletag.pubads().setTargeting("page", pageName);
+
+    const queryParams = getQueryParams();
+
+      if (queryParams.advertiser) {
+    googletag.pubads().setTargeting("Preview-client", queryParams.advertiser);
+  }
+
+  if (queryParams.campaign) {
+    googletag.pubads().setTargeting("preview-campaign", queryParams.campaign);
+  }
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+  });
+</script>
 
 
 </head>
@@ -48,7 +169,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <!-- Header -->
 <header class="w3-container w3-red w3-center" style="padding:128px 16px">
   <h1 class="w3-margin w3-jumbo">START PAGE</h1>
-  <p class="w3-xlarge">crown template external library</p>
+  <p class="w3-xlarge">crown template</p>
   <button class="w3-button w3-black w3-padding-large w3-large w3-margin-top">Get Started</button>
 </header>
 
@@ -130,8 +251,42 @@ function myFunction() {
 }
 </script>
 
-<!-- snack GDP code -->
-<script src="scripts/gpt.js"></script>
+<script>
+    $w.onReady(function () {
+  // Add the GPT script to the page
+  const gptScript = document.createElement("script");
+  gptScript.src = "https://securepubads.g.doubleclick.net/tag/js/gpt.js";
+  gptScript.async = true;
+  gptScript.crossOrigin = "anonymous";
+  document.head.appendChild(gptScript);
 
+  // Wait for GPT script to load
+  gptScript.onload = () => {
+    window.googletag = window.googletag || { cmd: [] };
+
+    googletag.cmd.push(function () {
+      googletag.defineSlot(
+        '/6428571/Snack-creative.com/Snack-creative.com-crown',
+        [468, 60],
+        'div-gpt-ad-1753194013326-0'
+      ).addService(googletag.pubads());
+
+      googletag.pubads().enableSingleRequest();
+      googletag.pubads().collapseEmptyDivs();
+      googletag.enableServices();
+      googletag.display('div-gpt-ad-1753194013326-0');
+    });
+  };
+
+  // Inject the ad container div into the page (you can change its location)
+  const adDiv = document.createElement("div");
+  adDiv.id = "div-gpt-ad-1753194013326-0";
+  adDiv.style.width = "468px";
+  adDiv.style.height = "60px";
+
+  // Append the ad container to the page body or a specific element
+  document.body.appendChild(adDiv); // Or target a specific container if needed
+});
+</script>
 </body>
 </html>
