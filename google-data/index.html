@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-m">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>300x250 Banner</title>
+    <style>
+        /* Basic styles for the 300x250 banner */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        #banner {
+            width: 300px;
+            height: 250px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-sizing: border-box; /* Ensures padding is inside the dimensions */
+            background-color: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        #quiz-form {
+            width: 100%;
+        }
+        .question-group {
+            margin-bottom: 10px;
+            font-size: 12px;
+        }
+        .question-group p {
+            margin: 0 0 5px 0;
+            font-weight: bold;
+        }
+        .question-group label {
+            margin-right: 15px;
+            cursor: pointer;
+        }
+        #submit-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+        #submit-btn:hover {
+            background-color: #0056b3;
+        }
+        #status-message {
+            font-size: 12px;
+            text-align: center;
+            margin-top: 10px;
+            height: 20px;
+        }
+        #thank-you {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="banner">
+        <form id="quiz-form">
+            <div class="question-group">
+                <p>1. Q1?</p>
+                <label><input type="radio" name="q1" value="Yes" required> Yes</label>
+                <label><input type="radio" name="q1" value="No"> No</label>
+            </div>
+            
+            <div class="question-group">
+                <p>2. Q2?</p>
+                <label><input type="radio" name="q2" value="Yes" required> Yes</label>
+                <label><input type="radio" name="q2" value="No"> No</label>
+            </div>
+            
+            <div class="question-group">
+                <p>3. Q3?</p>
+                <label><input type="radio" name="q3" value="Yes" required> Yes</label>
+                <label><input type="radio" name="q3" value="No"> No</label>
+            </div>
+            
+            <div class="question-group">
+                <p>4. Q4?</p>
+                <label><input type="radio" name="q4" value="Yes" required> Yes</label>
+                <label><input type="radio" name="q4" value="No"> No</label>
+            </div>
+
+            <button type="submit" id="submit-btn">Submit</button>
+            <p id="status-message"></p>
+        </form>
+    </div>
+
+    <script>
+        // --- PASTE YOUR GOOGLE APPS SCRIPT URL HERE ---
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyAuTbkVoCOb5zvDmF5CE-eGz-kAssIzTj-zSfVeJOSPy91Ki3zJH5MB8SuQFZFmiMcdw/exec';
+        // ------------------------------------------------
+
+        const form = document.getElementById('quiz-form');
+        const statusMessage = document.getElementById('status-message');
+        const banner = document.getElementById('banner');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault(); // Stop the form from submitting normally
+            
+            // Show loading message
+            statusMessage.textContent = 'Submitting...';
+            document.getElementById('submit-btn').disabled = true;
+
+            const formData = new FormData(form);
+
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === 'success') {
+                    // Show a thank you message inside the banner
+                    banner.innerHTML = '<div id="thank-you">Thank You!</div>';
+                } else {
+                    // Show error
+                    statusMessage.textContent = 'Error. Please try again.';
+                    statusMessage.style.color = 'red';
+                    document.getElementById('submit-btn').disabled = false;
+                }
+            })
+            .catch(error => {
+                // Show network error
+                console.error('Error:', error);
+                statusMessage.textContent = 'Network error. Try again.';
+                statusMessage.style.color = 'red';
+                document.getElementById('submit-btn').disabled = false;
+            });
+        });
+    </script>
+
+</body>
+</html>
