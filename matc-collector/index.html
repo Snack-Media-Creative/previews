@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Match Prediction Form</title>
+    <style>
+        :root {
+            --primary: #2ecc71;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light);
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+        h2 { text-align: center; color: var(--dark); margin-bottom: 20px; }
+
+        .match-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f8f9fa;
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        .match-label {
+            font-weight: bold;
+            color: var(--dark);
+            width: 80px;
+            font-size: 0.9rem;
+        }
+        
+        /* Stepper Styling */
+        .score-control {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .stepper-btn {
+            background-color: var(--dark);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+        .stepper-btn:hover { background-color: var(--primary); }
+        .stepper-btn:active { transform: scale(0.95); }
+        
+        input[type="number"] {
+            width: 40px;
+            text-align: center;
+            font-size: 1.2rem;
+            border: none;
+            background: transparent;
+            font-weight: bold;
+            -moz-appearance: textfield; /* Firefox remove arrows */
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .separator { font-weight: bold; color: #aaa; margin: 0 10px; }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        button[type="submit"]:hover { background-color: #27ae60; }
+        
+        /* Loading and Success states */
+        #status {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>BET365</h2>
+    <form id="footballForm">
+        <div id="matches-container">
+            </div>
+        <button type="submit" id="submitBtn">Submit Results</button>
+        <p id="status"></p>
+    </form>
+</div>
+
+<script>
+    // --- CONFIGURATION ---
+    // PASTE YOUR GOOGLE WEB APP URL HERE
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyqx1WeNpIzklM9Kii3SxZkltTt8-t1GHMR_1DF9tbz_LANZiSfcrE3nvTAc7EnLwNZ/exec'; 
+
+    const matchesContainer = document.getElementById('matches-container');
+
+    // Generate 6 matches dynamically
+    for (let i = 1; i <= 6; i++) {
+        const matchDiv = document.createElement('div');
+        matchDiv.className = 'match-row';
+        
+        matchDiv.innerHTML = `
+            <div class="match-label">Home ${i}</div>
+            
+            <div class="score-control">
+                <button type="button" class="stepper-btn" onclick="updateScore('home_${i}', -1)">-</button>
+                <input type="number" id="home_${i}" name="Match ${i} Home" value="0" readonly>
+                <button type="button" class="stepper-btn" onclick="updateScore('home_${i}', 1)">+</button>
+            </div>
+            
+            <span class="separator">-</span>
+            
+            <div class="score-control">
+                <button type="button" class="stepper-btn" onclick="updateScore('away_${i}', -1)">-</button>
+                <input type="number" id="away_${i}" name="Match ${i} Away" value="0" readonly>
+                <button type="button" class="stepper-btn" onclick="updateScore('away_${i}', 1)">+</button>
+            </div>
+
+            <div class="match-label">Away ${i}</div>
+        `;
+        matchesContainer.appendChild(matchDiv);
+    }
+
+    // Stepper Logic
+    window.updateScore = function(inputId, change) {
+        const input = document.getElementById(inputId);
+        let val = parseInt(input.value);
+        val += change;
+        if (val < 0) val = 0; // Prevent negative scores
+        input.value = val;
+    };
+
+    // Form Submission Logic
+    const form = document.getElementById('footballForm');
+    const statusMsg = document.getElementById('status');
+    const submitBtn = document.getElementById('submitBtn');
+
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        
+        if(GOOGLE_SCRIPT_URL.includes('YOUR_GOOGLE_SCRIPT')) {
+            alert('Please update the Script URL in the code!');
+            return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Uploading...";
+        statusMsg.style.display = "none";
+
+        const formData = new FormData(form);
+
+        fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            statusMsg.innerText = "✅ Successfully saved to Google Sheet!";
+            statusMsg.style.color = "green";
+            statusMsg.style.display = "block";
+            form.reset();
+            // Reset visible values to 0 manually since reset() doesn't affect innerHTML/JS values sometimes
+            document.querySelectorAll('input[type="number"]').forEach(input => input.value = 0);
+            submitBtn.innerText = "Submit Results";
+            submitBtn.disabled = false;
+        })
+        .catch(error => {
+            console.error('Error!', error.message);
+            statusMsg.innerText = "❌ Error uploading data.";
+            statusMsg.style.color = "red";
+            statusMsg.style.display = "block";
+            submitBtn.disabled = false;
+        });
+    });
+</script>
+
+</body>
+</html>

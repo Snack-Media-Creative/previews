@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BET365</title>
+    <style>
+        /* Base Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #222; /* just for preview background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Main Widget Container 300x600 */
+        .widget-container {
+            width: 300px;
+            height: 600px;
+            background-color: #000000;
+            color: white;
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #333;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 15px 0 5px 0;
+            text-transform: uppercase;
+            font-style: italic;
+            font-weight: 900;
+            letter-spacing: 1px;
+            font-size: 14px;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        /* Scrollable Match Area */
+        .matches-wrapper {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        /* Custom Scrollbar for sleek look */
+        .matches-wrapper::-webkit-scrollbar {
+            width: 6px;
+        }
+        .matches-wrapper::-webkit-scrollbar-track {
+            background: #000;
+        }
+        .matches-wrapper::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 3px;
+        }
+
+        /* Individual Match Card */
+        .match-row {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            margin-bottom: 12px;
+            padding: 10px 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .team-names {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 10px;
+            margin-bottom: 5px;
+            font-size: 14px;
+            font-weight: 800;
+            font-style: italic;
+        }
+
+        .match-interface {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        /* Jersey Styles */
+        .jersey-col {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .jersey-svg {
+            width: 45px;
+            height: 45px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+        }
+
+        /* Score Controls */
+        .score-col {
+            flex: 0 0 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .arrow-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+        .arrow-btn:hover { opacity: 1; }
+
+        .arrow-svg {
+            width: 16px;
+            height: 16px;
+            stroke: #66ffcc; /* The Neon Green color */
+            stroke-width: 3;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .score-input {
+            width: 40px;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 28px;
+            font-weight: 900;
+            text-align: center;
+            font-family: 'Arial Narrow', sans-serif;
+            appearance: none;
+            -moz-appearance: textfield;
+            margin: 2px 0;
+        }
+        /* Remove default input arrows */
+        .score-input::-webkit-outer-spin-button,
+        .score-input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .divider {
+            color: #444;
+            font-weight: bold;
+            font-size: 20px;
+            margin: 0 5px;
+        }
+
+        /* Footer / Button */
+        .footer {
+            padding: 15px;
+            background: linear-gradient(to top, #000 0%, transparent 100%);
+            flex-shrink: 0;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: transparent;
+            border: 2px solid #66ffcc;
+            color: #66ffcc;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: capitalize;
+        }
+
+        .submit-btn:hover {
+            background: #66ffcc;
+            color: #000;
+            box-shadow: 0 0 15px rgba(102, 255, 204, 0.4);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="widget-container">
+        <div class="header">
+            BET365
+        </div>
+
+        <form id="matchForm" class="matches-wrapper">
+            
+            <div class="match-row">
+                <div class="team-names">
+                    <span>Arsenal</span>
+                    <span>Chelsea</span>
+                </div>
+                <div class="match-interface">
+                    <div class="jersey-col">
+                        <svg class="jersey-svg" viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="50" fill="none" stroke="white" stroke-width="2"/>
+                        </svg>
+                    </div>
+
+                    <div class="score-col">
+                        <button type="button" class="arrow-btn up" onclick="adjustScore(this, 1)">
+                            <svg class="arrow-svg" viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg>
+                        </button>
+                        <input type="number" name="m1_home" class="score-input" value="0" min="0" readonly>
+                        <button type="button" class="arrow-btn down" onclick="adjustScore(this, -1)">
+                            <svg class="arrow-svg" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                    </div>
+
+                    <div class="divider">-</div>
+
+                    <div class="score-col">
+                        <button type="button" class="arrow-btn up" onclick="adjustScore(this, 1)">
+                            <svg class="arrow-svg" viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg>
+                        </button>
+                        <input type="number" name="m1_away" class="score-input" value="0" min="0" readonly>
+                        <button type="button" class="arrow-btn down" onclick="adjustScore(this, -1)">
+                            <svg class="arrow-svg" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                    </div>
+
+                    <div class="jersey-col">
+                        <svg class="jersey-svg" viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="50" fill="none" stroke="white" stroke-width="2"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            </form>
+
+        <div class="footer">
+            <button class="submit-btn" onclick="submitForm()">Bet Now</button>
+        </div>
+    </div>
+
+    <script>
+        // Data for the remaining 5 matches
+        const upcomingMatches = [
+            { h: 'Liverpool', a: 'Man City', hc: '#C8102E', ac: '#6CABDD' },
+            { h: 'Spurs', a: 'Man Utd', hc: '#fff', ac: '#DA291C' },
+            { h: 'Villa', a: 'Newcastle', hc: '#95BEB3', ac: '#241F20' },
+            { h: 'Everton', a: 'West Ham', hc: '#003399', ac: '#7A263A' },
+            { h: 'Brighton', a: 'Fulham', hc: '#0057B8', ac: '#000000' }
+        ];
+
+        const formContainer = document.getElementById('matchForm');
+        
+        // Helper to create HTML string for matches
+        upcomingMatches.forEach((match, index) => {
+            const idx = index + 2; // Starting from match 2
+            const html = `
+            <div class="match-row">
+                <div class="team-names">
+                    <span>${match.h}</span>
+                    <span>${match.a}</span>
+                </div>
+                <div class="match-interface">
+                    <div class="jersey-col"><svg class="jersey-svg" viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="50" fill="none" stroke="white" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div class="score-col">
+                        <button type="button" class="arrow-btn up" onclick="adjustScore(this, 1)">
+                            <svg class="arrow-svg" viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg>
+                        </button>
+                        <input type="number" name="m${idx}_home" class="score-input" value="0" min="0" readonly>
+                        <button type="button" class="arrow-btn down" onclick="adjustScore(this, -1)">
+                            <svg class="arrow-svg" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                    </div>
+                    <div class="divider">-</div>
+                    <div class="score-col">
+                        <button type="button" class="arrow-btn up" onclick="adjustScore(this, 1)">
+                            <svg class="arrow-svg" viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg>
+                        </button>
+                        <input type="number" name="m${idx}_away" class="score-input" value="0" min="0" readonly>
+                        <button type="button" class="arrow-btn down" onclick="adjustScore(this, -1)">
+                            <svg class="arrow-svg" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                    </div>
+                    <div class="jersey-col"><svg class="jersey-svg" viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="50" fill="none" stroke="white" stroke-width="2"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>`;
+            formContainer.insertAdjacentHTML('beforeend', html);
+        });
+
+        // Logic for Arrows
+        function adjustScore(btn, val) {
+            // Find the input relative to the button
+            const parent = btn.closest('.score-col');
+            const input = parent.querySelector('input');
+            let currentVal = parseInt(input.value);
+            
+            // Calculate new value
+            let newVal = currentVal + val;
+            if (newVal < 0) newVal = 0; // Prevent negative scores
+            
+            input.value = newVal;
+        }
+
+        // Dummy Submit
+        function submitForm() {
+            alert("Predictions saved for all 6 matches!");
+        }
+    </script>
+</body>
+</html>

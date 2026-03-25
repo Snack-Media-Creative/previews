@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Coming Sunday</title>
+    <style>
+        /* Optional styling to make it look nice */
+        #showdate {
+            font-family: Arial, sans-serif;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            padding: 20px;
+            border: 1px solid #ccc;
+            display: inline-block;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="showdate"></div>
+
+    <script>
+        function getComingSunday() {
+            const today = new Date();
+            const currentDay = today.getDay(); // 0 is Sunday, 1 is Monday... 6 is Saturday
+            
+            // Calculate days to add to reach the next Sunday
+            // If today is Sunday (0), 7-0 = 7 days (Next Sunday)
+            // If today is Friday (5), 7-5 = 2 days
+            const daysUntilSunday = 7 - currentDay;
+
+            // Create a new date object for the result
+            const comingSunday = new Date(today);
+            
+            // Set the date to today + the difference
+            comingSunday.setDate(today.getDate() + daysUntilSunday);
+
+            return comingSunday;
+        }
+
+        // Format the date (Day and Date)
+        const sundayDate = getComingSunday();
+        const options = { 
+            weekday: 'long', 
+            day: 'numeric',
+            month: 'long'
+        };
+        
+        // Render it into the DIV
+        document.getElementById("showdate").innerText = sundayDate.toLocaleDateString('en-US', options);
+    </script>
+
+</body>
+</html>
