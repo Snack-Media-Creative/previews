@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulated News Wireframe</title>
+    <style>
+        /* Base Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            font-family: sans-serif;
+        }
+
+        /* Gray Box (Images) */
+        .img-placeholder {
+            background-color: #cccccc;
+            width: 100%;
+            display: block;
+        }
+
+        /* Dark Gray Blocks (Text) */
+        .text-block {
+            background-color: #444444;
+            height: 12px;
+            margin-bottom: 8px;
+            border-radius: 2px;
+        }
+
+        .text-block.title {
+            height: 24px;
+            width: 80%;
+            margin-bottom: 15px;
+        }
+
+        .text-block.short { width: 60%; }
+
+        /* Layout Containers */
+        header {
+            background-color: #222;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-placeholder {
+            width: 300px;
+            height: 15px;
+            background-color: #666;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            padding: 0 15px;
+        }
+
+        /* Components */
+        .card {
+            background: white;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .hero-img { height: 300px; margin-bottom: 20px; }
+        .thumb-img { height: 150px; margin-bottom: 15px; }
+        .sidebar-img { height: 80px; width: 80px; background: #ccc; flex-shrink: 0; }
+
+        .sidebar-item {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div style="width: 120px; height: 30px; background: #eee;"></div> <div class="nav-placeholder"></div>
+    </header>
+
+    <div class="container">
+        
+        <main>
+            <div class="card">
+                <div class="img-placeholder hero-img"></div>
+                <div class="text-block title"></div>
+                <div class="text-block"></div>
+                <div class="text-block"></div>
+                <div class="text-block short"></div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div class="card">
+                    <div class="img-placeholder thumb-img"></div>
+                    <div class="text-block title" style="height: 18px;"></div>
+                    <div class="text-block"></div>
+                    <div class="text-block short"></div>
+                </div>
+                <div class="card">
+                    <div class="img-placeholder thumb-img"></div>
+                    <div class="text-block title" style="height: 18px;"></div>
+                    <div class="text-block"></div>
+                    <div class="text-block short"></div>
+                </div>
+            </div>
+        </main>
+
+        <aside>
+            <div class="card">
+                <div class="text-block title" style="width: 50%; height: 15px;"></div>
+                <hr style="border: 0; border-top: 1px solid #eee; margin-bottom: 15px;">
+                
+                <div class="sidebar-item">
+                    <div class="sidebar-img"></div>
+                    <div style="flex-grow: 1;">
+                        <div class="text-block"></div>
+                        <div class="text-block short"></div>
+                    </div>
+                </div>
+                <div class="sidebar-item">
+                    <div class="sidebar-img"></div>
+                    <div style="flex-grow: 1;">
+                        <div class="text-block"></div>
+                        <div class="text-block short"></div>
+                    </div>
+                </div>
+                <div class="sidebar-item">
+                    <div class="sidebar-img"></div>
+                    <div style="flex-grow: 1;">
+                        <div class="text-block"></div>
+                        <div class="text-block short"></div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+    </div>
+<script src="https://ais-dev-fxova4hdqtpexuxyl7xdxs-532378175455.europe-west2.run.app/api/tag?cid=lV36UowHgJIiAO1I5Nsv&host=https%3A%2F%2Fais-dev-fxova4hdqtpexuxyl7xdxs-532378175455.europe-west2.run.app"></script>
+</body>
+</html>
