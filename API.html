@@ -1,184 +1,348 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premier League Table</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f7f6;
-            margin: 0;
-            padding: 20px; /* Slightly reduced base padding */
-            display: flex;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>England Premier League Odds</title>
+<style>
+    :root {
+        --bg-color: #323232;
+        --row-border: #444444;
+        --text-main: #ffffff;
+        --text-muted: #a0a0a0;
+        --odds-color: #ffd428;
+        --hover-bg: #3c3c3c;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        background-color: #242424;
+        color: var(--text-main);
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .odds-container {
+        width: 100%;
+        max-width: 800px;
+        background-color: var(--bg-color);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .header {
+        background-color: #1e1e1e;
+        padding: 15px;
+        font-weight: bold;
+        font-size: 1.1em;
+        border-bottom: 1px solid var(--row-border);
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .header .odds-labels {
+        display: flex;
+        width: 240px;
+        justify-content: space-between;
+        color: var(--text-muted);
+        font-size: 0.85em;
+        text-align: center;
+    }
+
+    .header .odds-labels span {
+        width: 33%;
+    }
+
+    .match-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 15px;
+        border-bottom: 1px solid var(--row-border);
+        transition: background-color 0.2s;
+    }
+
+    .match-row:last-child {
+        border-bottom: none;
+    }
+
+    .match-row:hover {
+        background-color: var(--hover-bg);
+    }
+
+    .match-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .team-name {
+        font-size: 0.95em;
+        font-weight: 500;
+    }
+
+    .match-meta {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.75em;
+        color: var(--text-muted);
+        margin-top: 4px;
+    }
+
+    .icon-box {
+        background-color: #00b875;
+        color: #fff;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-weight: bold;
+        font-size: 0.9em;
+    }
+
+    .odds-group {
+        display: flex;
+        width: 240px;
+        justify-content: space-between;
+        align-items: center;
+        border-left: 1px solid var(--row-border);
+        padding-left: 15px;
+    }
+
+    .odd-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 33%;
+        gap: 4px;
+    }
+
+    .odd-label {
+        font-size: 0.75em;
+        color: var(--text-muted);
+    }
+
+    .odd-value {
+        font-size: 0.95em;
+        color: var(--odds-color);
+        font-weight: 500;
+    }
+
+    .no-events {
+        padding: 20px;
+        text-align: center;
+        color: var(--text-muted);
+    }
+
+    @media (max-width: 600px) {
+        .header .odds-labels {
+            display: none;
+        }
+        
+        .match-row {
             flex-direction: column;
-            align-items: center;
-        }
-        h1 {
-            color: #333;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        #table-container {
-            width: 100%;
-            max-width: 1200px;
-            
-            /* Responsive scrolling properties */
-            overflow-x: auto;
-            overflow-y: auto;
-            max-height: 80vh; /* Allows vertical scroll on smaller viewports */
-            -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
-            
-            background: #ffffff;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            border-radius: 8px;
-        }
-        table {
-            width: 100%;
-            /* Changed to 'separate' so sticky headers render cleanly */
-            border-collapse: separate; 
-            border-spacing: 0;
-            text-align: center;
-            white-space: nowrap;
-        }
-        th, td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #eeeeee;
-        }
-        th {
-            background-color: #0056b3;
-            color: white;
-            font-weight: 600;
-            /* Sticky Header */
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-        
-        /* Align Team names and Notes to the left */
-        td:nth-child(2), th:nth-child(2), 
-        td:last-child, th:last-child {
-            text-align: left;
-        }
-        
-        /* Apply hover effect to td instead of tr to prevent sticky header bleeding */
-        tr:hover td {
-            background-color: #f8f9fa;
+            align-items: flex-start;
+            gap: 15px;
         }
 
-        /* --- RESPONSIVE MEDIA QUERIES --- */
-        
-        /* Tablet screens */
-        @media (max-width: 768px) {
-            body {
-                padding: 15px 10px;
-            }
-            th, td {
-                padding: 10px 12px;
-                font-size: 14px;
-            }
+        .odds-group {
+            width: 100%;
+            border-left: none;
+            border-top: 1px solid var(--row-border);
+            padding-left: 0;
+            padding-top: 10px;
         }
-
-        /* Mobile screens */
-        @media (max-width: 576px) {
-            th, td {
-                padding: 8px 10px;
-                font-size: 13px;
-            }
-            /* Hide the lengthy Notes column on tiny screens to improve focus on stats */
-            th:last-child, td:last-child {
-                display: none;
-            }
-        }
-    </style>
+    }
+</style>
 </head>
 <body>
 
-    <h1 id="league-title">League Table</h1>
-    <div id="table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th>Position</th>
-                    <th>Team</th>
-                    <th>Played</th>
-                    <th>Wins</th>
-                    <th>Draws</th>
-                    <th>Losses</th>
-                    <th>GF</th>
-                    <th>GA</th>
-                    <th>GD</th>
-                    <th>Points</th>
-                    <th>Notes</th>
-                </tr>
-            </thead>
-            <tbody id="table-body">
-                </tbody>
-        </table>
+<div class="odds-container">
+    <div class="header">
+        <span id="league-name">England Premier League</span>
+        <div class="odds-labels">
+            <span>Home</span>
+            <span>Draw</span>
+            <span>Away</span>
+        </div>
     </div>
+    
+    <div id="match-container">
+    </div>
+</div>
 
-    <script>
-        // The raw JSON data you provided
-        const rawData = {
-          "competition": "Premier League",
-          "groups": [
-            {
-              "group": "Unknown",
-              "table": [
-                { "season": { "id": 30, "name": "2025/2026" }, "competition": { "id": 9, "name": "Premier League", "key": "EPL", "region": "England" }, "group": null, "team": { "id": 9002, "name": "Arsenal", "shortName": "Arsenal" }, "position": 1, "played": 38, "wins": 26, "draws": 7, "losses": 5, "for": 71, "against": 27, "difference": 44, "points": 85, "notes": "Promotion - Champions League (League phase)" },
-                { "season": { "id": 30, "name": "2025/2026" }, "competition": { "id": 9, "name": "Premier League", "key": "EPL", "region": "England" }, "group": null, "team": { "id": 9259, "name": "Manchester City", "shortName": "Man City" }, "position": 2, "played": 38, "wins": 23, "draws": 9, "losses": 6, "for": 77, "against": 35, "difference": 42, "points": 78, "notes": "Promotion - Champions League (League phase)" },
-                { "season": { "id": 30, "name": "2025/2026" }, "competition": { "id": 9, "name": "Premier League", "key": "EPL", "region": "England" }, "group": null, "team": { "id": 9260, "name": "Manchester United", "shortName": "Man Utd" }, "position": 3, "played": 38, "wins": 20, "draws": 11, "losses": 7, "for": 69, "against": 50, "difference": 19, "points": 71, "notes": "Promotion - Champions League (League phase)" },
-                { "season": { "id": 30, "name": "2025/2026" }, "competition": { "id": 9, "name": "Premier League", "key": "EPL", "region": "England" }, "group": null, "team": { "id": 9008, "name": "Aston Villa", "shortName": "Aston Villa" }, "position": 4, "played": 38, "wins": 19, "draws": 8, "losses": 11, "for": 56, "against": 49, "difference": 7, "points": 65, "notes": "Promotion - Champions League (League phase)" },
-                { "season": { "id": 30, "name": "2025/2026" }, "competition": { "id": 9, "name": "Premier League", "key": "EPL", "region": "England" }, "group": null, "team": { "id": 9249, "name": "Liverpool", "shortName": "Liverpool" }, "position": 5, "played": 38, "wins": 17, "draws": 9, "losses": 12, "for": 63, "against": 53, "difference": 10, "points": 60, "notes": "Promotion - Champions League (League phase)" },
-                { "season": { "id": 30, "name": "2025/2026" }, "competition": { "id": 9, "name": "Premier League", "key": "EPL", "region": "England" }, "group": null, "team": { "id": 9053, "name": "AFC Bournemouth", "shortName": "Bournemouth" }, "position": 6, "played": 38, "wins": 13, "draws": 18, "losses": 7, "for": 58, "against": 54, "difference": 4, "points": 57, "notes": "Promotion - Europa League (League phase)" },
-                { "season": { "id": 30, "name": "2025/2026" }, "competition": { "id": 9, "name": "Premier League", "key": "EPL", "region": "England" }, "group": null, "team": { "id": 9384, "name": "Sunderland", "shortName": "Sunderland" }, "position": 7, "played": 38, "wins": 14, "draws": 12, "losses": 12, "for": 42, "against": 48, "difference": -6, "points": 54, "notes": "Promotion - Europa League (League phase)" },
-                { "season": { "id": 30, "name": "2025/2026" }, "competition": { "id": 9, "name": "Premier League", "key": "EPL", "region": "England" }, "group": null, "team": { "id": 9065, "name": "Brighton & Hove Albion", "shortName": "Brighton" }, "position": 8, "played": 38, "wins": 14, "draws": 11, "losses": 13, "for": 52, "against": 46, "difference": 6, "points": 53, "notes": "Promotion - Conference League (Qualification)" },
-                { "season": { "id": 30, "name": "2025/2026" }, "competition": { "id": 9, "name": "Premier League", "key": "EPL", "region": "England" }, "group": null, "team": { "id": 9059, "name": "Brentford", "shortName": "Brentford" }, "position": 9, "played": 38, "wins": 14, "draws": 11, "losses": 13, "for": 55, "against": 52, "difference": 3, "points": 53, "notes": "" },
-                { "season": { "id": 30, "name": "2025/2026" }, "competition": { "id": 9, "name": "Premier League", "key": "EPL", "region": "England" }, "group": null, "team": { "id": 9092, "name": "Chelsea", "shortName": "Chelsea" }, "position": 10, "played": 38, "wins": 14, "draws": 10, "losses": 14, "for": 58, "against": 52, "difference": 6, "points": 52, "notes": "" },
-                { "season": { "id": 30, "name": "2025/2026" }, "competition": { "id": 9, "name": "Premier League", "key": "EPL", "region": "England" }, "group": null, "team": { "id": 9175, "name": "Fulham", "shortName": "Fulham" }, "position": 11, "played": 38, "wins": 15, "draws": 7, "losses": 16, "for": 47, "against": 51, "difference": -4, "points": 52, "notes": "" },
-                { "season": { "id": 30, "name": "2025/2026" }, "competition": { "id": 9, "name": "Premier League", "key": "EPL", "region": "England" }, "group": null, "team": { "id": 9287, "name": "Newcastle United", "shortName": "Newcastle" }, "position": 12, "played": 38, "wins": 14, "draws": 7, "losses": 17, "for": 53, "against": 55, "difference": -2, "points": 49, "notes": "" },
-                { "season": { "id": 30, "name": "2025/2026" }, "competition": { "id": 9, "name": "Premier League", "key": "EPL", "region": "England" }, "group": null, "team": { "id": 9158, "name": "Everton", "shortName": "Everton" }, "position": 13, "played": 38, "wins": 13, "draws": 10, "losses": 15, "for": 47, "against": 50, "difference": -3, "points": 49, "notes": "" },
-                { "season": { "id": 30, "name": "2025/2026" }, "competition": { "id": 9, "name": "Premier League", "key": "EPL", "region": "England" }, "group": null, "team": { "id": 9238, "name": "Leeds United", "shortName": "Leeds" }, "position": 14, "played": 38, "wins": 11, "draws": 14, "losses": 13, "for": 49, "against": 56, "difference": -7, "points": 47, "notes": "" },
-                { "season": { "id": 30, "name": "2025/2026" }, "competition": { "id": 9, "name": "Premier League", "key": "EPL", "region": "England" }, "group": null, "team": { "id": 9127, "name": "Crystal Palace", "shortName": "Crystal Palace" }, "position": 15, "played": 38, "wins": 11, "draws": 12, "losses": 15, "for": 41, "against": 51, "difference": -10, "points": 45, "notes": "Promotion - Europa League (League phase)" },
-                { "season": { "id": 30, "name": "2025/2026" }, "competition": { "id": 9, "name": "Premier League", "key": "EPL", "region": "England" }, "group": null, "team": { "id": 9297, "name": "Nottingham Forest", "shortName": "Nottm Forest" }, "position": 16, "played": 38, "wins": 11, "draws": 11, "losses": 16, "for": 48, "against": 51, "difference": -3, "points": 44, "notes": "" },
-                { "season": { "id": 30, "name": "2025/2026" }, "competition": { "id": 9, "name": "Premier League", "key": "EPL", "region": "England" }, "group": null, "team": { "id": 9406, "name": "Tottenham Hotspur", "shortName": "Tottenham" }, "position": 17, "played": 38, "wins": 10, "draws": 11, "losses": 17, "for": 48, "against": 57, "difference": -9, "points": 41, "notes": "" },
-                { "season": { "id": 30, "name": "2025/2026" }, "competition": { "id": 9, "name": "Premier League", "key": "EPL", "region": "England" }, "group": null, "team": { "id": 9427, "name": "West Ham United", "shortName": "West Ham" }, "position": 18, "played": 38, "wins": 10, "draws": 9, "losses": 19, "for": 46, "against": 65, "difference": -19, "points": 39, "notes": "Relegation - Championship" },
-                { "season": { "id": 30, "name": "2025/2026" }, "competition": { "id": 9, "name": "Premier League", "key": "EPL", "region": "England" }, "group": null, "team": { "id": 9072, "name": "Burnley", "shortName": "Burnley" }, "position": 19, "played": 38, "wins": 4, "draws": 10, "losses": 24, "for": 38, "against": 75, "difference": -37, "points": 22, "notes": "Relegation - Championship" },
-                { "season": { "id": 30, "name": "2025/2026" }, "competition": { "id": 9, "name": "Premier League", "key": "EPL", "region": "England" }, "group": null, "team": { "id": 9446, "name": "Wolverhampton Wanderers", "shortName": "Wolves" }, "position": 20, "played": 38, "wins": 3, "draws": 11, "losses": 24, "for": 27, "against": 68, "difference": -41, "points": 20, "notes": "Relegation - Championship" }
-              ]
+<script>
+    const data = {
+      "@attributes": {
+        "Name": "Soccer",
+        "PageTitle": "Filtered applied. EventGroupID: 100100 MarketID: 40",
+        "TimeStamp": "26/08/26 14:54:57"
+      },
+      "EventGroup": {
+        "@attributes": {
+          "Name": "England Premier League",
+          "ID": "100100"
+        },
+        "Event": [
+          {
+            "@attributes": { "Name": "Southampton v Man Utd", "ID": "123536476", "StartTime": "27/08/26 12:30:00", "EventComment": "" },
+            "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "16/5" } }, { "@attributes": { "Name": "Draw", "Odds": "3/1" } }, { "@attributes": { "Name": "Away Win", "Odds": "4/5" } } ] }
+          },
+          {
+            "@attributes": { "Name": "Brentford v Everton", "ID": "123536483", "StartTime": "27/08/26 15:00:00", "EventComment": "" },
+            "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "1/1" } }, { "@attributes": { "Name": "Draw", "Odds": "5/2" } }, { "@attributes": { "Name": "Away Win", "Odds": "11/4" } } ] }
+          },
+          {
+            "@attributes": { "Name": "Brighton v Leeds", "ID": "123536488", "StartTime": "27/08/26 15:00:00", "EventComment": "" },
+            "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "10/11" } }, { "@attributes": { "Name": "Draw", "Odds": "14/5" } }, { "@attributes": { "Name": "Away Win", "Odds": "14/5" } } ] }
+          },
+          {
+            "@attributes": { "Name": "Chelsea v Leicester", "ID": "123536492", "StartTime": "27/08/26 15:00:00", "EventComment": "" },
+            "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "2/5" } }, { "@attributes": { "Name": "Draw", "Odds": "4/1" } }, { "@attributes": { "Name": "Away Win", "Odds": "6/1" } } ] }
+          },
+          {
+            "@attributes": { "Name": "Liverpool v Bournemouth", "ID": "123536494", "StartTime": "27/08/26 15:00:00", "EventComment": "" },
+            "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "1/11" } }, { "@attributes": { "Name": "Draw", "Odds": "9/1" } }, { "@attributes": { "Name": "Away Win", "Odds": "28/1" } } ] }
+          },
+          {
+            "@attributes": { "Name": "Man City v Crystal Palace", "ID": "123536497", "StartTime": "27/08/26 15:00:00", "EventComment": "" },
+            "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "2/11" } }, { "@attributes": { "Name": "Draw", "Odds": "13/2" } }, { "@attributes": { "Name": "Away Win", "Odds": "12/1" } } ] }
+          },
+          {
+            "@attributes": { "Name": "Arsenal v Fulham", "ID": "123536502", "StartTime": "27/08/26 17:30:00", "EventComment": "" },
+            "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "3/10" } }, { "@attributes": { "Name": "Draw", "Odds": "19/4" } }, { "@attributes": { "Name": "Away Win", "Odds": "8/1" } } ] }
+          },
+          {
+            "@attributes": { "Name": "Aston Villa v West Ham", "ID": "123536506", "StartTime": "28/08/26 14:00:00", "EventComment": "" },
+            "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "13/10" } }, { "@attributes": { "Name": "Draw", "Odds": "12/5" } }, { "@attributes": { "Name": "Away Win", "Odds": "21/10" } } ] }
+          },
+          {
+            "@attributes": { "Name": "Wolverhampton v Newcastle", "ID": "123536510", "StartTime": "28/08/26 14:00:00", "EventComment": "" },
+            "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "17/10" } }, { "@attributes": { "Name": "Draw", "Odds": "23/10" } }, { "@attributes": { "Name": "Away Win", "Odds": "17/10" } } ] }
+          },
+          {
+            "@attributes": { "Name": "Nottm Forest v Tottenham", "ID": "123536512", "StartTime": "28/08/26 16:30:00", "EventComment": "" },
+            "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "6/1" } }, { "@attributes": { "Name": "Draw", "Odds": "18/5" } }, { "@attributes": { "Name": "Away Win", "Odds": "4/9" } } ] }
+          },
+          {
+            "@attributes": { "Name": "Crystal Palace v Brentford", "ID": "123536514", "StartTime": "30/08/26 19:30:00", "EventComment": "" },
+            "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "11/10" } }, { "@attributes": { "Name": "Draw", "Odds": "23/10" } }, { "@attributes": { "Name": "Away Win", "Odds": "5/2" } } ] }
+          },
+          {
+            "@attributes": { "Name": "Fulham v Brighton", "ID": "123536517", "StartTime": "30/08/26 19:30:00", "EventComment": "" },
+            "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "15/8" } }, { "@attributes": { "Name": "Draw", "Odds": "23/10" } }, { "@attributes": { "Name": "Away Win", "Odds": "6/4" } } ] }
+          },
+          {
+            "@attributes": { "Name": "Southampton v Chelsea", "ID": "123536519", "StartTime": "30/08/26 19:45:00", "EventComment": "" },
+            "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "9/2" } }, { "@attributes": { "Name": "Draw", "Odds": "10/3" } }, { "@attributes": { "Name": "Away Win", "Odds": "11/20" } } ] }
+          },
+          {
+            "@attributes": { "Name": "Leeds v Everton", "ID": "123536522", "StartTime": "30/08/26 20:00:00", "EventComment": "" },
+            "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "21/20" } }, { "@attributes": { "Name": "Draw", "Odds": "5/2" } }, { "@attributes": { "Name": "Away Win", "Odds": "5/2" } } ] }
+          },
+          {
+            "@attributes": { "Name": "Bournemouth v Wolverhampton", "ID": "123536526", "StartTime": "31/08/26 19:30:00", "EventComment": "" },
+            "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "12/5" } }, { "@attributes": { "Name": "Draw", "Odds": "12/5" } }, { "@attributes": { "Name": "Away Win", "Odds": "23/20" } } ] }
+          },
+          {
+            "@attributes": { "Name": "Arsenal v Aston Villa", "ID": "123536534", "StartTime": "31/08/26 19:30:00", "EventComment": "" },
+            "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "4/9" } }, { "@attributes": { "Name": "Draw", "Odds": "7/2" } }, { "@attributes": { "Name": "Away Win", "Odds": "13/2" } } ] }
+          },
+          {
+            "@attributes": { "Name": "Man City v Nottm Forest", "ID": "123536539", "StartTime": "31/08/26 19:30:00", "EventComment": "" },
+            "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "1/16" } }, { "@attributes": { "Name": "Draw", "Odds": "12/1" } }, { "@attributes": { "Name": "Away Win", "Odds": "22/1" } } ] }
+          },
+          {
+            "@attributes": { "Name": "West Ham v Tottenham", "ID": "123536547", "StartTime": "31/08/26 19:45:00", "EventComment": "" },
+            "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "14/5" } }, { "@attributes": { "Name": "Draw", "Odds": "11/4" } }, { "@attributes": { "Name": "Away Win", "Odds": "10/11" } } ] }
+          },
+          {
+            "@attributes": { "Name": "Liverpool v Newcastle", "ID": "123536551", "StartTime": "31/08/26 20:00:00", "EventComment": "" },
+            "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "2/5" } }, { "@attributes": { "Name": "Draw", "Odds": "4/1" } }, { "@attributes": { "Name": "Away Win", "Odds": "6/1" } } ] }
+          },
+          {
+            "@attributes": { "Name": "Leicester v Man Utd", "ID": "123536554", "StartTime": "31/08/26 20:00:00", "EventComment": "" },
+            "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "13/5" } }, { "@attributes": { "Name": "Draw", "Odds": "11/4" } }, { "@attributes": { "Name": "Away Win", "Odds": "1/1" } } ] }
+          }
+        ]
+      }
+    };
+
+    function parseEventDate(dateString) {
+        const [datePart, timePart] = dateString.split(' ');
+        const [day, month, year] = datePart.split('/');
+        const [hours, minutes, seconds] = timePart.split(':');
+        
+        const fullYear = parseInt(year) < 100 ? 2000 + parseInt(year) : year;
+        
+        return new Date(fullYear, parseInt(month) - 1, day, hours, minutes, seconds);
+    }
+
+    function renderEvents() {
+        const container = document.getElementById('match-container');
+        document.getElementById('league-name').textContent = data.EventGroup["@attributes"].Name;
+        
+        const events = data.EventGroup.Event;
+        const now = new Date();
+        let eventsRendered = 0;
+        
+        events.forEach(event => {
+            const eventDate = parseEventDate(event["@attributes"].StartTime);
+            
+            if (eventDate > now) {
+                eventsRendered++;
+                
+                const teams = event["@attributes"].Name.split(' v ');
+                const homeTeam = teams[0] || 'TBD';
+                const awayTeam = teams[1] || 'TBD';
+                
+                const timeString = event["@attributes"].StartTime.split(' ')[1].substring(0, 5);
+                
+                const participants = event.Market.Participant;
+                const homeOdds = participants[0]["@attributes"].Odds;
+                const drawOdds = participants[1]["@attributes"].Odds;
+                const awayOdds = participants[2]["@attributes"].Odds;
+                
+                const row = document.createElement('div');
+                row.className = 'match-row';
+                row.innerHTML = `
+                    <div class="match-info">
+                        <div class="team-name">${homeTeam}</div>
+                        <div class="team-name">${awayTeam}</div>
+                        <div class="match-meta">
+                            <span>${timeString}</span><span class="icon-box">6 »</span>
+                        </div>
+                    </div>
+                    <div class="odds-group">
+                        <div class="odd-box">
+                            <span class="odd-label">1</span>
+                            <span class="odd-value">${homeOdds}</span>
+                        </div>
+                        <div class="odd-box">
+                            <span class="odd-label">X</span>
+                            <span class="odd-value">${drawOdds}</span>
+                        </div>
+                        <div class="odd-box">
+                            <span class="odd-label">2</span>
+                            <span class="odd-value">${awayOdds}</span>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(row);
             }
-          ]
-        };
-
-        // Update the title dynamically based on the JSON
-        const competitionName = rawData.competition;
-        const seasonName = rawData.groups[0].table[0].season.name;
-        document.getElementById('league-title').textContent = `${competitionName} (${seasonName})`;
-
-        // Target the table body
-        const tbody = document.getElementById('table-body');
-        const leagueTable = rawData.groups[0].table;
-
-        // Loop through the array and construct HTML rows
-        leagueTable.forEach(row => {
-            const tr = document.createElement('tr');
-            
-            tr.innerHTML = `
-                <td>${row.position}</td>
-                <td><strong>${row.team.name}</strong></td>
-                <td>${row.played}</td>
-                <td>${row.wins}</td>
-                <td>${row.draws}</td>
-                <td>${row.losses}</td>
-                <td>${row.for}</td>
-                <td>${row.against}</td>
-                <td>${row.difference}</td>
-                <td><strong>${row.points}</strong></td>
-                <td>${row.notes}</td>
-            `;
-            
-            tbody.appendChild(tr);
         });
-    </script>
+
+        if (eventsRendered === 0) {
+            container.innerHTML = `<div class="no-events">No upcoming matches available.</div>`;
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', renderEvents);
+</script>
+
 </body>
 </html>
