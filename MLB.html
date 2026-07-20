@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sports News Ticker - Bottom Fixed</title>
+<style>
+  /* Basic page reset - removed all margins and padding */
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    font-family: 'Arial', sans-serif;
+  }
+
+  /* Main Ticker Container: Anchored to the bottom */
+  .ticker-wrapper {
+    width: 100%;
+    height: 150px;
+    background-color: #ffffff;
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    /* Shadow adjusted to cast upwards */
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+
+  /* Shared styling for both logo areas */
+  .logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 100%;
+    background-color: #ffffff;
+    z-index: 10;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  /* Softened shadows for the white background */
+  .logo-left {
+    box-shadow: 10px 0 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .logo-right {
+    box-shadow: -10px 0 20px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Styling for the SVG images */
+  .logo-container img {
+    max-height: 80px;
+    max-width: 130px;
+    object-fit: contain;
+  }
+
+  /* The middle area where the animation happens */
+  .scrolling-container {
+    flex-grow: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  /* The wrapper for the moving text and baseball */
+  .ticker-content {
+    display: flex;
+    width: max-content;
+    animation: scroll-left 15s linear infinite;
+    will-change: transform;
+  }
+
+  /* Grouping items to allow for a seamless 50% shift */
+  .ticker-group {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  /* Individual phrase block to handle spacing between duplicates */
+  .ticker-phrase {
+    display: flex;
+    align-items: center;
+    margin-right: 100px;
+  }
+
+  /* The flying/spinning baseball */
+  .baseball {
+    font-size: 70px;
+    margin-right: 20px;
+    display: inline-block;
+    animation: spin 1.5s linear infinite;
+  }
+
+  /* Ticker Text Styling */
+  .ticker-text {
+    color: #000000;
+    font-size: 60px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  /* Animation: Move 50% left (width of one full group), then instantly loop back */
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Animation: Spin the baseball */
+  @keyframes spin {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+</style>
+</head>
+<body>
+
+  <div class="ticker-wrapper">
+    
+    <!-- Left Logo Section (BBC) -->
+    <div class="logo-container logo-left">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/BBC_Logo_2021.svg" alt="BBC Logo">
+    </div>
+
+    <!-- Scrolling Animation Section (Middle) -->
+    <div class="scrolling-container">
+      <div class="ticker-content">
+        
+        <!-- Group 1 -->
+        <div class="ticker-group">
+          <div class="ticker-phrase">
+            <span class="baseball">⚾</span>
+            <span class="ticker-text">Tune in this Sunday</span>
+          </div>
+          <div class="ticker-phrase">
+            <span class="baseball">⚾</span>
+            <span class="ticker-text">Tune in this Sunday</span>
+          </div>
+          <div class="ticker-phrase">
+            <span class="baseball">⚾</span>
+            <span class="ticker-text">Tune in this Sunday</span>
+          </div>
+        </div>
+
+        <!-- Group 2 (Exact Duplicate of Group 1 for seamless looping) -->
+        <div class="ticker-group">
+          <div class="ticker-phrase">
+            <span class="baseball">⚾</span>
+            <span class="ticker-text">Tune in this Sunday</span>
+          </div>
+          <div class="ticker-phrase">
+            <span class="baseball">⚾</span>
+            <span class="ticker-text">Tune in this Sunday</span>
+          </div>
+          <div class="ticker-phrase">
+            <span class="baseball">⚾</span>
+            <span class="ticker-text">Tune in this Sunday</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Right Logo Section (MLB) -->
+    <div class="logo-container logo-right">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Major_League_Baseball_logo.svg" alt="MLB Logo">
+    </div>
+
+  </div>
+
+</body>
+</html>
