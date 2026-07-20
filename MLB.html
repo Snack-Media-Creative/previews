@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sports News Ticker - Scalable</title>
+<title>MLB BBC</title>
 <style>
   :root {
     --ticker-height: 100px; 
@@ -20,7 +20,6 @@
     font-family: 'Arial', sans-serif;
   }
 
-  /* Main Ticker Container */
   .ticker-wrapper {
     width: 100%;
     height: var(--ticker-height);
@@ -36,12 +35,11 @@
     z-index: 1000;
   }
 
-  /* Shared styling for both logo areas */
   .logo-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: calc(var(--ticker-height) * 1.33); /* Keeps logos proportional to height */
+    width: calc(var(--ticker-height) * 1.33);
     height: var(--ticker-height);
     background-color: #ffffff;
     z-index: 10;
@@ -58,7 +56,6 @@
     object-fit: contain;
   }
 
-  /* The middle area where the animation happens */
   .scrolling-container {
     flex-grow: 1;
     height: var(--ticker-height);
@@ -69,7 +66,6 @@
     z-index: 1;
   }
 
-  /* The wrapper for the moving text and baseball */
   .ticker-content {
     display: flex;
     align-items: center;
@@ -90,7 +86,6 @@
     margin-right: 100px;
   }
 
-  /* The flying/spinning baseball */
   .baseball {
     font-size: var(--ball-size);
     line-height: 1;
@@ -99,7 +94,6 @@
     animation: spin 1.5s linear infinite;
   }
 
-  /* Ticker Text Styling */
   .ticker-text {
     color: #000000;
     font-size: var(--font-size);
@@ -131,7 +125,6 @@
     <div class="scrolling-container">
       <div class="ticker-content">
         
-        <!-- Group 1 -->
         <div class="ticker-group">
           <div class="ticker-phrase">
             <span class="baseball">⚾</span>
@@ -147,7 +140,6 @@
           </div>
         </div>
 
-        <!-- Group 2 -->
         <div class="ticker-group">
           <div class="ticker-phrase">
             <span class="baseball">⚾</span>
