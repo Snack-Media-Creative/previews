@@ -289,7 +289,11 @@
         const now = new Date();
         let eventsRendered = 0;
         
-        events.forEach(event => {
+        for (const event of events) {
+            if (eventsRendered >= 5) {
+                break;
+            }
+            
             const eventDate = parseEventDate(event["@attributes"].StartTime);
             
             if (eventDate > now) {
@@ -334,7 +338,7 @@
                 
                 container.appendChild(row);
             }
-        });
+        }
 
         if (eventsRendered === 0) {
             container.innerHTML = `<div class="no-events">No upcoming matches available.</div>`;
