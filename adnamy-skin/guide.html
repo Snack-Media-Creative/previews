@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>England Premier League Odds</title>
+<style>
+    :root {
+        --bg-color: #323232;
+        --row-border: #444444;
+        --text-main: #ffffff;
+        --text-muted: #a0a0a0;
+        --odds-color: #ffd428;
+        --hover-bg: #3c3c3c;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        background-color: #242424;
+        color: var(--text-main);
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .odds-container {
+        width: 100%;
+        max-width: 800px;
+        background-color: var(--bg-color);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .header {
+        background-color: #1e1e1e;
+        padding: 15px;
+        font-weight: bold;
+        font-size: 1.1em;
+        border-bottom: 1px solid var(--row-border);
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .header .odds-labels {
+        display: flex;
+        width: 240px;
+        justify-content: space-between;
+        color: var(--text-muted);
+        font-size: 0.85em;
+        text-align: center;
+    }
+
+    .header .odds-labels span {
+        width: 33%;
+    }
+
+    /* New styles for the timer */
+    .timer-container {
+        background-color: #2a2a2a;
+        padding: 12px 15px;
+        text-align: center;
+        border-bottom: 1px solid var(--row-border);
+        color: var(--text-main);
+        font-size: 0.95em;
+        display: none; /* Hidden by default until we find a match */
+    }
+
+    .timer-highlight {
+        color: var(--odds-color);
+        font-weight: bold;
+        letter-spacing: 0.5px;
+        margin-left: 5px;
+    }
+
+    .match-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 15px;
+        border-bottom: 1px solid var(--row-border);
+        transition: background-color 0.2s;
+    }
+
+    .match-row:last-child {
+        border-bottom: none;
+    }
+
+    .match-row:hover {
+        background-color: var(--hover-bg);
+    }
+
+    .match-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .team-name {
+        font-size: 0.95em;
+        font-weight: 500;
+    }
+
+    .match-meta {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.75em;
+        color: var(--text-muted);
+        margin-top: 4px;
+    }
+
+    .icon-box {
+        background-color: #00b875;
+        color: #fff;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-weight: bold;
+        font-size: 0.9em;
+    }
+
+    .odds-group {
+        display: flex;
+        width: 240px;
+        justify-content: space-between;
+        align-items: center;
+        border-left: 1px solid var(--row-border);
+        padding-left: 15px;
+    }
+
+    .odd-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 33%;
+        gap: 4px;
+    }
+
+    .odd-label {
+        font-size: 0.75em;
+        color: var(--text-muted);
+    }
+
+    .odd-value {
+        font-size: 0.95em;
+        color: var(--odds-color);
+        font-weight: 500;
+    }
+
+    .no-events {
+        padding: 20px;
+        text-align: center;
+        color: var(--text-muted);
+    }
+
+    .loading-msg {
+        padding: 20px;
+        text-align: center;
+        color: var(--odds-color);
+    }
+
+    @media (max-width: 600px) {
+        .header .odds-labels {
+            display: none;
+        }
+        
+        .match-row {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .odds-group {
+            width: 100%;
+            border-left: none;
+            border-top: 1px solid var(--row-border);
+            padding-left: 0;
+            padding-top: 10px;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="odds-container">
+    <div class="header">
+        <span id="league-name">Loading...</span>
+        <div class="odds-labels">
+            <span>Home</span>
+            <span>Draw</span>
+            <span>Away</span>
+        </div>
+    </div>
+
+    <!-- Timer Container -->
+    <div id="next-game-timer" class="timer-container">
+        Next match <br>(<span id="next-match-teams"></span>) starts in: <span id="countdown-text" class="timer-highlight"></span>
+    </div>
+    
+    <div id="match-container">
+        <div class="loading-msg">Fetching data...</div>
+    </div>
+</div>
+
+<script>
+    let countdownInterval;
+
+    // Helper function to parse 'DD/MM/YY HH:MM:SS' into a valid Date object
+    function parseEventDate(dateString) {
+        const [datePart, timePart] = dateString.split(' ');
+        const [day, month, year] = datePart.split('/');
+        const [hours, minutes, seconds] = timePart.split(':');
+        
+        const fullYear = parseInt(year) < 100 ? 2000 + parseInt(year) : year;
+        
+        return new Date(fullYear, parseInt(month) - 1, day, hours, minutes, seconds);
+    }
+
+    function startCountdown(targetDate, homeTeam, awayTeam) {
+        const timerContainer = document.getElementById('next-game-timer');
+        const teamsSpan = document.getElementById('next-match-teams');
+        const countdownSpan = document.getElementById('countdown-text');
+        
+        timerContainer.style.display = 'block'; // Show the timer div
+        teamsSpan.textContent = `${homeTeam} v ${awayTeam}`;
+
+        function updateTimer() {
+            const now = new Date();
+            const diff = targetDate - now;
+
+            if (diff <= 0) {
+                countdownSpan.textContent = "Starting Now!";
+                clearInterval(countdownInterval);
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+            // Format strings to ensure "Day/Days" handles plurals nicely
+            const daysStr = days > 0 ? `${days}d ` : '';
+            countdownSpan.textContent = `${daysStr}${hours}h ${minutes}m`;
+        }
+
+        updateTimer(); // Initial call
+        countdownInterval = setInterval(updateTimer, 60000); // Update every 1 minute
+    }
+
+    function renderEvents(data) {
+        const container = document.getElementById('match-container');
+        container.innerHTML = ''; 
+        
+        document.getElementById('league-name').textContent = data.EventGroup["@attributes"].Name;
+        
+        const events = data.EventGroup.Event;
+        const now = new Date();
+        let eventsRendered = 0;
+        let isFirstUpcomingGame = true;
+        
+        for (const event of events) {
+            if (eventsRendered >= 5) {
+                break;
+            }
+            
+            const eventDate = parseEventDate(event["@attributes"].StartTime);
+            
+            if (eventDate > now) {
+                const teams = event["@attributes"].Name.split(' v ');
+                const homeTeam = teams[0] || 'TBD';
+                const awayTeam = teams[1] || 'TBD';
+
+                // If this is the absolute next game, start the countdown
+                if (isFirstUpcomingGame) {
+                    startCountdown(eventDate, homeTeam, awayTeam);
+                    isFirstUpcomingGame = false;
+                }
+                
+                eventsRendered++;
+                
+                const timeString = event["@attributes"].StartTime.split(' ')[1].substring(0, 5);
+                const participants = event.Market.Participant;
+                const homeOdds = participants[0]["@attributes"].Odds;
+                const drawOdds = participants[1]["@attributes"].Odds;
+                const awayOdds = participants[2]["@attributes"].Odds;
+                
+                const row = document.createElement('div');
+                row.className = 'match-row';
+                row.innerHTML = `
+                    <div class="match-info">
+                        <div class="team-name">${homeTeam}</div>
+                        <div class="team-name">${awayTeam}</div>
+                        <div class="match-meta">
+                            <span>${timeString}</span><span class="icon-box">6 »</span>
+                        </div>
+                    </div>
+                    <div class="odds-group">
+                        <div class="odd-box">
+                            <span class="odd-label">1</span>
+                            <span class="odd-value">${homeOdds}</span>
+                        </div>
+                        <div class="odd-box">
+                            <span class="odd-label">X</span>
+                            <span class="odd-value">${drawOdds}</span>
+                        </div>
+                        <div class="odd-box">
+                            <span class="odd-label">2</span>
+                            <span class="odd-value">${awayOdds}</span>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(row);
+            }
+        }
+
+        if (eventsRendered === 0) {
+            container.innerHTML = `<div class="no-events">No upcoming matches available.</div>`;
+        }
+    }
+
+    // Fetch the data on load
+    document.addEventListener('DOMContentLoaded', () => {
+        fetch('data.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => renderEvents(data))
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                document.getElementById('match-container').innerHTML = 
+                    `<div class="no-events">Error loading events. Ensure you are running a local web server to fetch the JSON file.</div>`;
+                document.getElementById('league-name').textContent = "Error";
+            });
+    });
+</script>
+
+</body>
+</html>

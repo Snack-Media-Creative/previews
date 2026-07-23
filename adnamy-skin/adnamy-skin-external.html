@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    :root {
+        --bg-color: #323232;
+        --row-border: #444444;
+        --text-main: #ffffff;
+        --text-muted: #a0a0a0;
+        --odds-color: #ffd428;
+        --hover-bg: #3c3c3c;
+    }
+    body{
+      background: #253D34;
+      background: linear-gradient(180deg, rgba(37, 61, 52, 1) 0%, rgba(44, 111, 85, 1) 30%, rgba(23, 61, 46, 1) 60%, rgba(49, 146, 107, 1) 86%, rgba(52, 168, 122, 1) 100%);
+      color: var(--text-main);
+      background-image: url(img/back-365-guide.jpg);
+      background-size: cover;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 1000px 1fr;
+      width: 100%;
+      min-height: 100vh;
+    }
+    .left {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+    }
+
+    .middle {
+      padding: 20px;
+    }
+
+    .right {
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: end;
+    }
+
+    .right img{
+      width: 100%;
+      height: auto;
+    }
+
+
+    .odds-container {
+        width: 60%;
+        background-color: var(--bg-color);
+        border-radius: 8px;
+        overflow: hidden;
+        height: 55%;
+        margin-bottom: 70px;
+    }
+
+    .header {
+        background-color: #1e1e1e;
+        padding: 15px;
+        font-weight: bold;
+        font-size: 1.1em;
+        border-bottom: 1px solid var(--row-border);
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .header .odds-labels {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        color: var(--text-muted);
+        font-size: 0.85em;
+        text-align: center;
+    }
+
+    .header .odds-labels span {
+        width: 33%;
+    }
+
+    .match-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 15px;
+        border-bottom: 1px solid var(--row-border);
+        transition: background-color 0.2s;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .match-row:last-child {
+        border-bottom: none;
+    }
+
+    .match-row:hover {
+        background-color: var(--hover-bg);
+    }
+
+    .match-info {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    .team-name {
+        font-size: 0.8em;
+        font-weight: 500;
+    }
+
+    .match-meta {
+        display: flex;
+        align-items: center;
+        font-size: 0.75em;
+        color: var(--text-muted);
+        margin-top: 4px;
+    }
+
+    .icon-box {
+        background-color: #00b875;
+        color: #fff;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-weight: bold;
+        font-size: 0.9em;
+    }
+
+    .odds-group {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        border-left: none;
+        border-top: 1px solid var(--row-border);
+        padding-left: 0;
+        padding-top: 10px;
+    }
+
+    .odd-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 33%;
+        gap: 4px;
+    }
+
+    .odd-label {
+        font-size: 0.75em;
+        color: var(--text-muted);
+    }
+
+    .odd-value {
+        font-size: 0.95em;
+        color: var(--odds-color);
+        font-weight: 500;
+    }
+
+    .no-events {
+        padding: 20px;
+        text-align: center;
+        color: var(--text-muted);
+    }
+    #league-name{
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+        text-align: center;
+    }
+        .timer-container {
+        background-color: #2a2a2a;
+        padding: 12px 15px;
+        text-align: center;
+        border-bottom: 1px solid var(--row-border);
+        color: var(--text-main);
+        font-size: 0.95em;
+        display: none;
+    }
+
+    .timer-highlight {
+        color: var(--odds-color);
+        font-weight: bold;
+        letter-spacing: 0.5px;
+        margin-left: 5px;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <div class="left">
+        <div class="odds-container">
+            <span id="league-name">England Premier League</span>
+            <div id="next-game-timer" class="timer-container">
+                Next match <br><span id="next-match-teams"></span><br>starts in: <span id="countdown-text" class="timer-highlight"></span>
+              </div>
+            <div class="header">
+                <div class="odds-labels">
+                <span>Home</span>
+                <span>Draw</span>
+                <span>Away</span>
+                </div>
+                </div>
+            <div id="match-container">
+            </div>
+        </div>
+    </div>
+    <div class="middle"></div>
+    <div class="right">
+      <img src="img/players.png" alt="">
+    </div>
+  </div>
+
+<script>
+    let countdownInterval;
+
+    function parseEventDate(dateString) {
+        const [datePart, timePart] = dateString.split(' ');
+        const [day, month, year] = datePart.split('/');
+        const [hours, minutes, seconds] = timePart.split(':');
+        
+        const fullYear = parseInt(year) < 100 ? 2000 + parseInt(year) : year;
+        
+        return new Date(fullYear, parseInt(month) - 1, day, hours, minutes, seconds);
+    }
+
+    function startCountdown(targetDate, homeTeam, awayTeam) {
+        const timerContainer = document.getElementById('next-game-timer');
+        const teamsSpan = document.getElementById('next-match-teams');
+        const countdownSpan = document.getElementById('countdown-text');
+        
+        timerContainer.style.display = 'block';
+        teamsSpan.textContent = `${homeTeam} v ${awayTeam}`;
+
+        function updateTimer() {
+            const now = new Date();
+            const diff = targetDate - now;
+
+            if (diff <= 0) {
+                countdownSpan.textContent = "Starting Now!";
+                clearInterval(countdownInterval);
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+            const daysStr = days > 0 ? `${days}d ` : '';
+            countdownSpan.textContent = `${daysStr}${hours}h ${minutes}m`;
+        }
+
+        updateTimer(); 
+        countdownInterval = setInterval(updateTimer, 60000);
+    }
+
+    function renderEvents(data) {
+        const container = document.getElementById('match-container');
+        container.innerHTML = ''; 
+        
+        document.getElementById('league-name').textContent = data.EventGroup["@attributes"].Name;
+        
+        const events = data.EventGroup.Event;
+        const now = new Date();
+        let eventsRendered = 0;
+        let isFirstUpcomingGame = true;
+        
+        for (const event of events) {
+            if (eventsRendered >= 5) {
+                break;
+            }
+            
+            const eventDate = parseEventDate(event["@attributes"].StartTime);
+            
+            if (eventDate > now) {
+                const teams = event["@attributes"].Name.split(' v ');
+                const homeTeam = teams[0] || 'TBD';
+                const awayTeam = teams[1] || 'TBD';
+
+                if (isFirstUpcomingGame) {
+                    startCountdown(eventDate, homeTeam, awayTeam);
+                    isFirstUpcomingGame = false;
+                }
+                
+                eventsRendered++;
+                
+                const timeString = event["@attributes"].StartTime.split(' ')[1].substring(0, 5);
+                const participants = event.Market.Participant;
+                const homeOdds = participants[0]["@attributes"].Odds;
+                const drawOdds = participants[1]["@attributes"].Odds;
+                const awayOdds = participants[2]["@attributes"].Odds;
+                
+                const row = document.createElement('div');
+                row.className = 'match-row';
+                row.innerHTML = `
+                    <div class="odds-group">
+                        <div class="odd-box">
+                            <span class="odd-label">${homeTeam}</span>
+                            <span class="odd-value">${homeOdds}</span>
+                        </div>
+                        <div class="odd-box">
+                            <span class="odd-label">X</span>
+                            <span class="odd-value">${drawOdds}</span>
+                        </div>
+                        <div class="odd-box">
+                            <span class="odd-label">${awayTeam}</span>
+                            <span class="odd-value">${awayOdds}</span>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(row);
+            }
+        }
+
+        if (eventsRendered === 0) {
+            container.innerHTML = `<div class="no-events">No upcoming matches available.</div>`;
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        fetch('data.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => renderEvents(data))
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                document.getElementById('match-container').innerHTML = 
+                    `<div class="no-events">Error loading events. Ensure you are running a local web server to fetch the JSON file.</div>`;
+                document.getElementById('league-name').textContent = "Error";
+            });
+    });
+</script>
+</body>
+</html>

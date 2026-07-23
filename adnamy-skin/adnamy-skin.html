@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>England Premier League Odds</title>
-<style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
     :root {
         --bg-color: #323232;
         --row-border: #444444;
@@ -13,23 +13,49 @@
         --odds-color: #ffd428;
         --hover-bg: #3c3c3c;
     }
-
-    body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        background-color: #242424;
-        color: var(--text-main);
-        margin: 0;
-        padding: 20px;
-        display: flex;
-        justify-content: center;
+    body{
+      background: #253D34;
+      background: linear-gradient(180deg, rgba(37, 61, 52, 1) 0%, rgba(44, 111, 85, 1) 30%, rgba(23, 61, 46, 1) 60%, rgba(49, 146, 107, 1) 86%, rgba(52, 168, 122, 1) 100%);
+      color: var(--text-main);
+      background-image: url(img/back-365-guide.jpg);
+      background-size: cover;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 1000px 1fr;
+      width: 100%;
+      min-height: 100vh;
+    }
+    .left {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
     }
 
+    .middle {
+      padding: 20px;
+    }
+
+    .right {
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: end;
+    }
+
+    .right img{
+      width: 100%;
+      height: auto;
+    }
+
+
     .odds-container {
-        width: 100%;
-        max-width: 800px;
+        width: 60%;
         background-color: var(--bg-color);
         border-radius: 8px;
         overflow: hidden;
+        height: 33%;
+        margin-bottom: 70px;
     }
 
     .header {
@@ -44,7 +70,7 @@
 
     .header .odds-labels {
         display: flex;
-        width: 240px;
+        width: 100%;
         justify-content: space-between;
         color: var(--text-muted);
         font-size: 0.85em;
@@ -58,10 +84,12 @@
     .match-row {
         display: flex;
         justify-content: space-between;
-        align-items: center;
         padding: 12px 15px;
         border-bottom: 1px solid var(--row-border);
         transition: background-color 0.2s;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
     }
 
     .match-row:last-child {
@@ -73,21 +101,20 @@
     }
 
     .match-info {
-        flex: 1;
         display: flex;
-        flex-direction: column;
-        gap: 6px;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-around;
     }
 
     .team-name {
-        font-size: 0.95em;
+        font-size: 0.8em;
         font-weight: 500;
     }
 
     .match-meta {
         display: flex;
         align-items: center;
-        gap: 8px;
         font-size: 0.75em;
         color: var(--text-muted);
         margin-top: 4px;
@@ -104,11 +131,13 @@
 
     .odds-group {
         display: flex;
-        width: 240px;
         justify-content: space-between;
         align-items: center;
-        border-left: 1px solid var(--row-border);
-        padding-left: 15px;
+        width: 100%;
+        border-left: none;
+        border-top: 1px solid var(--row-border);
+        padding-left: 0;
+        padding-top: 10px;
     }
 
     .odd-box {
@@ -136,45 +165,37 @@
         text-align: center;
         color: var(--text-muted);
     }
-
-    @media (max-width: 600px) {
-        .header .odds-labels {
-            display: none;
-        }
-        
-        .match-row {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 15px;
-        }
-
-        .odds-group {
-            width: 100%;
-            border-left: none;
-            border-top: 1px solid var(--row-border);
-            padding-left: 0;
-            padding-top: 10px;
-        }
+    #league-name{
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+        text-align: center;
     }
-</style>
+    </style>
 </head>
 <body>
-
-<div class="odds-container">
-    <div class="header">
-        <span id="league-name">England Premier League</span>
-        <div class="odds-labels">
-            <span>Home</span>
-            <span>Draw</span>
-            <span>Away</span>
+    <div class="container">
+    <div class="left">
+        <div class="odds-container">
+            <span id="league-name">England Premier League</span>
+            <div class="header">
+                <div class="odds-labels">
+                <span>Home</span>
+                <span>Draw</span>
+                <span>Away</span>
+                </div>
+                </div>
+            <div id="match-container">
+            </div>
         </div>
     </div>
-    
-    <div id="match-container">
+    <div class="middle"></div>
+    <div class="right">
+      <img src="img/players.png" alt="">
     </div>
-</div>
+  </div>
 
-<script>
+  <script>
     const data = {
       "@attributes": {
         "Name": "Soccer",
@@ -290,7 +311,7 @@
         let eventsRendered = 0;
         
         for (const event of events) {
-            if (eventsRendered >= 8) {
+            if (eventsRendered >= 5) {
                 break;
             }
             
@@ -313,24 +334,17 @@
                 const row = document.createElement('div');
                 row.className = 'match-row';
                 row.innerHTML = `
-                    <div class="match-info">
-                        <div class="team-name">${homeTeam}</div>
-                        <div class="team-name">${awayTeam}</div>
-                        <div class="match-meta">
-                            <span>${timeString}</span><span class="icon-box">6 »</span>
-                        </div>
-                    </div>
                     <div class="odds-group">
                         <div class="odd-box">
-                            <span class="odd-label">1</span>
+                            <span class="odd-label">${homeTeam}</span>
                             <span class="odd-value">${homeOdds}</span>
                         </div>
                         <div class="odd-box">
-                            <span class="odd-label">X</span>
+                            <span class="odd-label"></span>
                             <span class="odd-value">${drawOdds}</span>
                         </div>
                         <div class="odd-box">
-                            <span class="odd-label">2</span>
+                            <span class="odd-label">${awayTeam}</span>
                             <span class="odd-value">${awayOdds}</span>
                         </div>
                     </div>
@@ -347,6 +361,5 @@
 
     document.addEventListener('DOMContentLoaded', renderEvents);
 </script>
-
 </body>
 </html>
