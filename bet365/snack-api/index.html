@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premier League XML Feed</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f6f8;
+            color: #333;
+        }
+        h1 {
+            color: #008736; /* Bet365 Green */
+            border-bottom: 2px solid #008736;
+            padding-bottom: 10px;
+        }
+        #xml-container {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            overflow-x: auto;
+            font-family: "Courier New", Courier, monospace;
+        }
+        ul.xml-node {
+            list-style-type: none;
+            padding-left: 20px;
+            margin: 2px 0;
+            border-left: 1px dashed #555;
+        }
+        .tag-name {
+            color: #569cd6;
+            font-weight: bold;
+        }
+        .attribute-name {
+            color: #9cdcfe;
+        }
+        .attribute-value {
+            color: #ce9178;
+        }
+        .text-content {
+            color: #d4d4d4;
+            padding-left: 5px;
+        }
+        .error {
+            color: #ff5555;
+            background: #ffe6e6;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ff5555;
+            color: black;
+        }
+        code {
+            background-color: #e2e8f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Premier League XML Data</h1>
+    <p>Live data feed from: <code>https://snack-scripts.b-cdn.net/bet365/feeds/premier-league.xml</code></p>
+    
+    <div id="xml-container">Fetching data...</div>
+
+    <script>
+        const xmlUrl = 'https://snack-scripts.b-cdn.net/bet365/feeds/premier-league.xml';
+        
+        async function loadXML() {
+            try {
+                // Fetch the XML file
+                const response = await fetch(xmlUrl);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const xmlText = await response.text();
+                
+                // Parse the XML text into a DOM object
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(xmlText, "text/xml");
+                
+                // Check for parsing errors
+                if (xmlDoc.querySelector("parsererror")) {
+                    throw new Error("Invalid XML format retrieved.");
+                }
+
+                // Render the XML to the screen
+                const container = document.getElementById('xml-container');
+                container.innerHTML = ''; // Clear loading text
+                container.appendChild(renderNode(xmlDoc.documentElement));
+
+            } catch (error) {
+                document.getElementById('xml-container').innerHTML = 
+                    `<div class="error">
+                        <strong>Failed to load XML:</strong> ${error.message}
+                        <p><em>Note:</em> If you are viewing this locally and see a <strong>CORS error</strong> in your browser console, it means the CDN restricts direct browser access. To fix this, you would need to fetch the data via a backend server (like Node.js/PHP) or use a CORS proxy.</p>
+                     </div>`;
+            }
+        }
+
+        // Recursive function to turn XML nodes into HTML elements
+        function renderNode(node) {
+            const ul = document.createElement('ul');
+            ul.className = 'xml-node';
+
+            const li = document.createElement('li');
+            
+            // 1. Render Opening Tag Name
+            const tagSpan = document.createElement('span');
+            tagSpan.className = 'tag-name';
+            tagSpan.textContent = `<${node.nodeName}`;
+            li.appendChild(tagSpan);
+
+            // 2. Render Attributes
+            if (node.attributes && node.attributes.length > 0) {
+                for (let i = 0; i < node.attributes.length; i++) {
+                    const attr = node.attributes[i];
+                    
+                    const attrName = document.createElement('span');
+                    attrName.className = 'attribute-name';
+                    attrName.textContent = ` ${attr.name}=`;
+                    
+                    const attrValue = document.createElement('span');
+                    attrValue.className = 'attribute-value';
+                    attrValue.textContent = `"${attr.value}"`;
+                    
+                    li.appendChild(attrName);
+                    li.appendChild(attrValue);
+                }
+            }
+
+            // Close the opening tag bracket
+            const closeBracket = document.createElement('span');
+            closeBracket.className = 'tag-name';
+            closeBracket.textContent = '>';
+            li.appendChild(closeBracket);
+
+            // 3. Check for child elements vs text content
+            let hasChildElements = false;
+            for (let i = 0; i < node.childNodes.length; i++) {
+                if (node.childNodes[i].nodeType === 1) { // Node is an Element
+                    hasChildElements = true;
+                    break;
+                }
+            }
+
+            // 4. Render Text Content (if it's a leaf node)
+            if (!hasChildElements && node.textContent.trim() !== '') {
+                const textSpan = document.createElement('span');
+                textSpan.className = 'text-content';
+                textSpan.textContent = node.textContent.trim();
+                li.appendChild(textSpan);
+            }
+
+            // 5. Render Child Elements (Recursive call)
+            for (let i = 0; i < node.childNodes.length; i++) {
+                const child = node.childNodes[i];
+                if (child.nodeType === 1) { 
+                    li.appendChild(renderNode(child));
+                }
+            }
+
+            // 6. Render Closing Tag
+            const closeTagSpan = document.createElement('span');
+            closeTagSpan.className = 'tag-name';
+            // If it had children, put the closing tag on a new line visually
+            if (hasChildElements) {
+                closeTagSpan.innerHTML = `<br>&lt;/${node.nodeName}&gt;`;
+            } else {
+                closeTagSpan.textContent = `</${node.nodeName}>`;
+            }
+            li.appendChild(closeTagSpan);
+
+            ul.appendChild(li);
+            return ul;
+        }
+
+        // Run the script
+        loadXML();
+    </script>
+</body>
+</html>
