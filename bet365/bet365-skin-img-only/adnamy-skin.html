@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    :root {
+        --bg-color: #323232;
+        --row-border: #444444;
+        --text-main: #ffffff;
+        --text-muted: #a0a0a0;
+        --odds-color: #ffd428;
+        --hover-bg: #3c3c3c;
+    }
+    body{
+      background: #253D34;
+      background: linear-gradient(180deg, rgba(37, 61, 52, 1) 0%, rgba(44, 111, 85, 1) 30%, rgba(23, 61, 46, 1) 60%, rgba(49, 146, 107, 1) 86%, rgba(52, 168, 122, 1) 100%);
+      color: var(--text-main);
+      background-image: url(img/back-365-guide.jpg);
+      background-size: cover;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 1000px 1fr;
+      width: 100%;
+      min-height: 100vh;
+    }
+    .left {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+    }
+
+    .middle {
+      padding: 20px;
+    }
+
+    .right, .left {
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: end;
+    }
+
+    .right img{
+      width: 100%;
+      height: auto;
+    }
+
+    .left img{
+      width: 100%;
+      height: auto;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <div class="left">
+      <img src="img/left_img.png" alt="">
+    </div>
+    <div class="middle"></div>
+    <div class="right">
+      <img src="img/right_img.png" alt="">
+    </div>
+  </div>
+</body>
+</html>

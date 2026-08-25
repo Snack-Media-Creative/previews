@@ -1,0 +1,95 @@
+{
+  "@attributes": {
+    "Name": "Soccer",
+    "PageTitle": "Filtered applied. EventGroupID: 100100 MarketID: 40",
+    "TimeStamp": "26/08/26 14:54:57"
+  },
+  "EventGroup": {
+    "@attributes": {
+      "Name": "England Premier League",
+      "ID": "100100"
+    },
+    "Event": [
+      {
+        "@attributes": { "Name": "Southampton v Man Utd", "ID": "123536476", "StartTime": "27/08/26 12:30:00", "EventComment": "" },
+        "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "16/5" } }, { "@attributes": { "Name": "Draw", "Odds": "3/1" } }, { "@attributes": { "Name": "Away Win", "Odds": "4/5" } } ] }
+      },
+      {
+        "@attributes": { "Name": "Brentford v Everton", "ID": "123536483", "StartTime": "27/08/26 15:00:00", "EventComment": "" },
+        "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "1/1" } }, { "@attributes": { "Name": "Draw", "Odds": "5/2" } }, { "@attributes": { "Name": "Away Win", "Odds": "11/4" } } ] }
+      },
+      {
+        "@attributes": { "Name": "Brighton v Leeds", "ID": "123536488", "StartTime": "27/08/26 15:00:00", "EventComment": "" },
+        "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "10/11" } }, { "@attributes": { "Name": "Draw", "Odds": "14/5" } }, { "@attributes": { "Name": "Away Win", "Odds": "14/5" } } ] }
+      },
+      {
+        "@attributes": { "Name": "Chelsea v Leicester", "ID": "123536492", "StartTime": "27/08/26 15:00:00", "EventComment": "" },
+        "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "2/5" } }, { "@attributes": { "Name": "Draw", "Odds": "4/1" } }, { "@attributes": { "Name": "Away Win", "Odds": "6/1" } } ] }
+      },
+      {
+        "@attributes": { "Name": "Liverpool v Bournemouth", "ID": "123536494", "StartTime": "27/08/26 15:00:00", "EventComment": "" },
+        "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "1/11" } }, { "@attributes": { "Name": "Draw", "Odds": "9/1" } }, { "@attributes": { "Name": "Away Win", "Odds": "28/1" } } ] }
+      },
+      {
+        "@attributes": { "Name": "Man City v Crystal Palace", "ID": "123536497", "StartTime": "27/08/26 15:00:00", "EventComment": "" },
+        "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "2/11" } }, { "@attributes": { "Name": "Draw", "Odds": "13/2" } }, { "@attributes": { "Name": "Away Win", "Odds": "12/1" } } ] }
+      },
+      {
+        "@attributes": { "Name": "Arsenal v Fulham", "ID": "123536502", "StartTime": "27/08/26 17:30:00", "EventComment": "" },
+        "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "3/10" } }, { "@attributes": { "Name": "Draw", "Odds": "19/4" } }, { "@attributes": { "Name": "Away Win", "Odds": "8/1" } } ] }
+      },
+      {
+        "@attributes": { "Name": "Aston Villa v West Ham", "ID": "123536506", "StartTime": "28/08/26 14:00:00", "EventComment": "" },
+        "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "13/10" } }, { "@attributes": { "Name": "Draw", "Odds": "12/5" } }, { "@attributes": { "Name": "Away Win", "Odds": "21/10" } } ] }
+      },
+      {
+        "@attributes": { "Name": "Wolverhampton v Newcastle", "ID": "123536510", "StartTime": "28/08/26 14:00:00", "EventComment": "" },
+        "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "17/10" } }, { "@attributes": { "Name": "Draw", "Odds": "23/10" } }, { "@attributes": { "Name": "Away Win", "Odds": "17/10" } } ] }
+      },
+      {
+        "@attributes": { "Name": "Nottm Forest v Tottenham", "ID": "123536512", "StartTime": "28/08/26 16:30:00", "EventComment": "" },
+        "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "6/1" } }, { "@attributes": { "Name": "Draw", "Odds": "18/5" } }, { "@attributes": { "Name": "Away Win", "Odds": "4/9" } } ] }
+      },
+      {
+        "@attributes": { "Name": "Crystal Palace v Brentford", "ID": "123536514", "StartTime": "30/08/26 19:30:00", "EventComment": "" },
+        "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "11/10" } }, { "@attributes": { "Name": "Draw", "Odds": "23/10" } }, { "@attributes": { "Name": "Away Win", "Odds": "5/2" } } ] }
+      },
+      {
+        "@attributes": { "Name": "Fulham v Brighton", "ID": "123536517", "StartTime": "30/08/26 19:30:00", "EventComment": "" },
+        "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "15/8" } }, { "@attributes": { "Name": "Draw", "Odds": "23/10" } }, { "@attributes": { "Name": "Away Win", "Odds": "6/4" } } ] }
+      },
+      {
+        "@attributes": { "Name": "Southampton v Chelsea", "ID": "123536519", "StartTime": "30/08/26 19:45:00", "EventComment": "" },
+        "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "9/2" } }, { "@attributes": { "Name": "Draw", "Odds": "10/3" } }, { "@attributes": { "Name": "Away Win", "Odds": "11/20" } } ] }
+      },
+      {
+        "@attributes": { "Name": "Leeds v Everton", "ID": "123536522", "StartTime": "30/08/26 20:00:00", "EventComment": "" },
+        "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "21/20" } }, { "@attributes": { "Name": "Draw", "Odds": "5/2" } }, { "@attributes": { "Name": "Away Win", "Odds": "5/2" } } ] }
+      },
+      {
+        "@attributes": { "Name": "Bournemouth v Wolverhampton", "ID": "123536526", "StartTime": "31/08/26 19:30:00", "EventComment": "" },
+        "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "12/5" } }, { "@attributes": { "Name": "Draw", "Odds": "12/5" } }, { "@attributes": { "Name": "Away Win", "Odds": "23/20" } } ] }
+      },
+      {
+        "@attributes": { "Name": "Arsenal v Aston Villa", "ID": "123536534", "StartTime": "31/08/26 19:30:00", "EventComment": "" },
+        "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "4/9" } }, { "@attributes": { "Name": "Draw", "Odds": "7/2" } }, { "@attributes": { "Name": "Away Win", "Odds": "13/2" } } ] }
+      },
+      {
+        "@attributes": { "Name": "Man City v Nottm Forest", "ID": "123536539", "StartTime": "31/08/26 19:30:00", "EventComment": "" },
+        "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "1/16" } }, { "@attributes": { "Name": "Draw", "Odds": "12/1" } }, { "@attributes": { "Name": "Away Win", "Odds": "22/1" } } ] }
+      },
+      {
+        "@attributes": { "Name": "West Ham v Tottenham", "ID": "123536547", "StartTime": "31/08/26 19:45:00", "EventComment": "" },
+        "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "14/5" } }, { "@attributes": { "Name": "Draw", "Odds": "11/4" } }, { "@attributes": { "Name": "Away Win", "Odds": "10/11" } } ] }
+      },
+      {
+        "@attributes": { "Name": "Liverpool v Newcastle", "ID": "123536551", "StartTime": "31/08/26 20:00:00", "EventComment": "" },
+        "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "2/5" } }, { "@attributes": { "Name": "Draw", "Odds": "4/1" } }, { "@attributes": { "Name": "Away Win", "Odds": "6/1" } } ] }
+      },
+      {
+        "@attributes": { "Name": "Leicester v Man Utd", "ID": "123536554", "StartTime": "31/08/26 20:00:00", "EventComment": "" },
+        "Market": { "Participant": [ { "@attributes": { "Name": "Home Win", "Odds": "13/5" } }, { "@attributes": { "Name": "Draw", "Odds": "11/4" } }, { "@attributes": { "Name": "Away Win", "Odds": "1/1" } } ] }
+      }
+    ]
+  }
+}

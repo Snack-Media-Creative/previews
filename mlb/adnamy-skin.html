@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    body{
+      background: #D6CAB4;
+      color: var(--text-main);
+      background-size: cover;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 1000px 1fr;
+      width: 100%;
+      min-height: 100vh;
+    }
+    .left {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+    .right {
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-start
+    }
+
+    img{
+      width: auto;
+      height: 50%;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <div class="left">
+      <img src="img/l.jpg" alt="">
+    </div>
+    <div class="middle">
+    </div>
+    <div class="right">
+      <img src="img/r.jpg" alt="">
+    </div>
+  </div>
+</body>
+</html>
