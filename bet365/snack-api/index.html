@@ -13,7 +13,7 @@
             color: #333;
         }
         h1 {
-            color: #008736; /* Bet365 Green */
+            color: #008736;
             border-bottom: 2px solid #008736;
             padding-bottom: 10px;
         }
@@ -66,15 +66,19 @@
     <h1>Premier League XML Data</h1>
     <p>Live data feed from: <code>https://snack-scripts.b-cdn.net/bet365/feeds/premier-league.xml</code></p>
     
-    <div id="xml-container">Fetching data...</div>
+    <div id="xml-container">Fetching data via proxy...</div>
 
     <script>
-        const xmlUrl = 'https://snack-scripts.b-cdn.net/bet365/feeds/premier-league.xml';
+        // The original target URL
+        const targetUrl = 'proxy.php'; // Point this to your local PHP file
+        
+        // Wrap it in a CORS proxy (AllOrigins) to bypass browser restrictions
+        const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`;
         
         async function loadXML() {
             try {
-                // Fetch the XML file
-                const response = await fetch(xmlUrl);
+                // Fetch the XML file through the proxy
+                const response = await fetch(proxyUrl);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -98,7 +102,6 @@
                 document.getElementById('xml-container').innerHTML = 
                     `<div class="error">
                         <strong>Failed to load XML:</strong> ${error.message}
-                        <p><em>Note:</em> If you are viewing this locally and see a <strong>CORS error</strong> in your browser console, it means the CDN restricts direct browser access. To fix this, you would need to fetch the data via a backend server (like Node.js/PHP) or use a CORS proxy.</p>
                      </div>`;
             }
         }
@@ -143,7 +146,7 @@
             // 3. Check for child elements vs text content
             let hasChildElements = false;
             for (let i = 0; i < node.childNodes.length; i++) {
-                if (node.childNodes[i].nodeType === 1) { // Node is an Element
+                if (node.childNodes[i].nodeType === 1) { 
                     hasChildElements = true;
                     break;
                 }
@@ -168,7 +171,7 @@
             // 6. Render Closing Tag
             const closeTagSpan = document.createElement('span');
             closeTagSpan.className = 'tag-name';
-            // If it had children, put the closing tag on a new line visually
+            
             if (hasChildElements) {
                 closeTagSpan.innerHTML = `<br>&lt;/${node.nodeName}&gt;`;
             } else {
@@ -180,7 +183,6 @@
             return ul;
         }
 
-        // Run the script
         loadXML();
     </script>
 </body>
