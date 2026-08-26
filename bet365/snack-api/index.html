@@ -3,187 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premier League XML Feed</title>
+    <title>Premier League Odds Viewer</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f6f8;
+            margin: 20px;
+            background-color: #f9f9f9;
             color: #333;
         }
-        h1 {
-            color: #008736;
-            border-bottom: 2px solid #008736;
-            padding-bottom: 10px;
+        h2 {
+            color: #1a1a1a;
         }
-        #xml-container {
-            background-color: #1e1e1e;
-            color: #d4d4d4;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            overflow-x: auto;
-            font-family: "Courier New", Courier, monospace;
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background: #fff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
-        ul.xml-node {
-            list-style-type: none;
-            padding-left: 20px;
-            margin: 2px 0;
-            border-left: 1px dashed #555;
+        th, td {
+            border: 1px solid #e0e0e0;
+            padding: 12px;
+            text-align: left;
         }
-        .tag-name {
-            color: #569cd6;
-            font-weight: bold;
+        th {
+            background-color: #f1f3f5;
+            font-weight: 600;
         }
-        .attribute-name {
-            color: #9cdcfe;
+        tr:nth-child(even) {
+            background-color: #fafafa;
         }
-        .attribute-value {
-            color: #ce9178;
+        tr:hover {
+            background-color: #f1f8ff;
         }
-        .text-content {
-            color: #d4d4d4;
-            padding-left: 5px;
+        .status-msg {
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
         }
         .error {
-            color: #ff5555;
-            background: #ffe6e6;
-            padding: 15px;
-            border-radius: 5px;
-            border: 1px solid #ff5555;
-            color: black;
-        }
-        code {
-            background-color: #e2e8f0;
-            padding: 2px 6px;
-            border-radius: 4px;
+            background-color: #ffebee;
+            border-left: 4px solid #f44336;
+            color: #c62828;
         }
     </style>
 </head>
 <body>
 
-    <h1>Premier League XML Data</h1>
-    <p>Live data feed from: <code>https://snack-scripts.b-cdn.net/bet365/feeds/premier-league.xml</code></p>
+    <h2>Premier League Odds</h2>
     
-    <div id="xml-container">Fetching data via proxy...</div>
+    <div id="status" class="status-msg">Fetching XML feed...</div>
+    
+    <table id="oddsTable" style="display: none;">
+        <thead>
+            <tr>
+                <th>Event</th>
+                <th>Market</th>
+                <th>Odds Home</th>
+                <th>Odds Draw</th>
+                <th>Odds Away</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+            <!-- Data will be injected here -->
+        </tbody>
+    </table>
 
     <script>
-        // The original target URL
-        const targetUrl = 'proxy.php'; // Point this to your local PHP file
-        
-        // Wrap it in a CORS proxy (AllOrigins) to bypass browser restrictions
-        const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`;
-        
-        async function loadXML() {
+        const url = 'https://snack-feeds.b-cdn.net/bet365/feeds/premier-league.xml';
+
+        async function fetchAndParseXML() {
             try {
-                // Fetch the XML file through the proxy
-                const response = await fetch(proxyUrl);
+                const response = await fetch(url);
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    throw new Error(`HTTP error! Status: ${response.status}`);
                 }
+                
                 const xmlText = await response.text();
                 
-                // Parse the XML text into a DOM object
                 const parser = new DOMParser();
                 const xmlDoc = parser.parseFromString(xmlText, "text/xml");
                 
-                // Check for parsing errors
-                if (xmlDoc.querySelector("parsererror")) {
-                    throw new Error("Invalid XML format retrieved.");
-                }
-
-                // Render the XML to the screen
-                const container = document.getElementById('xml-container');
-                container.innerHTML = ''; // Clear loading text
-                container.appendChild(renderNode(xmlDoc.documentElement));
-
+                populateTable(xmlDoc);
+                
             } catch (error) {
-                document.getElementById('xml-container').innerHTML = 
-                    `<div class="error">
-                        <strong>Failed to load XML:</strong> ${error.message}
-                     </div>`;
+                document.getElementById('status').className = "status-msg error";
+                document.getElementById('status').innerHTML = `
+                    <strong>Error loading XML:</strong> ${error.message} <br><br>
+                    <em>Note: If you get a "Failed to fetch" or CORS error in the console, your browser is blocking the request for security reasons.</em>`;
             }
         }
 
-        // Recursive function to turn XML nodes into HTML elements
-        function renderNode(node) {
-            const ul = document.createElement('ul');
-            ul.className = 'xml-node';
-
-            const li = document.createElement('li');
+        function populateTable(xmlDoc) {
+            const tbody = document.getElementById('tableBody');
             
-            // 1. Render Opening Tag Name
-            const tagSpan = document.createElement('span');
-            tagSpan.className = 'tag-name';
-            tagSpan.textContent = `<${node.nodeName}`;
-            li.appendChild(tagSpan);
-
-            // 2. Render Attributes
-            if (node.attributes && node.attributes.length > 0) {
-                for (let i = 0; i < node.attributes.length; i++) {
-                    const attr = node.attributes[i];
-                    
-                    const attrName = document.createElement('span');
-                    attrName.className = 'attribute-name';
-                    attrName.textContent = ` ${attr.name}=`;
-                    
-                    const attrValue = document.createElement('span');
-                    attrValue.className = 'attribute-value';
-                    attrValue.textContent = `"${attr.value}"`;
-                    
-                    li.appendChild(attrName);
-                    li.appendChild(attrValue);
-                }
-            }
-
-            // Close the opening tag bracket
-            const closeBracket = document.createElement('span');
-            closeBracket.className = 'tag-name';
-            closeBracket.textContent = '>';
-            li.appendChild(closeBracket);
-
-            // 3. Check for child elements vs text content
-            let hasChildElements = false;
-            for (let i = 0; i < node.childNodes.length; i++) {
-                if (node.childNodes[i].nodeType === 1) { 
-                    hasChildElements = true;
-                    break;
-                }
-            }
-
-            // 4. Render Text Content (if it's a leaf node)
-            if (!hasChildElements && node.textContent.trim() !== '') {
-                const textSpan = document.createElement('span');
-                textSpan.className = 'text-content';
-                textSpan.textContent = node.textContent.trim();
-                li.appendChild(textSpan);
-            }
-
-            // 5. Render Child Elements (Recursive call)
-            for (let i = 0; i < node.childNodes.length; i++) {
-                const child = node.childNodes[i];
-                if (child.nodeType === 1) { 
-                    li.appendChild(renderNode(child));
-                }
-            }
-
-            // 6. Render Closing Tag
-            const closeTagSpan = document.createElement('span');
-            closeTagSpan.className = 'tag-name';
+            const events = xmlDoc.getElementsByTagName("Event"); 
             
-            if (hasChildElements) {
-                closeTagSpan.innerHTML = `<br>&lt;/${node.nodeName}&gt;`;
-            } else {
-                closeTagSpan.textContent = `</${node.nodeName}>`;
+            if (events.length === 0) {
+                document.getElementById('status').className = "status-msg error";
+                document.getElementById('status').innerText = "No events found. Please check the XML tag names in the code.";
+                return;
             }
-            li.appendChild(closeTagSpan);
 
-            ul.appendChild(li);
-            return ul;
+            for (let i = 0; i < events.length; i++) {
+                const eventNode = events[i];
+                const eventName = eventNode.getAttribute("Name") || eventNode.getAttribute("name") || "Unknown Event";
+                
+                const markets = eventNode.getElementsByTagName("Market");
+                
+                for (let j = 0; j < markets.length; j++) {
+                    const marketNode = markets[j];
+                    const marketName = marketNode.getAttribute("Name") || marketNode.getAttribute("name") || "Unknown Market";
+                    
+                    const participants = marketNode.getElementsByTagName("Participant");
+                    
+                    let homeOdds = "-", drawOdds = "-", awayOdds = "-";
+                    let homeFound = false;
+                    
+                    for (let k = 0; k < participants.length; k++) {
+                        const p = participants[k];
+                        const pName = p.getAttribute("Name") || p.getAttribute("name") || "";
+                        const pOdds = p.getAttribute("Odds") || p.getAttribute("odds") || "";
+                        
+                        if (pName.toLowerCase() === "draw" || pName.toLowerCase() === "x") {
+                            drawOdds = pOdds;
+                        } else if (!homeFound) {
+                            homeOdds = pOdds;
+                            homeFound = true;
+                        } else {
+                            awayOdds = pOdds;
+                        }
+                    }
+
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${eventName}</td>
+                        <td>${marketName}</td>
+                        <td>${homeOdds}</td>
+                        <td>${drawOdds}</td>
+                        <td>${awayOdds}</td>
+                    `;
+                    tbody.appendChild(tr);
+                }
+            }
+            
+            document.getElementById('status').style.display = 'none';
+            document.getElementById('oddsTable').style.display = 'table';
         }
 
-        loadXML();
+        fetchAndParseXML();
     </script>
 </body>
 </html>
