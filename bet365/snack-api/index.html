@@ -17,39 +17,6 @@
             flex-direction: column;
             align-items: center;
         }
-
-        /* Control Panel Styles */
-        .controls {
-            background-color: #25493b;
-            padding: 15px 25px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            border: 1px solid #6df2a5;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            color: #ffffff;
-            font-family: 'Oswald', sans-serif;
-            letter-spacing: 1px;
-        }
-
-        .controls input {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid #6df2a5;
-            color: #6df2a5;
-            padding: 8px 12px;
-            font-size: 18px;
-            border-radius: 4px;
-            width: 60px;
-            text-align: center;
-            font-family: 'Oswald', sans-serif;
-        }
-
-        .controls input:focus {
-            outline: none;
-            box-shadow: 0 0 10px rgba(109, 242, 165, 0.5);
-        }
         
         /* Grid for the cards */
         #cards-container {
@@ -64,7 +31,7 @@
         /* The Card Design */
         .promo-card {
             background: radial-gradient(circle, #25493b 0%, #162d23 100%);
-            width: 480px; /* Increased slightly to fit new icons */
+            width: 480px;
             padding: 30px 20px;
             text-align: center;
             font-family: 'Oswald', sans-serif;
@@ -114,13 +81,13 @@
 
         /* Specific icon style */
         .odds-icon {
-            width: 35px; /* Good size relative to large odds */
+            width: 35px;
             height: 35px;
             object-fit: contain;
-            opacity: 0.8; /* Muted slightly */
-            filter: drop-shadow(0 0 10px rgba(109, 242, 165, 0.5)); /* Match the glow */
-            align-self: flex-end; /* Align with the odds number (not label) */
-            margin-bottom: 5px; /* Precise align for '>>' with odds and not label */
+            opacity: 0.8;
+            filter: drop-shadow(0 0 10px rgba(109, 242, 165, 0.5));
+            align-self: flex-end;
+            margin-bottom: 5px;
         }
 
         .odd-container {
@@ -161,19 +128,15 @@
 </head>
 <body>
 
-    <!-- Control panel to choose how many matches to display -->
-    <div class="controls" id="controls" style="display: none;">
-        <label for="matchLimit">NUMBER OF MATCHES TO DISPLAY:</label>
-        <input type="number" id="matchLimit" min="1" value="6">
-    </div>
-
     <div id="status">Fetching Premier League Odds...</div>
     
     <div id="cards-container"></div>
 
     <script>
         const url = 'https://snack-feeds.b-cdn.net/bet365/feeds/premier-league.xml';
-        let globalXmlData = null; // Store the fetched XML data globally
+        
+        // --- CHOOSE YOUR AMOUNT HERE ---
+        const matchLimit = 3; 
 
         async function fetchAndParseXML() {
             try {
@@ -182,14 +145,12 @@
                 
                 const xmlText = await response.text();
                 const parser = new DOMParser();
-                globalXmlData = parser.parseFromString(xmlText, "text/xml");
+                const xmlDoc = parser.parseFromString(xmlText, "text/xml");
                 
-                // Show controls and generate initial cards once data is loaded
+                // Hide status message once data is loaded
                 document.getElementById('status').style.display = 'none';
-                document.getElementById('controls').style.display = 'flex';
                 
-                const initialLimit = parseInt(document.getElementById('matchLimit').value, 10);
-                generateCards(initialLimit);
+                generateCards(xmlDoc, matchLimit);
                 
             } catch (error) {
                 const statusDiv = document.getElementById('status');
@@ -199,13 +160,9 @@
             }
         }
 
-        function generateCards(limit) {
-            if (!globalXmlData) return;
-
+        function generateCards(xmlDoc, limit) {
             const container = document.getElementById('cards-container');
-            container.innerHTML = ''; // Clear existing cards before redrawing
-            
-            const events = globalXmlData.getElementsByTagName("Event"); 
+            const events = xmlDoc.getElementsByTagName("Event"); 
             
             if (events.length === 0) {
                 container.innerHTML = "<div style='color: white;'>No events found in the XML feed.</div>";
@@ -274,14 +231,6 @@
                 }
             }
         }
-
-        // Listen for changes on the number input to redraw the cards
-        document.getElementById('matchLimit').addEventListener('input', (event) => {
-            const newLimit = parseInt(event.target.value, 10);
-            if (newLimit > 0) {
-                generateCards(newLimit);
-            }
-        });
 
         // Initialize script
         fetchAndParseXML();
