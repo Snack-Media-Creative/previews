@@ -3,113 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Premier League Odds Cards with Icons</title>
+    <!-- Import fonts to match the design -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:ital,wght@1,700&display=swap" rel="stylesheet">
+    
     <style>
-    :root {
-        --bg-color: #323232;
-        --row-border: #444444;
-        --text-main: #ffffff;
-        --text-muted: #a0a0a0;
-        --odds-color: #ffd428;
-        --hover-bg: #3c3c3c;
-    }
-    body {
-    color: var(--text-main);
-    margin: 0;
-    overflow-x: hidden; /* Prevents scrollbars from appearing during the scale animation */
-}
-
-/* Pseudo-element handles the background separately from the content */
-body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    
-    /* Your original background properties */
-    background: #253D34;
-    background: linear-gradient(180deg, rgba(37, 61, 52, 1) 0%, rgba(44, 111, 85, 1) 30%, rgba(23, 61, 46, 1) 60%, rgba(49, 146, 107, 1) 86%, rgba(52, 168, 122, 1) 100%);
-    background-image: url(img/back.jpg);
-    background-size: cover;
-    background-position: center;
-    
-    /* 10-second animation */
-    animation: scaleBackground 20s ease-out forwards;
-}
-
-/* Keyframes for the 1.5 to 1 scale */
-@keyframes scaleBackground {
-    0% {
-        transform: scale(1.5);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-    .container {
-      display: grid;
-      grid-template-columns: 1fr 1000px 1fr;
-      width: 100%;
-      min-height: 100vh;
-    }
-    .left {
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      flex-direction: column;
-      text-align: center;
-    }
-    .left img{
-        width: 80%;
-    }
-
-    .middle {
-      padding: 20px;
-    }
-
-    .right {
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      flex-direction: column;
-      text-align: center;
-    }
-
-
-    .right img{
-      width: 70%;
-    }
-
-    /* Grid for the cards */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding: 20px 20px;
+            background-color: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        /* Grid for the cards */
         #cards-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 30px;
-            width: 70%;
-            margin-bottom: 50px;
-            margin: auto;
+            width: 100%;
+            max-width: 1600px;
         }
         
         /* The Card Design */
         .promo-card {
             background: radial-gradient(circle, #25493b 0%, #162d23 100%);
-            width: 100%;
+            width: 480px;
             padding: 20px 20px;
             text-align: center;
             font-family: 'Oswald', sans-serif;
             text-transform: uppercase;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            box-shadow: 0 10px 10px rgba(0,0,0,0.6);
             border-radius: 8px;
             border: 1px solid #2a5242;
         }
 
         .match-title {
             color: #ffffff;
-            font-size: 1.5vh;
+            font-size: 10vh;
+            letter-spacing: 1px;
             margin-bottom: 5px;
             font-style: normal;
         }
@@ -117,29 +52,19 @@ body::before {
         .match-title .vs {
             color: #6df2a5;
             text-transform: lowercase;
-            font-size: 1.5vh;
+            font-size: 5vh;
             margin: 0 8px;
             font-family: Arial, sans-serif;
             font-weight: bold;
         }
 
-        .timer-display {
-            color: #6df2a5;
-            font-size: 1vh;
-            font-family: Arial, sans-serif;
-            margin-bottom: 10px; /* Reduced to fit better inside 300px */
-            background: rgba(0, 0, 0, 0.3);
-            display: inline-block;
-            padding: 5px 15px;
-            border-radius: 4px;
-        }
         .main-market {
             color: #ffffff;
-            font-size: 1vh;
+            font-size: 7vh;
             font-weight: 700;
             font-style: italic;
-            line-height: 1.1;
-            margin-bottom: 10px;
+            line-height: 0.5;
+            margin-bottom: 25px;
             letter-spacing: 1px;
         }
 
@@ -148,16 +73,16 @@ body::before {
             display: flex;
             justify-content: center; /* Center the group */
             align-items: center; /* Center vertically */
-            gap: 5px; /* Space between all elements (odds and icons) */
+            gap: 20px; /* Space between all elements (odds and icons) */
             background: rgba(0, 0, 0, 0.2);
             border-radius: 8px;
-            padding: 5px;
+            padding: 15px 10px;
         }
 
         /* Specific icon style */
         .odds-icon {
-            width: 10px;
-            height: 10px;
+            width: 35px;
+            height: 35px;
             object-fit: contain;
             opacity: 0.8;
             filter: drop-shadow(0 0 10px rgba(109, 242, 165, 0.5));
@@ -173,7 +98,7 @@ body::before {
 
         .odd-label {
             color: #9ba6a0;
-            font-size: 1vh;
+            font-size: 5vh;
             font-family: Arial, sans-serif;
             font-weight: bold;
             margin-bottom: 5px;
@@ -182,7 +107,7 @@ body::before {
 
         .new-odds {
             color: #ffffff;
-            font-size: 1.5vh;
+            font-size: 15vh;
             font-weight: 700;
             font-style: italic;
             line-height: 1;
@@ -202,28 +127,16 @@ body::before {
     </style>
 </head>
 <body>
-    <div class="container">
-    <div class="left">
-        <div class="top"><img src="img/top.png" alt="" style="margin-bottom: 20px;"></div>
-        <div class="odds-container">
-            <div id="status">Fetching Premier League Odds...</div>
-            <div id="cards-container"></div>
-        </div>
-        <div class="bottom"><img src="img/cta.png" alt="" style="margin-top: 30px;"></div>
-    </div>
-    <div class="middle"></div>
-    <div class="right"><div>
-        <div class="top"><img src="img/top.png" alt=""></div>
-      <div><img src="img/pic_1.png" alt="" style="height: 100%;"></div>
-    <div class="bottom"><img src="img/cta.png" alt="" style="margin-top: 30px;"></div>
 
-    </div>
-  </div>
+    <div id="status">Fetching Premier League Odds...</div>
+    
+    <div id="cards-container"></div>
 
     <script>
         const url = 'https://snack-feeds.b-cdn.net/bet365/feeds/premier-league.xml';
         
-        const matchLimit = 2; 
+        // --- CHOOSE YOUR AMOUNT HERE ---
+        const matchLimit = 1; 
 
         async function fetchAndParseXML() {
             try {
@@ -234,10 +147,10 @@ body::before {
                 const parser = new DOMParser();
                 const xmlDoc = parser.parseFromString(xmlText, "text/xml");
                 
+                // Hide status message once data is loaded
                 document.getElementById('status').style.display = 'none';
                 
                 generateCards(xmlDoc, matchLimit);
-                startTimers();
                 
             } catch (error) {
                 const statusDiv = document.getElementById('status');
@@ -256,17 +169,18 @@ body::before {
                 return;
             }
 
+            // Determine how many matches to loop through based on the limit
             const matchesToDisplay = Math.min(limit, events.length);
 
             for (let i = 0; i < matchesToDisplay; i++) {
                 const eventNode = events[i];
                 let eventName = eventNode.getAttribute("Name") || eventNode.getAttribute("name") || "Unknown Event";
-                const startTime = eventNode.getAttribute("StartTime");
                 
-                eventName = eventName.replace(/\s+v\s+/i, ' <span class="vs">v</span> ');
+                eventName = eventName.replace(/\s+v\s+/i, ' <span class="vs">vs</span> ');
                 
                 const markets = eventNode.getElementsByTagName("Market");
                 
+                // Assuming we just want the first market (Match Winner) for the card
                 if (markets.length > 0) {
                     const marketNode = markets[0]; 
                     const marketName = marketNode.getAttribute("Name") || marketNode.getAttribute("name") || "Match Winner";
@@ -295,19 +209,18 @@ body::before {
                     card.className = 'promo-card';
                     card.innerHTML = `
                         <div class="match-title">${eventName}</div>
-                        <div class="timer-display" data-starttime="${startTime}">Loading timer...</div>
                         <div class="main-market">${marketName}</div>
                         <div class="odds-section">
                             <div class="odd-container">
                                 <div class="odd-label">HOME</div>
                                 <div class="new-odds">${homeOdds}</div>
                             </div>
-                            <img src="arrow.gif" class="odds-icon" /> <!-- Icon between Draw and Away -->
+                            <img id="fid2295370" src="https://aka.clipcentric.com/file/2295370/orig/1787838968/tbZbLoTH?f=auto" class="odds-icon">
                             <div class="odd-container">
                                 <div class="odd-label">DRAW</div>
                                 <div class="new-odds">${drawOdds}</div>
                             </div>
-                            <img src="arrow.gif" class="odds-icon" /> <!-- Icon between Draw and Away -->
+                            <img id="fid2295370" src="https://aka.clipcentric.com/file/2295370/orig/1787838968/tbZbLoTH?f=auto" class="odds-icon">
                             <div class="odd-container">
                                 <div class="odd-label">AWAY</div>
                                 <div class="new-odds">${awayOdds}</div>
@@ -319,39 +232,9 @@ body::before {
             }
         }
 
-        function startTimers() {
-            setInterval(() => {
-                document.querySelectorAll('.timer-display').forEach(timerEl => {
-                    const timeStr = timerEl.getAttribute('data-starttime');
-                    if (!timeStr) return;
-                    
-                    const [datePart, timePart] = timeStr.split(' ');
-                    const [day, month, shortYear] = datePart.split('/');
-                    const [hour, minute, second] = timePart.split(':');
-                    const year = "20" + shortYear; 
-                    
-                    const eventDate = new Date(`${year}-${month}-${day}T${hour}:${minute}:${second}`);
-                    const now = new Date();
-                    const diff = eventDate - now;
-                    
-                    if (diff <= 0) {
-                        timerEl.innerText = "Match Started";
-                        timerEl.style.color = "#ff6b6b";
-                    } else {
-                        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-                        const h = Math.floor((diff / (1000 * 60 * 60)) % 24).toString().padStart(2, '0');
-                        const m = Math.floor((diff / 1000 / 60) % 60).toString().padStart(2, '0');
-                        const s = Math.floor((diff / 1000) % 60).toString().padStart(2, '0');
-                        
-                        const dayLabel = d === 1 ? 'Day' : 'Days';
-                        
-                        timerEl.innerText = `${d} ${dayLabel} ${h}:${m}:${s} to kick off`;
-                    }
-                });
-            }, 1000);
-        }
-
+        // Initialize script
         fetchAndParseXML();
     </script>
+    <!-- Asset Name: arrow.gif -->
 </body>
 </html>

@@ -1,0 +1,528 @@
+This XML file does not appear to have any style information associated with it. The document tree is shown below.
+<Sport Name="Football" PageTitle="Filtered applied. EventGroupID: 100100 MarketID: 45" TimeStamp="28/08/26 15:00:10">
+<EventGroup Name="England Premier League" ID="100100">
+<Event Name="Bournemouth v Everton" ID="196564288" StartTime="29/08/26 15:00:00" EventComment="" ParentEventID="196564288">
+<Market Name="First Goalscorer" ID="45" PlaceCount="98" PlaceOdds="1/5" FID="196564288">
+<Participant Name=" Evanilson" Odds="9/2" OddsDecimal="5.500" OddsAmerican="450" Handicap="" ID="1981142800" LastUpdated="24/08/26 11:30:41" AVG="44329C726611092089C185C6E1FCA7E8B6D9592C"/>
+<Participant Name="Rayan Vitor" Odds="6/1" OddsDecimal="7.000" OddsAmerican="600" Handicap="" ID="1981142823" LastUpdated="24/08/26 11:30:41" AVG="681C94C3ADF4C12DAA7B0FE9FEDB9835E1204EBF"/>
+<Participant Name="Daniel Jebbison" Odds="13/2" OddsDecimal="7.500" OddsAmerican="650" Handicap="" ID="1981142894" LastUpdated="24/08/26 11:30:41" AVG="3B3BC53F0C06597C5CF86333076A6EA6B3C3CA0D"/>
+<Participant Name=" Beto" Odds="13/2" OddsDecimal="7.500" OddsAmerican="650" Handicap="" ID="1981142712" LastUpdated="28/08/26 04:31:54" AVG="02A65FF2B07F26142292D1BB18C295FC4EF07F70"/>
+<Participant Name="Alvaro Rodriguez" Odds="7/1" OddsDecimal="8.000" OddsAmerican="700" Handicap="" ID="1981142701" LastUpdated="28/08/26 04:31:54" AVG="524DE6F2C39FAE295E1AB9DB7260902012614C1A"/>
+<Participant Name="David Brooks" Odds="15/2" OddsDecimal="8.500" OddsAmerican="750" Handicap="" ID="1981142791" LastUpdated="28/08/26 12:34:56" AVG="9327BE64B001C29363FBFA96FF8B98D043AE219D"/>
+<Participant Name="Justin Kluivert" Odds="15/2" OddsDecimal="8.500" OddsAmerican="750" Handicap="" ID="1981142866" LastUpdated="28/08/26 12:34:56" AVG="1E23E3010178C2BAB65FBB258F3D8481BBE38967"/>
+<Participant Name="Thierno Barry" Odds="8/1" OddsDecimal="9.000" OddsAmerican="800" Handicap="" ID="1981142809" LastUpdated="28/08/26 04:31:54" AVG="06391916818857B38F39AAFE643CED3C9BDC36D7"/>
+<Participant Name="Iliman-Cheikh Ndiaye" Odds="17/2" OddsDecimal="9.500" OddsAmerican="850" Handicap="" ID="1981142676" LastUpdated="28/08/26 12:34:56" AVG="B7CE1BD2B1C2A1A3A1ABDDF2C72A46C90E851F21"/>
+<Participant Name="Amine Adli" Odds="10/1" OddsDecimal="11.000" OddsAmerican="1000" Handicap="" ID="1981142663" LastUpdated="28/08/26 04:31:54" AVG="7410EBD1E5358B80AE6F50E531D715B4BD5173EF"/>
+<Participant Name="Ben Doak" Odds="10/1" OddsDecimal="11.000" OddsAmerican="1000" Handicap="" ID="1981142740" LastUpdated="24/08/26 11:30:41" AVG="8751ECE95193E4E792CA9013E8784F6C437A0F9E"/>
+<Participant Name="Juanlu Sanchez" Odds="10/1" OddsDecimal="11.000" OddsAmerican="1000" Handicap="" ID="1981142774" LastUpdated="24/08/26 11:30:41" AVG="ED2405482DC9C4098E5FA75C6D1E1934C8350368"/>
+<Participant Name="Marcus Tavernier" Odds="10/1" OddsDecimal="11.000" OddsAmerican="1000" Handicap="" ID="1981142750" LastUpdated="24/08/26 11:30:41" AVG="8C70F6EAE2BF554C03EC1E06ECB3D466F2393CE7"/>
+<Participant Name="Tyrique George" Odds="10/1" OddsDecimal="11.000" OddsAmerican="1000" Handicap="" ID="1981142901" LastUpdated="24/08/26 11:30:41" AVG="E4FBD9D126515F7297C89A290C98E3694ABC6DB4"/>
+<Participant Name="Brennan Johnson" Odds="12/1" OddsDecimal="13.000" OddsAmerican="1200" Handicap="" ID="1981142783" LastUpdated="24/08/26 11:30:41" AVG="7FF39617CF4025ECE3BB4EF9A8FB28232AA00091"/>
+<Participant Name="Kiernan Dewsbury-Hall" Odds="12/1" OddsDecimal="13.000" OddsAmerican="1200" Handicap="" ID="1981142905" LastUpdated="24/08/26 11:30:41" AVG="83E21E802606D549C0EA48C8406E851FCB578FC6"/>
+<Participant Name="Carlos Alcaraz" Odds="16/1" OddsDecimal="17.000" OddsAmerican="1600" Handicap="" ID="1981142757" LastUpdated="24/08/26 11:30:41" AVG="0A1304645EAB7821CBE72847A48DF65A2FDA9843"/>
+<Participant Name="Tyler Dibling" Odds="16/1" OddsDecimal="17.000" OddsAmerican="1600" Handicap="" ID="1981142908" LastUpdated="24/08/26 11:30:41" AVG="5EEB7E46EBD1612FDA361E4433651EB7E1F30A6C"/>
+<Participant Name="Alex Scott" Odds="18/1" OddsDecimal="19.000" OddsAmerican="1800" Handicap="" ID="1981142727" LastUpdated="24/08/26 11:30:41" AVG="FF56F3A2AE67569D45CD35B6230671E604E71F56"/>
+<Participant Name="Merlin Rohl" Odds="18/1" OddsDecimal="19.000" OddsAmerican="1800" Handicap="" ID="1981142884" LastUpdated="24/08/26 11:30:41" AVG="86ACC110F1C6A370ECB62AD3FD6E5DE23AFDB78A"/>
+<Participant Name="Ryan Christie" Odds="18/1" OddsDecimal="19.000" OddsAmerican="1800" Handicap="" ID="1981142920" LastUpdated="24/08/26 11:30:42" AVG="7EC37180FB2B7703F9E108BF0A3BE9F5AD568E9F"/>
+<Participant Name="Alex Toth" Odds="20/1" OddsDecimal="21.000" OddsAmerican="2000" Handicap="" ID="1981142681" LastUpdated="24/08/26 11:30:41" AVG="D1711DBFA89B96342A6CC577B518995ABC1EFDBD"/>
+<Participant Name="James Garner" Odds="20/1" OddsDecimal="21.000" OddsAmerican="2000" Handicap="" ID="1981142688" LastUpdated="24/08/26 11:30:41" AVG="E873C97E269DD6DDC5F5792C20AEE0B408BAAE5B"/>
+<Participant Name="Harrison Armstrong" Odds="22/1" OddsDecimal="23.000" OddsAmerican="2200" Handicap="" ID="1981142872" LastUpdated="24/08/26 11:30:41" AVG="5F6B84187EF1923FD4269723A66ECFA053287E22"/>
+<Participant Name="Hayden Hackney" Odds="22/1" OddsDecimal="23.000" OddsAmerican="2200" Handicap="" ID="1981142731" LastUpdated="24/08/26 11:30:41" AVG="000ED5BA5D76C852F344AA62D2FAC9CCB76AB8FE"/>
+<Participant Name="Julian Araujo" Odds="22/1" OddsDecimal="23.000" OddsAmerican="2200" Handicap="" ID="1981142745" LastUpdated="24/08/26 11:30:41" AVG="FDECEC4DB2D92DAABBB15FAE3840372FEB5EF12F"/>
+<Participant Name="Timothy Iroegbunam" Odds="22/1" OddsDecimal="23.000" OddsAmerican="2200" Handicap="" ID="1981142915" LastUpdated="24/08/26 11:30:42" AVG="F35EBAF4B2417458A16994409C2124BA6C207CEA"/>
+<Participant Name="Adam Aznou" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="1981142736" LastUpdated="24/08/26 11:30:41" AVG="27CC7157B1EA3EDDC68C55B4423D7795B68D5434"/>
+<Participant Name="Antonio Silva" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="1981142723" LastUpdated="24/08/26 11:30:41" AVG="90B7E1B5AF82B065979BFDEB2675751C6AEE8EB6"/>
+<Participant Name="Bafode Diakite" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="1981142911" LastUpdated="24/08/26 11:30:41" AVG="4A333F8104F30E25B45839362D9796AB4F45D865"/>
+<Participant Name="Christian Norgaard" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="1981142830" LastUpdated="24/08/26 11:30:41" AVG="74D23B61F2CB8749792BABC67A5E26D65E2152AD"/>
+<Participant Name="Harvey Foster" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="2012274879" LastUpdated="28/08/26 10:28:51" AVG="C913854F598DA1F5195C2410F8BBC7B84955EF4A"/>
+<Participant Name="Jake O'Brien" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="1981142836" LastUpdated="28/08/26 10:28:51" AVG="EC055F63275BD943EB461433C614C4B228E0FA4E"/>
+<Participant Name="James Hill" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="1981142672" LastUpdated="28/08/26 10:28:51" AVG="B296D3AF7E86EBC1AB2AD47134018C137C7CB0B9"/>
+<Participant Name="James Tarkowski" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="1981142890" LastUpdated="28/08/26 10:28:51" AVG="70DE9F6082EF3F469B3069F9C171B2B6196CB092"/>
+<Participant Name="Jarrad Branthwaite" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="1981142815" LastUpdated="28/08/26 10:28:51" AVG="354922B633373562FD7343A0B8A786ABA83D8C9E"/>
+<Participant Name="Lewis Cook" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="1981142897" LastUpdated="28/08/26 10:28:51" AVG="DE5CEE29EE136BCB592BFCB2336CC83F07B1BA9C"/>
+<Participant Name="Michael Keane" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="1981142860" LastUpdated="28/08/26 10:28:51" AVG="86B366EA87E30EC834DC524EC1AFBC491F86943A"/>
+<Participant Name="Adrien Truffert" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981142856" LastUpdated="28/08/26 10:28:51" AVG="045A035E6B53D0DD6976B167042DBF31F7DA3B04"/>
+<Participant Name="Nathan Patterson" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981142763" LastUpdated="28/08/26 10:28:51" AVG="B7EC92296BFDCB16717E77A519589F6D02E99113"/>
+<Participant Name="Tyler Adams" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981142850" LastUpdated="28/08/26 10:28:51" AVG="B492F542DF7073316D01BCADED7CF095D46AA3A6"/>
+<Participant Name="Veljko Milosavljevic" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981142708" LastUpdated="28/08/26 10:28:51" AVG="2723574963A13D1034EF3C42C0DC1DE4F8D0B18D"/>
+<Participant Name="Vitaliy Mykolenko" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981142879" LastUpdated="28/08/26 10:28:51" AVG="3D7F56B5C9F495E9374CEFEFB6FA4CDA537E49CA"/>
+<Participant Name="Adam Smith" Odds="40/1" OddsDecimal="41.000" OddsAmerican="4000" Handicap="" ID="1981142719" LastUpdated="28/08/26 10:28:51" AVG="1FC6D98D2A15A108F7B87E4C5364AC4AE24069A0"/>
+<Participant Name="Julio Soler" Odds="40/1" OddsDecimal="41.000" OddsAmerican="4000" Handicap="" ID="1981142843" LastUpdated="28/08/26 10:28:51" AVG="18D32848C83EB0C00ECBF3EA8A94799A58E2C481"/>
+<Participant Name="No Goalscorer" Odds="10/1" OddsDecimal="11.000" OddsAmerican="1000" Handicap="" ID="1981142938" LastUpdated="28/08/26 10:28:51" AVG="048FAB1CB9ECEE542104CC21EC1F5C21DF87A28A"/>
+</Market>
+</Event>
+<Event Name="Aston Villa v Arsenal" ID="196564290" StartTime="31/08/26 20:00:00" EventComment="" ParentEventID="196564290">
+<Market Name="First Goalscorer" ID="45" PlaceCount="98" PlaceOdds="1/5" FID="196564290">
+<Participant Name="Viktor Gyokeres" Odds="15/4" OddsDecimal="4.750" OddsAmerican="375" Handicap="" ID="1981192278" LastUpdated="25/08/26 08:19:00" AVG="1CB5A5FCD1A2BDE23731CA75AC6526971D3CCA41"/>
+<Participant Name="Kai Havertz" Odds="9/2" OddsDecimal="5.500" OddsAmerican="450" Handicap="" ID="1981192271" LastUpdated="25/08/26 08:19:00" AVG="D72ED46469C023B490F9E1DA9ECCC889DC4515EB"/>
+<Participant Name="Gabriel Jesus" Odds="5/1" OddsDecimal="6.000" OddsAmerican="500" Handicap="" ID="1981192225" LastUpdated="25/08/26 08:19:00" AVG="D43FA2FE9A3DC31F1DCFC17FC39671FBD239766E"/>
+<Participant Name="Bukayo Saka" Odds="11/2" OddsDecimal="6.500" OddsAmerican="550" Handicap="" ID="1981192255" LastUpdated="25/08/26 08:19:00" AVG="AB54B8C6514BC02A0E60697B88B8BF328850BA8A"/>
+<Participant Name="Christos Tzolis" Odds="13/2" OddsDecimal="7.500" OddsAmerican="650" Handicap="" ID="1981192239" LastUpdated="25/08/26 08:19:00" AVG="83216D3625203DA54AD1CF5489E0B149DA5D475B"/>
+<Participant Name="Ethan Nwaneri" Odds="7/1" OddsDecimal="8.000" OddsAmerican="700" Handicap="" ID="1981192268" LastUpdated="25/08/26 08:19:00" AVG="503260C7743C67BBCC51C495E9692D7945B99227"/>
+<Participant Name="Noni Madueke" Odds="7/1" OddsDecimal="8.000" OddsAmerican="700" Handicap="" ID="1981192224" LastUpdated="25/08/26 08:19:00" AVG="A5F37C6D3E82E08F7B6DE5B7B9DB9C9E84E9D35F"/>
+<Participant Name="Mikel Merino" Odds="8/1" OddsDecimal="9.000" OddsAmerican="800" Handicap="" ID="1981192272" LastUpdated="25/08/26 08:25:17" AVG="EF5BC5FED953CA682D53291E7B54738EBD02C21C"/>
+<Participant Name="Eberechi Eze" Odds="17/2" OddsDecimal="9.500" OddsAmerican="850" Handicap="" ID="1981192289" LastUpdated="28/08/26 10:41:03" AVG="1B8D65D187726E472E3627655D479E5968F02380"/>
+<Participant Name="Max Dowman" Odds="17/2" OddsDecimal="9.500" OddsAmerican="850" Handicap="" ID="1981192287" LastUpdated="28/08/26 10:41:03" AVG="117C3B24253AFCE621073D526AFAEC465375DD24"/>
+<Participant Name="Tammy Abraham" Odds="9/1" OddsDecimal="10.000" OddsAmerican="900" Handicap="" ID="1981192249" LastUpdated="28/08/26 11:11:01" AVG="9FD821F8BC6B477AEE76B294ACEE448C3428B3A0"/>
+<Participant Name="Martin Odegaard" Odds="10/1" OddsDecimal="11.000" OddsAmerican="1000" Handicap="" ID="1981192283" LastUpdated="24/08/26 11:37:36" AVG="FA656AEB9709B1977BF9A935263B8B7CDF88AD5D"/>
+<Participant Name="Brian Madjo" Odds="11/1" OddsDecimal="12.000" OddsAmerican="1100" Handicap="" ID="1981192257" LastUpdated="25/08/26 08:25:17" AVG="074B904F30EE3C269308D5D2AF4CE1DBC62843F8"/>
+<Participant Name="Alejandro Garnacho" Odds="12/1" OddsDecimal="13.000" OddsAmerican="1200" Handicap="" ID="1981192242" LastUpdated="28/08/26 10:41:03" AVG="883FCCC0FCE7D4573560D53F5091CEABCA0ADFA6"/>
+<Participant Name="Declan Rice" Odds="14/1" OddsDecimal="15.000" OddsAmerican="1400" Handicap="" ID="1981192253" LastUpdated="25/08/26 14:49:08" AVG="428BF234F79E6F924417B222BE11D52E9E486957"/>
+<Participant Name="Gabriel Magalhaes" Odds="14/1" OddsDecimal="15.000" OddsAmerican="1400" Handicap="" ID="1981192235" LastUpdated="25/08/26 14:49:08" AVG="A7DBC472C57F974BB29EF7FF77E318052F5130EB"/>
+<Participant Name="Bruno Guimaraes" Odds="14/1" OddsDecimal="15.000" OddsAmerican="1400" Handicap="" ID="1981192261" LastUpdated="25/08/26 14:49:08" AVG="8ADDB72BBC99C492D319DEBB8AD30BA7CA019F2E"/>
+<Participant Name="Emiliano Buendia" Odds="16/1" OddsDecimal="17.000" OddsAmerican="1600" Handicap="" ID="1981192230" LastUpdated="24/08/26 11:37:36" AVG="6033C63C5577280EC13EE0C5BD264B3FEB6CBAF0"/>
+<Participant Name="Johan Manzambi" Odds="16/1" OddsDecimal="17.000" OddsAmerican="1600" Handicap="" ID="1981192233" LastUpdated="24/08/26 11:37:36" AVG="2284B25597A5E446317C7D7FDF6F2AD66D96EF7D"/>
+<Participant Name="Alysson Edward" Odds="18/1" OddsDecimal="19.000" OddsAmerican="1800" Handicap="" ID="1981192286" LastUpdated="28/08/26 10:41:03" AVG="F623C1DC5F2FAB1BE7044F0F8B1A4F7E1A1D8C32"/>
+<Participant Name="John McGinn" Odds="18/1" OddsDecimal="19.000" OddsAmerican="1800" Handicap="" ID="1981192264" LastUpdated="28/08/26 10:41:03" AVG="EB7F83A8D122539D9B4C8BFA4EADA3ADD4295877"/>
+<Participant Name="Luka Lynch" Odds="18/1" OddsDecimal="19.000" OddsAmerican="1800" Handicap="" ID="1981192258" LastUpdated="28/08/26 10:41:03" AVG="E115FA827ED37CB7AE714521AD11913F926F407E"/>
+<Participant Name="Ben White" Odds="20/1" OddsDecimal="21.000" OddsAmerican="2000" Handicap="" ID="1981192262" LastUpdated="28/08/26 10:41:03" AVG="530DB2BA1B5B708EEA489C4A62F614591BEBCEE1"/>
+<Participant Name="George Hemmings" Odds="20/1" OddsDecimal="21.000" OddsAmerican="2000" Handicap="" ID="1981192267" LastUpdated="28/08/26 10:41:03" AVG="6EE93623D7AC597C432B9FB416FC0578E6712A88"/>
+<Participant Name="Martin Zubimendi" Odds="20/1" OddsDecimal="21.000" OddsAmerican="2000" Handicap="" ID="1981192274" LastUpdated="28/08/26 10:41:03" AVG="363A6D2F78D12288BFD76380E8E085ECC699D091"/>
+<Participant Name="Riccardo Calafiori" Odds="20/1" OddsDecimal="21.000" OddsAmerican="2000" Handicap="" ID="1981192226" LastUpdated="28/08/26 12:01:01" AVG="11C2D8056ABCA545D95C7319E0D3DBC338B5D611"/>
+<Participant Name="Marli Salmon" Odds="22/1" OddsDecimal="23.000" OddsAmerican="2200" Handicap="" ID="1981192223" LastUpdated="28/08/26 12:01:01" AVG="694B54095582BF1F0B1754666E57C90F88997DC2"/>
+<Participant Name="Myles Lewis-Skelly" Odds="22/1" OddsDecimal="23.000" OddsAmerican="2200" Handicap="" ID="1981192270" LastUpdated="28/08/26 12:01:01" AVG="5B9AC684E27F938A1C96DE71F3491F6433C69FA6"/>
+<Participant Name="Ross Barkley" Odds="22/1" OddsDecimal="23.000" OddsAmerican="2200" Handicap="" ID="1981192227" LastUpdated="28/08/26 10:42:08" AVG="8927ECD8D624CD793560DC1FA963A8C42E9CA547"/>
+<Participant Name="Bradley Burrowes" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="1981192288" LastUpdated="24/08/26 11:37:36" AVG="43B60DDFF95A10AF17C5108AE71538DA787D777C"/>
+<Participant Name="Cristhian Mosquera" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="1981192222" LastUpdated="24/08/26 11:37:36" AVG="31401B602174AD36E033A9435C209C61F30C60B6"/>
+<Participant Name="Leon Goretzka" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="2007156782" LastUpdated="27/08/26 16:18:06" AVG="67898649125BC2B181A7091FD723E4DFE0520B80"/>
+<Participant Name="Piero Hincapie" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="1981192248" LastUpdated="27/08/26 16:18:06" AVG="CC8ADF4D944AC10F82FF38423A311DE5CAE909B6"/>
+<Participant Name="Ezri Konsa" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1987925554" LastUpdated="27/08/26 16:18:06" AVG="9DBB5BA957FA3F6FEAE65E74C64C292A11060443"/>
+<Participant Name="Ian Maatsen" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981192243" LastUpdated="27/08/26 16:18:06" AVG="E2962DA825865DEA38454269693E25E95365A7DD"/>
+<Participant Name="Matty Cash" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981192240" LastUpdated="27/08/26 16:18:06" AVG="16A7DD410DD8D6780987E6F4ECD4A3F3615C524E"/>
+<Participant Name="Modou Cisse" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981192284" LastUpdated="27/08/26 16:18:06" AVG="E7C7B67D594E8A64EC19CD6ED1D883B047A3A8D4"/>
+<Participant Name="Lamare Bogarde" Odds="40/1" OddsDecimal="41.000" OddsAmerican="4000" Handicap="" ID="1981192277" LastUpdated="28/08/26 11:11:01" AVG="581D22F498756B6A91773EB828A3974F5E667606"/>
+<Participant Name="Triston Rowe" Odds="40/1" OddsDecimal="41.000" OddsAmerican="4000" Handicap="" ID="1981192285" LastUpdated="28/08/26 11:11:01" AVG="5691D6836E48765A60A049A94D669820B6A6AB1E"/>
+<Participant Name="Victor Lindelof" Odds="40/1" OddsDecimal="41.000" OddsAmerican="4000" Handicap="" ID="1981192252" LastUpdated="28/08/26 11:11:01" AVG="D5CE0127939957079A860E2BF651F5109BD372E0"/>
+<Participant Name="Boubacar Kamara" Odds="50/1" OddsDecimal="51.000" OddsAmerican="5000" Handicap="" ID="1981192273" LastUpdated="28/08/26 11:11:01" AVG="C26B3D4013ABF0D8EA93CF371A121C1294F6048C"/>
+<Participant Name="Matteo Ruggeri" Odds="50/1" OddsDecimal="51.000" OddsAmerican="5000" Handicap="" ID="1981192232" LastUpdated="28/08/26 11:11:01" AVG="00A9BE6BB1E450027E8443889D3EB1C29A730100"/>
+<Participant Name="Pau Torres" Odds="50/1" OddsDecimal="51.000" OddsAmerican="5000" Handicap="" ID="1981192246" LastUpdated="27/08/26 16:18:06" AVG="23DA207FD02759B783F35DBCEEABA46D79867A19"/>
+<Participant Name="Tyrone Mings" Odds="50/1" OddsDecimal="51.000" OddsAmerican="5000" Handicap="" ID="1981192236" LastUpdated="27/08/26 16:18:06" AVG="EC0D04E9F0990932CD65BF2E680635B256DF09E6"/>
+<Participant Name="Aaron Wan-Bissaka" Odds="66/1" OddsDecimal="67.000" OddsAmerican="6600" Handicap="" ID="1981192220" LastUpdated="27/08/26 16:18:06" AVG="D0EAB88AC18F0648D7544A469CF2FF878E49438A"/>
+<Participant Name="No Goalscorer" Odds="11/1" OddsDecimal="12.000" OddsAmerican="1100" Handicap="" ID="1981192290" LastUpdated="27/08/26 16:18:06" AVG="B5C54B08383B0DAB35EEB32F6DC47DC6DC0E14BA"/>
+</Market>
+</Event>
+<Event Name="Chelsea v Brighton" ID="196564292" StartTime="30/08/26 14:00:00" EventComment="" ParentEventID="196564292">
+<Market Name="First Goalscorer" ID="45" PlaceCount="98" PlaceOdds="1/5" FID="196564292">
+<Participant Name="Cole Palmer" Odds="9/2" OddsDecimal="5.500" OddsAmerican="450" Handicap="" ID="1981166155" LastUpdated="28/08/26 10:43:01" AVG="73A11D4B48B2322A0A590F789E885556D2272481"/>
+<Participant Name="Joao Pedro" Odds="9/2" OddsDecimal="5.500" OddsAmerican="450" Handicap="" ID="1981166227" LastUpdated="28/08/26 10:43:01" AVG="53F5D80445823FF7CE3F41080343EA9D60ECF30F"/>
+<Participant Name="Danny Welbeck" Odds="5/1" OddsDecimal="6.000" OddsAmerican="500" Handicap="" ID="1981166301" LastUpdated="27/08/26 13:09:11" AVG="C414DF3670004AF3047BAAF7A00E104F6BC91E74"/>
+<Participant Name="Emanuel Emegha" Odds="5/1" OddsDecimal="6.000" OddsAmerican="500" Handicap="" ID="2012278847" LastUpdated="28/08/26 10:29:37" AVG="26B67CFECAE97645935FE0E8BB861B3857FF6161"/>
+<Participant Name=" Estevao" Odds="7/1" OddsDecimal="8.000" OddsAmerican="700" Handicap="" ID="1981166051" LastUpdated="28/08/26 10:43:01" AVG="AAFF24401A0817A8175E3BAA61D20CBCF702CBBF"/>
+<Participant Name="Morgan Rogers" Odds="7/1" OddsDecimal="8.000" OddsAmerican="700" Handicap="" ID="1981166197" LastUpdated="28/08/26 10:43:01" AVG="AB99609294095FA0E790F04E656BE2BD73EB5E23"/>
+<Participant Name="Pedro Neto" Odds="8/1" OddsDecimal="9.000" OddsAmerican="800" Handicap="" ID="1981166055" LastUpdated="28/08/26 10:29:37" AVG="022385293DD76A93320A2EEEC002D989667B8965"/>
+<Participant Name="Promise David" Odds="17/2" OddsDecimal="9.500" OddsAmerican="850" Handicap="" ID="1981166272" LastUpdated="28/08/26 10:29:37" AVG="7DCC21845D4917CE9B0F6E1DEAA9A86AABAF8563"/>
+<Participant Name="Charalampos Kostoulas" Odds="9/1" OddsDecimal="10.000" OddsAmerican="900" Handicap="" ID="1981166139" LastUpdated="28/08/26 10:29:37" AVG="AEA5BE1B1F8685B8D5E986FC14EE66B0A54B60A6"/>
+<Participant Name="Ibrahim Osman" Odds="10/1" OddsDecimal="11.000" OddsAmerican="1000" Handicap="" ID="1981166164" LastUpdated="28/08/26 10:49:10" AVG="32F70A84BED0036DC82FF977BEA0531D2602ABEF"/>
+<Participant Name="Jamie Bynoe-Gittens" Odds="10/1" OddsDecimal="11.000" OddsAmerican="1000" Handicap="" ID="1981166149" LastUpdated="28/08/26 10:49:10" AVG="6C7AB4F849A27D02CA72B18397A5D889378DAD57"/>
+<Participant Name="Kaoru Mitoma" Odds="10/1" OddsDecimal="11.000" OddsAmerican="1000" Handicap="" ID="1981166256" LastUpdated="28/08/26 10:49:10" AVG="4F8968240EB64CF14C718A4F698C3FBC929026A6"/>
+<Participant Name="Amario Cozier-Duberry" Odds="11/1" OddsDecimal="12.000" OddsAmerican="1100" Handicap="" ID="1981166178" LastUpdated="28/08/26 10:49:10" AVG="3E8412CD0DE142924C5DFDD1C313D1FE547A00E1"/>
+<Participant Name="Diego Gomez" Odds="11/1" OddsDecimal="12.000" OddsAmerican="1100" Handicap="" ID="1981166121" LastUpdated="28/08/26 10:49:10" AVG="EEE5200C9950E28A36BF78BE664A8560D6E43DE9"/>
+<Participant Name="Enzo Fernandez" Odds="11/1" OddsDecimal="12.000" OddsAmerican="1100" Handicap="" ID="1981166093" LastUpdated="28/08/26 10:49:10" AVG="271E8CC7D39BF300A239981E4321F250E5845578"/>
+<Participant Name="Georginio Rutter" Odds="11/1" OddsDecimal="12.000" OddsAmerican="1100" Handicap="" ID="1981166243" LastUpdated="28/08/26 10:49:10" AVG="D49C28EAD9940BE92CBB6C4E983D229F473D46C2"/>
+<Participant Name="Geovany Quenda" Odds="11/1" OddsDecimal="12.000" OddsAmerican="1100" Handicap="" ID="1981166183" LastUpdated="28/08/26 10:49:10" AVG="935D9AC439CCD2862B4AB7D9153B915EF3EFE163"/>
+<Participant Name="Zadok Yohanna" Odds="11/1" OddsDecimal="12.000" OddsAmerican="1100" Handicap="" ID="1981166250" LastUpdated="28/08/26 10:29:37" AVG="CB5DC6E69C00472DECD4F33652D75A03D21937C1"/>
+<Participant Name="Josh Robertson" Odds="12/1" OddsDecimal="13.000" OddsAmerican="1200" Handicap="" ID="2012278853" LastUpdated="28/08/26 10:29:37" AVG="C6DD4C7A36A8E4EA6578797C0EBF25B14E281041"/>
+<Participant Name="Shane Nti" Odds="12/1" OddsDecimal="13.000" OddsAmerican="1200" Handicap="" ID="2012278864" LastUpdated="28/08/26 10:29:37" AVG="B32CE1C99875626FC880048AD330EAB0C8CE0F13"/>
+<Participant Name="Yankuba Minteh" Odds="12/1" OddsDecimal="13.000" OddsAmerican="1200" Handicap="" ID="1981166204" LastUpdated="28/08/26 10:29:37" AVG="07188EB2C1B9DC93B218DA9093DE329C29E618D4"/>
+<Participant Name="Matt O'Riley" Odds="14/1" OddsDecimal="15.000" OddsAmerican="1400" Handicap="" ID="1981166107" LastUpdated="28/08/26 10:29:37" AVG="22C50D8F912F4D44BF239C3B898E27531FC64B2E"/>
+<Participant Name="Maxim De Cuyper" Odds="14/1" OddsDecimal="15.000" OddsAmerican="1400" Handicap="" ID="1981166283" LastUpdated="28/08/26 10:29:37" AVG="70DE7B531CA7A31A95BE16BE66AE06C63505D34E"/>
+<Participant Name="Nehemiah Oriola" Odds="14/1" OddsDecimal="15.000" OddsAmerican="1400" Handicap="" ID="1981166085" LastUpdated="28/08/26 10:29:37" AVG="91DAEAEA9CB561FEBAB6261ECD79D9164B53AB5B"/>
+<Participant Name="Yasin Ayari" Odds="14/1" OddsDecimal="15.000" OddsAmerican="1400" Handicap="" ID="1981166174" LastUpdated="28/08/26 10:29:37" AVG="2474B7224B1A42C59E0D40D382C32022776184F9"/>
+<Participant Name="Malick Yalcouye" Odds="18/1" OddsDecimal="19.000" OddsAmerican="1800" Handicap="" ID="1981166274" LastUpdated="28/08/26 10:43:01" AVG="80967BF33335A23B380FF67679CF8EA0AD664BA6"/>
+<Participant Name="Valentin Barco" Odds="18/1" OddsDecimal="19.000" OddsAmerican="1800" Handicap="" ID="1981166116" LastUpdated="28/08/26 10:29:37" AVG="B8D36429C29583DC4005D1D02B3D4D590B04317D"/>
+<Participant Name="Dario Essugo" Odds="20/1" OddsDecimal="21.000" OddsAmerican="2000" Handicap="" ID="1981166099" LastUpdated="28/08/26 10:29:37" AVG="6EF9A2AD3F85203BC9D822990EB27B66A3000459"/>
+<Participant Name="Reece James" Odds="20/1" OddsDecimal="21.000" OddsAmerican="2000" Handicap="" ID="1981166286" LastUpdated="28/08/26 10:29:37" AVG="AD34C95FD5C4AABD096C23B93300859BD4B506B8"/>
+<Participant Name="Reggie Watson" Odds="20/1" OddsDecimal="21.000" OddsAmerican="2000" Handicap="" ID="2012278859" LastUpdated="28/08/26 10:29:37" AVG="B3A57E2E31313EF3D41F9058244A5D7A768E8326"/>
+<Participant Name="Romeo Lavia" Odds="20/1" OddsDecimal="21.000" OddsAmerican="2000" Handicap="" ID="1981166129" LastUpdated="28/08/26 10:29:37" AVG="38D17052D3F4591394E989239D4FE60E4FF52CC4"/>
+<Participant Name="Pascal Gross" Odds="22/1" OddsDecimal="23.000" OddsAmerican="2200" Handicap="" ID="1981166210" LastUpdated="28/08/26 10:29:37" AVG="465F15EA6CD5BF820C8A61A3013E0E02557F2EEC"/>
+<Participant Name="Aaron Anselmino" Odds="25/1" OddsDecimal="26.000" OddsAmerican="2500" Handicap="" ID="1981166262" LastUpdated="28/08/26 10:29:37" AVG="EA1C636DB2CB83B4B4CAB59CD141AD169F5D73D7"/>
+<Participant Name="Ferdi Kadioglu" Odds="25/1" OddsDecimal="26.000" OddsAmerican="2500" Handicap="" ID="1981166159" LastUpdated="28/08/26 10:29:37" AVG="100665878A12D445F27B18CDB6919139368D38A0"/>
+<Participant Name="Jordan Henderson" Odds="25/1" OddsDecimal="26.000" OddsAmerican="2500" Handicap="" ID="1981166280" LastUpdated="28/08/26 10:29:37" AVG="4D304E0DC453B22BADF14E36CFA64966CD9BCE57"/>
+<Participant Name="Josh Acheampong" Odds="25/1" OddsDecimal="26.000" OddsAmerican="2500" Handicap="" ID="1981166276" LastUpdated="28/08/26 10:29:37" AVG="CA95F470A2D64DEA32FEC4B75E4F6D1C596B6C84"/>
+<Participant Name="Marco Palestra" Odds="25/1" OddsDecimal="26.000" OddsAmerican="2500" Handicap="" ID="1981166124" LastUpdated="28/08/26 10:29:37" AVG="37318395A15001F143E3595A91266100DAA31FDD"/>
+<Participant Name="Maxence Lacroix" Odds="25/1" OddsDecimal="26.000" OddsAmerican="2500" Handicap="" ID="1981166077" LastUpdated="28/08/26 10:29:37" AVG="69A6711F42BDCE4C9AF1417C30D649DE16D8120E"/>
+<Participant Name="Moises Caicedo" Odds="25/1" OddsDecimal="26.000" OddsAmerican="2500" Handicap="" ID="1981166040" LastUpdated="28/08/26 10:29:37" AVG="E1881EA0B1E23BB2285F9F74CFA519FD0B1258F5"/>
+<Participant Name="Pep Chavarria" Odds="25/1" OddsDecimal="26.000" OddsAmerican="2500" Handicap="" ID="1981166222" LastUpdated="28/08/26 10:29:37" AVG="B8704C148E94D718CCA987D4AE0099D4897319C9"/>
+<Participant Name="Jorrel Hato" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="1981166190" LastUpdated="28/08/26 10:29:37" AVG="C06D283834BBDEDE58C882443CA43C2788C1A1A5"/>
+<Participant Name="Levi Colwill" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="1981166289" LastUpdated="28/08/26 10:29:37" AVG="F37B419F8EEE97C4110CA4070256FEA3428EA498"/>
+<Participant Name="Luka Vuskovic" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="1981166061" LastUpdated="28/08/26 10:29:37" AVG="21CF412376685DB61C21E5AD2B5B6D22F6C7DECC"/>
+<Participant Name="Malo Gusto" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="1981166239" LastUpdated="28/08/26 10:29:37" AVG="B71032988784E495DFB20D7507B6F8435674CFC5"/>
+<Participant Name="Mats Wieffer" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="1981166281" LastUpdated="28/08/26 10:29:37" AVG="30D53850EF9E4B5F29DDE776792EB45DF22FCDE7"/>
+<Participant Name="Tosin Adarabioyo" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="1981166295" LastUpdated="28/08/26 10:29:37" AVG="90FBA76DAF3A3DE356B541B82CA573BA127A83FB"/>
+<Participant Name="Wesley Fofana" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="1981166278" LastUpdated="28/08/26 10:29:37" AVG="ECE48531636C337C10FC9CC65962F8900082F063"/>
+<Participant Name="Eiran Cashin" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981166215" LastUpdated="28/08/26 10:49:10" AVG="C67FA880C899F783AB08B9CCE9EC75B9951C08E1"/>
+<Participant Name="Freddie Simmonds" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="2012278841" LastUpdated="28/08/26 10:49:10" AVG="5F952A98E56652DBCBB990AABF6811070E604C78"/>
+<Participant Name="Joao Pedro Costinha" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981166143" LastUpdated="28/08/26 10:49:10" AVG="4CA881B027F1FC13AAB007C61C6D039EBD34BE34"/>
+<Participant Name="Lewis Dunk" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981166237" LastUpdated="28/08/26 10:49:10" AVG="CE56A94687A7D4EE0D8FFC3625B017FE9E8220A0"/>
+<Participant Name="Michael Svoboda" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981166292" LastUpdated="28/08/26 10:49:10" AVG="5F3451E2962B20F89CB735B470FC5A867F4E02EE"/>
+<Participant Name="Pascal Struijk" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981166267" LastUpdated="28/08/26 10:49:10" AVG="48A6A4922C4389A1104505FED4B3F3B97BBA31C4"/>
+<Participant Name="Olivier Boscagli" Odds="40/1" OddsDecimal="41.000" OddsAmerican="4000" Handicap="" ID="1981166067" LastUpdated="28/08/26 10:49:10" AVG="528AFFA41AB2BF6AC434FEE029F9BB08A4C793BA"/>
+<Participant Name="No Goalscorer" Odds="14/1" OddsDecimal="15.000" OddsAmerican="1400" Handicap="" ID="1981166304" LastUpdated="28/08/26 10:29:37" AVG="6AE99D8BE45999E697E066B45AC94480DF7C789A"/>
+</Market>
+</Event>
+<Event Name="Coventry v Hull" ID="196564294" StartTime="29/08/26 15:00:00" EventComment="" ParentEventID="196564294">
+<Market Name="First Goalscorer" ID="45" PlaceCount="98" PlaceOdds="1/5" FID="196564294">
+<Participant Name="Ellis Simms" Odds="5/1" OddsDecimal="6.000" OddsAmerican="500" Handicap="" ID="1981149074" LastUpdated="27/08/26 06:03:41" AVG="92F7269FF6E1B37BCF9BEAAF00A4FEF42795C4E4"/>
+<Participant Name="Sidiki Cherif" Odds="5/1" OddsDecimal="6.000" OddsAmerican="500" Handicap="" ID="1981149202" LastUpdated="27/08/26 06:03:41" AVG="E6BB724120157F5065CF9A5E693070054AFD9D32"/>
+<Participant Name="Taiwo Awoniyi" Odds="5/1" OddsDecimal="6.000" OddsAmerican="500" Handicap="" ID="1981149208" LastUpdated="27/08/26 06:03:41" AVG="CED31F09DA9A51535AC8E579C74AE908F2ED795A"/>
+<Participant Name="Brandon Thomas-Asante" Odds="11/2" OddsDecimal="6.500" OddsAmerican="550" Handicap="" ID="1981149197" LastUpdated="27/08/26 06:03:41" AVG="1BEAD808BD5217E5B07B2313BB630E0CC28B62AC"/>
+<Participant Name="Ephron Mason-Clark" Odds="7/1" OddsDecimal="8.000" OddsAmerican="700" Handicap="" ID="1981149205" LastUpdated="24/08/26 11:31:38" AVG="CA95AA2F25C9927B41A3E74AE22E5DFA255C9333"/>
+<Participant Name="Gustavo Hamer" Odds="15/2" OddsDecimal="8.500" OddsAmerican="750" Handicap="" ID="1981149070" LastUpdated="26/08/26 22:30:47" AVG="6B213E56B0679135049C9D659E96A7E9F82B3692"/>
+<Participant Name="Tyrell Sellars-Fleming" Odds="15/2" OddsDecimal="8.500" OddsAmerican="750" Handicap="" ID="1991868679" LastUpdated="26/08/26 22:30:47" AVG="0CE70EDC1135D520FFF2E3D27F7AC51E9E97707B"/>
+<Participant Name="Victor Torp" Odds="15/2" OddsDecimal="8.500" OddsAmerican="750" Handicap="" ID="1981149093" LastUpdated="26/08/26 22:30:47" AVG="BEA54DFE8B135C73A15131E61002DF0F9270A880"/>
+<Participant Name="Joe Gelhardt" Odds="17/2" OddsDecimal="9.500" OddsAmerican="850" Handicap="" ID="1981149179" LastUpdated="28/08/26 09:24:38" AVG="42DEB1D49BB231DC04A159C253C09A1EB68C8178"/>
+<Participant Name="Oliver McBurnie" Odds="17/2" OddsDecimal="9.500" OddsAmerican="850" Handicap="" ID="1981149077" LastUpdated="28/08/26 09:24:38" AVG="47A3B2352BB3ED8B5544FA50E1D3535926155FA8"/>
+<Participant Name="Jack Rudoni" Odds="9/1" OddsDecimal="10.000" OddsAmerican="900" Handicap="" ID="1981149163" LastUpdated="25/08/26 19:40:59" AVG="59BE7E3ECA2856A02CDB5740AF844B54678B83F0"/>
+<Participant Name="Mohamed Belloumi" Odds="10/1" OddsDecimal="11.000" OddsAmerican="1000" Handicap="" ID="1981149161" LastUpdated="25/08/26 19:40:59" AVG="33DDDDDEA7B27526E3313C8D52A138AD59D8FABF"/>
+<Participant Name="Tatsuhiro Sakamoto" Odds="10/1" OddsDecimal="11.000" OddsAmerican="1000" Handicap="" ID="1981149172" LastUpdated="25/08/26 19:40:59" AVG="69F8F6E8E65287878F50101EC6487EDD8430B5E7"/>
+<Participant Name="Loum Tchaouna" Odds="11/1" OddsDecimal="12.000" OddsAmerican="1100" Handicap="" ID="1981149211" LastUpdated="27/08/26 06:03:41" AVG="95F81A0246306677193D33CEBB56C81DCF896E30"/>
+<Participant Name="Mohamed-Ali Cho" Odds="11/1" OddsDecimal="12.000" OddsAmerican="1100" Handicap="" ID="2011938365" LastUpdated="28/08/26 09:24:38" AVG="BF8CCB12EAAA95E48796E7082948B4CB5246C529"/>
+<Participant Name="David Akintola" Odds="12/1" OddsDecimal="13.000" OddsAmerican="1200" Handicap="" ID="1991868670" LastUpdated="28/08/26 09:24:38" AVG="A0D35A33573B3A21A3ADA729DFD90F85886F8B01"/>
+<Participant Name="Kieran Dowell" Odds="12/1" OddsDecimal="13.000" OddsAmerican="1200" Handicap="" ID="1981149186" LastUpdated="28/08/26 09:24:38" AVG="0AFA1022F9704AFECAAAC887AD85A31CDCCF53F1"/>
+<Participant Name="Liam Millar" Odds="12/1" OddsDecimal="13.000" OddsAmerican="1200" Handicap="" ID="1981149175" LastUpdated="28/08/26 09:24:38" AVG="3A83E449E56C35D7A3293630376B30489D27EC98"/>
+<Participant Name="Matt Crooks" Odds="12/1" OddsDecimal="13.000" OddsAmerican="1200" Handicap="" ID="1981149187" LastUpdated="28/08/26 09:24:38" AVG="6CDD745DE8CFA22722B43FD84493654E41D18449"/>
+<Participant Name="Caleb Yirenkyi" Odds="14/1" OddsDecimal="15.000" OddsAmerican="1400" Handicap="" ID="1981149155" LastUpdated="28/08/26 09:24:38" AVG="66642B82C4A9FD1C6A36C5B6CC043845899A0404"/>
+<Participant Name="Josh Eccles" Odds="14/1" OddsDecimal="15.000" OddsAmerican="1400" Handicap="" ID="1981149214" LastUpdated="28/08/26 09:24:38" AVG="BF5E602FC3905CE90E4549F35FCAC18FCB0E0FFC"/>
+<Participant Name="Kaine Kesler-Hayden" Odds="14/1" OddsDecimal="15.000" OddsAmerican="1400" Handicap="" ID="1981149203" LastUpdated="28/08/26 09:24:38" AVG="30BE6DFE6BEC4F62D331255870A6DE58A1923150"/>
+<Participant Name="Raphael Borges Rodrigues" Odds="14/1" OddsDecimal="15.000" OddsAmerican="1400" Handicap="" ID="1981149142" LastUpdated="28/08/26 09:24:38" AVG="4388173C4BEEB29CCAEA4E546DF561F3DF2C5F67"/>
+<Participant Name="Abdulkadir Omur" Odds="16/1" OddsDecimal="17.000" OddsAmerican="1600" Handicap="" ID="1991868674" LastUpdated="28/08/26 09:24:38" AVG="FA83AEE93D21291B3C625276A86B9320D8841285"/>
+<Participant Name="Frank Onyeka" Odds="16/1" OddsDecimal="17.000" OddsAmerican="1600" Handicap="" ID="1981149181" LastUpdated="28/08/26 09:24:38" AVG="98391A33049E49AE1609D36BC9DD98CE96C6260B"/>
+<Participant Name="Jens Hjerto-Dahl" Odds="16/1" OddsDecimal="17.000" OddsAmerican="1600" Handicap="" ID="1981149209" LastUpdated="28/08/26 09:24:38" AVG="0D56302337D20D096674C2C945AA31FF631A4B7A"/>
+<Participant Name="Regan Slater" Odds="18/1" OddsDecimal="19.000" OddsAmerican="1800" Handicap="" ID="1981149193" LastUpdated="28/08/26 09:24:38" AVG="8F028D834A92429C8101C9AA8E45AFD3B4FAB3D4"/>
+<Participant Name="Bobby Thomas" Odds="20/1" OddsDecimal="21.000" OddsAmerican="2000" Handicap="" ID="1981149071" LastUpdated="28/08/26 09:24:38" AVG="7E44B81FEB1043953AEC7B51C8E2F28E9151E57F"/>
+<Participant Name="Elliot Stroud" Odds="20/1" OddsDecimal="21.000" OddsAmerican="2000" Handicap="" ID="1981149199" LastUpdated="28/08/26 09:24:38" AVG="9DC8DEE58C0AB4CCA01AE67911F0567D129CD39A"/>
+<Participant Name="Oscar Zambrano" Odds="20/1" OddsDecimal="21.000" OddsAmerican="2000" Handicap="" ID="1981149200" LastUpdated="28/08/26 09:24:38" AVG="7D644783DF3BE208E7B668A5C85DE407BF81E8D4"/>
+<Participant Name="Liam Kitching" Odds="22/1" OddsDecimal="23.000" OddsAmerican="2200" Handicap="" ID="1981149201" LastUpdated="28/08/26 14:48:02" AVG="2C11F9574A9EAC2859203D84D051CF69C967E6C5"/>
+<Participant Name="Matt Grimes" Odds="22/1" OddsDecimal="23.000" OddsAmerican="2200" Handicap="" ID="1981149188" LastUpdated="28/08/26 14:48:02" AVG="D0C27E0BD6ACB456A29032A3F859FAB21107D703"/>
+<Participant Name="Aurele Amenda" Odds="25/1" OddsDecimal="26.000" OddsAmerican="2500" Handicap="" ID="1981149216" LastUpdated="28/08/26 14:48:02" AVG="478D0CD5E9EE0CC5FECEB21A7A2CDD6A84FCC4FA"/>
+<Participant Name="Darko Gyabi" Odds="25/1" OddsDecimal="26.000" OddsAmerican="2500" Handicap="" ID="1981149191" LastUpdated="28/08/26 14:48:02" AVG="3DCB5281F6255940750974841FC020E7DE63CF08"/>
+<Participant Name="Ethan Pinnock" Odds="25/1" OddsDecimal="26.000" OddsAmerican="2500" Handicap="" ID="1998582068" LastUpdated="28/08/26 14:48:02" AVG="EC7FC3D20B468354DF0649D7D56BC0E38BA95127"/>
+<Participant Name="Hidemasa Morita" Odds="25/1" OddsDecimal="26.000" OddsAmerican="2500" Handicap="" ID="1991868663" LastUpdated="28/08/26 14:48:02" AVG="28796F66386B6B777DE602D0D729EC163DBCF8FA"/>
+<Participant Name="Jake Bidwell" Odds="25/1" OddsDecimal="26.000" OddsAmerican="2500" Handicap="" ID="1981149194" LastUpdated="28/08/26 14:48:02" AVG="116BB7F779D5D0A96FACDF88B2238C6414252B45"/>
+<Participant Name="Matty Jacob" Odds="25/1" OddsDecimal="26.000" OddsAmerican="2500" Handicap="" ID="1981149189" LastUpdated="28/08/26 14:48:02" AVG="59338617D30CCB65D8915C117C6D32BC350C2BA4"/>
+<Participant Name="Milan van Ewijk" Odds="25/1" OddsDecimal="26.000" OddsAmerican="2500" Handicap="" ID="1981149190" LastUpdated="28/08/26 14:48:02" AVG="20CF5C27DB9E86EADC76493AC1921B112A87351F"/>
+<Participant Name="Ryan Giles" Odds="25/1" OddsDecimal="26.000" OddsAmerican="2500" Handicap="" ID="1981149207" LastUpdated="28/08/26 14:48:02" AVG="3FB041DE1FDC3B6EB47EDDCC7EF67755D15DDBDD"/>
+<Participant Name="Matt Targett" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="1981149107" LastUpdated="28/08/26 09:24:38" AVG="18DDA5D06814D2892801C41EC5E28D510112BDD9"/>
+<Participant Name="Paddy McNair" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="1981149124" LastUpdated="28/08/26 09:24:38" AVG="56A01D48C7BF40E17F4360CB810C07FE2C42A81A"/>
+<Participant Name="Cody Drameh" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981149184" LastUpdated="28/08/26 09:24:38" AVG="76A09751F2D14B52E9C5AC06EB06200561B21B58"/>
+<Participant Name="Jay Dasilva" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981149212" LastUpdated="28/08/26 09:24:38" AVG="30FB4B8C5A14FFBB34B4630772C299B3409FC8FC"/>
+<Participant Name="Joel Latibeaudiere" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981149073" LastUpdated="28/08/26 09:24:38" AVG="DC02A0EF24CB354D9A012AB587AB2644553B9B44"/>
+<Participant Name="Lewie Coyle" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981149213" LastUpdated="28/08/26 09:24:38" AVG="61878A41CDB9E26FA520C75A6C3EF4DB65D2DD31"/>
+<Participant Name="Luke Woolfenden" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981149210" LastUpdated="28/08/26 09:24:38" AVG="5E73FA6148FEB5FE254F42A626ADAC2D8AB33E2B"/>
+<Participant Name="Miguel Brau" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981149075" LastUpdated="28/08/26 09:24:38" AVG="C1395111BFA1C973DAF6F722ADD3CAF2187D63CF"/>
+<Participant Name="Nobel Mendy" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981149167" LastUpdated="28/08/26 09:24:38" AVG="D5E7977A2A86D1DD9A37AE97F35D6B8A626307BF"/>
+<Participant Name="Charlie Hughes" Odds="40/1" OddsDecimal="41.000" OddsAmerican="4000" Handicap="" ID="1981149069" LastUpdated="28/08/26 09:24:38" AVG="90EDA47D86DC7804E19BA63875976AFC8D4758B8"/>
+<Participant Name="John Egan" Odds="40/1" OddsDecimal="41.000" OddsAmerican="4000" Handicap="" ID="1981149196" LastUpdated="28/08/26 09:24:38" AVG="2CC57077F9EDE9727B129F2F5AB28D6268E2354C"/>
+<Participant Name="Lucas Gourna-Douath" Odds="40/1" OddsDecimal="41.000" OddsAmerican="4000" Handicap="" ID="1981149215" LastUpdated="28/08/26 09:24:38" AVG="D171B1A50F6A33AAA4A846A996498A86B8CE32D2"/>
+<Participant Name="Lucas Herrington" Odds="40/1" OddsDecimal="41.000" OddsAmerican="4000" Handicap="" ID="1981149072" LastUpdated="28/08/26 09:24:38" AVG="479AA016BB14D21B6D6E2EF7C05B388D3F16003B"/>
+<Participant Name="Semi Ajayi" Odds="40/1" OddsDecimal="41.000" OddsAmerican="4000" Handicap="" ID="1981149198" LastUpdated="28/08/26 09:24:38" AVG="BA082A3DB9D166054D0CC3F3DCA16322660D7810"/>
+<Participant Name="No Goalscorer" Odds="10/1" OddsDecimal="11.000" OddsAmerican="1000" Handicap="" ID="1981149217" LastUpdated="28/08/26 09:24:38" AVG="A17D0F912706B2828A7DD514CBAF925144C4FA34"/>
+</Market>
+</Event>
+<Event Name="Crystal Palace v Man City" ID="196564296" StartTime="28/08/26 20:00:00" EventComment="Live In-Play." ParentEventID="196564296">
+<Market Name="First Goalscorer" ID="45" PlaceCount="98" PlaceOdds="1/5" FID="196564296">
+<Participant Name="Erling Haaland" Odds="5/2" OddsDecimal="3.500" OddsAmerican="250" Handicap="" ID="1981129032" LastUpdated="28/08/26 02:34:33" AVG="62EB684F06A36FB1F1197321058741A227DAA48C"/>
+<Participant Name="Antoine Semenyo" Odds="5/1" OddsDecimal="6.000" OddsAmerican="500" Handicap="" ID="1981129058" LastUpdated="28/08/26 13:38:48" AVG="E7ABB80045BBBD0C74E9135218C82D6B74FBBD8F"/>
+<Participant Name="Jean-Philippe Mateta" Odds="13/2" OddsDecimal="7.500" OddsAmerican="650" Handicap="" ID="1981129086" LastUpdated="28/08/26 02:34:33" AVG="21564FD812E49930CA8B1C44D5DB97B9893972C6"/>
+<Participant Name="Jorgen Larsen" Odds="15/2" OddsDecimal="8.500" OddsAmerican="750" Handicap="" ID="1981129067" LastUpdated="28/08/26 07:46:01" AVG="62B514BE6B21BDA6CAAD56A7CE9248AE6DC9873B"/>
+<Participant Name="Phil Foden" Odds="15/2" OddsDecimal="8.500" OddsAmerican="750" Handicap="" ID="1981129012" LastUpdated="28/08/26 07:46:01" AVG="5DA59A4DCF9364A9869A2B53780CDBC60DD3EB42"/>
+<Participant Name="Ryan McAidoo" Odds="15/2" OddsDecimal="8.500" OddsAmerican="750" Handicap="" ID="1981129003" LastUpdated="28/08/26 07:46:01" AVG="1C79F2F5BEDF9FA71243D820C564380B8D0D0F28"/>
+<Participant Name="Eddie Nketiah" Odds="17/2" OddsDecimal="9.500" OddsAmerican="850" Handicap="" ID="1981129025" LastUpdated="28/08/26 05:24:05" AVG="B4941B6E1E8FBAB6E855AC60F42875FC0E67CB35"/>
+<Participant Name="Jack Grealish" Odds="17/2" OddsDecimal="9.500" OddsAmerican="850" Handicap="" ID="1981129106" LastUpdated="28/08/26 05:24:05" AVG="A759604D8D834EEC2661CD82ACB4899FC68CB57E"/>
+<Participant Name="Jeremy Monga" Odds="17/2" OddsDecimal="9.500" OddsAmerican="850" Handicap="" ID="1981129071" LastUpdated="28/08/26 05:24:05" AVG="4F44433E67D365B164B9C4E5A294A5C2B5E97DC5"/>
+<Participant Name="Claudio Echeverri" Odds="9/1" OddsDecimal="10.000" OddsAmerican="900" Handicap="" ID="1981129029" LastUpdated="28/08/26 02:34:33" AVG="8F2824BA996BABBA7344670C1C2FF55D391B34C5"/>
+<Participant Name="Evann Guessand" Odds="10/1" OddsDecimal="11.000" OddsAmerican="1000" Handicap="" ID="1981129119" LastUpdated="28/08/26 05:24:05" AVG="A3C2B2393D50420514EA405370715CBD7B7A2D1E"/>
+<Participant Name="Ismaila Sarr" Odds="10/1" OddsDecimal="11.000" OddsAmerican="1000" Handicap="" ID="1981129150" LastUpdated="28/08/26 05:24:06" AVG="57068A9BA407DF9C14ADCC2DE4872FF61BD56594"/>
+<Participant Name="Jeremy Doku" Odds="11/1" OddsDecimal="12.000" OddsAmerican="1100" Handicap="" ID="1981129141" LastUpdated="28/08/26 02:34:33" AVG="3801FDE1AF0854E003AD27B00B89DD6D52DC7FCC"/>
+<Participant Name="Nico O'Reilly" Odds="11/1" OddsDecimal="12.000" OddsAmerican="1100" Handicap="" ID="1981128998" LastUpdated="28/08/26 02:34:33" AVG="621DC0C1311ED3EDE6DF9A15BC22808E392823A5"/>
+<Participant Name="Rayan Cherki" Odds="11/1" OddsDecimal="12.000" OddsAmerican="1100" Handicap="" ID="1981129062" LastUpdated="28/08/26 02:34:33" AVG="BD9D1EB162DD8C0E03AC2FE304892DC2EB7B0A9C"/>
+<Participant Name="Jesurun Rak-Sakyi" Odds="14/1" OddsDecimal="15.000" OddsAmerican="1400" Handicap="" ID="1981129039" LastUpdated="28/08/26 02:34:33" AVG="18BAE5765EAE89A2B0EC2971136A975714BDD37C"/>
+<Participant Name="Romain Esse" Odds="14/1" OddsDecimal="15.000" OddsAmerican="1400" Handicap="" ID="1981129010" LastUpdated="28/08/26 02:34:33" AVG="F96C279C416E322C001CB43D5B4C228F5D81575E"/>
+<Participant Name="Zavier Gozo" Odds="14/1" OddsDecimal="15.000" OddsAmerican="1400" Handicap="" ID="1981129083" LastUpdated="28/08/26 13:38:48" AVG="883CEF57FCA280749C6AA16094124AEF783BD621"/>
+<Participant Name="Ayyoub Bouaddi" Odds="16/1" OddsDecimal="17.000" OddsAmerican="1600" Handicap="" ID="1996960775" LastUpdated="28/08/26 13:38:48" AVG="A9CA2C4C779969C6F3DE112B565D48346FB6BD8B"/>
+<Participant Name="Daichi Kamada" Odds="16/1" OddsDecimal="17.000" OddsAmerican="1600" Handicap="" ID="1981129137" LastUpdated="28/08/26 13:38:48" AVG="FF3EB0C298FAE8F03E3CBAD3B117A564A0480C7C"/>
+<Participant Name="Yeremy Pino" Odds="16/1" OddsDecimal="17.000" OddsAmerican="1600" Handicap="" ID="1981129054" LastUpdated="28/08/26 13:38:48" AVG="C4D22C0B0C0F2999063D23D49A75B89F3E7E3AFA"/>
+<Participant Name="Daniel Munoz" Odds="20/1" OddsDecimal="21.000" OddsAmerican="2000" Handicap="" ID="1981129051" LastUpdated="28/08/26 13:38:48" AVG="81A7DDF0AC595877E4A75EF2B8C69C675DDB7BA6"/>
+<Participant Name="Dwight McNeil" Odds="20/1" OddsDecimal="21.000" OddsAmerican="2000" Handicap="" ID="1981129044" LastUpdated="28/08/26 13:38:48" AVG="AE47D3FF7CE5D2F3BAA0E4EE96E7C0BE31F1494B"/>
+<Participant Name="Elliot Anderson" Odds="20/1" OddsDecimal="21.000" OddsAmerican="2000" Handicap="" ID="1981128980" LastUpdated="28/08/26 13:38:48" AVG="6858727BBE4519484E049220392CEA23064DB611"/>
+<Participant Name="Justin Devenny" Odds="20/1" OddsDecimal="21.000" OddsAmerican="2000" Handicap="" ID="1981128992" LastUpdated="28/08/26 13:38:48" AVG="640123C9CFFD68A7646C311A3DE9E9870CA54811"/>
+<Participant Name="Marc Guehi" Odds="20/1" OddsDecimal="21.000" OddsAmerican="2000" Handicap="" ID="1981129146" LastUpdated="28/08/26 05:24:06" AVG="0F63F023C2E85C150F36BA9C5A03546B05AAB622"/>
+<Participant Name="Mateo Kovacic" Odds="20/1" OddsDecimal="21.000" OddsAmerican="2000" Handicap="" ID="1981129094" LastUpdated="28/08/26 05:24:05" AVG="3A5942A542CE8D463F0D531A2254D692CEAD42AD"/>
+<Participant Name="Cheick Doucoure" Odds="25/1" OddsDecimal="26.000" OddsAmerican="2500" Handicap="" ID="1981129109" LastUpdated="27/08/26 05:27:57" AVG="ED6F2AB2CB600BA73CDFD58D2656CAF5E374754A"/>
+<Participant Name="Josko Gvardiol" Odds="25/1" OddsDecimal="26.000" OddsAmerican="2500" Handicap="" ID="1981129144" LastUpdated="27/08/26 05:27:57" AVG="E82790AB27908688388C595621C037771492064E"/>
+<Participant Name="Rayan Ait Nouri" Odds="25/1" OddsDecimal="26.000" OddsAmerican="2500" Handicap="" ID="1981129129" LastUpdated="27/08/26 05:27:57" AVG="DE118082CD1EE4A019B95DDED43732EAAADB1E7E"/>
+<Participant Name="Vitor Reis" Odds="25/1" OddsDecimal="26.000" OddsAmerican="2500" Handicap="" ID="1981129000" LastUpdated="27/08/26 05:27:57" AVG="60CDA588492E609685942B573B35068288D49842"/>
+<Participant Name="Matheus Nunes" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="1981129021" LastUpdated="26/08/26 11:27:03" AVG="09CC10D912FADDD203A724E1F647E422726A0E19"/>
+<Participant Name="Stephen Mfuni" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="1981128989" LastUpdated="26/08/26 11:27:03" AVG="18A5CCFBF093ACBA3F1EE74672D4E63AA595C26A"/>
+<Participant Name="Abduqodir Khusanov" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981129080" LastUpdated="26/08/26 11:27:03" AVG="870BA0F2E73CC7EFEE7964450E170849C425557B"/>
+<Participant Name="Adam Wharton" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981129112" LastUpdated="26/08/26 11:27:03" AVG="6837C59E5DB353BBF52AAB06C6B1A8F81AD340F8"/>
+<Participant Name="Anan Khalaili" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981129123" LastUpdated="26/08/26 11:27:03" AVG="D3E52A2EFD7D0D4E11754CA862A6FC40EE1DD027"/>
+<Participant Name="Borna Sosa" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981129008" LastUpdated="26/08/26 11:27:03" AVG="12E40768207C958DCBC2458E447154335AB5339A"/>
+<Participant Name="Jefferson Lerma" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981129065" LastUpdated="27/08/26 16:29:26" AVG="622ADA9246F47AF225759DC9349313D8D39341B2"/>
+<Participant Name="Oscar Mingueza" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981129088" LastUpdated="27/08/26 16:29:26" AVG="DBABBC988B82A706893BD801014D61265BA666BE"/>
+<Participant Name="Rico Lewis" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981129114" LastUpdated="27/08/26 16:29:26" AVG="D8D6D41BA9AC8AF81B67C28574061A668ACB236E"/>
+<Participant Name="Ruben Dias" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981129133" LastUpdated="27/08/26 16:29:26" AVG="FB0C1F1F5147E27AC41BB4D316D4DC5096769C9C"/>
+<Participant Name="Takehiro Tomiyasu" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981129048" LastUpdated="27/08/26 16:29:26" AVG="8509AB06E0C2A42E0D80E0AC78CCF2A0E006513C"/>
+<Participant Name="Will Hughes" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981129077" LastUpdated="27/08/26 16:29:26" AVG="77009290C357059E6805CBC402892D00309C4FDA"/>
+<Participant Name="Chris Richards" Odds="40/1" OddsDecimal="41.000" OddsAmerican="4000" Handicap="" ID="1981129098" LastUpdated="26/08/26 11:27:03" AVG="4BB9AF04334B119A695B3BBEA90F9D8CEF2FB037"/>
+<Participant Name="Jaydee Canvot" Odds="40/1" OddsDecimal="41.000" OddsAmerican="4000" Handicap="" ID="1981129101" LastUpdated="26/08/26 11:27:03" AVG="E95E8EE8EA629FF1AE71243EC61CD2744596CF2B"/>
+<Participant Name="Tyrick Mitchell" Odds="40/1" OddsDecimal="41.000" OddsAmerican="4000" Handicap="" ID="1981129126" LastUpdated="26/08/26 11:27:03" AVG="4110A2AD95B250997C4939B9668B74C98597382A"/>
+<Participant Name="Axel Disasi" Odds="50/1" OddsDecimal="51.000" OddsAmerican="5000" Handicap="" ID="1997430588" LastUpdated="26/08/26 12:48:23" AVG="A3829FB4CB256144EEAB573F2AD1DA34C2387E3A"/>
+<Participant Name="No Goalscorer" Odds="12/1" OddsDecimal="13.000" OddsAmerican="1200" Handicap="" ID="1981129152" LastUpdated="28/08/26 06:36:58" AVG="70F8CE48CC6867FD43D7A06782B19FEAAEB7DD5C"/>
+</Market>
+</Event>
+<Event Name="Leeds v Brentford" ID="196564298" StartTime="30/08/26 14:00:00" EventComment="" ParentEventID="196564298">
+<Market Name="First Goalscorer" ID="45" PlaceCount="98" PlaceOdds="1/5" FID="196564298">
+<Participant Name="Igor Thiago" Odds="9/2" OddsDecimal="5.500" OddsAmerican="450" Handicap="" ID="1981172787" LastUpdated="26/08/26 15:37:40" AVG="A83B7FF31BAC920F97A3A2B7FE9C31B0646A20CE"/>
+<Participant Name="Dominic Calvert-Lewin" Odds="5/1" OddsDecimal="6.000" OddsAmerican="500" Handicap="" ID="1981172781" LastUpdated="26/08/26 15:37:40" AVG="BC085AA61B0B67BB51D1AA3A2B698278D7A0EB40"/>
+<Participant Name="Callum Wilson" Odds="6/1" OddsDecimal="7.000" OddsAmerican="600" Handicap="" ID="1981172828" LastUpdated="26/08/26 15:37:40" AVG="754781C5035B7BAA355F881745803F8731CEB0D4"/>
+<Participant Name="Kevin Schade" Odds="7/1" OddsDecimal="8.000" OddsAmerican="700" Handicap="" ID="1981172867" LastUpdated="26/08/26 15:37:40" AVG="5D148EE4A5F2D8C7C0E6834468024632C946B1C1"/>
+<Participant Name="Noah Okafor" Odds="7/1" OddsDecimal="8.000" OddsAmerican="700" Handicap="" ID="1981172902" LastUpdated="26/08/26 15:37:40" AVG="D5B4927AC5AF3B8839E3BC4EA2D4C9CF99697122"/>
+<Participant Name="Lukas Nmecha" Odds="15/2" OddsDecimal="8.500" OddsAmerican="750" Handicap="" ID="1981172779" LastUpdated="26/08/26 15:37:40" AVG="D587570E8BD3CE0AC5BFDCFAF052F7EF3C174EC8"/>
+<Participant Name="Harry Wilson" Odds="8/1" OddsDecimal="9.000" OddsAmerican="800" Handicap="" ID="1981172775" LastUpdated="26/08/26 15:37:40" AVG="CECA81FA3E369DA5DF03DF0D9DC1D37AFAE6F7BB"/>
+<Participant Name="Brenden Aaronson" Odds="9/1" OddsDecimal="10.000" OddsAmerican="900" Handicap="" ID="1981172778" LastUpdated="26/08/26 15:37:40" AVG="FB9EA66FCBAC3872AA204BACD35F83EA328B790C"/>
+<Participant Name="Dango Ouattara" Odds="9/1" OddsDecimal="10.000" OddsAmerican="900" Handicap="" ID="1981172791" LastUpdated="24/08/26 11:34:53" AVG="E11BB96FC07116BDD9CF21C8292C424E1AC14577"/>
+<Participant Name="Degnand Gnonto" Odds="9/1" OddsDecimal="10.000" OddsAmerican="900" Handicap="" ID="1981172874" LastUpdated="26/08/26 15:37:40" AVG="9F2294C181D7C6067DFD110BDF9092958072E4D9"/>
+<Participant Name="Daniel James" Odds="10/1" OddsDecimal="11.000" OddsAmerican="1000" Handicap="" ID="1981172892" LastUpdated="26/08/26 15:37:40" AVG="83A3C29D69B47B0A1D2B563B8F3C30027978424B"/>
+<Participant Name="Fabio Carvalho" Odds="10/1" OddsDecimal="11.000" OddsAmerican="1000" Handicap="" ID="1981172780" LastUpdated="26/08/26 15:37:40" AVG="FD4C040653F06BAECC093D3D2D47558C0CA31192"/>
+<Participant Name="Jaidon Anthony" Odds="10/1" OddsDecimal="11.000" OddsAmerican="1000" Handicap="" ID="1981172879" LastUpdated="26/08/26 15:37:40" AVG="C2AA5FA3CD14A70E1C80D2AD75BCAC49E8E03D04"/>
+<Participant Name="Anton Stach" Odds="14/1" OddsDecimal="15.000" OddsAmerican="1400" Handicap="" ID="1981172884" LastUpdated="26/08/26 15:37:40" AVG="3694CC4E4143E435E721097CF3EEF11950605684"/>
+<Participant Name="Gustavo Nunes Gomes" Odds="14/1" OddsDecimal="15.000" OddsAmerican="1400" Handicap="" ID="1981172789" LastUpdated="26/08/26 15:37:40" AVG="7439411CEB51E1EB9AFF5DDFC3351C26DBFDB056"/>
+<Participant Name="Keane Lewis-Potter" Odds="14/1" OddsDecimal="15.000" OddsAmerican="1400" Handicap="" ID="1981172777" LastUpdated="26/08/26 15:37:40" AVG="6D4504209D321751CB101A7B97BBD359757D6CA8"/>
+<Participant Name="Ao Tanaka" Odds="16/1" OddsDecimal="17.000" OddsAmerican="1600" Handicap="" ID="1981172784" LastUpdated="26/08/26 15:37:40" AVG="135DA5BF4BAFEFAA182C4674004FB19D5EE1A77D"/>
+<Participant Name="Josh Dasilva" Odds="16/1" OddsDecimal="17.000" OddsAmerican="1600" Handicap="" ID="1981172903" LastUpdated="26/08/26 15:37:40" AVG="31C8547238930859A30EE5F348C7BE1BBF0A0893"/>
+<Participant Name="Mamadou Sangare" Odds="16/1" OddsDecimal="17.000" OddsAmerican="1600" Handicap="" ID="1981172786" LastUpdated="26/08/26 15:37:40" AVG="9C132692508350B92EAEB30DAAB098790D5FBADD"/>
+<Participant Name="Mikkel Damsgaard" Odds="16/1" OddsDecimal="17.000" OddsAmerican="1600" Handicap="" ID="1981172888" LastUpdated="26/08/26 15:37:40" AVG="206A72F5E14B2B4A900BD9A1A9A64FC9842A5483"/>
+<Participant Name="Sean Longstaff" Odds="16/1" OddsDecimal="17.000" OddsAmerican="1600" Handicap="" ID="1981172886" LastUpdated="26/08/26 15:37:40" AVG="F61869B222FB2A288F8B22079E49B9FDB149DBF4"/>
+<Participant Name="Alfie Cresswell" Odds="22/1" OddsDecimal="23.000" OddsAmerican="2200" Handicap="" ID="1981172814" LastUpdated="26/08/26 15:37:40" AVG="06AD9DF2D1E610E45F4CD0F444620A051917C1AC"/>
+<Participant Name="Jaka Bijol" Odds="22/1" OddsDecimal="23.000" OddsAmerican="2200" Handicap="" ID="1981172790" LastUpdated="26/08/26 15:37:40" AVG="B168C76EA3D7C1CFB5276508FCBF7F10660AE6DC"/>
+<Participant Name="Jayden Bogle" Odds="22/1" OddsDecimal="23.000" OddsAmerican="2200" Handicap="" ID="1981172882" LastUpdated="28/08/26 13:30:11" AVG="7A77C34B45DA0BCB78715B6875796F8E8AA444CC"/>
+<Participant Name="Rhys Chadwick" Odds="22/1" OddsDecimal="23.000" OddsAmerican="2200" Handicap="" ID="1991007188" LastUpdated="28/08/26 13:30:11" AVG="FB9752476474B11A68E87FE63B0E11B565538CAF"/>
+<Participant Name="El Hadji Diouf" Odds="25/1" OddsDecimal="26.000" OddsAmerican="2500" Handicap="" ID="2013178345" LastUpdated="28/08/26 13:30:11" AVG="BF96F7844D1CCEF3103EE66DB0230217302A4060"/>
+<Participant Name="Jannik Schuster" Odds="25/1" OddsDecimal="26.000" OddsAmerican="2500" Handicap="" ID="1981172872" LastUpdated="28/08/26 13:30:11" AVG="FB51D0446F3C66E1088D97903FA328408C2E6215"/>
+<Participant Name="Mathias Jensen" Odds="25/1" OddsDecimal="26.000" OddsAmerican="2500" Handicap="" ID="1981172858" LastUpdated="28/08/26 13:30:11" AVG="60D80DA0348CC431172CF7D21AFF06E037721F31"/>
+<Participant Name="Vitaly Janelt" Odds="25/1" OddsDecimal="26.000" OddsAmerican="2500" Handicap="" ID="1981172795" LastUpdated="28/08/26 13:30:11" AVG="8E8D365E3FD4F1572D2CA7D7E3F392E2BE596114"/>
+<Participant Name="Yegor Yarmolyuk" Odds="25/1" OddsDecimal="26.000" OddsAmerican="2500" Handicap="" ID="1981172773" LastUpdated="28/08/26 13:30:11" AVG="1A26028C153DA137D305341733451C30F8E6A888"/>
+<Participant Name="James Justin" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="1981172788" LastUpdated="27/08/26 14:01:42" AVG="B76A9FE7B650EE50CEC3B7EEE701E2F82F12051F"/>
+<Participant Name="Jayden Lienou" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="1981172900" LastUpdated="27/08/26 14:01:42" AVG="8F19D608B6D625C1DC41116046E51D413AD42BFC"/>
+<Participant Name="Nico Elvedi" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="1981172897" LastUpdated="28/08/26 13:30:11" AVG="5D69D55CA87677D49D3FB2B9212FC5ABDD396892"/>
+<Participant Name="Rico Henry" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="1981172890" LastUpdated="28/08/26 13:30:11" AVG="423E0B8209FB8EDE4343E3289260427F47D767F6"/>
+<Participant Name="Tarik Muharemovic" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="1981172782" LastUpdated="28/08/26 13:30:11" AVG="123B6A618FE105FA8701060EA5074713037A0688"/>
+<Participant Name="Ethan Ampadu" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981172868" LastUpdated="28/08/26 13:30:11" AVG="6E18A3086CA2124CDF4AC7BA7ADB6A2E0B462174"/>
+<Participant Name="Jayden Meghoma" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981172898" LastUpdated="28/08/26 13:30:11" AVG="2797EEB2A85D4A21A8FB56EA80E48CEE52279008"/>
+<Participant Name="Joe Rodon" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981172876" LastUpdated="28/08/26 13:30:11" AVG="473625A16A9693FA380EC038472EB1551BF24434"/>
+<Participant Name="Nathan Collins" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981172792" LastUpdated="28/08/26 13:30:11" AVG="CAABFE5CDDBDBF30E8A85543AEF1E7A0AE5777C4"/>
+<Participant Name="Aaron Hickey" Odds="40/1" OddsDecimal="41.000" OddsAmerican="4000" Handicap="" ID="1981172785" LastUpdated="28/08/26 13:30:11" AVG="D32B0609503C727CDEBEBB3FF8EAB6828B8A64ED"/>
+<Participant Name="Kristoffer Ajer" Odds="40/1" OddsDecimal="41.000" OddsAmerican="4000" Handicap="" ID="1981172793" LastUpdated="28/08/26 13:30:11" AVG="3546001FF9F021DDE53E390BFF2BBA3BD044813D"/>
+<Participant Name="Michael Kayode" Odds="40/1" OddsDecimal="41.000" OddsAmerican="4000" Handicap="" ID="1981172844" LastUpdated="28/08/26 13:30:11" AVG="27F4B1F8430EC64BC9C2324EC36585B4AB883EC1"/>
+<Participant Name="No Goalscorer" Odds="10/1" OddsDecimal="11.000" OddsAmerican="1000" Handicap="" ID="1981172906" LastUpdated="28/08/26 13:30:11" AVG="8FE21E62D95434AB0D86845D08BAFB3239AC723A"/>
+</Market>
+</Event>
+<Event Name="Liverpool v Nottm Forest" ID="196564300" StartTime="29/08/26 12:30:00" EventComment="" ParentEventID="196564300">
+<Market Name="First Goalscorer" ID="45" PlaceCount="98" PlaceOdds="1/5" FID="196564300">
+<Participant Name="Alexander Isak" Odds="15/4" OddsDecimal="4.750" OddsAmerican="375" Handicap="" ID="1981135602" LastUpdated="24/08/26 11:29:38" AVG="76D33633C4CC0F99571CC5C9D68132084DBE3C57"/>
+<Participant Name="Cody Gakpo" Odds="11/2" OddsDecimal="6.500" OddsAmerican="550" Handicap="" ID="1981135662" LastUpdated="24/08/26 11:29:38" AVG="AA15A862D27AA42A42588FD523ECD66CD7536E69"/>
+<Participant Name="Federico Chiesa" Odds="11/2" OddsDecimal="6.500" OddsAmerican="550" Handicap="" ID="1981135682" LastUpdated="24/08/26 11:29:39" AVG="FECA603B989C17DBAF47567170AACD86BB14AA26"/>
+<Participant Name="Rio Ngumoha" Odds="13/2" OddsDecimal="7.500" OddsAmerican="650" Handicap="" ID="1981135676" LastUpdated="26/08/26 15:37:10" AVG="E39060EDE948DF699EE10EA09898EDC3F4A47368"/>
+<Participant Name="Victor Munoz" Odds="13/2" OddsDecimal="7.500" OddsAmerican="650" Handicap="" ID="1981135616" LastUpdated="26/08/26 15:37:10" AVG="D76CC853E243D84F18668331FC005BFEFC528BD6"/>
+<Participant Name="Lewis Koumas" Odds="7/1" OddsDecimal="8.000" OddsAmerican="700" Handicap="" ID="1981135625" LastUpdated="24/08/26 11:29:38" AVG="E73A05F8C5FAB62ACDEBFE7812AD701F05076EB8"/>
+<Participant Name="Chris Wood" Odds="8/1" OddsDecimal="9.000" OddsAmerican="800" Handicap="" ID="1981135613" LastUpdated="28/08/26 10:27:09" AVG="1D05B7B9042C1181F0DD1D199A4326099F478AE9"/>
+<Participant Name="Florian Wirtz" Odds="8/1" OddsDecimal="9.000" OddsAmerican="800" Handicap="" ID="1981135660" LastUpdated="26/08/26 15:37:10" AVG="5681CDBC5AADCEE55B78F626E6621BED0CD393B5"/>
+<Participant Name="Dominik Szoboszlai" Odds="17/2" OddsDecimal="9.500" OddsAmerican="850" Handicap="" ID="1981135677" LastUpdated="24/08/26 11:29:39" AVG="D7E9BF0F80DF2FA2BE9F9562019B5A99897660C9"/>
+<Participant Name="Arnaud Kalimuendo" Odds="10/1" OddsDecimal="11.000" OddsAmerican="1000" Handicap="" ID="1981135633" LastUpdated="26/08/26 15:37:10" AVG="F7DC87523F69DA775137C24D00E0630BBE68F79D"/>
+<Participant Name="Harvey Elliott" Odds="10/1" OddsDecimal="11.000" OddsAmerican="1000" Handicap="" ID="1981135663" LastUpdated="26/08/26 15:37:10" AVG="F9B45979D5DBC1916EF99277B4AF17A06A037806"/>
+<Participant Name="Liam Delap" Odds="10/1" OddsDecimal="11.000" OddsAmerican="1000" Handicap="" ID="2005699823" LastUpdated="27/08/26 12:13:10" AVG="6EB8502DB6B7C3B2CD1984C84B6EE16DF2581BB0"/>
+<Participant Name="Igor Jesus" Odds="11/1" OddsDecimal="12.000" OddsAmerican="1100" Handicap="" ID="1981135659" LastUpdated="27/08/26 12:13:10" AVG="FB9FB3B1D3BE49A68ACD935CB93D1DA0F5019AFC"/>
+<Participant Name="Morgan Gibbs-White" Odds="11/1" OddsDecimal="12.000" OddsAmerican="1100" Handicap="" ID="1981135666" LastUpdated="27/08/26 12:13:10" AVG="26EE2B6DF250167D1EE69F5B7A5C5D07E569167B"/>
+<Participant Name="Alexis Mac Allister" Odds="14/1" OddsDecimal="15.000" OddsAmerican="1400" Handicap="" ID="1981135668" LastUpdated="27/08/26 12:13:10" AVG="83CDC21BF473D9D4F2C6E8F095E52CA5E8AECCA8"/>
+<Participant Name="James McConnell" Odds="14/1" OddsDecimal="15.000" OddsAmerican="1400" Handicap="" ID="1981135623" LastUpdated="28/08/26 10:27:09" AVG="8F9138D2266199A0A4CA29E1234000074D3D2478"/>
+<Participant Name="Trey Nyoni" Odds="14/1" OddsDecimal="15.000" OddsAmerican="1400" Handicap="" ID="1981135691" LastUpdated="28/08/26 10:27:09" AVG="09C2D803618A6957253DC588E379397DF9C0EF62"/>
+<Participant Name="Callum Hudson-Odoi" Odds="16/1" OddsDecimal="17.000" OddsAmerican="1600" Handicap="" ID="1981135606" LastUpdated="28/08/26 10:27:09" AVG="B5858906A30538A3BDE695C8E7FE13A35074ABFF"/>
+<Participant Name="Dan Ndoye" Odds="16/1" OddsDecimal="17.000" OddsAmerican="1600" Handicap="" ID="1981135692" LastUpdated="27/08/26 12:13:10" AVG="8461214C85EE65693AED9BD65B0C99929BA35D38"/>
+<Participant Name="Jeremie Frimpong" Odds="16/1" OddsDecimal="17.000" OddsAmerican="1600" Handicap="" ID="1981135629" LastUpdated="27/08/26 12:13:10" AVG="2F5FDB7B0D954CD77B79A7141CF11EFF575B696C"/>
+<Participant Name="Ryan Gravenberch" Odds="16/1" OddsDecimal="17.000" OddsAmerican="1600" Handicap="" ID="1981135610" LastUpdated="27/08/26 12:13:10" AVG="267747C169CA0ADE1CACEFD56ACCF2F2DA88DFE3"/>
+<Participant Name="Omari Giraud-Hutchinson" Odds="18/1" OddsDecimal="19.000" OddsAmerican="1800" Handicap="" ID="1981135678" LastUpdated="27/08/26 12:13:10" AVG="9E4EB987FF36E6674304D4AE0A703B380D7E4BF3"/>
+<Participant Name="Calvin Ramsay" Odds="20/1" OddsDecimal="21.000" OddsAmerican="2000" Handicap="" ID="1981135589" LastUpdated="27/08/26 12:13:10" AVG="6CCCD86DA2FC592FF3345E86BC75494BAADA24FE"/>
+<Participant Name="James McAtee" Odds="20/1" OddsDecimal="21.000" OddsAmerican="2000" Handicap="" ID="1981135693" LastUpdated="27/08/26 12:13:10" AVG="AD525617B570D81007715A31F4429CB62064F9E7"/>
+<Participant Name="Jeremy Jacquet" Odds="20/1" OddsDecimal="21.000" OddsAmerican="2000" Handicap="" ID="1981135639" LastUpdated="28/08/26 10:27:09" AVG="EF325390FC8708A60F7B0C34C805FAE4714992F7"/>
+<Participant Name="Stefan Bajcetic" Odds="20/1" OddsDecimal="21.000" OddsAmerican="2000" Handicap="" ID="1981135688" LastUpdated="28/08/26 10:27:09" AVG="EFB057EB5D84F444DE554A21C3D1D7186484BBFC"/>
+<Participant Name="Virgil van Dijk" Odds="20/1" OddsDecimal="21.000" OddsAmerican="2000" Handicap="" ID="1981135620" LastUpdated="28/08/26 10:27:09" AVG="314087EF5BF795E1DA4F706F10B82C6F88B136F1"/>
+<Participant Name="Wataru Endo" Odds="20/1" OddsDecimal="21.000" OddsAmerican="2000" Handicap="" ID="1981135673" LastUpdated="28/08/26 10:27:09" AVG="ABB70C1DDDC5EFECDF41A03EB1C253657596CC68"/>
+<Participant Name="Konstantinos Tsimikas" Odds="22/1" OddsDecimal="23.000" OddsAmerican="2200" Handicap="" ID="1981135671" LastUpdated="28/08/26 10:27:09" AVG="901379F7E33B931A6373822E460B60303F97CE98"/>
+<Participant Name="Luke Chambers" Odds="22/1" OddsDecimal="23.000" OddsAmerican="2200" Handicap="" ID="1981135664" LastUpdated="28/08/26 10:27:09" AVG="E56B36750E8F236E8F33076D99DDC26B1E69EC44"/>
+<Participant Name="Milos Kerkez" Odds="22/1" OddsDecimal="23.000" OddsAmerican="2200" Handicap="" ID="1981135647" LastUpdated="28/08/26 10:27:09" AVG="02EDB0393EA6607623C5C965689A1501BF89C0F6"/>
+<Participant Name="Nicolas Dominguez" Odds="22/1" OddsDecimal="23.000" OddsAmerican="2200" Handicap="" ID="1981135667" LastUpdated="28/08/26 10:27:09" AVG="09B01DF84A91CA56D3897484C6B923EC1DEE0DC9"/>
+<Participant Name="Ronald Araujo" Odds="22/1" OddsDecimal="23.000" OddsAmerican="2200" Handicap="" ID="1981135687" LastUpdated="28/08/26 10:27:09" AVG="5E1AD1CDC2F331D2A55B6F9C462305F2581AF286"/>
+<Participant Name="Ibrahim Sangare" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981135661" LastUpdated="27/08/26 12:13:10" AVG="4B735AD8ED65D1A3C332B0B76B693AA10A4890B3"/>
+<Participant Name="Neco Williams" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981135670" LastUpdated="27/08/26 12:13:10" AVG="5C4D2D631DF581557010C20576E68FC573861092"/>
+<Participant Name="Ryan Yates" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981135665" LastUpdated="27/08/26 12:13:10" AVG="AEA0F662B4072D3948F59FF80521A26D7C0C13DB"/>
+<Participant Name="Jair Cunha" Odds="40/1" OddsDecimal="41.000" OddsAmerican="4000" Handicap="" ID="1981135674" LastUpdated="27/08/26 12:13:10" AVG="E1BA972B1DA292C9E78D529A1C84846C1745CE22"/>
+<Participant Name="Nicolo Savona" Odds="40/1" OddsDecimal="41.000" OddsAmerican="4000" Handicap="" ID="1981135651" LastUpdated="27/08/26 12:13:10" AVG="C3F8AABECF36D3233E8D2FB667C4FE1353FDD9BF"/>
+<Participant Name="Nikola Milenkovic" Odds="40/1" OddsDecimal="41.000" OddsAmerican="4000" Handicap="" ID="1981135634" LastUpdated="27/08/26 12:13:10" AVG="842525940B0FE3AE5FCD52466BF6B6CB19AD6848"/>
+<Participant Name="Xaver Schlager" Odds="40/1" OddsDecimal="41.000" OddsAmerican="4000" Handicap="" ID="1981135672" LastUpdated="27/08/26 12:13:10" AVG="23D1B3074ABF7029E908BCDDF9F4859C6F89976C"/>
+<Participant Name="Murillo dos Santos" Odds="40/1" OddsDecimal="41.000" OddsAmerican="4000" Handicap="" ID="1981135689" LastUpdated="27/08/26 12:13:10" AVG="24DB511D2757C0D9BE23CFCA65ED6647F77AC21C"/>
+<Participant Name="Felipe Morato" Odds="50/1" OddsDecimal="51.000" OddsAmerican="5000" Handicap="" ID="1981135690" LastUpdated="27/08/26 12:13:10" AVG="8EB8BA1009621C7ECE85690DBDF4BE6CB43CFA27"/>
+<Participant Name="Luca Netz" Odds="50/1" OddsDecimal="51.000" OddsAmerican="5000" Handicap="" ID="1981135669" LastUpdated="27/08/26 12:13:10" AVG="C5A11D027DEBDFA194BE808F1B880F4E3A841BCE"/>
+<Participant Name="Ola Aina" Odds="50/1" OddsDecimal="51.000" OddsAmerican="5000" Handicap="" ID="1981135675" LastUpdated="27/08/26 12:13:10" AVG="1E850718AE43F579FFDC9EFD2633D973037BA466"/>
+<Participant Name="Ousmane Diomande" Odds="50/1" OddsDecimal="51.000" OddsAmerican="5000" Handicap="" ID="1981135654" LastUpdated="27/08/26 12:13:10" AVG="4896274D254B813C1B623D15345BDCA46C184723"/>
+<Participant Name="Zach Abbott" Odds="50/1" OddsDecimal="51.000" OddsAmerican="5000" Handicap="" ID="1981135657" LastUpdated="27/08/26 12:13:10" AVG="F0C7E533540154E744DAA33E4047332F0EBFB70B"/>
+<Participant Name="No Goalscorer" Odds="14/1" OddsDecimal="15.000" OddsAmerican="1400" Handicap="" ID="1981135694" LastUpdated="27/08/26 12:13:10" AVG="3B08BCF108B61A7D99C5746E9131F93A77EE8156"/>
+</Market>
+</Event>
+<Event Name="Man Utd v Ipswich" ID="196564302" StartTime="30/08/26 16:30:00" EventComment="" ParentEventID="196564302">
+<Market Name="First Goalscorer" ID="45" PlaceCount="98" PlaceOdds="1/5" FID="196564302">
+<Participant Name="Benjamin Sesko" Odds="7/2" OddsDecimal="4.500" OddsAmerican="350" Handicap="" ID="1981183865" LastUpdated="26/08/26 12:43:04" AVG="862FC1E65F8CC57882F9B965100415FAB1753484"/>
+<Participant Name="Bryan Mbeumo" Odds="9/2" OddsDecimal="5.500" OddsAmerican="450" Handicap="" ID="1981183830" LastUpdated="26/08/26 12:43:04" AVG="8581A6832E3434127917FE00EBDD7A902E675B90"/>
+<Participant Name="Joshua Zirkzee" Odds="11/2" OddsDecimal="6.500" OddsAmerican="550" Handicap="" ID="1981183859" LastUpdated="26/08/26 12:43:04" AVG="274808C18AD432CA1341365781B699B071409913"/>
+<Participant Name="Marcus Rashford" Odds="11/2" OddsDecimal="6.500" OddsAmerican="550" Handicap="" ID="1981183807" LastUpdated="26/08/26 12:43:04" AVG="8C2BC7DA4A4D95BFED56C243C7D4C043CE2FF2E5"/>
+<Participant Name="Bruno Fernandes" Odds="6/1" OddsDecimal="7.000" OddsAmerican="600" Handicap="" ID="1981183988" LastUpdated="26/08/26 12:43:04" AVG="5BE3FB48105C108F0CF2219FF4D7CF67EFFD8E20"/>
+<Participant Name="Matheus Cunha" Odds="8/1" OddsDecimal="9.000" OddsAmerican="800" Handicap="" ID="1981184005" LastUpdated="26/08/26 12:43:04" AVG="3A9442604EEF1AAF1FBDEC313AE12CBBC8E88D57"/>
+<Participant Name="Shea Lacey" Odds="10/1" OddsDecimal="11.000" OddsAmerican="1000" Handicap="" ID="1981183990" LastUpdated="28/08/26 09:24:54" AVG="DD88814ACBD098450BF65539AF3925F115FDEB10"/>
+<Participant Name="Anis Mehmeti" Odds="11/1" OddsDecimal="12.000" OddsAmerican="1100" Handicap="" ID="1981183844" LastUpdated="28/08/26 09:24:54" AVG="6442A72730CC45A4A6DD2C191F29A0CFDF64F599"/>
+<Participant Name="Daizen Maeda" Odds="11/1" OddsDecimal="12.000" OddsAmerican="1100" Handicap="" ID="1981184001" LastUpdated="28/08/26 09:24:54" AVG="658CF07ED452C826D9F4F60D7BDBFF3DB69BAE65"/>
+<Participant Name="Mason Mount" Odds="11/1" OddsDecimal="12.000" OddsAmerican="1100" Handicap="" ID="1981183869" LastUpdated="26/08/26 12:43:04" AVG="592F155CE3570A93AC929852E863A12CDA50C10C"/>
+<Participant Name="Patrick Dorgu" Odds="11/1" OddsDecimal="12.000" OddsAmerican="1100" Handicap="" ID="1981184016" LastUpdated="26/08/26 12:43:04" AVG="2A534292029C27B978B2A6C287B373CA8AF85D77"/>
+<Participant Name="Chuba Akpom" Odds="12/1" OddsDecimal="13.000" OddsAmerican="1200" Handicap="" ID="1981183833" LastUpdated="26/08/26 12:43:04" AVG="8C403829E7E3199BFAE86F74FE93E27710050151"/>
+<Participant Name="Julio Enciso" Odds="12/1" OddsDecimal="13.000" OddsAmerican="1200" Handicap="" ID="1981184023" LastUpdated="26/08/26 12:43:04" AVG="9883BACA005892AD43C2842D4F4069126DD03FC7"/>
+<Participant Name="Emersonn Silva" Odds="12/1" OddsDecimal="13.000" OddsAmerican="1200" Handicap="" ID="1981183816" LastUpdated="26/08/26 12:43:04" AVG="A4916886A5F630608B48308CC865890076325E39"/>
+<Participant Name="Andrey Santos" Odds="14/1" OddsDecimal="15.000" OddsAmerican="1400" Handicap="" ID="1981183846" LastUpdated="24/08/26 11:36:38" AVG="C28A71C74DE362779A681783CADFA6C5867E1DF6"/>
+<Participant Name="Jack Clarke" Odds="14/1" OddsDecimal="15.000" OddsAmerican="1400" Handicap="" ID="1981183862" LastUpdated="24/08/26 11:36:38" AVG="D63094BFC630FE5AFACBCF33018F11A9E37D0F5F"/>
+<Participant Name="Jaden Philogene-Bidace" Odds="14/1" OddsDecimal="15.000" OddsAmerican="1400" Handicap="" ID="1981183837" LastUpdated="24/08/26 11:36:38" AVG="23E9A92855536DBE6329417D4FF8239261B64D9C"/>
+<Participant Name="Youri Tielemans" Odds="14/1" OddsDecimal="15.000" OddsAmerican="1400" Handicap="" ID="1981183998" LastUpdated="24/08/26 11:36:39" AVG="4040A9C8DE3D03410EB5BB7FAE04B26D528DEDD1"/>
+<Participant Name="Kasey McAteer" Odds="16/1" OddsDecimal="17.000" OddsAmerican="1600" Handicap="" ID="1981183851" LastUpdated="24/08/26 20:48:59" AVG="C31CEE89D64D25066F3925A2021AF7DA020A2011"/>
+<Participant Name="Sindre Walle" Odds="16/1" OddsDecimal="17.000" OddsAmerican="1600" Handicap="" ID="1981183996" LastUpdated="24/08/26 20:48:59" AVG="D944FB5C896ADCEB193ADB5593501378D7E3E981"/>
+<Participant Name="Issahaku Fatawu" Odds="18/1" OddsDecimal="19.000" OddsAmerican="1800" Handicap="" ID="1981183881" LastUpdated="24/08/26 20:48:59" AVG="5326595BF9FCF9271F761EEE6B641ED3FD7C1B77"/>
+<Participant Name="Kobbie Mainoo" Odds="18/1" OddsDecimal="19.000" OddsAmerican="1800" Handicap="" ID="1981183977" LastUpdated="24/08/26 20:48:59" AVG="2179B19E8745787D6DEED9C38DDFA7EDFE71F10D"/>
+<Participant Name="Marcelino Nunez" Odds="18/1" OddsDecimal="19.000" OddsAmerican="1800" Handicap="" ID="1981183804" LastUpdated="24/08/26 20:48:59" AVG="F769F74446EF23E484BD07F4F4D10DB1B70BA45F"/>
+<Participant Name="Chiedozie Ogbene" Odds="20/1" OddsDecimal="21.000" OddsAmerican="2000" Handicap="" ID="1981183992" LastUpdated="24/08/26 11:36:38" AVG="E3E5CB27B50CBEF04821409E1D37CEA4B41EAC34"/>
+<Participant Name="Diogo Dalot" Odds="22/1" OddsDecimal="23.000" OddsAmerican="2200" Handicap="" ID="1981183840" LastUpdated="24/08/26 11:36:38" AVG="8C07A8328C71794E0CADD37C74957DFDF0BCF332"/>
+<Participant Name="Harry Maguire" Odds="22/1" OddsDecimal="23.000" OddsAmerican="2200" Handicap="" ID="1981183821" LastUpdated="24/08/26 11:36:38" AVG="78A6176EBD0AF8AF61E9EB625F9FF7FF067CDF8D"/>
+<Participant Name="Matthijs de Ligt" Odds="22/1" OddsDecimal="23.000" OddsAmerican="2200" Handicap="" ID="1981183945" LastUpdated="24/08/26 11:36:38" AVG="1A66BCF4F41BEDEA82FF29533A66FA8BF95DBAEF"/>
+<Participant Name="Ayden Heaven" Odds="25/1" OddsDecimal="26.000" OddsAmerican="2500" Handicap="" ID="1981184053" LastUpdated="24/08/26 20:48:59" AVG="18D2C32638E9D6FA16B9725CCC3970F96C14EEA0"/>
+<Participant Name="Cameron Humphreys" Odds="25/1" OddsDecimal="26.000" OddsAmerican="2500" Handicap="" ID="1981183868" LastUpdated="24/08/26 20:48:59" AVG="DCD7B8DAAC82CAC5C829FBBDE8B595075995D3C8"/>
+<Participant Name="Exequiel Palacios" Odds="25/1" OddsDecimal="26.000" OddsAmerican="2500" Handicap="" ID="2011939316" LastUpdated="28/08/26 09:24:54" AVG="6910BE8B0461D9502213A20EB5C39ABC3A8A7A60"/>
+<Participant Name="Jack Taylor" Odds="25/1" OddsDecimal="26.000" OddsAmerican="2500" Handicap="" ID="1981183931" LastUpdated="28/08/26 09:24:54" AVG="7E2DDB15758852E83BD6FF0BF77A48B5F832390D"/>
+<Participant Name="Abdoul Ouattara" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="1981183964" LastUpdated="28/08/26 09:24:54" AVG="4DA9901F3CEBD2861E57184ACA6FD90D1A5BF9DC"/>
+<Participant Name="Charlie Compton" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="1992856801" LastUpdated="28/08/26 09:24:54" AVG="8E73961CE55DFA2CB5B6441284A9FAB7B74E24A2"/>
+<Participant Name="Leny Yoro" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981184029" LastUpdated="28/08/26 09:24:54" AVG="4D7949E581C0B7B254FC17720D9BEE132F28EAB4"/>
+<Participant Name="Lisandro Martinez" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981183984" LastUpdated="28/08/26 09:24:54" AVG="422A9A404C0E833245B36BA1D23F1343B9D7E55D"/>
+<Participant Name="Luke Shaw" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981184033" LastUpdated="28/08/26 09:24:54" AVG="8CBA85DBDA8B8F0F5DDEACEC06D221699173241E"/>
+<Participant Name="Noussair Mazraoui" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981183796" LastUpdated="28/08/26 09:24:54" AVG="ACEC7682800B46177DD709E4B8101493091F7A83"/>
+<Participant Name="Darnell Furlong" Odds="40/1" OddsDecimal="41.000" OddsAmerican="4000" Handicap="" ID="1981183835" LastUpdated="28/08/26 09:24:54" AVG="765D416D5F50C3AD4B9A7565DB2E3351AD4EFBD7"/>
+<Participant Name="Luis Florentino" Odds="40/1" OddsDecimal="41.000" OddsAmerican="4000" Handicap="" ID="1981183811" LastUpdated="28/08/26 09:24:54" AVG="73984903EE6C7D7FC0DB8EF09A973642EF24D91C"/>
+<Participant Name="Sasa Lukic" Odds="40/1" OddsDecimal="41.000" OddsAmerican="4000" Handicap="" ID="1981183957" LastUpdated="28/08/26 09:24:54" AVG="9DBA656DCBA5E2D8E0728DC31711695104E62C6C"/>
+<Participant Name="Cedric Kipre" Odds="50/1" OddsDecimal="51.000" OddsAmerican="5000" Handicap="" ID="1981184026" LastUpdated="28/08/26 09:24:54" AVG="9F4139808F0CE021BEA4DF467CEF1379D96CF25E"/>
+<Participant Name="Dara O'Shea" Odds="50/1" OddsDecimal="51.000" OddsAmerican="5000" Handicap="" ID="1981183843" LastUpdated="28/08/26 09:24:54" AVG="5DEC735EBCF49DCF39264F90E580E41D28DCD575"/>
+<Participant Name="Leif Davis" Odds="50/1" OddsDecimal="51.000" OddsAmerican="5000" Handicap="" ID="1981183971" LastUpdated="28/08/26 09:24:54" AVG="2260A14B7834AE526A50225A118CCB8931475710"/>
+<Participant Name="Azor Matusiwa" Odds="66/1" OddsDecimal="67.000" OddsAmerican="6600" Handicap="" ID="1981183855" LastUpdated="28/08/26 09:24:54" AVG="1DB0884CE8AFFE6729B356B9F6140893151C0C06"/>
+<Participant Name="Issa Diop" Odds="66/1" OddsDecimal="67.000" OddsAmerican="6600" Handicap="" ID="1981183824" LastUpdated="28/08/26 09:24:54" AVG="EE9E921ECBEE6AC711FACA95FFD65B5CE3EAF2ED"/>
+<Participant Name="Jacob Greaves" Odds="66/1" OddsDecimal="67.000" OddsAmerican="6600" Handicap="" ID="1981184019" LastUpdated="28/08/26 09:24:54" AVG="B36F418199B293C4A85166DCDA9CFAF5249FE2C3"/>
+<Participant Name="No Goalscorer" Odds="16/1" OddsDecimal="17.000" OddsAmerican="1600" Handicap="" ID="1981184058" LastUpdated="28/08/26 09:24:54" AVG="BEC60BF4CC4D79761C89158076D005637E87F4E5"/>
+</Market>
+</Event>
+<Event Name="Sunderland v Fulham" ID="196564305" StartTime="30/08/26 14:00:00" EventComment="" ParentEventID="196564305">
+<Market Name="First Goalscorer" ID="45" PlaceCount="98" PlaceOdds="1/5" FID="196564305">
+<Participant Name="Brian Brobbey" Odds="11/2" OddsDecimal="6.500" OddsAmerican="550" Handicap="" ID="1981178747" LastUpdated="25/08/26 11:10:35" AVG="D2AA4EE15EB5EA3100A675685FD2AD32F73C8044"/>
+<Participant Name="Wilson Isidor" Odds="11/2" OddsDecimal="6.500" OddsAmerican="550" Handicap="" ID="1981178714" LastUpdated="25/08/26 11:10:35" AVG="420CFE0D339C22048925C614E4B4F4E1EA7376FB"/>
+<Participant Name="Rodrigo Muniz" Odds="6/1" OddsDecimal="7.000" OddsAmerican="600" Handicap="" ID="1981178727" LastUpdated="25/08/26 11:10:35" AVG="826D4B9FED7F82930F67F45E0B049456F5615163"/>
+<Participant Name="Gonzalo Garcia" Odds="15/2" OddsDecimal="8.500" OddsAmerican="750" Handicap="" ID="1981178637" LastUpdated="24/08/26 22:11:15" AVG="1E321C88C90794B914AE383268EFD1AF10ABF187"/>
+<Participant Name="Jonah Kusi-Asare" Odds="15/2" OddsDecimal="8.500" OddsAmerican="750" Handicap="" ID="1981178686" LastUpdated="24/08/26 22:11:15" AVG="5F38A44F4F2D04E56C21A0EAC81D3865F62E1A7B"/>
+<Participant Name="Emile Smith Rowe" Odds="8/1" OddsDecimal="9.000" OddsAmerican="800" Handicap="" ID="1981178598" LastUpdated="24/08/26 22:11:15" AVG="51074D02E34EA7F9873D9154DD42D15BC40A7E5C"/>
+<Participant Name="Simon Adingra" Odds="17/2" OddsDecimal="9.500" OddsAmerican="850" Handicap="" ID="1981178712" LastUpdated="24/08/26 22:11:15" AVG="B09BADF19F1250515D921AC61ABF16B4F0156A5E"/>
+<Participant Name="Chemsdine Talbi" Odds="10/1" OddsDecimal="11.000" OddsAmerican="1000" Handicap="" ID="1981178575" LastUpdated="27/08/26 00:46:26" AVG="4CC67261C1203F97E6BCC974D7E07398A7085121"/>
+<Participant Name="Enzo Le Fee" Odds="10/1" OddsDecimal="11.000" OddsAmerican="1000" Handicap="" ID="1981178670" LastUpdated="27/08/26 00:46:26" AVG="AA4A0E9866F3E6893D98D9AD5E4CDF33080E96B3"/>
+<Participant Name="Nilson Angulo" Odds="10/1" OddsDecimal="11.000" OddsAmerican="1000" Handicap="" ID="1981178750" LastUpdated="27/08/26 00:46:26" AVG="780A96F27CB2266DFF481B5D3063C54620A67FE0"/>
+<Participant Name="Cesar Palacios" Odds="11/1" OddsDecimal="12.000" OddsAmerican="1100" Handicap="" ID="1981178568" LastUpdated="25/08/26 11:10:35" AVG="DF1C51FBCDD4909DAF0296EF91A1094E1E048CB3"/>
+<Participant Name="Habib Diarra" Odds="11/1" OddsDecimal="12.000" OddsAmerican="1100" Handicap="" ID="1981178718" LastUpdated="25/08/26 11:10:35" AVG="850434CCD21A540222235252C53E28A9E3F72B51"/>
+<Participant Name="Joshua King" Odds="11/1" OddsDecimal="12.000" OddsAmerican="1100" Handicap="" ID="1981178610" LastUpdated="25/08/26 11:10:35" AVG="53FB7B44CB1E12F21738B4C09977E60861C64B91"/>
+<Participant Name="Macauley Zepa" Odds="11/1" OddsDecimal="12.000" OddsAmerican="1100" Handicap="" ID="2012266138" LastUpdated="28/08/26 10:27:28" AVG="1DCD3BB90D373844BC15A9E7C12F7F7869001A2A"/>
+<Participant Name="Romaine Mundle" Odds="11/1" OddsDecimal="12.000" OddsAmerican="1100" Handicap="" ID="1981178723" LastUpdated="28/08/26 10:27:28" AVG="ECF8733C908494AFF888C8DFBF9508D4A83E33FF"/>
+<Participant Name="Kevin Macedo" Odds="11/1" OddsDecimal="12.000" OddsAmerican="1100" Handicap="" ID="1981178655" LastUpdated="28/08/26 10:27:28" AVG="DEB7BA4A9C3B00411FEF04B4DF482D0E2D9C1246"/>
+<Participant Name="Alex Iwobi" Odds="12/1" OddsDecimal="13.000" OddsAmerican="1200" Handicap="" ID="1981178589" LastUpdated="28/08/26 10:27:28" AVG="3C8DB61098FD38127290918C77B19AD20E4E92AA"/>
+<Participant Name="Oscar Bobb" Odds="12/1" OddsDecimal="13.000" OddsAmerican="1200" Handicap="" ID="1981178621" LastUpdated="28/08/26 10:27:28" AVG="C8751F10785438210EE5917AB6B8D4B904B7D65A"/>
+<Participant Name="Chris Rigg" Odds="14/1" OddsDecimal="15.000" OddsAmerican="1400" Handicap="" ID="1981178615" LastUpdated="28/08/26 10:27:28" AVG="8436538091E9E605742E5EA415164D587609A768"/>
+<Participant Name="Jocelin Ta Bi" Odds="14/1" OddsDecimal="15.000" OddsAmerican="1400" Handicap="" ID="1981178563" LastUpdated="28/08/26 10:27:28" AVG="9AE704672876CD0F3544B64D38972FD38404F84A"/>
+<Participant Name="Alan Browne" Odds="16/1" OddsDecimal="17.000" OddsAmerican="1600" Handicap="" ID="1981178649" LastUpdated="28/08/26 10:27:28" AVG="300DA93BA175014DBA2094A1274627FEDFCE29D1"/>
+<Participant Name="Ryan Sessegnon" Odds="18/1" OddsDecimal="19.000" OddsAmerican="1800" Handicap="" ID="1981178606" LastUpdated="28/08/26 10:27:28" AVG="B7B188B68D00B16EC4D6D147CA77D9514CA6E658"/>
+<Participant Name="Daniel Ballard" Odds="20/1" OddsDecimal="21.000" OddsAmerican="2000" Handicap="" ID="1981178705" LastUpdated="28/08/26 10:27:28" AVG="B8F8FC899876C6FAFBB0F356B213236F19D7A774"/>
+<Participant Name="Granit Xhaka" Odds="20/1" OddsDecimal="21.000" OddsAmerican="2000" Handicap="" ID="1981178708" LastUpdated="28/08/26 10:27:28" AVG="CD44812903AF2F9EFF673D94E87061BABC65A506"/>
+<Participant Name="Shea Charles" Odds="20/1" OddsDecimal="21.000" OddsAmerican="2000" Handicap="" ID="1981178595" LastUpdated="28/08/26 10:27:28" AVG="7A973A20FFBBC7E201415F1EC4A936F4F75D4EEE"/>
+<Participant Name="Jules Ahoka" Odds="22/1" OddsDecimal="23.000" OddsAmerican="2200" Handicap="" ID="1997530051" LastUpdated="28/08/26 10:27:28" AVG="D92CEB636D930FCFF605622230C8B342964F7F95"/>
+<Participant Name="Thomas Meunier" Odds="22/1" OddsDecimal="23.000" OddsAmerican="2200" Handicap="" ID="1981178691" LastUpdated="28/08/26 10:27:28" AVG="82F35605388C95F086E641E0A2EE4228A3D890F0"/>
+<Participant Name="Trai Hume" Odds="22/1" OddsDecimal="23.000" OddsAmerican="2200" Handicap="" ID="1981178660" LastUpdated="28/08/26 10:27:28" AVG="9B5C16EB1EF17A28641BF837467583B9A4BFEFD6"/>
+<Participant Name="Chibby Nwoko" Odds="25/1" OddsDecimal="26.000" OddsAmerican="2500" Handicap="" ID="2012266136" LastUpdated="28/08/26 10:27:28" AVG="16B4FE5F755827043CA555AF38FF7D17D4CF03B2"/>
+<Participant Name="Harrison Reed" Odds="25/1" OddsDecimal="26.000" OddsAmerican="2500" Handicap="" ID="1981178702" LastUpdated="28/08/26 10:27:28" AVG="FF8E314EB6BCA1F8B7984F40690811F563682073"/>
+<Participant Name="Noah Sadiki" Odds="25/1" OddsDecimal="26.000" OddsAmerican="2500" Handicap="" ID="1981178630" LastUpdated="28/08/26 10:27:28" AVG="0782F86E4FC09B06478581F62F7F128AB28178D1"/>
+<Participant Name="Omar Alderete" Odds="25/1" OddsDecimal="26.000" OddsAmerican="2500" Handicap="" ID="1981178696" LastUpdated="28/08/26 10:27:28" AVG="FE133FE1532332A3F9A1B08166F3D942A90B68A1"/>
+<Participant Name="Timothy Castagne" Odds="25/1" OddsDecimal="26.000" OddsAmerican="2500" Handicap="" ID="1981178681" LastUpdated="28/08/26 10:27:28" AVG="13ED3A841304C67EE68F37C9CE3A96CBAE76EF73"/>
+<Participant Name="Jenson Seelt" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="1981178665" LastUpdated="28/08/26 10:27:28" AVG="6936433A50956939CEE2061C420FC67DDA723D00"/>
+<Participant Name="Luke O'Nien" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="1981178604" LastUpdated="28/08/26 10:27:28" AVG="C62ADBECA86ADEB6E31B42625DE7B1CFA618EFA2"/>
+<Participant Name="Nordi Mukiele" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="1981178557" LastUpdated="28/08/26 10:27:28" AVG="F94C7297495C8267F1CDA14190EBB80FC0272E60"/>
+<Participant Name="Jorge Cuenca" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981178597" LastUpdated="28/08/26 10:27:28" AVG="535D8716DB330472D343A911D3EFF6D04BEE2CFA"/>
+<Participant Name="Reinildo Mandava" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981178581" LastUpdated="28/08/26 10:27:28" AVG="8746A79BD532A6BE970BE1B65D820E0B28348524"/>
+<Participant Name="Sander Berge" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981178676" LastUpdated="28/08/26 10:27:28" AVG="4304A461E54FED4121228A2B2E89EF6B48269A3B"/>
+<Participant Name="Antonee Robinson" Odds="40/1" OddsDecimal="41.000" OddsAmerican="4000" Handicap="" ID="1981178734" LastUpdated="28/08/26 10:27:28" AVG="6E1DE89E38B5A0B1347C0E7451AB25CA97A0373B"/>
+<Participant Name="Bradley Slade" Odds="40/1" OddsDecimal="41.000" OddsAmerican="4000" Handicap="" ID="2012266137" LastUpdated="28/08/26 10:27:28" AVG="FFFBBCF8B1C8C9ED55AA370DFA98910DB4650B58"/>
+<Participant Name="Calvin Bassey" Odds="40/1" OddsDecimal="41.000" OddsAmerican="4000" Handicap="" ID="1981178554" LastUpdated="28/08/26 10:27:28" AVG="A73FA183668EBAEC65138D479878708403D73949"/>
+<Participant Name="Kenny Tete" Odds="40/1" OddsDecimal="41.000" OddsAmerican="4000" Handicap="" ID="1981178549" LastUpdated="28/08/26 10:27:28" AVG="EDA5275A715B2BFFC3E5F81808D2A42911A50396"/>
+<Participant Name="Luc De Fougerolles" Odds="40/1" OddsDecimal="41.000" OddsAmerican="4000" Handicap="" ID="1984121511" LastUpdated="28/08/26 10:27:28" AVG="DE314F202A2E7DDA9371138A82E5D20F3E13DBC3"/>
+<Participant Name="Joachim Andersen" Odds="50/1" OddsDecimal="51.000" OddsAmerican="5000" Handicap="" ID="1981178644" LastUpdated="28/08/26 10:27:28" AVG="8489E3AE68638F884B553EDD13EB4D493E49C3F8"/>
+<Participant Name="No Goalscorer" Odds="8/1" OddsDecimal="9.000" OddsAmerican="800" Handicap="" ID="1981178755" LastUpdated="28/08/26 10:27:28" AVG="662B6879C2F1DA9909DD26640AC97FD23A03397A"/>
+</Market>
+</Event>
+<Event Name="Tottenham v Newcastle" ID="196564311" StartTime="29/08/26 17:30:00" EventComment="" ParentEventID="196564311">
+<Market Name="First Goalscorer" ID="45" PlaceCount="98" PlaceOdds="1/5" FID="196564311">
+<Participant Name=" Richarlison" Odds="11/2" OddsDecimal="6.500" OddsAmerican="550" Handicap="" ID="1981159449" LastUpdated="24/08/26 17:06:16" AVG="14542EFE85D5053DF7ABFB6C68937070F0206B13"/>
+<Participant Name="Dominic Solanke" Odds="6/1" OddsDecimal="7.000" OddsAmerican="600" Handicap="" ID="1981159488" LastUpdated="24/08/26 17:06:16" AVG="DD645E4E78425B08D4C393C971935E2D30EE70BC"/>
+<Participant Name="Nick Woltemade" Odds="13/2" OddsDecimal="7.500" OddsAmerican="650" Handicap="" ID="1981159297" LastUpdated="26/08/26 23:58:09" AVG="5A6C75FD705F23364165BC76853372F483137CFD"/>
+<Participant Name="Omar Marmoush" Odds="13/2" OddsDecimal="7.500" OddsAmerican="650" Handicap="" ID="2006698634" LastUpdated="27/08/26 15:08:30" AVG="F39DABC84A37C9FAF8B5FC283921E7E8F7E19E85"/>
+<Participant Name="William Osula" Odds="13/2" OddsDecimal="7.500" OddsAmerican="650" Handicap="" ID="1981159367" LastUpdated="27/08/26 15:08:30" AVG="6D0F2E70859FD9FF0F7962C03B45C4A74647103F"/>
+<Participant Name="Yoane Wissa" Odds="13/2" OddsDecimal="7.500" OddsAmerican="650" Handicap="" ID="1981159328" LastUpdated="27/08/26 15:08:30" AVG="A69EA165727FBDBD9FCA7C046E43FAFEA18F8BED"/>
+<Participant Name="Mathys Tel" Odds="15/2" OddsDecimal="8.500" OddsAmerican="750" Handicap="" ID="1981159361" LastUpdated="27/08/26 15:08:30" AVG="E8C1EB06594F6E5FA9D4BFF03C99EDDB7E338E4E"/>
+<Participant Name="Harvey Barnes" Odds="8/1" OddsDecimal="9.000" OddsAmerican="800" Handicap="" ID="1981159465" LastUpdated="27/08/26 15:08:30" AVG="F83489B4D6E7388438BC6BA63285420A6A0C29BE"/>
+<Participant Name="Mikey Moore" Odds="8/1" OddsDecimal="9.000" OddsAmerican="800" Handicap="" ID="1981159323" LastUpdated="27/08/26 15:08:30" AVG="0D03B967224BD913C3B3E2F48AD2B74CD2AFC739"/>
+<Participant Name="Mohammed Kudus" Odds="8/1" OddsDecimal="9.000" OddsAmerican="800" Handicap="" ID="1981159313" LastUpdated="27/08/26 15:08:30" AVG="15C6309EEBFA31D6C552D3D45E09326E2B03F71C"/>
+<Participant Name="Anthony Elanga" Odds="9/1" OddsDecimal="10.000" OddsAmerican="900" Handicap="" ID="1981159306" LastUpdated="27/08/26 15:08:30" AVG="EF58968EF04CEAF1311CB8326E08DCD7BA5357C6"/>
+<Participant Name="Sean Neave" Odds="9/1" OddsDecimal="10.000" OddsAmerican="900" Handicap="" ID="2002618073" LastUpdated="27/08/26 15:08:30" AVG="835B6ECF162F05035ABDB68ADADAFB3F15DA3331"/>
+<Participant Name="Bazoumana Toure" Odds="10/1" OddsDecimal="11.000" OddsAmerican="1000" Handicap="" ID="1981159482" LastUpdated="27/08/26 15:08:30" AVG="8BA6C1A54621BC8974E0FEE2A09F332A3F2F41F2"/>
+<Participant Name=" Savio" Odds="10/1" OddsDecimal="11.000" OddsAmerican="1000" Handicap="" ID="1988553314" LastUpdated="27/08/26 15:08:30" AVG="5844559771E4BFFD49DF25841E8B4C0AB06AAED3"/>
+<Participant Name="James Maddison" Odds="11/1" OddsDecimal="12.000" OddsAmerican="1100" Handicap="" ID="1981159246" LastUpdated="27/08/26 15:08:30" AVG="0B417F1B66D44D9363F6850E22499BAF60B9EE7C"/>
+<Participant Name="Luca Williams-Barnet" Odds="11/1" OddsDecimal="12.000" OddsAmerican="1100" Handicap="" ID="2002618075" LastUpdated="27/08/26 15:08:30" AVG="FB00CE9C67D82CF9E3ED9F87E2FB1F0FE92096B1"/>
+<Participant Name="Conor Gallagher" Odds="12/1" OddsDecimal="13.000" OddsAmerican="1200" Handicap="" ID="1981159255" LastUpdated="27/08/26 15:08:30" AVG="D05343C6EEF59602210B059AF9BFC49680FEAC46"/>
+<Participant Name="Jacob Murphy" Odds="14/1" OddsDecimal="15.000" OddsAmerican="1400" Handicap="" ID="1981159303" LastUpdated="27/08/26 15:08:30" AVG="64A1F47E662150C8503F61196E4C9206DC850B73"/>
+<Participant Name="Jacob Ramsey" Odds="16/1" OddsDecimal="17.000" OddsAmerican="1600" Handicap="" ID="1981159349" LastUpdated="27/08/26 15:08:30" AVG="DD23966DDE2F4212592697B9C60B44BB0D25D0F3"/>
+<Participant Name=" Joelinton" Odds="16/1" OddsDecimal="17.000" OddsAmerican="1600" Handicap="" ID="1981159469" LastUpdated="27/08/26 15:08:30" AVG="C0EEB269EE4636DC6BB8993B07A34DF5C69C18D2"/>
+<Participant Name="Lucas Bergvall" Odds="18/1" OddsDecimal="19.000" OddsAmerican="1800" Handicap="" ID="1981159309" LastUpdated="27/08/26 15:08:30" AVG="08B2F5652FA1E8A00559403494C2075A58F827D5"/>
+<Participant Name="Mateus Fernandes" Odds="18/1" OddsDecimal="19.000" OddsAmerican="1800" Handicap="" ID="1981159434" LastUpdated="27/08/26 15:08:30" AVG="7783A239E326B844A0AD720FC4A5EA0F07847BCB"/>
+<Participant Name="Micky van de Ven" Odds="18/1" OddsDecimal="19.000" OddsAmerican="1800" Handicap="" ID="1981159279" LastUpdated="27/08/26 15:08:30" AVG="B92F3C5A91D969082CBAB84E0D43B94B5FCEAC9E"/>
+<Participant Name="Pape Sarr" Odds="18/1" OddsDecimal="19.000" OddsAmerican="1800" Handicap="" ID="1981159474" LastUpdated="27/08/26 15:08:30" AVG="8A139E26B5075FAA40487A541F1739AEDBBD0524"/>
+<Participant Name="Sandro Tonali" Odds="18/1" OddsDecimal="19.000" OddsAmerican="1800" Handicap="" ID="1981159267" LastUpdated="27/08/26 15:08:30" AVG="A6AF1DF2B5AA22D9AC579B13C68985A27EF4B952"/>
+<Participant Name="Joe Willock" Odds="20/1" OddsDecimal="21.000" OddsAmerican="2000" Handicap="" ID="1981159494" LastUpdated="27/08/26 15:08:30" AVG="E2B23092CE13C8A0B85CDEB85E002EC7C88CD18B"/>
+<Participant Name="Lewis Miley" Odds="20/1" OddsDecimal="21.000" OddsAmerican="2000" Handicap="" ID="1981159232" LastUpdated="27/08/26 15:08:30" AVG="7AAED2FB3B7013E7CF8F8EDBFAAC3BA5466D0ECF"/>
+<Participant Name="Sean Steur" Odds="20/1" OddsDecimal="21.000" OddsAmerican="2000" Handicap="" ID="1981159340" LastUpdated="27/08/26 15:08:30" AVG="0E5A2FD732AD1131A33ED12D9DDFFF4BBD4CE5E8"/>
+<Participant Name="Archie Gray" Odds="22/1" OddsDecimal="23.000" OddsAmerican="2200" Handicap="" ID="1981159413" LastUpdated="27/08/26 15:08:30" AVG="72D5B3C0075FAB2B79D0DAD380EB199EAA856F77"/>
+<Participant Name="Joao Victor Souza" Odds="22/1" OddsDecimal="23.000" OddsAmerican="2200" Handicap="" ID="1981159497" LastUpdated="27/08/26 15:08:30" AVG="971A8F6F2147F92A665197C2100EF5B9D2CABEFF"/>
+<Participant Name="Pedro Porro" Odds="22/1" OddsDecimal="23.000" OddsAmerican="2200" Handicap="" ID="1981159354" LastUpdated="27/08/26 15:08:30" AVG="F7A2A6691F0F79F049A85436C29A009A83D18222"/>
+<Participant Name="Rodrigo Bentancur" Odds="22/1" OddsDecimal="23.000" OddsAmerican="2200" Handicap="" ID="1981159335" LastUpdated="27/08/26 15:08:30" AVG="4D791C4D1916DEB73C927D9A154CC882836DFD14"/>
+<Participant Name="Aladji Bamba" Odds="25/1" OddsDecimal="26.000" OddsAmerican="2500" Handicap="" ID="1981159483" LastUpdated="27/08/26 15:08:30" AVG="33F2DE2E0BB1F3FF1C1F0E86AB83B280AD0B3F88"/>
+<Participant Name="Fabian Schar" Odds="25/1" OddsDecimal="26.000" OddsAmerican="2500" Handicap="" ID="1981159345" LastUpdated="27/08/26 15:08:30" AVG="CB2906F4A5998B41B09739BD5DEACB557BEDD1C7"/>
+<Participant Name="Nico Gonzalez" Odds="25/1" OddsDecimal="26.000" OddsAmerican="2500" Handicap="" ID="2002618074" LastUpdated="27/08/26 15:08:30" AVG="C092E8BD280DE25354160F56C8D277749DB32D67"/>
+<Participant Name="Destiny Udogie" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="1981159315" LastUpdated="27/08/26 15:08:30" AVG="6B3F4E5415644EBE595216F8B8625D1CF5FF1972"/>
+<Participant Name="Jan Paul van Hecke" Odds="28/1" OddsDecimal="29.000" OddsAmerican="2800" Handicap="" ID="1981159274" LastUpdated="27/08/26 15:08:30" AVG="8387E685C43684CD28F5C6FA4A9373E56723C261"/>
+<Participant Name="Amar Dedic" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981159293" LastUpdated="27/08/26 15:08:30" AVG="024C1921CE41B37CC6A539842620A1F2D784FFCA"/>
+<Participant Name="Andrew Robertson" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981159454" LastUpdated="27/08/26 15:08:30" AVG="597689BEA1F8243D0D3F073797FC15C1CB8BCA17"/>
+<Participant Name="Ben Davies" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981159262" LastUpdated="27/08/26 15:08:30" AVG="25E029B020B00053210CF6CA052FDE41BC733242"/>
+<Participant Name="Dan Burn" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981159484" LastUpdated="27/08/26 15:08:30" AVG="28521CA6FCEC435F8347A697F32AFE773E3D5C19"/>
+<Participant Name="Kevin Danso" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981159460" LastUpdated="27/08/26 15:08:30" AVG="6AC564D2D4E0FAD1778008DFD53FFEF37997A80E"/>
+<Participant Name="Kota Takai" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981159479" LastUpdated="27/08/26 15:08:30" AVG="44C7674A580ECF8D3CF98D8965AF1DD8AF5A5CAE"/>
+<Participant Name="Leo Shahar" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981159300" LastUpdated="27/08/26 15:08:30" AVG="322B0A774E122FC23BBCB9237AD68FA99658B886"/>
+<Participant Name="Lewis Hall" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981159389" LastUpdated="27/08/26 15:08:30" AVG="813659F6CE02BEA94160D119BD078D242E2869E6"/>
+<Participant Name="Malick Thiaw" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981159241" LastUpdated="27/08/26 15:08:30" AVG="A67BE4505133345805524C9500F0114BAE60ADCA"/>
+<Participant Name="Valentino Livramento" Odds="33/1" OddsDecimal="34.000" OddsAmerican="3300" Handicap="" ID="1981159288" LastUpdated="27/08/26 15:08:30" AVG="DC28CFCAEBD6BFD9726B8B058BADC5D368ABDD04"/>
+<Participant Name="Marcos Senesi" Odds="40/1" OddsDecimal="41.000" OddsAmerican="4000" Handicap="" ID="1981159491" LastUpdated="27/08/26 15:08:30" AVG="D2F9DB7078CEBBE6EC6F7BE783615349BACA2D92"/>
+<Participant Name="Sven Botman" Odds="40/1" OddsDecimal="41.000" OddsAmerican="4000" Handicap="" ID="1981159283" LastUpdated="27/08/26 15:08:30" AVG="6F628BA3D5A07E965A78B2433A876EC678A29BE3"/>
+<Participant Name="No Goalscorer" Odds="14/1" OddsDecimal="15.000" OddsAmerican="1400" Handicap="" ID="1981159499" LastUpdated="27/08/26 15:08:30" AVG="3A57359E1F857EE59F3B551F9BA6535A23E81616"/>
+</Market>
+</Event>
+</EventGroup>
+</Sport>

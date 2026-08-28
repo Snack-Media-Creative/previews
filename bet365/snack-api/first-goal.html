@@ -3,102 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Premier League Odds Cards with Timer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:ital,wght@1,700&display=swap" rel="stylesheet">
+    
     <style>
-    :root {
-        --bg-color: #323232;
-        --row-border: #444444;
-        --text-main: #ffffff;
-        --text-muted: #a0a0a0;
-        --odds-color: #ffd428;
-        --hover-bg: #3c3c3c;
-    }
-    body {
-    color: var(--text-main);
-    margin: 0;
-    overflow-x: hidden; /* Prevents scrollbars from appearing during the scale animation */
-}
-
-/* Pseudo-element handles the background separately from the content */
-body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    
-    /* Your original background properties */
-    background: #253D34;
-    background: linear-gradient(180deg, rgba(37, 61, 52, 1) 0%, rgba(44, 111, 85, 1) 30%, rgba(23, 61, 46, 1) 60%, rgba(49, 146, 107, 1) 86%, rgba(52, 168, 122, 1) 100%);
-    background-image: url(img/back.jpg);
-    background-size: cover;
-    background-position: center;
-    
-    /* 10-second animation */
-    animation: scaleBackground 20s ease-out forwards;
-}
-
-/* Keyframes for the 1.5 to 1 scale */
-@keyframes scaleBackground {
-    0% {
-        transform: scale(1.5);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-    .container {
-      display: grid;
-      grid-template-columns: 1fr 1000px 1fr;
-      width: 100%;
-      min-height: 100vh;
-    }
-    .left {
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      flex-direction: column;
-      text-align: center;
-    }
-    .left img{
-        width: 80%;
-    }
-
-    .middle {
-      padding: 20px;
-    }
-
-    .right {
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      flex-direction: column;
-      text-align: center;
-    }
-
-
-    .right img{
-      width: 70%;
-    }
-
-    /* Grid for the cards */
+        /* Base styles retained from original template[cite: 2] */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            background-color: #1a1a1a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
         #cards-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 30px;
-            width: 70%;
-            margin-bottom: 50px;
-            margin: auto;
+            width: 100%;
+            max-width: 1600px;
         }
         
-        /* The Card Design */
         .promo-card {
+            position: relative; 
             background: radial-gradient(circle, #25493b 0%, #162d23 100%);
-            width: 100%;
-            padding: 20px 20px;
+            width: 500px;  
+            height: 300px; 
+            box-sizing: border-box; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
             text-align: center;
             font-family: 'Oswald', sans-serif;
             text-transform: uppercase;
@@ -107,9 +46,32 @@ body::before {
             border: 1px solid #2a5242;
         }
 
+        .promo-card::before,
+        .promo-card::after {
+            content: ">>";
+            position: absolute;
+            color: transparent;
+            background-image: url(arrow.gif);
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 50px;
+            height: 50px;
+        }
+
+        .promo-card::before {
+            top: -20px;
+            left: 150px;
+        }
+
+        .promo-card::after {
+            bottom: -35px;
+            right: 100px;
+        }
+
         .match-title {
             color: #ffffff;
-            font-size: 1.5vh;
+            font-size: 22px;
+            letter-spacing: 1px;
             margin-bottom: 5px;
             font-style: normal;
         }
@@ -117,7 +79,7 @@ body::before {
         .match-title .vs {
             color: #6df2a5;
             text-transform: lowercase;
-            font-size: 1.5vh;
+            font-size: 18px;
             margin: 0 8px;
             font-family: Arial, sans-serif;
             font-weight: bold;
@@ -125,39 +87,41 @@ body::before {
 
         .timer-display {
             color: #6df2a5;
-            font-size: 1vh;
+            font-size: 16px;
             font-family: Arial, sans-serif;
-            margin-bottom: 10px; /* Reduced to fit better inside 300px */
+            margin-bottom: 15px; 
+            letter-spacing: 1px;
             background: rgba(0, 0, 0, 0.3);
             display: inline-block;
             padding: 5px 15px;
             border-radius: 4px;
         }
+
         .main-market {
             color: #ffffff;
-            font-size: 1vh;
+            font-size: 40px;
             font-weight: 700;
             font-style: italic;
             line-height: 1.1;
-            margin-bottom: 10px;
+            margin-bottom: 15px; 
             letter-spacing: 1px;
         }
 
-        /* The section holding odds and icons */
         .odds-section {
             display: flex;
-            justify-content: center; /* Center the group */
-            align-items: center; /* Center vertically */
-            gap: 5px; /* Space between all elements (odds and icons) */
+            justify-content: center; 
+            align-items: center; 
+            gap: 20px; 
             background: rgba(0, 0, 0, 0.2);
             border-radius: 8px;
-            padding: 5px;
+            padding: 12px 10px;
+            width: 100%; 
+            box-sizing: border-box;
         }
 
-        /* Specific icon style */
         .odds-icon {
-            width: 10px;
-            height: 10px;
+            width: 35px;
+            height: 35px;
             object-fit: contain;
             opacity: 0.8;
             filter: drop-shadow(0 0 10px rgba(109, 242, 165, 0.5));
@@ -169,20 +133,23 @@ body::before {
             display: flex;
             flex-direction: column;
             align-items: center;
+            flex: 1; /* Ensures player names have equal spacing */
         }
 
+        /* Adjusted label font size to accommodate longer player names */
         .odd-label {
             color: #9ba6a0;
-            font-size: 1vh;
+            font-size: 13px; 
             font-family: Arial, sans-serif;
             font-weight: bold;
             margin-bottom: 5px;
             letter-spacing: 1px;
+            text-align: center;
         }
 
         .new-odds {
             color: #ffffff;
-            font-size: 1.5vh;
+            font-size: 45px;
             font-weight: 700;
             font-style: italic;
             line-height: 1;
@@ -202,28 +169,41 @@ body::before {
     </style>
 </head>
 <body>
-    <div class="container">
-    <div class="left">
-        <div class="top"><img src="img/top.png" alt="" style="margin-bottom: 20px;"></div>
-        <div class="odds-container">
-            <div id="status">Fetching Premier League Odds...</div>
-            <div id="cards-container"></div>
-        </div>
-        <div class="bottom"><img src="img/cta.png" alt="" style="margin-top: 30px;"></div>
-    </div>
-    <div class="middle"></div>
-    <div class="right"><div>
-        <div class="top"><img src="img/top.png" alt=""></div>
-      <div><img src="img/pic_1.png" alt="" style="height: 100%;"></div>
-    <div class="bottom"><img src="img/cta.png" alt="" style="margin-top: 30px;"></div>
 
+    <div id="status" style="display: none;">Fetching Premier League Odds...</div>
+    
+    <div id="cards-container">
+        <!-- Manually injected content from the first event in data-first-goal.xml[cite: 1] -->
+        <div class="promo-card">
+            <div class="match-title">Bournemouth <span class="vs">v</span> Everton</div> <!--[cite: 1, 2] -->
+            <div class="timer-display" data-starttime="29/08/26 15:00:00">Loading timer...</div> <!--[cite: 1, 2] -->
+            <div class="main-market">First Goalscorer</div> <!--[cite: 1] -->
+            <div class="odds-section">
+                <!-- Participant 1: Evanilson[cite: 1] -->
+                <div class="odd-container">
+                    <div class="odd-label">EVANILSON</div>
+                    <div class="new-odds">9/2</div>
+                </div>
+                <img src="arrow.gif" class="odds-icon" /> <!--[cite: 2] -->
+                <!-- Participant 2: Rayan Vitor[cite: 1] -->
+                <div class="odd-container">
+                    <div class="odd-label">RAYAN VITOR</div>
+                    <div class="new-odds">6/1</div>
+                </div>
+                <img src="arrow.gif" class="odds-icon" /> <!--[cite: 2] -->
+                <!-- Participant 3: Daniel Jebbison[cite: 1] -->
+                <div class="odd-container">
+                    <div class="odd-label">DANIEL JEBBISON</div>
+                    <div class="new-odds">13/2</div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 
     <script>
-        const url = 'https://snack-feeds.b-cdn.net/bet365/feeds/premier-league.xml';
-        
-        const matchLimit = 2; 
+        // Data path updated to target the First Goalscorer XML feed[cite: 1]
+        const url = 'data-first-goal.xml'; 
+        const matchLimit = 1; 
 
         async function fetchAndParseXML() {
             try {
@@ -251,10 +231,10 @@ body::before {
             const container = document.getElementById('cards-container');
             const events = xmlDoc.getElementsByTagName("Event"); 
             
-            if (events.length === 0) {
-                container.innerHTML = "<div style='color: white;'>No events found in the XML feed.</div>";
-                return;
-            }
+            if (events.length === 0) return;
+
+            // Clear static HTML placeholder before rendering
+            container.innerHTML = ""; 
 
             const matchesToDisplay = Math.min(limit, events.length);
 
@@ -263,33 +243,25 @@ body::before {
                 let eventName = eventNode.getAttribute("Name") || eventNode.getAttribute("name") || "Unknown Event";
                 const startTime = eventNode.getAttribute("StartTime");
                 
-                eventName = eventName.replace(/\s+v\s+/i, ' <span class="vs">v</span> ');
+                eventName = eventName.replace(/\s+v\s+/i, ' <span class="vs">v</span> '); //[cite: 2]
                 
                 const markets = eventNode.getElementsByTagName("Market");
                 
                 if (markets.length > 0) {
                     const marketNode = markets[0]; 
-                    const marketName = marketNode.getAttribute("Name") || marketNode.getAttribute("name") || "Match Winner";
+                    const marketName = marketNode.getAttribute("Name") || marketNode.getAttribute("name"); //[cite: 1]
                     
                     const participants = marketNode.getElementsByTagName("Participant");
                     
-                    let homeOdds = "-", drawOdds = "-", awayOdds = "-";
-                    let homeFound = false;
+                    // Logic updated to pull the top 3 goalscorers instead of Home/Draw/Away[cite: 1, 2]
+                    const p1Name = participants[0] ? participants[0].getAttribute("Name").trim() : "-";
+                    const p1Odds = participants[0] ? participants[0].getAttribute("Odds") : "-";
                     
-                    for (let k = 0; k < participants.length; k++) {
-                        const p = participants[k];
-                        const pName = p.getAttribute("Name") || p.getAttribute("name") || "";
-                        const pOdds = p.getAttribute("Odds") || p.getAttribute("odds") || "-";
-                        
-                        if (pName.toLowerCase() === "draw" || pName.toLowerCase() === "x") {
-                            drawOdds = pOdds;
-                        } else if (!homeFound) {
-                            homeOdds = pOdds;
-                            homeFound = true;
-                        } else {
-                            awayOdds = pOdds;
-                        }
-                    }
+                    const p2Name = participants[1] ? participants[1].getAttribute("Name").trim() : "-";
+                    const p2Odds = participants[1] ? participants[1].getAttribute("Odds") : "-";
+                    
+                    const p3Name = participants[2] ? participants[2].getAttribute("Name").trim() : "-";
+                    const p3Odds = participants[2] ? participants[2].getAttribute("Odds") : "-";
 
                     const card = document.createElement('div');
                     card.className = 'promo-card';
@@ -299,18 +271,18 @@ body::before {
                         <div class="main-market">${marketName}</div>
                         <div class="odds-section">
                             <div class="odd-container">
-                                <div class="odd-label">HOME</div>
-                                <div class="new-odds">${homeOdds}</div>
+                                <div class="odd-label">${p1Name.toUpperCase()}</div>
+                                <div class="new-odds">${p1Odds}</div>
                             </div>
-                            <img src="arrow.gif" class="odds-icon" /> <!-- Icon between Draw and Away -->
+                            <img src="arrow.gif" class="odds-icon" />
                             <div class="odd-container">
-                                <div class="odd-label">DRAW</div>
-                                <div class="new-odds">${drawOdds}</div>
+                                <div class="odd-label">${p2Name.toUpperCase()}</div>
+                                <div class="new-odds">${p2Odds}</div>
                             </div>
-                            <img src="arrow.gif" class="odds-icon" /> <!-- Icon between Draw and Away -->
+                            <img src="arrow.gif" class="odds-icon" />
                             <div class="odd-container">
-                                <div class="odd-label">AWAY</div>
-                                <div class="new-odds">${awayOdds}</div>
+                                <div class="odd-label">${p3Name.toUpperCase()}</div>
+                                <div class="new-odds">${p3Odds}</div>
                             </div>
                         </div>
                     `;
@@ -348,10 +320,12 @@ body::before {
                         timerEl.innerText = `${d} ${dayLabel} ${h}:${m}:${s} to kick off`;
                     }
                 });
-            }, 1000);
+            }, 1000); //[cite: 2]
         }
 
-        fetchAndParseXML();
+        // Uncomment the line below to allow the script to override the hardcoded HTML using a live local XML feed.
+        // fetchAndParseXML(); 
+        startTimers(); // Start the timer for the hardcoded fallback event immediately
     </script>
 </body>
 </html>

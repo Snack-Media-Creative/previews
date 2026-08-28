@@ -55,32 +55,43 @@ body::before {
       width: 100%;
       min-height: 100vh;
     }
-    .left {
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      flex-direction: column;
-      text-align: center;
-    }
-    .left img{
-        width: 80%;
-    }
+
 
     .middle {
       padding: 20px;
     }
 
-    .right {
+
+    .left, .right {
       display: flex;
-      justify-content: center;
-      align-items: flex-end;
+      justify-content: space-between; /* Pushes first item to top, last to bottom */
+      align-items: center; /* Centers items horizontally */
       flex-direction: column;
       text-align: center;
+      height: 100vh; /* Ensures the columns take up the full viewport height */
     }
 
+    .left img, .right img {
+        width: 80%;
+    }
 
-    .right img{
-      width: 70%;
+    .right{
+        background-image: url(img/pic_1.png);
+        background-position: center;
+        background-size: 450px;
+        background-repeat: no-repeat;
+    }
+
+    /* Force 0 margin and padding on top/bottom containers */
+    .top {
+        margin: 50px 0 0 0;
+        padding: 0;
+        width: 100%;
+    }
+    .bottom {
+        margin: 0 0 50px 0;
+        padding: 0;
+        width: 100%;
     }
 
     /* Grid for the cards */
@@ -202,23 +213,24 @@ body::before {
     </style>
 </head>
 <body>
-    <div class="container">
-    <div class="left">
-        <div class="top"><img src="img/top.png" alt="" style="margin-bottom: 20px;"></div>
-        <div class="odds-container">
-            <div id="status">Fetching Premier League Odds...</div>
-            <div id="cards-container"></div>
-        </div>
-        <div class="bottom"><img src="img/cta.png" alt="" style="margin-top: 30px;"></div>
+<div class="container">
+      <div class="left">
+          <div class="top"><img src="img/top.png" alt=""></div>
+          <div class="odds-container">
+              <div id="status">Fetching Premier League Odds...</div>
+              <div id="cards-container"></div>
+          </div>
+          <div class="bottom"><img src="img/cta.png" alt=""></div>
+      </div>
+      
+      <div class="middle"></div>
+      
+      <div class="right">
+          <div class="top"><img src="img/top.png" alt=""></div>
+          <div class="middle-image"></div>
+          <div class="bottom"><img src="img/cta.png" alt=""></div>
+      </div>
     </div>
-    <div class="middle"></div>
-    <div class="right"><div>
-        <div class="top"><img src="img/top.png" alt=""></div>
-      <div><img src="img/pic_1.png" alt="" style="height: 100%;"></div>
-    <div class="bottom"><img src="img/cta.png" alt="" style="margin-top: 30px;"></div>
-
-    </div>
-  </div>
 
     <script>
         const url = 'https://snack-feeds.b-cdn.net/bet365/feeds/premier-league.xml';

@@ -1,0 +1,145 @@
+This XML file does not appear to have any style information associated with it. The document tree is shown below.
+<Sport Name="Football" PageTitle="Filtered applied. EventGroupID: 100100 MarketID: 40" TimeStamp="25/08/26 15:58:00">
+<EventGroup Name="England Premier League" ID="100100">
+<Event Name="Bournemouth v Everton" ID="196564288" StartTime="29/08/26 15:00:00" EventComment="" ParentEventID="196564288">
+<Market Name="Full Time Result" ID="40" PlaceCount="1" PlaceOdds="1/1" FID="196564288">
+<Participant Name="Home Win" Odds="1/1" OddsDecimal="2.000" OddsAmerican="100" Handicap="" ID="1533368957" LastUpdated="23/08/26 16:03:11" AVG="70159344D7A5D660218919003DC5A4C13FDF5F34"/>
+<Participant Name="Draw" Odds="5/2" OddsDecimal="3.500" OddsAmerican="250" Handicap="" ID="1533368958" LastUpdated="23/08/26 16:03:11" AVG="7425D756E103D9DDC6DD31039494E965BB8A9C65"/>
+<Participant Name="Away Win" Odds="5/2" OddsDecimal="3.500" OddsAmerican="250" Handicap="" ID="1533368959" LastUpdated="24/08/26 12:25:15" AVG="C5CE992197BA821B3352DCF5AD5E280F4751B48F"/>
+</Market>
+</Event>
+<Event Name="Aston Villa v Arsenal" ID="196564290" StartTime="31/08/26 20:00:00" EventComment="" ParentEventID="196564290">
+<Market Name="Full Time Result" ID="40" PlaceCount="1" PlaceOdds="1/1" FID="196564290">
+<Participant Name="Home Win" Odds="21/4" OddsDecimal="6.250" OddsAmerican="525" Handicap="" ID="1533369171" LastUpdated="25/08/26 12:59:47" AVG="D3B295A4D02712E7217B3ECF893FD2FEC087506D"/>
+<Participant Name="Draw" Odds="3/1" OddsDecimal="4.000" OddsAmerican="300" Handicap="" ID="1533369179" LastUpdated="25/08/26 08:25:15" AVG="F6DF17E2F26F701D90F4F0894478A3067C807756"/>
+<Participant Name="Away Win" Odds="8/15" OddsDecimal="1.533" OddsAmerican="-188" Handicap="" ID="1533369180" LastUpdated="25/08/26 12:59:47" AVG="F68D65CBC428BE8D761FAC310294D5ED89096B3F"/>
+</Market>
+</Event>
+<Event Name="Chelsea v Brighton" ID="196564292" StartTime="30/08/26 14:00:00" EventComment="" ParentEventID="196564292">
+<Market Name="Full Time Result" ID="40" PlaceCount="1" PlaceOdds="1/1" FID="196564292">
+<Participant Name="Home Win" Odds="17/20" OddsDecimal="1.850" OddsAmerican="-118" Handicap="" ID="1533369254" LastUpdated="24/08/26 22:20:03" AVG="C89B2C9690AB54958B1855305C14C902BB074DE9"/>
+<Participant Name="Draw" Odds="5/2" OddsDecimal="3.500" OddsAmerican="250" Handicap="" ID="1533369256" LastUpdated="23/08/26 14:53:00" AVG="5080B5D60ED5074772C5A910AED52EDC478E3075"/>
+<Participant Name="Away Win" Odds="13/5" OddsDecimal="3.600" OddsAmerican="260" Handicap="" ID="1533369258" LastUpdated="24/08/26 22:20:04" AVG="56B276D95D5510863B29DF69B323FD675D1E3223"/>
+</Market>
+</Event>
+<Event Name="Coventry v Hull" ID="196564294" StartTime="29/08/26 15:00:00" EventComment="" ParentEventID="196564294">
+<Market Name="Full Time Result" ID="40" PlaceCount="1" PlaceOdds="1/1" FID="196564294">
+<Participant Name="Home Win" Odds="17/20" OddsDecimal="1.850" OddsAmerican="-118" Handicap="" ID="1533369359" LastUpdated="24/08/26 01:18:34" AVG="E841C070A2FA06D7A0BCACA39FA6C88A0E9AEDFD"/>
+<Participant Name="Draw" Odds="13/5" OddsDecimal="3.600" OddsAmerican="260" Handicap="" ID="1533369364" LastUpdated="22/08/26 17:05:06" AVG="5AAFECE164F6D5D41670EABCB0C52A30E6305A5B"/>
+<Participant Name="Away Win" Odds="29/10" OddsDecimal="3.900" OddsAmerican="290" Handicap="" ID="1533369366" LastUpdated="24/08/26 01:18:34" AVG="E92AAA8B093586360C61BB302427F1C8DA078E0D"/>
+</Market>
+</Event>
+<Event Name="Crystal Palace v Man City" ID="196564296" StartTime="28/08/26 20:00:00" EventComment="" ParentEventID="196564296">
+<Market Name="Full Time Result" ID="40" PlaceCount="1" PlaceOdds="1/1" FID="196564296">
+<Participant Name="Home Win" Odds="4/1" OddsDecimal="5.000" OddsAmerican="400" Handicap="" ID="1533369546" LastUpdated="24/08/26 12:23:46" AVG="6C9671940DA15BE256E32A951B91342CF1ABA233"/>
+<Participant Name="Draw" Odds="3/1" OddsDecimal="4.000" OddsAmerican="300" Handicap="" ID="1533369547" LastUpdated="22/08/26 17:05:23" AVG="1E9371A10E2465F0DB1C4D4B17B08A6DEE052C77"/>
+<Participant Name="Away Win" Odds="3/5" OddsDecimal="1.600" OddsAmerican="-167" Handicap="" ID="1533369548" LastUpdated="24/08/26 12:23:46" AVG="8A3AAA50A78F43384BF8753D21CCCD6738F1A9E4"/>
+</Market>
+</Event>
+<Event Name="Leeds v Brentford" ID="196564298" StartTime="30/08/26 14:00:00" EventComment="" ParentEventID="196564298">
+<Market Name="Full Time Result" ID="40" PlaceCount="1" PlaceOdds="1/1" FID="196564298">
+<Participant Name="Home Win" Odds="29/20" OddsDecimal="2.450" OddsAmerican="145" Handicap="" ID="1533369706" LastUpdated="24/08/26 01:21:43" AVG="BC421E42BEFCE18033B0666B72AAD973EBFDBADB"/>
+<Participant Name="Draw" Odds="12/5" OddsDecimal="3.400" OddsAmerican="240" Handicap="" ID="1533369707" LastUpdated="22/08/26 14:35:47" AVG="E1028C0FCF80D8DED9C7717B32DF82684F066EC3"/>
+<Participant Name="Away Win" Odds="13/8" OddsDecimal="2.625" OddsAmerican="162" Handicap="" ID="1533369708" LastUpdated="24/08/26 01:21:43" AVG="42B7BB811605517202404ACA0299903E54212C96"/>
+</Market>
+</Event>
+<Event Name="Liverpool v Nottm Forest" ID="196564300" StartTime="29/08/26 12:30:00" EventComment="" ParentEventID="196564300">
+<Market Name="Full Time Result" ID="40" PlaceCount="1" PlaceOdds="1/1" FID="196564300">
+<Participant Name="Home Win" Odds="9/20" OddsDecimal="1.450" OddsAmerican="-223" Handicap="" ID="1533369864" LastUpdated="24/08/26 12:25:07" AVG="A8C2CA8F03C58E51E53F3946AC301BCF1C98F67D"/>
+<Participant Name="Draw" Odds="7/2" OddsDecimal="4.500" OddsAmerican="350" Handicap="" ID="1533369868" LastUpdated="22/08/26 17:03:37" AVG="9A947D5871BBD0A8D29544639E31ADB200DAD34F"/>
+<Participant Name="Away Win" Odds="19/4" OddsDecimal="5.750" OddsAmerican="475" Handicap="" ID="1533369869" LastUpdated="24/08/26 12:25:07" AVG="FDA68AE3CDADED2E9A1E7573055AF2FE7FEADC74"/>
+</Market>
+</Event>
+<Event Name="Man Utd v Ipswich" ID="196564302" StartTime="30/08/26 16:30:00" EventComment="" ParentEventID="196564302">
+<Market Name="Full Time Result" ID="40" PlaceCount="1" PlaceOdds="1/1" FID="196564302">
+<Participant Name="Home Win" Odds="21/50" OddsDecimal="1.420" OddsAmerican="-239" Handicap="" ID="1533369931" LastUpdated="24/08/26 01:21:55" AVG="80FEBE030F6994F18B1A4C797E78DD040764CA20"/>
+<Participant Name="Draw" Odds="7/2" OddsDecimal="4.500" OddsAmerican="350" Handicap="" ID="1533369932" LastUpdated="22/08/26 17:04:23" AVG="BD439B3547F1C0E5C41745C4A204E2DDFCD91DBF"/>
+<Participant Name="Away Win" Odds="6/1" OddsDecimal="7.000" OddsAmerican="600" Handicap="" ID="1533369933" LastUpdated="24/08/26 01:21:55" AVG="494EDBFEC52E0700F95355C4CAD653923FFDE18F"/>
+</Market>
+</Event>
+<Event Name="Sunderland v Fulham" ID="196564305" StartTime="30/08/26 14:00:00" EventComment="" ParentEventID="196564305">
+<Market Name="Full Time Result" ID="40" PlaceCount="1" PlaceOdds="1/1" FID="196564305">
+<Participant Name="Home Win" Odds="7/5" OddsDecimal="2.400" OddsAmerican="140" Handicap="" ID="1533369986" LastUpdated="24/08/26 22:11:15" AVG="CC59E6422BB4C2EA7C3009F9C8F6F53C350B16A9"/>
+<Participant Name="Draw" Odds="23/10" OddsDecimal="3.300" OddsAmerican="230" Handicap="" ID="1533369987" LastUpdated="22/08/26 14:35:00" AVG="48372A5BBCF2DC71A29487540B0DDA9227809D65"/>
+<Participant Name="Away Win" Odds="17/10" OddsDecimal="2.700" OddsAmerican="170" Handicap="" ID="1533369988" LastUpdated="24/08/26 22:11:15" AVG="5585930E72C3B6E6AD86E43251CAD6D0B5DE4445"/>
+</Market>
+</Event>
+<Event Name="Tottenham v Newcastle" ID="196564311" StartTime="29/08/26 17:30:00" EventComment="" ParentEventID="196564311">
+<Market Name="Full Time Result" ID="40" PlaceCount="1" PlaceOdds="1/1" FID="196564311">
+<Participant Name="Home Win" Odds="23/20" OddsDecimal="2.150" OddsAmerican="115" Handicap="" ID="1533370295" LastUpdated="24/08/26 17:06:10" AVG="982E3E0183208C816E003C7CF698F25ED578C9DA"/>
+<Participant Name="Draw" Odds="5/2" OddsDecimal="3.500" OddsAmerican="250" Handicap="" ID="1533370308" LastUpdated="19/06/26 10:32:42" AVG="6A21EB8BBAC3F04A53682D2F8B19273747B7A597"/>
+<Participant Name="Away Win" Odds="21/10" OddsDecimal="3.100" OddsAmerican="210" Handicap="" ID="1533370310" LastUpdated="24/08/26 17:06:10" AVG="523814EEA42EF9A21E1BAB143B990BDEC055E3C7"/>
+</Market>
+</Event>
+<Event Name="Arsenal v Chelsea" ID="196565033" StartTime="06/09/26 16:30:00" EventComment="" ParentEventID="196565033">
+<Market Name="Full Time Result" ID="40" PlaceCount="1" PlaceOdds="1/1" FID="196565033">
+<Participant Name="Home Win" Odds="8/13" OddsDecimal="1.615" OddsAmerican="-163" Handicap="" ID="1533461400" LastUpdated="23/08/26 14:46:23" AVG="86AAFE824934410C785A3593C7885377BEFC4F89"/>
+<Participant Name="Draw" Odds="11/4" OddsDecimal="3.750" OddsAmerican="275" Handicap="" ID="1533461401" LastUpdated="23/08/26 14:41:43" AVG="A2C6AA15A5295460C886138B0EF0D574E25C2EB0"/>
+<Participant Name="Away Win" Odds="17/4" OddsDecimal="5.250" OddsAmerican="425" Handicap="" ID="1533461402" LastUpdated="23/08/26 14:46:23" AVG="B0AF3A1752D1438BF5DFAE2062B87A9DAF019EFD"/>
+</Market>
+</Event>
+<Event Name="Brentford v Sunderland" ID="196565038" StartTime="05/09/26 15:00:00" EventComment="" ParentEventID="196565038">
+<Market Name="Full Time Result" ID="40" PlaceCount="1" PlaceOdds="1/1" FID="196565038">
+<Participant Name="Home Win" Odds="8/13" OddsDecimal="1.615" OddsAmerican="-163" Handicap="" ID="1533461746" LastUpdated="23/08/26 19:47:22" AVG="0CDE15AC5D7C8C2090E8C5C418357DA056B5FA76"/>
+<Participant Name="Draw" Odds="29/10" OddsDecimal="3.900" OddsAmerican="290" Handicap="" ID="1533461748" LastUpdated="23/08/26 19:47:22" AVG="DD90432D020A2736F4D942E8E94C36B0E1A2C2FF"/>
+<Participant Name="Away Win" Odds="4/1" OddsDecimal="5.000" OddsAmerican="400" Handicap="" ID="1533461749" LastUpdated="23/08/26 19:47:22" AVG="92DDC2F9F40CA145E8E8CE2F9B52AE37BF75DDBB"/>
+</Market>
+</Event>
+<Event Name="Brighton v Leeds" ID="196565042" StartTime="05/09/26 15:00:00" EventComment="" ParentEventID="196565042">
+<Market Name="Full Time Result" ID="40" PlaceCount="1" PlaceOdds="1/1" FID="196565042">
+<Participant Name="Home Win" Odds="4/5" OddsDecimal="1.800" OddsAmerican="-125" Handicap="" ID="1533461889" LastUpdated="24/08/26 13:00:40" AVG="511495F5E9DCF5136C9208FEB9FDE7B5EFB37BA4"/>
+<Participant Name="Draw" Odds="5/2" OddsDecimal="3.500" OddsAmerican="250" Handicap="" ID="1533461891" LastUpdated="24/08/26 13:00:40" AVG="882FF995A7C5E0E70B159108DB24C7D077A6CBAE"/>
+<Participant Name="Away Win" Odds="10/3" OddsDecimal="4.333" OddsAmerican="333" Handicap="" ID="1533461892" LastUpdated="24/08/26 13:00:40" AVG="AFAEEB9FCFA6AF41863ABCB79674A00BD3CB728C"/>
+</Market>
+</Event>
+<Event Name="Everton v Man Utd" ID="196565048" StartTime="06/09/26 14:00:00" EventComment="" ParentEventID="196565048">
+<Market Name="Full Time Result" ID="40" PlaceCount="1" PlaceOdds="1/1" FID="196565048">
+<Participant Name="Home Win" Odds="7/4" OddsDecimal="2.750" OddsAmerican="175" Handicap="" ID="1533461980" LastUpdated="23/08/26 14:47:46" AVG="809E545015EA0A97284AC2C794150DA1EDDC99A3"/>
+<Participant Name="Draw" Odds="23/10" OddsDecimal="3.300" OddsAmerican="230" Handicap="" ID="1533461981" LastUpdated="23/08/26 14:41:58" AVG="CB21439F6A5DEE0E99D48FDDC384EA9FCEB0FEC9"/>
+<Participant Name="Away Win" Odds="29/20" OddsDecimal="2.450" OddsAmerican="145" Handicap="" ID="1533461982" LastUpdated="23/08/26 14:47:46" AVG="9DAE9EC0A56BF24BCE2719B0FAAC957706B19C37"/>
+</Market>
+</Event>
+<Event Name="Fulham v Crystal Palace" ID="196565052" StartTime="05/09/26 15:00:00" EventComment="" ParentEventID="196565052">
+<Market Name="Full Time Result" ID="40" PlaceCount="1" PlaceOdds="1/1" FID="196565052">
+<Participant Name="Home Win" Odds="6/5" OddsDecimal="2.200" OddsAmerican="120" Handicap="" ID="1533462091" LastUpdated="23/08/26 14:42:01" AVG="FA937395DE75BF78786F78B070DA912B568E153A"/>
+<Participant Name="Draw" Odds="12/5" OddsDecimal="3.400" OddsAmerican="240" Handicap="" ID="1533462092" LastUpdated="23/08/26 14:42:01" AVG="CE43D651B3008A723EB68954EFE3DFD659D621CD"/>
+<Participant Name="Away Win" Odds="11/5" OddsDecimal="3.200" OddsAmerican="220" Handicap="" ID="1533462093" LastUpdated="23/08/26 14:42:01" AVG="82A785105D182A3128F9B91C80039561A33D93A9"/>
+</Market>
+</Event>
+<Event Name="Hull v Aston Villa" ID="196565064" StartTime="05/09/26 17:30:00" EventComment="" ParentEventID="196565064">
+<Market Name="Full Time Result" ID="40" PlaceCount="1" PlaceOdds="1/1" FID="196565064">
+<Participant Name="Home Win" Odds="31/10" OddsDecimal="4.100" OddsAmerican="310" Handicap="" ID="1533462932" LastUpdated="24/08/26 13:26:50" AVG="1571B1E13C9E359A3D7AFD4DA6E8233BE888BDFA"/>
+<Participant Name="Draw" Odds="11/4" OddsDecimal="3.750" OddsAmerican="275" Handicap="" ID="1533462948" LastUpdated="24/08/26 13:26:50" AVG="314D20369750A844422BEDD6F88C7A0CDCBC9DA3"/>
+<Participant Name="Away Win" Odds="4/5" OddsDecimal="1.800" OddsAmerican="-125" Handicap="" ID="1533462949" LastUpdated="24/08/26 13:26:50" AVG="9FF7563F381737E9EE38DB1C499EDD61391005CF"/>
+</Market>
+</Event>
+<Event Name="Ipswich v Liverpool" ID="196565074" StartTime="04/09/26 20:00:00" EventComment="" ParentEventID="196565074">
+<Market Name="Full Time Result" ID="40" PlaceCount="1" PlaceOdds="1/1" FID="196565074">
+<Participant Name="Home Win" Odds="17/4" OddsDecimal="5.250" OddsAmerican="425" Handicap="" ID="1533464320" LastUpdated="23/08/26 14:48:19" AVG="7F909AA63B871F0DAA02B88A83F12F05D70E19C5"/>
+<Participant Name="Draw" Odds="29/10" OddsDecimal="3.900" OddsAmerican="290" Handicap="" ID="1533464335" LastUpdated="23/08/26 14:48:19" AVG="E85E76ACE1059CBC4BA5846EA187757B72CEB894"/>
+<Participant Name="Away Win" Odds="8/13" OddsDecimal="1.615" OddsAmerican="-163" Handicap="" ID="1533464338" LastUpdated="23/08/26 14:48:28" AVG="3D43DF63F85F18CB339E31D2F53175BADD37265A"/>
+</Market>
+</Event>
+<Event Name="Man City v Coventry" ID="196565082" StartTime="05/09/26 15:00:00" EventComment="" ParentEventID="196565082">
+<Market Name="Full Time Result" ID="40" PlaceCount="1" PlaceOdds="1/1" FID="196565082">
+<Participant Name="Home Win" Odds="1/5" OddsDecimal="1.200" OddsAmerican="-500" Handicap="" ID="1533465263" LastUpdated="23/08/26 14:49:47" AVG="6762186F6C0FDB65FB1A14910CA5663E10DE9226"/>
+<Participant Name="Draw" Odds="13/2" OddsDecimal="7.500" OddsAmerican="650" Handicap="" ID="1533465268" LastUpdated="23/08/26 14:49:36" AVG="DE46109C0455C70564AE16A12013C42EA2C90B50"/>
+<Participant Name="Away Win" Odds="10/1" OddsDecimal="11.000" OddsAmerican="1000" Handicap="" ID="1533465270" LastUpdated="23/08/26 14:49:47" AVG="8B56EAA34B313C51D8AEA7816D6F95FF9DC79AE2"/>
+</Market>
+</Event>
+<Event Name="Newcastle v Bournemouth" ID="196565086" StartTime="05/09/26 12:30:00" EventComment="" ParentEventID="196565086">
+<Market Name="Full Time Result" ID="40" PlaceCount="1" PlaceOdds="1/1" FID="196565086">
+<Participant Name="Home Win" Odds="13/10" OddsDecimal="2.300" OddsAmerican="130" Handicap="" ID="1533465600" LastUpdated="23/08/26 14:43:37" AVG="3BCF4A2AA25A70B24AA45A00277BDBD3DB26D5D0"/>
+<Participant Name="Draw" Odds="5/2" OddsDecimal="3.500" OddsAmerican="250" Handicap="" ID="1533465603" LastUpdated="23/08/26 14:41:40" AVG="EA856AFF641EFF014F0869C84BB32C09EE4F2512"/>
+<Participant Name="Away Win" Odds="9/5" OddsDecimal="2.800" OddsAmerican="180" Handicap="" ID="1533465604" LastUpdated="23/08/26 14:43:37" AVG="DE843B7F1EA814925BE3D91FE653D2F832D74BD4"/>
+</Market>
+</Event>
+<Event Name="Nottm Forest v Tottenham" ID="196565092" StartTime="05/09/26 15:00:00" EventComment="" ParentEventID="196565092">
+<Market Name="Full Time Result" ID="40" PlaceCount="1" PlaceOdds="1/1" FID="196565092">
+<Participant Name="Home Win" Odds="13/8" OddsDecimal="2.625" OddsAmerican="162" Handicap="" ID="1533465895" LastUpdated="23/08/26 14:50:24" AVG="85AC4ACA8090ABE14E513F09808A625DC20394FF"/>
+<Participant Name="Draw" Odds="9/4" OddsDecimal="3.250" OddsAmerican="225" Handicap="" ID="1533465896" LastUpdated="23/08/26 14:42:11" AVG="0FF5B6D015443ECFF29740A73CA37647FC80ACF1"/>
+<Participant Name="Away Win" Odds="31/20" OddsDecimal="2.550" OddsAmerican="155" Handicap="" ID="1533465897" LastUpdated="23/08/26 14:50:24" AVG="9304721831B143DDEF7C91564C707FF2942B339E"/>
+</Market>
+</Event>
+</EventGroup>
+</Sport>
