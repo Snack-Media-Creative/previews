@@ -1,4 +1,4 @@
-// File 1: First Goalscorer (from source 4)
+// File 1: First Goalscorer
 (async function() {
     const url = 'https://snack-feeds.b-cdn.net/bet365/feeds/premier-league-first-goalscorer.xml';
     
@@ -20,7 +20,7 @@
             const eventNode = events[i];
             let eventName = eventNode.getAttribute("Name") || eventNode.getAttribute("name") || "Unknown Event";
             
-            // Filter: Only include events containing "TEAM_NAME"
+            // Filter: Only include events containing "arsenal"
             if (!eventName.toLowerCase().includes("arsenal")) continue;
 
             let formattedName = eventName.replace(/\s+v\s+/i, ' <span class="vs">v</span> ');
@@ -34,7 +34,8 @@
                 
                 let playersHtml = '';
 
-                for (let k = 0; k < Math.min(7, participants.length); k++) {
+                // Modified: Loop through ALL participants instead of limiting to 7
+                for (let k = 0; k < participants.length; k++) {
                     const p = participants[k];
                     const pName = p.getAttribute("Name") || p.getAttribute("name") || `Player ${k+1}`;
                     const pOdds = p.getAttribute("Odds") || p.getAttribute("odds") || "-";
@@ -52,6 +53,9 @@
                     `;
                 }
 
+                // Modified: Apply a scrollable max-height if there are more than 5 participants
+                let scrollStyle = participants.length > 5 ? 'style="max-height: 380px; overflow-y: auto; padding-right: 10px;"' : '';
+
                 htmlContent += `
                     <div class="bet-builder-card" style="margin-bottom: 40px;">
                         <div class="bb-main-title">
@@ -60,7 +64,7 @@
                         <div class="bb-header">
                             <div class="bb-title">${formattedName}</div>
                         </div>
-                        <div class="bb-list">
+                        <div class="bb-list" ${scrollStyle}>
                             ${playersHtml}
                         </div>
                     </div>

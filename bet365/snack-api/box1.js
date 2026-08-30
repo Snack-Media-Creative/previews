@@ -1,5 +1,5 @@
 (async function() {
-    const url = 'https://snack-feeds.b-cdn.net/bet365/feeds/premier-league.xml';
+    const url = 'https://snack-feeds.b-cdn.net/bet365/feeds/premier-league-enhanced.xml';
     
     try {
         const response = await fetch(url);
