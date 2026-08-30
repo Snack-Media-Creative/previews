@@ -1,4 +1,4 @@
-async function loadBox1() {
+(async function() {
     const url = 'https://snack-feeds.b-cdn.net/bet365/feeds/premier-league-enhanced.xml';
     
     try {
@@ -16,14 +16,13 @@ async function loadBox1() {
         if (events.length === 0) return;
 
         let htmlContent = '';
-        const selectedTeam = document.getElementById('team-selector').value.toLowerCase();
 
         for (let i = 0; i < events.length; i++) {
             const eventNode = events[i];
             let eventName = eventNode.getAttribute("Name") || eventNode.getAttribute("name") || "Unknown Event";
             
-            // Filter: Only include events containing the selected team
-            if (!eventName.toLowerCase().includes(selectedTeam)) continue;
+            // Filter: Only include events containing "TEAM_NAME"
+            if (!eventName.toLowerCase().includes("arsenal")) continue;
 
             const startTime = eventNode.getAttribute("StartTime");
             let formattedName = eventName.replace(/\s+v\s+/i, ' <span class="vs">v</span> ');
@@ -83,8 +82,7 @@ async function loadBox1() {
         container.innerHTML = htmlContent;
         
         // Start Timer specifically for Box 1
-        if (window.box1Interval) clearInterval(window.box1Interval);
-        window.box1Interval = setInterval(() => {
+        setInterval(() => {
             const timerEls = container.querySelectorAll('.timer-display');
             timerEls.forEach(timerEl => {
                 const timeStr = timerEl.getAttribute('data-starttime');
@@ -118,7 +116,4 @@ async function loadBox1() {
     } catch (error) {
         console.error("Box 1 Error:", error);
     }
-}
-
-document.getElementById('team-selector').addEventListener('change', loadBox1);
-loadBox1();
+})();

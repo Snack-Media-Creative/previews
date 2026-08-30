@@ -1,5 +1,6 @@
-async function loadBox2() {
-    const url = 'https://snack-feeds.b-cdn.net/bet365/feeds/premier-league-first-goalscorer.xml';
+// File 2: First Goalscorer Subs (from source 5)
+(async function() {
+    const url = 'https://snack-feeds.b-cdn.net/bet365/feeds/premier-league-correct-score.xml';
     
     try {
         const response = await fetch(url);
@@ -8,20 +9,19 @@ async function loadBox2() {
         const xmlText = await response.text();
         const xmlDoc = new DOMParser().parseFromString(xmlText, "text/xml");
         
-        const container = document.getElementById('box2-container');
+        const container = document.getElementById('box3-container');
         const events = xmlDoc.getElementsByTagName("Event"); 
         
         if (events.length === 0) return;
 
         let htmlContent = '';
-        const selectedTeam = document.getElementById('team-selector').value.toLowerCase();
 
         for (let i = 0; i < events.length; i++) {
             const eventNode = events[i];
             let eventName = eventNode.getAttribute("Name") || eventNode.getAttribute("name") || "Unknown Event";
             
-            // Filter: Only include events containing selected team
-            if (!eventName.toLowerCase().includes(selectedTeam)) continue;
+            // Filter: Only include events containing "TEAM_NAME"
+            if (!eventName.toLowerCase().includes("arsenal")) continue;
 
             let formattedName = eventName.replace(/\s+v\s+/i, ' <span class="vs">v</span> ');
             
@@ -45,13 +45,15 @@ async function loadBox2() {
                                 <svg viewBox="0 0 24 24" fill="none" stroke="#6df2a5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                             </div>
                             <div class="bb-info">
-                                <div class="bb-name"><span class="bb-player-odds">${pOdds}</span>${pName}</div>
+                                
                                 <div class="bb-market">${marketName}</div>
+                                <div class="bb-name">${pName}<span class="bb-player-odds"> ${pOdds}</span></div>
                             </div>
                         </div>
                     `;
                 }
 
+                // Modified: Apply a scrollable max-height if there are more than 5 participants
                 let scrollStyle = participants.length > 5 ? 'style="max-height: 380px; overflow-y: auto; padding-right: 10px;"' : '';
 
                 htmlContent += `
@@ -69,13 +71,10 @@ async function loadBox2() {
                 `;
             }
         }
-        
+
         container.innerHTML = htmlContent;
 
     } catch (error) {
-        console.error("Box 2 Error:", error);
+        console.error("Box 3 Error:", error);
     }
-}
-
-document.getElementById('team-selector').addEventListener('change', loadBox2);
-loadBox2();
+})();

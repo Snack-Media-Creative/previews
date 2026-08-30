@@ -1,5 +1,4 @@
-// File 2: First Goalscorer Subs (from source 5)
-(async function() {
+async function loadBox3() {
     const url = 'https://snack-feeds.b-cdn.net/bet365/feeds/premier-league-correct-score.xml';
     
     try {
@@ -15,13 +14,14 @@
         if (events.length === 0) return;
 
         let htmlContent = '';
+        const selectedTeam = document.getElementById('team-selector').value.toLowerCase();
 
         for (let i = 0; i < events.length; i++) {
             const eventNode = events[i];
             let eventName = eventNode.getAttribute("Name") || eventNode.getAttribute("name") || "Unknown Event";
             
-            // Filter: Only include events containing "TEAM_NAME"
-            if (!eventName.toLowerCase().includes("arsenal")) continue;
+            // Filter: Only include events containing selected team
+            if (!eventName.toLowerCase().includes(selectedTeam)) continue;
 
             let formattedName = eventName.replace(/\s+v\s+/i, ' <span class="vs">v</span> ');
             
@@ -53,7 +53,6 @@
                     `;
                 }
 
-                // Modified: Apply a scrollable max-height if there are more than 5 participants
                 let scrollStyle = participants.length > 5 ? 'style="max-height: 380px; overflow-y: auto; padding-right: 10px;"' : '';
 
                 htmlContent += `
@@ -77,4 +76,7 @@
     } catch (error) {
         console.error("Box 3 Error:", error);
     }
-})();
+}
+
+document.getElementById('team-selector').addEventListener('change', loadBox3);
+loadBox3();
