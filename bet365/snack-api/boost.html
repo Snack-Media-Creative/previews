@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sportsbook XML Viewer</title>
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --primary-color: #1a252f;
+            --accent-color: #007bff;
+            --card-bg: #ffffff;
+            --border-color: #e1e4e8;
+            --odds-bg: #eef2f5;
+            --odds-color: #d32f2f;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--primary-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .upload-section {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            text-align: center;
+            margin-bottom: 30px;
+            border: 2px dashed var(--border-color);
+        }
+
+        h1 {
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .event-group {
+            margin-bottom: 40px;
+        }
+
+        .event-group h2 {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .event-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .event-header .time {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: normal;
+        }
+
+        .event-comment {
+            display: inline-block;
+            background: #e8f4fd;
+            color: var(--accent-color);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .market-section {
+            margin-bottom: 20px;
+        }
+
+        .market-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #444;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .participant-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 12px;
+        }
+
+        .participant-card {
+            background: var(--odds-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+
+        .participant-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            cursor: default;
+        }
+
+        .p-name {
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-right: 10px;
+        }
+
+        .p-odds {
+            font-weight: bold;
+            color: var(--odds-color);
+            background: #fff;
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            white-space: nowrap;
+        }
+
+        .empty-state {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="upload-section">
+        <h3>Upload your XML File</h3>
+        <input type="file" id="xmlFileInput" accept=".xml">
+    </div>
+
+    <div id="app"></div>
+</div>
+
+<script>
+    document.getElementById('xmlFileInput').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                parseAndRenderXML(e.target.result);
+            };
+            reader.readAsText(file);
+        }
+    });
+
+    function parseAndRenderXML(rawString) {
+        const app = document.getElementById('app');
+        
+        // 1. Strip out any stray text before the actual XML begins
+        const startIndex = rawString.indexOf('<Sport');
+        if (startIndex === -1) {
+            app.innerHTML = '<p style="color: red;">Error: Could not find the starting &lt;Sport&gt; tag. Make sure this is the correct file.</p>';
+            return;
+        }
+        const cleanedXml = rawString.substring(startIndex);
+
+        // 2. Parse the cleaned XML
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(cleanedXml, "text/xml");
+
+        // 3. Catch structural parsing errors
+        const parseError = xmlDoc.querySelector("parsererror");
+        if (parseError) {
+            app.innerHTML = `<p style="color: red;">XML Parsing Error. Your file might be missing a closing tag.<br><br>Details: ${parseError.textContent}</p>`;
+            return;
+        }
+
+        app.innerHTML = ''; // Clear previous content
+
+        const sport = xmlDoc.querySelector('Sport');
+        if (!sport) {
+            app.innerHTML = '<p style="color: red;">Invalid XML structure. Could not find root &lt;Sport&gt; element.</p>';
+            return;
+        }
+
+        // Render Page Header
+        const header = document.createElement('h1');
+        const sportName = sport.getAttribute('Name') || 'Unknown Sport';
+        const pageTitle = sport.getAttribute('PageTitle') || '';
+        const timeStamp = sport.getAttribute('TimeStamp') || '';
+        header.innerHTML = `${sportName} <span style="font-size:1rem; color:#666;">| ${pageTitle} (Generated: ${timeStamp})</span>`;
+        app.appendChild(header);
+
+        // Render Event Groups
+        const eventGroups = sport.querySelectorAll(':scope > EventGroup');
+        
+        if (eventGroups.length === 0) {
+            app.innerHTML += '<p class="empty-state">No events found in this file.</p>';
+            return;
+        }
+
+        eventGroups.forEach(group => {
+            const groupDiv = document.createElement('div');
+            groupDiv.className = 'event-group';
+            
+            const groupName = group.getAttribute('Name') || 'Unnamed Group';
+            groupDiv.innerHTML = `<h2>${groupName}</h2>`;
+
+            // Render Events (Matches)
+            const events = group.querySelectorAll(':scope > Event');
+            events.forEach(event => {
+                const eventCard = document.createElement('div');
+                eventCard.className = 'event-card';
+
+                const eventName = event.getAttribute('Name') || 'Unnamed Event';
+                const startTime = event.getAttribute('StartTime') || 'TBD';
+                const comment = event.getAttribute('EventComment');
+
+                let eventHTML = `
+                    <div class="event-header">
+                        <span>${eventName}</span>
+                        <span class="time">${startTime}</span>
+                    </div>
+                `;
+
+                if (comment) {
+                    eventHTML += `<div class="event-comment">${comment}</div>`;
+                }
+
+                // Render Markets
+                const markets = event.querySelectorAll(':scope > Market');
+                markets.forEach(market => {
+                    const marketName = market.getAttribute('Name') || 'Unnamed Market';
+                    let marketHTML = `
+                        <div class="market-section">
+                            <div class="market-title">${marketName}</div>
+                            <div class="participant-grid">
+                    `;
+
+                    // Render Participants (Bets)
+                    const participants = market.querySelectorAll(':scope > Participant');
+                    participants.forEach(p => {
+                        const pName = p.getAttribute('BetslipDisplay') || p.getAttribute('Name') || 'Unknown';
+                        const oddsFraction = p.getAttribute('Odds') || 'N/A';
+                        const oddsDecimal = p.getAttribute('OddsDecimal') || 'N/A';
+                        
+                        marketHTML += `
+                            <div class="participant-card">
+                                <span class="p-name">${pName}</span>
+                                <span class="p-odds">${oddsFraction} (${oddsDecimal})</span>
+                            </div>
+                        `;
+                    });
+
+                    marketHTML += `</div></div>`;
+                    eventHTML += marketHTML;
+                });
+
+                eventCard.innerHTML = eventHTML;
+                groupDiv.appendChild(eventCard);
+            });
+
+            app.appendChild(groupDiv);
+        });
+    }
+</script>
+
+</body>
+</html>

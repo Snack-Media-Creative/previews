@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:ital,wght@1,700&display=swap" rel="stylesheet">
+<style>
+    *{
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+body{
+    background: black;
+}
+        #cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 500px;
+            margin: 20px;
+        }
+        
+        .promo-card {
+            text-align: center;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            border-radius: 8px;
+            width: 490px;
+            box-shadow: 0 0 20px #ffffff;
+        }
+
+        .match-title {
+            color: #ffffff;
+            font-size: 30px;
+            letter-spacing: 1px;
+            font-style: normal;
+            font-style: italic;
+            font-weight: 700;
+        }
+
+        .match-title .vs {
+            color: #6df2a5;
+            text-transform: lowercase;
+            font-size: 20px;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+        }
+
+        .timer-display {
+            color: #6df2a5;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+            background: rgba(0, 0, 0, 0.3);
+            display: inline-block;
+            border-radius: 4px;
+            padding: 5px 20px;
+            font-style: italic;
+        }
+
+        .main-market {
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: 700;
+            font-style: italic;
+            line-height: 0.5;
+            margin: 10px 0;
+        }
+
+        .odds-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px; 
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            width: 80%;
+            margin: auto; 
+            padding: 5px;
+        }
+
+        .odds-icon {
+            width: 10px;
+            height: 10px;
+            object-fit: contain;
+            opacity: 0.8;
+            filter: drop-shadow(0 0 10px rgba(109, 242, 165, 0.5));
+            align-self: center;
+        }
+
+        .odd-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .odd-label {
+            color: #9ba6a0;
+            font-size: 15px;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+        }
+
+        .new-odds {
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: 700;
+            font-style: italic;
+            text-shadow: 0 0 20px rgba(109, 242, 165, 0.4);
+        }
+
+        .test-box{
+            width: 100px;
+            height: 100px;
+        }
+
+
+        .box-animated {
+            position: relative;
+            height: 100%;
+            background: linear-gradient(135deg, #113626 0%, #06170f 100%);
+            border-radius: 10px;
+            box-shadow: inset 0 0 40px rgba(250, 250, 250, 0.85);
+            box-sizing: border-box;
+            z-index: 1;
+        }
+
+        .box-animated::before, 
+        .box-animated::after {
+          content: "";
+          position: absolute;
+          inset: -3px;
+          border-radius: 10px;
+          z-index: -1;
+  
+          background: conic-gradient(from var(--angle), #071c12 0%, #0e4028 45deg, #2df596 90deg, #0e4028 135deg, #071c12 180deg, #0e4028 225deg, #2df596 270deg, #0e4028 315deg, #071c12 360deg);
+  
+          animation: rotate-border 4s linear infinite;
+        }
+
+        .box-animated::after {
+          filter: blur(15px);
+         opacity: 0.6; 
+        }
+
+        @keyframes rotate-border {
+         0% {
+          --angle: 0deg;
+         }
+         100% {
+           --angle: 360deg;
+         }
+        }
+
+        .box-back{
+          background: radial-gradient(circle, #25493b 0%, #162d23 100%);;
+          border-radius: 8px;
+          padding: 10px;
+        }
+
+        .odds-animated{
+            position: fixed;
+            z-index: 99;
+            height: 30px;
+            top: 0;
+            left: 0;
+            animation: arrowanimation 4s linear infinite;
+        }
+
+        @keyframes arrowanimation {
+         0% {
+          left: 0;
+          opacity: 0;
+         }25% {
+          opacity: .5;
+         }75% {
+          opacity: .5;
+         }
+         100% {
+           left:  500px;
+           opacity: 0;
+         }
+        }
+
+        .odds-animated2{
+            position: fixed;
+            z-index: 99;
+            height: 30px;
+            bottom: 0;
+            left: 0;
+            animation: arrowanimation 4s 2s linear infinite;
+        }
+</style>
+
+</head>
+<body>
+    
+    <div id="status">Fetching Premier League Odds...</div>
+    
+    <div id="cards-container">
+    </div>
+
+     <script>
+        const url = 'https://snack-feeds.b-cdn.net/bet365/feeds/premier-league.xml';
+        
+        const matchLimit = 1; 
+
+        async function fetchAndParseXML() {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                
+                const xmlText = await response.text();
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(xmlText, "text/xml");
+                
+                document.getElementById('status').style.display = 'none';
+                
+                generateCards(xmlDoc, matchLimit);
+                startTimers();
+                
+            } catch (error) {
+                const statusDiv = document.getElementById('status');
+                statusDiv.className = "error";
+                statusDiv.innerHTML = `Error loading XML: ${error.message} <br><br>
+                <span style="font-size: 14px;">(Check console for CORS errors if running locally.)</span>`;
+            }
+        }
+
+        function generateCards(xmlDoc, limit) {
+            const container = document.getElementById('cards-container');
+            const events = xmlDoc.getElementsByTagName("Event"); 
+            
+            if (events.length === 0) {
+                container.innerHTML = "<div style='color: white;'>No events found in the XML feed.</div>";
+                return;
+            }
+
+            const matchesToDisplay = Math.min(limit, events.length);
+
+            for (let i = 0; i < matchesToDisplay; i++) {
+                const eventNode = events[i];
+                let eventName = eventNode.getAttribute("Name") || eventNode.getAttribute("name") || "Unknown Event";
+                const startTime = eventNode.getAttribute("StartTime");
+                
+                eventName = eventName.replace(/\s+v\s+/i, ' <span class="vs">v</span> ');
+                
+                const markets = eventNode.getElementsByTagName("Market");
+                
+                if (markets.length > 0) {
+                    const marketNode = markets[0]; 
+                    const marketName = marketNode.getAttribute("Name") || marketNode.getAttribute("name") || "Match Winner";
+                    
+                    const participants = marketNode.getElementsByTagName("Participant");
+                    
+                    let homeOdds = "-", drawOdds = "-", awayOdds = "-";
+                    let homeFound = false;
+                    
+                    for (let k = 0; k < participants.length; k++) {
+                        const p = participants[k];
+                        const pName = p.getAttribute("Name") || p.getAttribute("name") || "";
+                        const pOdds = p.getAttribute("Odds") || p.getAttribute("odds") || "-";
+                        
+                        if (pName.toLowerCase() === "draw" || pName.toLowerCase() === "x") {
+                            drawOdds = pOdds;
+                        } else if (!homeFound) {
+                            homeOdds = pOdds;
+                            homeFound = true;
+                        } else {
+                            awayOdds = pOdds;
+                        }
+                    }
+
+                    const card = document.createElement('div');
+                    card.className = 'promo-card';
+                    card.innerHTML = `
+                        <div class="box-animated">
+                            <div class="box-back">
+                        <div class="match-title">${eventName}</div>
+                        <div class="timer-display" data-starttime="${startTime}">Loading timer...</div>
+                        <div class="main-market">${marketName}</div>
+                        <div class="odds-section">
+                            <div class="odd-container">
+                                <div class="odd-label">HOME</div>
+                                <div class="new-odds">${homeOdds}</div>
+                            </div>
+                            <img id="fid2295370" src="https://aka.clipcentric.com/file/2295370/orig/1787838968/tbZbLoTH?f=auto" class="odds-icon">
+                            <div class="odd-container">
+                                <div class="odd-label">DRAW</div>
+                                <div class="new-odds">${drawOdds}</div>
+                            </div>
+                            <img id="fid2295370" src="https://aka.clipcentric.com/file/2295370/orig/1787838968/tbZbLoTH?f=auto" class="odds-icon">
+                            <div class="odd-container">
+                                <div class="odd-label">AWAY</div>
+                                <div class="new-odds">${awayOdds}</div>
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+                        <img id="fid2295370" src="https://aka.clipcentric.com/file/2295370/orig/1787838968/tbZbLoTH?f=auto" class="odds-animated">
+                        <img id="fid2295370" src="https://aka.clipcentric.com/file/2295370/orig/1787838968/tbZbLoTH?f=auto" class="odds-animated2">
+                    `;
+                    container.appendChild(card);
+                }
+            }
+        }
+
+        function startTimers() {
+            setInterval(() => {
+                document.querySelectorAll('.timer-display').forEach(timerEl => {
+                    const timeStr = timerEl.getAttribute('data-starttime');
+                    if (!timeStr) return;
+                    
+                    const [datePart, timePart] = timeStr.split(' ');
+                    const [day, month, shortYear] = datePart.split('/');
+                    const [hour, minute, second] = timePart.split(':');
+                    const year = "20" + shortYear; 
+                    
+                    const eventDate = new Date(`${year}-${month}-${day}T${hour}:${minute}:${second}`);
+                    const now = new Date();
+                    const diff = eventDate - now;
+                    
+                    if (diff <= 0) {
+                        timerEl.innerText = "Match Started";
+                        timerEl.style.color = "#ff6b6b";
+                    } else {
+                        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                        const h = Math.floor((diff / (1000 * 60 * 60)) % 24).toString().padStart(2, '0');
+                        const m = Math.floor((diff / 1000 / 60) % 60).toString().padStart(2, '0');
+                        const s = Math.floor((diff / 1000) % 60).toString().padStart(2, '0');
+                        
+                        const dayLabel = d === 1 ? 'Day' : 'Days';
+                        
+                        timerEl.innerText = `${d} ${dayLabel} ${h}:${m}:${s} to kick off`;
+                    }
+                });
+            }, 1000);
+        }
+
+        fetchAndParseXML();
+    </script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports Odds Dashboard</title>
+    <style>
+        :root {
+            --primary-bg: #f4f7f6;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-muted: #666666;
+            --accent-blue: #007bff;
+            --odds-bg: #e3f2fd;
+            --odds-text: #0d47a1;
+            --boosted-bg: #fff3e0;
+            --boosted-text: #e65100;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-main);
+            margin: 0;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--text-main);
+            margin-bottom: 30px;
+        }
+
+        #dashboard {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .event-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .event-title {
+            font-size: 1.6em;
+            margin-top: 0;
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .event-time {
+            color: var(--text-muted);
+            font-size: 0.9em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .market-box {
+            border-left: 4px solid var(--accent-blue);
+            background-color: #f9fbff;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .market-title {
+            font-size: 1.1em;
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #222;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 10px 15px;
+            border-bottom: 1px solid #eeeeee;
+        }
+
+        th {
+            background-color: #f1f1f1;
+            font-weight: 600;
+            color: #444;
+            font-size: 0.9em;
+            text-transform: uppercase;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .odds-badge {
+            display: inline-block;
+            background-color: var(--odds-bg);
+            color: var(--odds-text);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.95em;
+        }
+
+        .boosted-badge {
+            display: inline-block;
+            background-color: var(--boosted-bg);
+            color: var(--boosted-text);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            text-decoration: line-through;
+            margin-right: 8px;
+        }
+        
+        .loading {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 1.2em;
+        }
+        
+        .error {
+            text-align: center;
+            color: #d32f2f;
+            background-color: #ffebee;
+            padding: 20px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>England Premier League - Betting Markets</h1>
+    <div id="dashboard"><div class="loading">Loading data from boost.xml...</div></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const dashboard = document.getElementById('dashboard');
+
+            // Fetch the XML file directly
+            fetch('boost.xml')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.text();
+                })
+                .then(xmlString => {
+                    const parser = new DOMParser();
+                    const xmlDoc = parser.parseFromString(xmlString, "text/xml");
+                    
+                    // Clear the loading message
+                    dashboard.innerHTML = '';
+
+                    const events = xmlDoc.getElementsByTagName('Event');
+
+                    for (let i = 0; i < events.length; i++) {
+                        const eventNode = events[i];
+                        const eventName = eventNode.getAttribute('Name');
+                        const startTimeRaw = eventNode.getAttribute('StartTime');
+                        const eventComment = eventNode.getAttribute('EventComment') || '';
+                        
+                        let startTime = startTimeRaw;
+                        if(startTimeRaw && startTimeRaw.includes(' ')) {
+                            const parts = startTimeRaw.split(' ');
+                            startTime = `${parts[0]} at ${parts[1]}`;
+                        }
+
+                        const markets = eventNode.getElementsByTagName('Market');
+                        if (markets.length === 0) continue;
+
+                        let eventHtml = `
+                            <div class="event-card">
+                                <h2 class="event-title">${eventName}</h2>
+                                <div class="event-time">
+                                    📅 ${startTime} ${eventComment ? ` — <em>${eventComment}</em>` : ''}
+                                </div>
+                        `;
+
+                        for (let j = 0; j < markets.length; j++) {
+                            const marketNode = markets[j];
+                            const marketName = marketNode.getAttribute('Name');
+                            
+                            const marketUnBoosted = marketNode.getAttribute('UnBoostedOdds');
+                            const marketOdds = marketNode.getAttribute('Odds');
+                            
+                            let marketHeaderAddon = '';
+                            if (marketOdds && marketOdds !== "") {
+                                marketHeaderAddon = `<span style="float:right; font-size: 0.9em; font-weight:normal;">
+                                    ${marketUnBoosted ? `<span class="boosted-badge">${marketUnBoosted}</span>` : ''}
+                                    <span class="odds-badge">${marketOdds}</span>
+                                </span>`;
+                            }
+
+                            eventHtml += `
+                                <div class="market-box">
+                                    <h3 class="market-title">${marketName} ${marketHeaderAddon}</h3>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Selection</th>
+                                                <th style="width: 150px; text-align: right;">Odds</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                            `;
+
+                            const participants = marketNode.getElementsByTagName('Participant');
+                            for (let k = 0; k < participants.length; k++) {
+                                const p = participants[k];
+                                const pName = p.getAttribute('Name');
+                                const odds = p.getAttribute('Odds');
+                                const unboostedOdds = p.getAttribute('UnBoostedOdds');
+
+                                let oddsHtml = '';
+                                if (unboostedOdds && unboostedOdds !== "") {
+                                    oddsHtml += `<span class="boosted-badge">${unboostedOdds}</span>`;
+                                }
+                                if (odds && odds !== "") {
+                                    oddsHtml += `<span class="odds-badge">${odds}</span>`;
+                                }
+
+                                eventHtml += `
+                                    <tr>
+                                        <td>${pName}</td>
+                                        <td style="text-align: right;">${oddsHtml}</td>
+                                    </tr>
+                                `;
+                            }
+                            eventHtml += `
+                                        </tbody>
+                                    </table>
+                                </div>
+                            `;
+                        }
+                        eventHtml += `</div>`;
+                        dashboard.innerHTML += eventHtml;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching or parsing XML:', error);
+                    dashboard.innerHTML = `
+                        <div class="error">
+                            <strong>Failed to load boost.xml</strong><br>
+                            Make sure the file exists in the same directory and you are viewing this page through a local web server (e.g., http://localhost:8000), not directly via a file:// URL.
+                        </div>
+                    `;
+                });
+        });
+    </script>
+</body>
+</html>
