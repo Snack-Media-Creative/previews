@@ -226,7 +226,6 @@
 </head>
 <body>
 
-
     <div id="dashboard"><div class="loading">Loading odds data...</div></div>
 
     <script>
@@ -245,7 +244,7 @@
                     const parser = new DOMParser();
                     globalXmlDoc = parser.parseFromString(xmlString, "text/xml");
                     
-                    // Directly render the dashboard with 'team name' filter
+                    // Directly render the dashboard with 'Arsenal' filter
                     renderDashboard('');
                 })
                 .catch(error => {
@@ -318,7 +317,7 @@
                             <div class="bet-card">
                                 <div class="card-content">
                                     <div class="card-header">
-                                        <h3 class="market-name">${marketName} +</h3>
+                                        <h3 class="market-name">${marketName}</h3>
                                         <div class="odds-container">
                                             ${marketUnBoosted ? `<span class="unboosted-odds">${marketUnBoosted}</span>` : ''}
                                             <span class="main-odds">${displayOdds}</span>
