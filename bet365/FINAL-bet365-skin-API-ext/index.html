@@ -3,22 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boosted Bet Builders</title>
+    <title>Document</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;0,900;1,700;1,900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;0,900;1,700;1,900&display=swap');
 
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 40px 20px;
+    :root {
+        --bg-color: #323232;
+        --row-border: #444444;
+        --text-main: #ffffff;
+        --text-muted: #a0a0a0;
+        --odds-color: #ffd428;
+        --hover-bg: #3c3c3c;
+    }
+    body {
+    color: var(--text-main);
+    margin: 0;
+    overflow-x: hidden; /* Prevents scrollbars from appearing during the scale animation */font-family: 'Roboto', sans-serif;
+            padding: 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 20px;
             color: white;
-            background-color: black;
-        }
+}
 
+/* Pseudo-element handles the background separately from the content */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    
+    /* Your original background properties */
+    background: #253D34;
+    background: linear-gradient(180deg, rgba(37, 61, 52, 1) 0%, rgba(44, 111, 85, 1) 30%, rgba(23, 61, 46, 1) 60%, rgba(49, 146, 107, 1) 86%, rgba(52, 168, 122, 1) 100%);
+    background-image: url(img/skin-background.jpg);
+    background-size: cover;
+    background-position: top;
+    
+    /* 10-second animation */
+    animation: scaleBackground 20s ease-out forwards;
+}
+
+/* Keyframes for the 1.5 to 1 scale */
+@keyframes scaleBackground {
+    0% {
+        transform: scale(1.5);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 1000px 1fr;
+      width: 100%;
+      min-height: 100vh;
+    }
+
+
+    .middle {
+      padding: 20px;
+    }
+
+
+    .left, .right {
+      display: flex;
+      justify-content: space-between; /* Pushes first item to top, last to bottom */
+      align-items: center; /* Centers items horizontally */
+      flex-direction: column;
+      text-align: center;
+      height: 100vh; /* Ensures the columns take up the full viewport height */
+    }
+
+    .left img, .right img {
+        width: 80%;
+    }
+
+    .left{
+        background-image: url(img/pic_1.png);
+        background-position: center;
+        background-size: 450px;
+        background-repeat: no-repeat;
+    }
+
+    /* Force 0 margin and padding on top/bottom containers */
+    .top {
+        margin: 50px 0 0 0;
+        padding: 0;
+        width: 100%;
+    }
+    .bottom {
+        margin: 0 0 50px 0;
+        padding: 0;
+        width: 100%;
+    }
+
+    
         h1 {
             color: #5de49c;
             text-transform: uppercase;
@@ -38,19 +122,19 @@
 
         /* --- Main Card Styling --- */
         .bet-card {
-            background: #0000008b;
+            background: #000000c8;
             border: 2px solid #5de49c;
             border-radius: 12px;
             width: 100%;
-            max-width: 420px;
             box-shadow: 0 0 15px rgba(93, 228, 156, 1);
             overflow: hidden;
             display: flex;
+            height: 200px;
             flex-direction: column;
         }
 
         .card-content {
-            padding: 20px;
+            padding: 15px;
             flex-grow: 1;
         }
 
@@ -91,12 +175,12 @@
         .divider {
             height: 1px;
             background: rgba(255, 255, 255, 0.2);
-            margin: 10px 0;
+            margin: 5px 0;
             border: none;
         }
 
         .event-name {
-            font-size: 1rem;
+            font-size: 0.8rem;
             font-weight: 900;
             margin-bottom: 10px;
             text-transform: uppercase;
@@ -106,8 +190,8 @@
 
         .event-name .v {
             color: #5de49c;
-            font-size: 0.9em;
-            margin: 0 3px;
+            font-size: 0.8em;
+            margin: 0px;
             text-transform: lowercase;
             font-weight: 700;
         }
@@ -123,7 +207,7 @@
             content: '';
             position: absolute;
             top: 15px;
-            bottom: 15px;
+            bottom: 10px;
             left: 9px;
             width: 2px;
             background-color: #5de49c;
@@ -134,8 +218,8 @@
             position: relative;
             display: flex;
             align-items: center;
-            margin-bottom: 10px;
-            font-size: 1rem;
+            margin-bottom: 5px;
+            font-size: 0.8rem;
             color: #e0e6e5;
             z-index: 2;
         }
@@ -170,7 +254,7 @@
 
         .card-footer {
             background-color: #79efae;
-            padding: 10px 20px;
+            padding: 5px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -188,7 +272,7 @@
 
         .footer-label {
             font-size: 0.8rem;
-            margin-bottom: 2px;
+            margin-bottom: 0px;
             font-weight: 400;
             color: #1a3830;
         }
@@ -225,8 +309,22 @@
     </style>
 </head>
 <body>
-
-    <div id="dashboard"><div class="loading">Loading odds data...</div></div>
+<div class="container">
+      <div class="left">
+          <div class="top"><img src="img/skintop.png" alt=""></div>
+          <div class="middle-image"></div>
+          <div class="bottom"><img src="img/cta.png" alt=""></div>
+      </div>
+      
+      <div class="middle"></div>
+      
+      <div class="right">
+          <div class="top"><img src="img/skintop.png" alt=""></div>
+          
+          <div id="dashboard"><div class="loading">Loading odds data...</div></div>
+          <div class="bottom"><img src="img/cta.png" alt=""></div>
+      </div>
+    </div>
 
     <script>
         let globalXmlDoc = null; 
@@ -332,16 +430,6 @@
                                     </div>
                                 </div>
                                 
-                                <div class="card-footer">
-                                    <div class="footer-col">
-                                        <span class="footer-label">Stake</span>
-                                        <span class="footer-val">£10.00</span>
-                                    </div>
-                                    <div class="footer-col right">
-                                        <span class="footer-label">To Return</span>
-                                        <span class="footer-val">£${calculatedReturn}</span>
-                                    </div>
-                                </div>
                             </div>
                         `;
 
