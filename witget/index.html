@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Macdonald Group Widget</title>
+<style>
+  /* Widget Container Styling */
+  #macdonald-widget {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 500px;
+    height: 100px;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    font-family: Arial, sans-serif;
+    transition: height 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    overflow: hidden;
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Expanded State */
+  #macdonald-widget.expanded {
+    height: 600px;
+  }
+
+  /* Header Styling */
+  .widget-header {
+    padding: 0 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1a365d;
+    color: white;
+    height: 100px;
+    min-height: 100px;
+    box-sizing: border-box;
+  }
+  
+  .widget-header h2 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: normal;
+  }
+
+  /* Expand/Collapse Button */
+  .toggle-btn {
+    padding: 12px 20px;
+    font-size: 15px;
+    cursor: pointer;
+    background: #ffffff;
+    color: #1a365d;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background 0.2s;
+  }
+  
+  .toggle-btn:hover {
+    background: #f0f0f0;
+  }
+
+  /* Body and Scrollable Area */
+  .widget-body {
+    padding: 20px 25px;
+    flex-grow: 1;
+    overflow-y: auto;
+    background: #f8fafc;
+    display: none;
+  }
+  
+  #macdonald-widget.expanded .widget-body {
+    display: block;
+  }
+
+  /* Filter Sections */
+  .filters {
+    margin-bottom: 15px;
+  }
+  
+  .filters strong {
+    display: block;
+    margin-bottom: 8px;
+    color: #334155;
+    font-size: 15px;
+  }
+  
+  .region-filters {
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e2e8f0;
+    margin-bottom: 10px;
+  }
+
+  .region-filters label {
+    margin-right: 20px;
+    font-size: 14px;
+    color: #475569;
+    cursor: pointer;
+  }
+  
+  /* Amenities Dropdown */
+  details.amenities-dropdown {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+  }
+  
+  details.amenities-dropdown summary {
+    font-size: 14px;
+    font-weight: bold;
+    color: #334155;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  .amenity-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+    max-height: 180px;
+    overflow-y: auto;
+    padding-bottom: 10px;
+  }
+  
+  .amenity-grid label {
+    font-size: 13px;
+    color: #475569;
+    cursor: pointer;
+    background: #f1f5f9;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    border: 1px solid transparent;
+  }
+
+  .amenity-grid label:hover {
+    background: #e2e8f0;
+  }
+
+  .amenity-grid input {
+    margin-right: 6px;
+    cursor: pointer;
+  }
+
+  /* Venue Card Items */
+  .venue-item {
+    background: white;
+    padding: 16px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  }
+  
+  .venue-item h3 {
+    margin: 0 0 6px 0;
+    color: #0f172a;
+    font-size: 17px;
+  }
+  
+  .venue-item p {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    color: #64748b;
+    line-height: 1.4;
+  }
+  
+  .venue-item a {
+    color: #2563eb;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .venue-item a:hover {
+    text-decoration: underline;
+  }
+  
+  .loading-msg {
+    color: #64748b;
+    font-style: italic;
+  }
+  
+  /* Simple tags for amenities on the card */
+  .venue-tags {
+    margin: 8px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .venue-tags span {
+    background: #dbeafe;
+    color: #1e40af;
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+</style>
+</head>
+<body>
+
+<div id="macdonald-widget">
+  <div class="widget-header">
+    <h2>Macdonald group widget</h2>
+    <button class="toggle-btn" onclick="toggleWidget()">Expand</button>
+  </div>
+  
+  <div class="widget-body">
+    <div class="filters">
+      <!-- Region Filters -->
+      <div class="region-filters">
+        <strong>Region:</strong>
+        <label>
+          <input type="checkbox" class="location-filter" value="Scotland" checked onchange="filterVenues()"> Scotland
+        </label>
+        <label>
+          <input type="checkbox" class="location-filter" value="England" checked onchange="filterVenues()"> England
+        </label>
+      </div>
+      
+      <!-- Dynamic Amenities Filters go here -->
+      <details class="amenities-dropdown">
+        <summary>Filter by Amenities & Features</summary>
+        <div id="amenity-filters-container" class="amenity-grid">
+          <span class="loading-msg" style="font-size: 13px;">Loading amenities...</span>
+        </div>
+      </details>
+    </div>
+    
+    <div id="venue-list">
+      <p class="loading-msg">Loading venues from Google Sheets...</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Google Sheet Configuration
+  const sheetId = '1UwNGmplofhETliPExkq25-amNb--7FaGKwP2C6hDLhA';
+  const gid = '96119972';
+  const csvUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv&gid=${gid}`;
+
+  let venues = [];
+  let amenityHeaders = [];
+
+  // 1. Fetch data from Google Sheets
+  async function loadDataFromSheet() {
+    try {
+      const response = await fetch(csvUrl);
+      if (!response.ok) throw new Error("Network response was not ok");
+      
+      const csvText = await response.text();
+      parseCSVData(csvText);
+      generateAmenityCheckboxes(); // Build the new checkboxes
+      filterVenues(); // Render the list
+      
+    } catch (error) {
+      document.getElementById('venue-list').innerHTML = `
+        <p style="color: red;">Error loading data. Please ensure the Google Sheet is set to "Anyone with the link can view".</p>
+      `;
+      console.error("Error fetching Google Sheet:", error);
+    }
+  }
+
+  // 2. Parse CSV and dynamically grab Columns E to AH
+  function parseCSVData(csvText) {
+    const rows = [];
+    let row = [];
+    let currentString = '';
+    let insideQuotes = false;
+    
+    // Robust CSV parser
+    for (let i = 0; i < csvText.length; i++) {
+      const char = csvText[i];
+      const nextChar = csvText[i + 1];
+      
+      if (char === '"' && insideQuotes && nextChar === '"') {
+        currentString += '"';
+        i++; 
+      } else if (char === '"') {
+        insideQuotes = !insideQuotes;
+      } else if (char === ',' && !insideQuotes) {
+        row.push(currentString.trim());
+        currentString = '';
+      } else if ((char === '\n' || char === '\r') && !insideQuotes) {
+        if (char === '\r' && nextChar === '\n') i++; 
+        row.push(currentString.trim());
+        if (row.join('').length > 0) rows.push(row);
+        row = [];
+        currentString = '';
+      } else {
+        currentString += char;
+      }
+    }
+    if (currentString !== '' || row.length > 0) {
+      row.push(currentString.trim());
+      rows.push(row);
+    }
+
+    if(rows.length === 0) return;
+
+    // Extract Headers from Column E (index 4) onwards
+    const headerRow = rows[0];
+    amenityHeaders = headerRow.slice(4).filter(header => header !== ''); 
+
+    // Map rows into venues array
+    venues = [];
+    for(let i = 1; i < rows.length; i++) {
+      const cols = rows[i];
+      if(cols.length < 4 || !cols[0]) continue; 
+      
+      const location = cols[1];
+      let region = "England";
+      if(location.toLowerCase().includes("scottish") || location.toLowerCase().includes("scotland")) {
+        region = "Scotland";
+      }
+
+      // Check all amenity columns for this specific hotel
+      // Assuming any text (like "Yes", "x", "1") means the hotel has it
+      const venueAmenities = {};
+      const activeAmenitiesList = []; // to render tags
+      
+      amenityHeaders.forEach((amenity, index) => {
+        const colIndex = 4 + index; 
+        const cellValue = cols[colIndex] ? cols[colIndex].trim().toLowerCase() : '';
+        // If the cell isn't empty and doesn't say "no" or "false", they have it
+        const hasAmenity = (cellValue !== '' && cellValue !== 'no' && cellValue !== 'false');
+        
+        venueAmenities[amenity] = hasAmenity;
+        
+        if(hasAmenity) {
+          activeAmenitiesList.push(amenity);
+        }
+      });
+
+      venues.push({
+        name: cols[0],       
+        location: cols[1],   
+        golf: cols[2],       
+        link: cols[3],       
+        region: region,
+        amenitiesMap: venueAmenities,
+        amenitiesList: activeAmenitiesList
+      });
+    }
+  }
+
+  // 3. Create the UI checkboxes for the amenities
+  function generateAmenityCheckboxes() {
+    const container = document.getElementById('amenity-filters-container');
+    container.innerHTML = ''; // Clear loading message
+
+    amenityHeaders.forEach(amenity => {
+      const label = document.createElement('label');
+      label.innerHTML = `<input type="checkbox" class="amenity-filter" value="${amenity}" onchange="filterVenues()"> ${amenity}`;
+      container.appendChild(label);
+    });
+  }
+
+  // 4. Handle Expand/Collapse
+  function toggleWidget() {
+    const widget = document.getElementById('macdonald-widget');
+    const btn = widget.querySelector('.toggle-btn');
+    
+    widget.classList.toggle('expanded');
+    
+    if(widget.classList.contains('expanded')) {
+      btn.textContent = 'Collapse';
+    } else {
+      btn.textContent = 'Expand';
+    }
+  }
+
+  // 5. Filter and render the HTML list
+  function filterVenues() {
+    const checkedRegions = Array.from(document.querySelectorAll('.location-filter:checked')).map(cb => cb.value);
+    const checkedAmenities = Array.from(document.querySelectorAll('.amenity-filter:checked')).map(cb => cb.value);
+    
+    const venueList = document.getElementById('venue-list');
+    venueList.innerHTML = '';
+    
+    venues.forEach(venue => {
+      // 1. Must match Region
+      const regionMatch = checkedRegions.includes(venue.region);
+      
+      // 2. Must match ALL selected amenities (AND logic)
+      const amenityMatch = checkedAmenities.every(selectedAmenity => venue.amenitiesMap[selectedAmenity] === true);
+      
+      if (regionMatch && amenityMatch) {
+        const div = document.createElement('div');
+        div.className = 'venue-item';
+        
+        // Show up to 5 matching amenities as tags so the user knows why it appeared
+        let tagsHtml = '';
+        if(venue.amenitiesList.length > 0) {
+          const displayTags = venue.amenitiesList.slice(0, 5);
+          tagsHtml = `<div class="venue-tags">${displayTags.map(tag => `<span>${tag}</span>`).join('')}</div>`;
+        }
+
+        div.innerHTML = `
+          <h3>${venue.name}</h3>
+          <p style="margin-bottom: 4px;"><strong>Location:</strong> ${venue.location}</p>
+          <p><strong>Golf:</strong> ${venue.golf}</p>
+          ${tagsHtml}
+          <a href="${venue.link}" target="_blank" style="display:block; margin-top:10px;">View Hotel &rarr;</a>
+        `;
+        venueList.appendChild(div);
+      }
+    });
+    
+    if(venueList.innerHTML === '') {
+      venueList.innerHTML = '<p style="color: #64748b;">No venues found for the selected filters.</p>';
+    }
+  }
+
+  // Start fetching the data immediately
+  loadDataFromSheet();
+</script>
+
+</body>
+</html>
