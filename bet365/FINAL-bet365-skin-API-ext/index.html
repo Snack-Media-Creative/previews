@@ -59,7 +59,7 @@ body::before {
 }
     .container {
       display: grid;
-      grid-template-columns: 1fr 1000px 1fr;
+      grid-template-columns: 1fr 970px 1fr;
       width: 100%;
       min-height: 100vh;
     }
@@ -102,8 +102,7 @@ body::before {
         width: 100%;
     }
 
-    
-        h1 {
+    h1 {
             color: #5de49c;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -122,14 +121,13 @@ body::before {
 
         /* --- Main Card Styling --- */
         .bet-card {
-            background: #000000c8;
+            background: linear-gradient(180deg, #122a27 0%, #0d1e1c 100%);
             border: 2px solid #5de49c;
             border-radius: 12px;
             width: 100%;
             box-shadow: 0 0 15px rgba(93, 228, 156, 1);
             overflow: hidden;
             display: flex;
-            height: 200px;
             flex-direction: column;
         }
 
@@ -257,7 +255,7 @@ body::before {
             padding: 5px 20px;
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             color: #0b1514;
         }
 
@@ -266,7 +264,7 @@ body::before {
             flex-direction: column;
         }
 
-        .footer-col.right {
+        .footer-col.sright {
             text-align: right;
         }
 
@@ -306,6 +304,12 @@ body::before {
             width: 100%;
             margin-top: 20px;
         }
+        .oddsName{
+            color: #5de49c;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+
     </style>
 </head>
 <body>
@@ -342,8 +346,8 @@ body::before {
                     const parser = new DOMParser();
                     globalXmlDoc = parser.parseFromString(xmlString, "text/xml");
                     
-                    // Directly render the dashboard with 'Arsenal' filter
-                    renderDashboard('');
+                    // Directly render the dashboard with empty filter and picking 3 cards
+                    renderDashboard('', 2);
                 })
                 .catch(error => {
                     console.error('Error fetching or parsing XML:', error);
@@ -357,20 +361,40 @@ body::before {
                 });
         });
 
-        function renderDashboard(filterText) {
+        // Function to shuffle an array (Fisher-Yates algorithm)
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Updated function takes a filterText and an optional maxCards limit
+        function renderDashboard(filterText, maxCards = 10) {
             const dashboard = document.getElementById('dashboard');
             dashboard.innerHTML = ''; 
             
             if (!globalXmlDoc) return;
 
-            const events = globalXmlDoc.getElementsByTagName('Event');
+            // Get events and convert the HTMLCollection to an array so it can be shuffled
+            let events = Array.from(globalXmlDoc.getElementsByTagName('Event'));
+            
+            // Randomize the order of the events
+            events = shuffleArray(events);
+
             let cardsRendered = 0;
 
             for (let i = 0; i < events.length; i++) {
+                // Break out of the loop if we have reached the required number of cards
+                if (cardsRendered >= maxCards) {
+                    break;
+                }
+
                 const eventNode = events[i];
                 let rawName = eventNode.getAttribute('Name') || '';
 
-                if (filterText !== 'All' && !rawName.includes(filterText)) {
+                if (filterText !== 'All' && filterText !== '' && !rawName.includes(filterText)) {
                     continue; 
                 }
 
@@ -378,7 +402,7 @@ body::before {
                 const markets = eventNode.getElementsByTagName('Market');
                 
                 // Only process the FIRST market for this event
-                if (markets.length > 1) {
+                if (markets.length > 0) {
                     const marketNode = markets[0];
                     const marketName = marketNode.getAttribute('Name');
                     const marketUnBoosted = marketNode.getAttribute('UnBoostedOdds');
@@ -387,18 +411,22 @@ body::before {
                     
                     const displayOdds = marketOdds ? marketOdds : '';
                     
-                    let calculatedReturn = "--";
-                    if (marketOddsDecimal && !isNaN(parseFloat(marketOddsDecimal))) {
-                        const returnVal = 10 * parseFloat(marketOddsDecimal);
-                        calculatedReturn = returnVal.toFixed(2);
-                    }
-                    
                     let participantsHtml = '';
                     const participants = marketNode.getElementsByTagName('Participant');
-                    
+
+                    let calculatedReturn = "--";
+                    let oddsForCalculation = marketOddsDecimal; 
+
                     if (participants.length > 0) {
                         for (let k = 0; k < participants.length; k++) {
                             const pName = participants[k].getAttribute('Name');
+                            const pOdds = participants[k].getAttribute('Odds');
+                            
+                            // If marketOddsDecimal is empty/falsy, fallback to the participant's odds
+                            if (!oddsForCalculation) {
+                                oddsForCalculation = pOdds;
+                            }
+
                             participantsHtml += `
                                 <div class="selection-item">
                                     <div class="check-icon">
@@ -406,9 +434,22 @@ body::before {
                                             <polyline points="20 6 9 17 4 12"></polyline>
                                         </svg>
                                     </div>
-                                    <span>${pName}</span>
+                                    <span>${pName}</span>&nbsp;<span class="oddsName">${pOdds}</span>
                                 </div>
                             `;
+                        }
+
+                        // Evaluate calculatedReturn now that we have our final oddsForCalculation
+                        if (oddsForCalculation) {
+                            if (oddsForCalculation.includes('/')) {
+                                // Fallback logic in case pOdds represents a fraction (e.g. 5/1)
+                                const [num, den] = oddsForCalculation.split('/');
+                                const decimalOdds = (parseFloat(num) / parseFloat(den)) + 1;
+                                calculatedReturn = (10 * decimalOdds).toFixed(2);
+                            } else if (!isNaN(parseFloat(oddsForCalculation))) {
+                                const returnVal = 10 * parseFloat(oddsForCalculation);
+                                calculatedReturn = returnVal.toFixed(2);
+                            }
                         }
 
                         const cardHtml = `
@@ -430,6 +471,16 @@ body::before {
                                     </div>
                                 </div>
                                 
+                                <div class="card-footer">
+                                    <div class="footer-col">
+                                        <span class="footer-label">Stake</span>
+                                        <span class="footer-val">£10.00</span>
+                                    </div>
+                                    <div class="footer-col sright">
+                                        <span class="footer-label">To Return</span>
+                                        <span class="footer-val">£${calculatedReturn}</span>
+                                    </div>
+                                </div>
                             </div>
                         `;
 
