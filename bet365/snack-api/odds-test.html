@@ -235,7 +235,7 @@
             const dashboard = document.getElementById('dashboard');
 
             // Fetches data from the live XML feed
-            fetch('https://snack-feeds.b-cdn.net/bet365/feeds/premier-league-bet-boosts.xml')
+            fetch('https://snack-feeds.b-cdn.net/bet365/feeds/snack-bet-boosts.xml')
                 .then(response => {
                     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                     return response.text();

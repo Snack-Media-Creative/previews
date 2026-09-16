@@ -333,7 +333,7 @@ body::before {
             const dashboard = document.getElementById('dashboard');
 
             // Fetches data from the live XML feed
-            fetch('https://snack-feeds.b-cdn.net/bet365/feeds/premier-league-bet-boosts.xml')
+            fetch('https://snack-feeds.b-cdn.net/bet365/feeds/snack-bet-boosts.xml')
                 .then(response => {
                     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                     return response.text();
@@ -343,7 +343,7 @@ body::before {
                     globalXmlDoc = parser.parseFromString(xmlString, "text/xml");
                     
                     // Directly render the dashboard with 'Arsenal' filter
-                    renderDashboard('Arsenal');
+                    renderDashboard('');
                 })
                 .catch(error => {
                     console.error('Error fetching or parsing XML:', error);
@@ -378,7 +378,7 @@ body::before {
                 const markets = eventNode.getElementsByTagName('Market');
                 
                 // Only process the FIRST market for this event
-                if (markets.length > 0) {
+                if (markets.length > 1) {
                     const marketNode = markets[0];
                     const marketName = marketNode.getAttribute('Name');
                     const marketUnBoosted = marketNode.getAttribute('UnBoostedOdds');
