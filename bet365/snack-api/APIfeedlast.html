@@ -312,19 +312,22 @@
                     
                     const displayOdds = marketOdds ? marketOdds : '';
                     
-                    let calculatedReturn = "--";
-                    if (marketOddsDecimal && !isNaN(parseFloat(marketOddsDecimal))) {
-                        const returnVal = 10 * parseFloat(marketOddsDecimal);
-                        calculatedReturn = returnVal.toFixed(2);
-                    }
-                    
                     let participantsHtml = '';
                     const participants = marketNode.getElementsByTagName('Participant');
-                    
+
+                    let calculatedReturn = "--";
+                    let oddsForCalculation = marketOddsDecimal; 
+
                     if (participants.length > 0) {
                         for (let k = 0; k < participants.length; k++) {
                             const pName = participants[k].getAttribute('Name');
                             const pOdds = participants[k].getAttribute('Odds');
+                            
+                            // If marketOddsDecimal is empty/falsy, fallback to the participant's odds
+                            if (!oddsForCalculation) {
+                                oddsForCalculation = pOdds;
+                            }
+
                             participantsHtml += `
                                 <div class="selection-item">
                                     <div class="check-icon">
@@ -335,6 +338,19 @@
                                     <span>${pName}</span>&nbsp;<span class="oddsName">${pOdds}</span>
                                 </div>
                             `;
+                        }
+
+                        // Evaluate calculatedReturn now that we have our final oddsForCalculation
+                        if (oddsForCalculation) {
+                            if (oddsForCalculation.includes('/')) {
+                                // Fallback logic in case pOdds represents a fraction (e.g. 5/1)
+                                const [num, den] = oddsForCalculation.split('/');
+                                const decimalOdds = (parseFloat(num) / parseFloat(den)) + 1;
+                                calculatedReturn = (10 * decimalOdds).toFixed(2);
+                            } else if (!isNaN(parseFloat(oddsForCalculation))) {
+                                const returnVal = 10 * parseFloat(oddsForCalculation);
+                                calculatedReturn = returnVal.toFixed(2);
+                            }
                         }
 
                         const cardHtml = `
