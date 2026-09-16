@@ -242,8 +242,8 @@
                     const parser = new DOMParser();
                     globalXmlDoc = parser.parseFromString(xmlString, "text/xml");
                     
-                    // Directly render the dashboard with 'Arsenal' filter
-                    renderDashboard('');
+                    // Directly render the dashboard with empty filter and picking 3 cards
+                    renderDashboard('', );
                 })
                 .catch(error => {
                     console.error('Error fetching or parsing XML:', error);
@@ -257,20 +257,40 @@
                 });
         });
 
-        function renderDashboard(filterText) {
+        // Function to shuffle an array (Fisher-Yates algorithm)
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Updated function takes a filterText and an optional maxCards limit
+        function renderDashboard(filterText, maxCards = 10) {
             const dashboard = document.getElementById('dashboard');
             dashboard.innerHTML = ''; 
             
             if (!globalXmlDoc) return;
 
-            const events = globalXmlDoc.getElementsByTagName('Event');
+            // Get events and convert the HTMLCollection to an array so it can be shuffled
+            let events = Array.from(globalXmlDoc.getElementsByTagName('Event'));
+            
+            // Randomize the order of the events
+            events = shuffleArray(events);
+
             let cardsRendered = 0;
 
             for (let i = 0; i < events.length; i++) {
+                // Break out of the loop if we have reached the required number of cards
+                if (cardsRendered >= maxCards) {
+                    break;
+                }
+
                 const eventNode = events[i];
                 let rawName = eventNode.getAttribute('Name') || '';
 
-                if (filterText !== 'All' && !rawName.includes(filterText)) {
+                if (filterText !== 'All' && filterText !== '' && !rawName.includes(filterText)) {
                     continue; 
                 }
 
