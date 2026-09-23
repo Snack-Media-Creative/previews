@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boosted Bet Builders</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;0,900;1,700;1,900&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 10px;
+            gap: 20px;
+            color: white;
+        }
+
+        h1 {
+            color: #5de49c;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        .contenedor{
+            width: 100%;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #dashboard {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items:center;
+            gap: 30px;
+            max-width: 300px;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* --- Main Card Styling --- */
+        .bet-card {
+            background: linear-gradient(180deg, #122a27 0%, #0d1e1c 100%);
+            border: 2px solid #5de49c;
+            border-radius: 12px;
+            width: 100%;
+            box-shadow: 0 0 15px rgba(93, 228, 156, 1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-content {
+            padding: 15px;
+            flex-grow: 1;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .market-name {
+            font-size: 1rem;
+            font-weight: 900;
+            font-style: italic;
+            color: #a7f2e1;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 0;
+        }
+
+        .odds-container {
+            text-align: right;
+        }
+
+        .unboosted-odds {
+            color: #88a39e;
+            font-size: 0.7rem;
+            text-decoration: line-through;
+            margin-right: 8px;
+            font-weight: 700;
+        }
+
+        .main-odds {
+            font-size: 1rem;
+            font-weight: 900;
+            color: #f6ca3f;
+        }
+
+        .divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 5px 0;
+            border: none;
+        }
+
+        .event-name {
+            font-size: 0.8rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+        }
+
+        .event-name .v {
+            color: #5de49c;
+            font-size: 0.8em;
+            margin: 0px;
+            text-transform: lowercase;
+            font-weight: 700;
+        }
+
+        .selections-list {
+            position: relative;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .selections-list::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            bottom: 10px;
+            left: 9px;
+            width: 2px;
+            background-color: #5de49c;
+            z-index: 1;
+        }
+
+        .selection-item {
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+            font-size: 0.8rem;
+            color: #e0e6e5;
+            z-index: 2;
+        }
+
+        .selection-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .check-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #122a27;
+            border: 2px solid #5de49c;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+            z-index: 2;
+        }
+
+        .check-icon svg {
+            width: 12px;
+            height: 12px;
+            fill: none;
+            stroke: #5de49c;
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .card-footer {
+            background-color: #79efae;
+            padding: 5px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #0b1514;
+        }
+
+        .footer-col {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-col.right {
+            text-align: right;
+        }
+
+        .footer-label {
+            font-size: 0.8rem;
+            margin-bottom: 0px;
+            font-weight: 400;
+            color: #1a3830;
+        }
+
+        .footer-val {
+            font-size: 1rem;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            color: #000000;
+        }
+
+        .loading {
+            font-size: 1rem;
+            color: #5de49c;
+        }
+
+        .error {
+            background: #ff4d4d;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            max-width: 600px;
+            line-height: 1.5;
+        }
+        
+        .no-results {
+            font-size: 1rem;
+            color: #88a39e;
+            text-align: center;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .oddsName{
+            color: #5de49c;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+    <div id="dashboard"><div class="loading">Loading odds data...</div></div>
+    </div>
+    <script>
+        let globalXmlDoc = null; 
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const dashboard = document.getElementById('dashboard');
+
+            // Fetches data from the live XML feed
+            fetch('https://snack-feeds.b-cdn.net/bet365/feeds/snack-bet-boosts.xml')
+                .then(response => {
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    return response.text();
+                })
+                .then(xmlString => {
+                    const parser = new DOMParser();
+                    globalXmlDoc = parser.parseFromString(xmlString, "text/xml");
+                    
+                    // Directly render the dashboard with empty filter and picking 3 cards
+                    renderDashboard('', 1 );
+                })
+                .catch(error => {
+                    console.error('Error fetching or parsing XML:', error);
+                    dashboard.innerHTML = `
+                        <div class="error">
+                            <strong>Failed to load the XML feed.</strong><br>
+                            If you are viewing this locally, your browser may be blocking the request due to CORS (Cross-Origin Resource Sharing) restrictions.<br>
+                            Error details: ${error.message}
+                        </div>
+                    `;
+                });
+        });
+
+        // Function to shuffle an array (Fisher-Yates algorithm)
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Updated function takes a filterText and an optional maxCards limit
+        function renderDashboard(filterText, maxCards = 10) {
+            const dashboard = document.getElementById('dashboard');
+            dashboard.innerHTML = ''; 
+            
+            if (!globalXmlDoc) return;
+
+            // Get events and convert the HTMLCollection to an array so it can be shuffled
+            let events = Array.from(globalXmlDoc.getElementsByTagName('Event'));
+            
+            // Randomize the order of the events
+            events = shuffleArray(events);
+
+            let cardsRendered = 0;
+
+            for (let i = 0; i < events.length; i++) {
+                // Break out of the loop if we have reached the required number of cards
+                if (cardsRendered >= maxCards) {
+                    break;
+                }
+
+                const eventNode = events[i];
+                let rawName = eventNode.getAttribute('Name') || '';
+
+                if (filterText !== 'All' && filterText !== '' && !rawName.includes(filterText)) {
+                    continue; 
+                }
+
+                let formattedName = rawName.replace(' v ', ' <span class="v">v</span> ');
+                const markets = eventNode.getElementsByTagName('Market');
+                
+                // Only process the FIRST market for this event
+                if (markets.length > 0) {
+                    const marketNode = markets[0];
+                    const marketName = marketNode.getAttribute('Name');
+                    const marketUnBoosted = marketNode.getAttribute('UnBoostedOdds');
+                    const marketOdds = marketNode.getAttribute('Odds');
+                    const marketOddsDecimal = marketNode.getAttribute('OddsDecimal');
+                    
+                    const displayOdds = marketOdds ? marketOdds : '';
+                    
+                    let participantsHtml = '';
+                    const participants = marketNode.getElementsByTagName('Participant');
+
+                    let calculatedReturn = "--";
+                    let oddsForCalculation = marketOddsDecimal; 
+
+                    if (participants.length > 0) {
+                        for (let k = 0; k < participants.length; k++) {
+                            const pName = participants[k].getAttribute('Name');
+                            const pOdds = participants[k].getAttribute('Odds');
+                            
+                            // If marketOddsDecimal is empty/falsy, fallback to the participant's odds
+                            if (!oddsForCalculation) {
+                                oddsForCalculation = pOdds;
+                            }
+
+                            participantsHtml += `
+                                <div class="selection-item">
+                                    <div class="check-icon">
+                                        <svg viewBox="0 0 24 24">
+                                            <polyline points="20 6 9 17 4 12"></polyline>
+                                        </svg>
+                                    </div>
+                                    <span>${pName}</span>&nbsp;<span class="oddsName">${pOdds}</span>
+                                </div>
+                            `;
+                        }
+
+                        // Evaluate calculatedReturn now that we have our final oddsForCalculation
+                        if (oddsForCalculation) {
+                            if (oddsForCalculation.includes('/')) {
+                                // Fallback logic in case pOdds represents a fraction (e.g. 5/1)
+                                const [num, den] = oddsForCalculation.split('/');
+                                const decimalOdds = (parseFloat(num) / parseFloat(den)) + 1;
+                                calculatedReturn = (10 * decimalOdds).toFixed(2);
+                            } else if (!isNaN(parseFloat(oddsForCalculation))) {
+                                const returnVal = 10 * parseFloat(oddsForCalculation);
+                                calculatedReturn = returnVal.toFixed(2);
+                            }
+                        }
+
+                        const cardHtml = `
+                            <div class="bet-card">
+                                <div class="card-content">
+                                    <div class="card-header">
+                                        <h3 class="market-name">${marketName}</h3>
+                                        <div class="odds-container">
+                                            ${marketUnBoosted ? `<span class="unboosted-odds">${marketUnBoosted}</span>` : ''}
+                                            <span class="main-odds">${displayOdds}</span>
+                                        </div>
+                                    </div>
+                                    <hr class="divider">
+                                    
+                                    <div class="event-name">${formattedName}</div>
+                                    
+                                    <div class="selections-list">
+                                        ${participantsHtml}
+                                    </div>
+                                </div>
+                                
+                                <div class="card-footer">
+                                    <div class="footer-col">
+                                        <span class="footer-label">Stake</span>
+                                        <span class="footer-val">£10.00</span>
+                                    </div>
+                                    <div class="footer-col right">
+                                        <span class="footer-label">To Return</span>
+                                        <span class="footer-val">£${calculatedReturn}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+
+                        dashboard.innerHTML += cardHtml;
+                        cardsRendered++;
+                    }
+                }
+            }
+
+            if (cardsRendered === 0) {
+                dashboard.innerHTML = `<div class="no-results">No markets found for ${filterText}.</div>`;
+            }
+        }
+    </script>
+</body>
+</html>
