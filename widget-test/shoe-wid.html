@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shoe Finder Quiz Widget</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@600;700;800&family=Nunito+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0B1D40;
+    --navy-dark:#071530;
+    --cyan:#17EDFF;
+    --cyan-deep:#00AFC2;
+    --white:#FFFFFF;
+    --grey-bg:#F2F4F7;
+    --grey-line:#E2E6ED;
+    --text-muted:#6B7280;
+  }
+  *{box-sizing:border-box;}
+  html,body{
+    margin:0;
+    height:100%;
+    font-family:'Nunito Sans',sans-serif;
+    color:var(--navy);
+    -webkit-font-smoothing:antialiased;
+  }
+  body{
+    background:linear-gradient(180deg, #FFFFFF 0%, #F5F6F8 100%);
+    position:relative;
+    overflow-x:hidden;
+  }
+  h1,h2,.serif{ font-family:'Bodoni Moda',serif; }
+
+  /* ---------------- LAUNCHER ---------------- */
+  .launcher{
+    position:fixed;
+    left:24px;
+    bottom:80px;
+    z-index:1000;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:12px;
+    background:linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+    border:none;
+    border-radius:999px;
+    padding:9px 22px 9px 16px;
+    cursor:pointer;
+    box-shadow:0 14px 30px -10px rgba(11,29,64,0.55);
+    transition:transform .2s cubic-bezier(.34,1.56,.64,1), box-shadow .2s ease;
+    animation:pop-in .5s ease .2s both;
+  }
+  .launcher:hover{
+    transform:translateY(-4px) scale(1.035);
+    box-shadow:0 20px 42px -8px rgba(23,237,255,0.35), 0 0 0 2px var(--cyan);
+  }
+  .launcher:active{transform:translateY(-1px) scale(1.01); transition-duration:.08s;}
+  .launcher-logo{ display:flex; align-items:center; justify-content:center; transition:transform .2s ease; }
+  .launcher:hover .launcher-logo{transform:scale(1.05);}
+  .launcher .label{display:flex; flex-direction:column; line-height:1.2; text-align:left;}
+  .launcher .label .l1{font-size:13.5px; font-weight:700; color:var(--white);}
+  .launcher .label .l2{font-size:10.5px; font-weight:600; color:var(--cyan);}
+  .launcher.hidden{display:none;}
+  @keyframes pop-in{ from{opacity:0; transform:translateY(14px) scale(0.94);} to{opacity:1; transform:translateY(0) scale(1);} }
+
+  /* ---------------- PANEL ---------------- */
+  .widget-panel{
+    position:fixed;
+    left:24px;
+    bottom:80px;
+    z-index:1001;
+    width:430px;
+    max-width:calc(100vw - 32px);
+    height:680px;
+    max-height:calc(100vh - 104px);
+    background:var(--white);
+    border-radius:18px;
+    box-shadow:0 30px 70px -20px rgba(11,29,64,0.5);
+    display:none;
+    flex-direction:column;
+    overflow:hidden;
+    transform-origin:bottom left;
+  }
+  .widget-panel.open{ display:flex; animation:expand-in .32s cubic-bezier(.2,.9,.25,1) both; }
+  @keyframes expand-in{ from{opacity:0; transform:scale(0.85) translateY(16px);} to{opacity:1; transform:scale(1) translateY(0);} }
+
+  .panel-header{
+    position:relative;
+    background:linear-gradient(150deg, var(--navy) 45%, var(--navy-dark) 100%);
+    padding:18px 20px 18px;
+    flex-shrink:0;
+    overflow:hidden;
+  }
+  .panel-header::before{
+    content:"";
+    position:absolute; top:-50%; right:-25%;
+    width:70%; height:200%;
+    background:var(--cyan);
+    opacity:0.12;
+    border-radius:50%;
+  }
+  .panel-header::after{
+    content:"";
+    position:absolute; left:0; right:0; bottom:0; height:3px;
+    background:linear-gradient(90deg, var(--navy), var(--cyan));
+  }
+  .header-top{
+    position:relative; z-index:2;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .header-title-group {
+    display:flex; align-items:center; gap:12px;
+  }
+  .brand-logo {
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .header-text {
+    display:flex; flex-direction:column;
+  }
+  .header-actions{display:flex; gap:6px; margin-left:auto;}
+  .header-actions button{
+    width:28px; height:28px; border-radius:8px; border:none;
+    background:rgba(255,255,255,0.12); color:var(--white);
+    cursor:pointer; display:flex; align-items:center; justify-content:center;
+    transition:background .15s ease;
+  }
+  .header-actions button:hover{background:rgba(255,255,255,0.24);}
+  .header-actions svg{width:13px; height:13px;}
+  .panel-header h2{
+    position:relative; z-index:2;
+    color:var(--white);
+    font-size:19px; font-weight:700; line-height:1.28;
+    margin:0 0 2px;
+  }
+  .panel-header .h2-sub{
+    position:relative; z-index:2;
+    color:rgba(255,255,255,0.65);
+    font-size:11.5px; font-weight:500;
+  }
+
+  /* Body */
+  .panel-body{ flex:1; overflow-y:auto; padding:24px 18px 18px; display:flex; flex-direction:column;}
+  .panel-body::-webkit-scrollbar{width:6px;}
+  .panel-body::-webkit-scrollbar-thumb{background:#DDD; border-radius:10px;}
+
+  /* Quiz Styles */
+  .quiz-question-container {
+    animation: fade-up .3s ease both;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  .quiz-progress {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--cyan-deep);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+  .quiz-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 20px;
+    text-align: center;
+    line-height: 1.3;
+  }
+  .quiz-option {
+    width: 100%;
+    margin-bottom: 12px;
+    padding: 16px;
+    border: 1.5px solid var(--grey-line);
+    border-radius: 12px;
+    background: var(--white);
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--navy);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+    line-height: 1.4;
+  }
+  .quiz-option:hover {
+    border-color: var(--cyan-deep);
+    box-shadow: 0 4px 12px rgba(11,29,64,0.1);
+    transform: translateY(-2px);
+  }
+
+  /* Results Card */
+  .club-list {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: 1fr;
+    animation: fade-up .3s ease both;
+  }
+  @keyframes fade-up{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
+  
+  .club-card {
+    border: 1px solid var(--grey-line); 
+    border-radius: 12px;
+    transition: box-shadow .15s ease, border-color .15s ease;
+    display: flex; 
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--white);
+  }
+  .club-card:hover { box-shadow: 0 12px 26px -16px rgba(11,29,64,0.3); border-color: #cfd6e0; }
+  
+  .club-card img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+  
+  .club-card .info { 
+    padding: 18px; 
+    flex: 1; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between; 
+  }
+  .club-card .pc-name { font-size: 18px; font-weight: 800; color: var(--navy); line-height: 1.3; margin-bottom: 12px;}
+  
+  /* Tags */
+  .club-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+  .club-tag {
+    font-size:9.5px; font-weight:800; color:var(--cyan-deep);
+    background:#E6FCFF; padding:4px 8px; border-radius:4px;
+    text-transform:uppercase; letter-spacing:0.04em;
+  }
+  
+  .view-btn {
+    width: 100%; margin-top: 20px; border: none; border-radius: 8px; height: 42px;
+    background: var(--navy); color: var(--white); font-weight: 800; font-size: 14px;
+    cursor: pointer; transition: background .15s ease;
+  }
+  .view-btn:hover { background: var(--navy-dark); }
+  
+  .reset-btn {
+      margin-top: 12px; background: transparent; color: var(--text-muted); height: 36px;
+      border: 1px solid var(--grey-line); border-radius: 8px; font-weight: 700; cursor: pointer;
+  }
+  .reset-btn:hover { background: var(--grey-bg); color: var(--navy); }
+
+  @media (max-width:460px){
+    .widget-panel{ width:calc(100vw - 24px); left:12px; bottom:68px; height:calc(100vh - 92px); }
+    .launcher{ left:12px; bottom:68px; }
+  }
+</style>
+</head>
+<body>
+
+<button class="launcher" id="launcherBtn">
+  <div class="launcher-logo">
+    <svg viewBox="0 0 32 32" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="16" cy="16" r="14" stroke="#17EDFF" stroke-width="2.5" stroke-dasharray="4 4"/>
+      <path d="M11 16L15 20L22 12" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+  <span class="label">
+    <span class="l1">Find Your Perfect Shoe</span>
+    <span class="l2">Take our quick quiz</span>
+  </span>
+</button>
+
+<div class="widget-panel" id="widgetPanel">
+  <div class="panel-header">
+    <div class="header-top">
+      <div class="header-title-group">
+        <div class="brand-logo">
+          <svg viewBox="0 0 32 32" width="34" height="34" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="16" cy="16" r="14" stroke="#17EDFF" stroke-width="2.5" stroke-dasharray="4 4"/>
+            <path d="M11 16L15 20L22 12" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="header-text">
+          <h2>Shoe Finder Quiz</h2>
+          <div class="h2-sub">Discover your perfect match</div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="minimizeBtn" title="Minimize">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14" stroke="white" stroke-width="2.2" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel-body" id="panelBody">
+    <div id="quizContainer" class="quiz-question-container">
+      <!-- Injected via JS -->
+    </div>
+  </div>
+</div>
+
+<script>
+// Data Source
+const shoesData = [
+  { 
+    name: "MEN'S G.112 GOLF SHOE", 
+    features: ["WATER REPELLENT P.U. LEATHER", "SEAMLESS SYNTHETIC UPPER", "HEEL-TO-TOE TURF TRACTION", "MESH LINING", "REMOVABLE INSOLES"],
+    img: "https://res.cloudinary.com/gfore/image/upload/f_auto,q_auto:best,dpr_auto,w_1260/v1782333187/GMF000156_STWT_2.jpg",
+    id: "g112"
+  },
+  { 
+    name: "MEN'S GALLIVAN2R GOLF SHOE", 
+    features: ["WATER REPELLENT T.P.U.", "REMOVABLE INSOLES", "ODOUR INHIBITING LINING", "LIGHTWEIGHT DESIGN", "G/POD TRACTION SYSTEM", "EVA MIDSOLE"],
+    img: "https://res.cloudinary.com/gfore/image/upload/f_auto,q_auto:best,dpr_auto,w_1260/v1782333225/GMF000058_STWT_GIF.jpg",
+    id: "gallivan2r"
+  },
+  { 
+    name: "MEN'S MG4+ O2 G/LOCK GOLF SHOE", 
+    features: ["PREMIUM WATER REPELLENT T.P.U.", "G/LOCK TECHNOLOGY CLEATS", "MASSAGING INSOLES", "AUXETIC LATTICE MIDSOLE", "PADDED MESH LINING"],
+    img: "https://res.cloudinary.com/gfore/image/upload/f_auto,q_auto:best,dpr_auto,w_1260/v1775057798/GMF000127_TWLT.jpg",
+    id: "mg4"
+  },
+  { 
+    name: "MEN'S GALLIVANTER G/LOCK LEATHER GOLF SHOE", 
+    features: ["WATER REPELLENT PEBBLE FULL GRAIN LEATHER", "G/LOCK CLEAT DESIGN", "TRIPLE DENSITY FOAM CUSHION FOOTBED", "PADDED MESH LINING"],
+    img: "https://res.cloudinary.com/gfore/image/upload/f_auto,q_auto:best,dpr_auto,w_1260/v1782333232/GMF000055_SCHA_2.jpg",
+    id: "gallivanter"
+  }
+];
+
+// Linear 3-Question Quiz Flow
+const quizFlow = [
+  {
+    question: "What is your typical playing style and traction need?",
+    options: [
+      { text: "Casual rounds; I want a seamless, sporty look with turf traction.", result: "g112" },
+      { text: "Walking 18 holes; I need the lightest possible shoe with a spikeless system.", result: "gallivan2r" },
+      { text: "Wet mornings; I need modern spiked traction (G/LOCK) and premium waterproofing.", result: "mg4" },
+      { text: "Traditional courses; I prefer classic leather styling with maximum spiked grip.", result: "gallivanter" }
+    ]
+  },
+  {
+    question: "Which comfort feature sounds best for your feet?",
+    options: [
+      { text: "Standard removable insoles with a breathable, padded mesh lining.", result: "g112" },
+      { text: "An EVA midsole with odour-inhibiting linings for hot days.", result: "gallivan2r" },
+      { text: "A massaging footbed to keep my feet energized.", result: "mg4" },
+      { text: "Thick, triple-density foam cushioning for a plush, premium feel.", result: "gallivanter" }
+    ]
+  },
+  {
+    question: "What upper material and finish do you prefer?",
+    options: [
+      { text: "Seamless synthetic P.U. leather with a sporty edge.", result: "g112" },
+      { text: "Modern, lightweight T.P.U. that sheds water instantly.", result: "gallivan2r" },
+      { text: "Premium T.P.U. with a high-tech auxetic lattice midsole.", result: "mg4" },
+      { text: "Classic pebble full-grain leather for a timeless look.", result: "gallivanter" }
+    ]
+  }
+];
+
+const quizContainer = document.getElementById('quizContainer');
+let currentStepIndex = 0;
+
+// Scoring system to track answers
+let scores = {
+  g112: 0,
+  gallivan2r: 0,
+  mg4: 0,
+  gallivanter: 0
+};
+
+function renderQuestion(index) {
+  // If we've passed the last question, calculate and show results
+  if (index >= quizFlow.length) {
+    calculateAndRenderResult();
+    return;
+  }
+  
+  const step = quizFlow[index];
+  
+  let html = `
+    <div class="quiz-progress">Question ${index + 1} of 3</div>
+    <div class="quiz-title">${step.question}</div>
+  `;
+  
+  step.options.forEach((opt) => {
+    html += `<button class="quiz-option" data-result="${opt.result}">${opt.text}</button>`;
+  });
+  
+  quizContainer.innerHTML = html;
+  
+  // Attach event listeners to buttons
+  const buttons = quizContainer.querySelectorAll('.quiz-option');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const result = this.getAttribute('data-result');
+      
+      // Increment the score for the selected shoe
+      scores[result]++;
+      
+      // Move to next question
+      currentStepIndex++;
+      renderQuestion(currentStepIndex);
+    });
+  });
+}
+
+function calculateAndRenderResult() {
+  // Find the shoe with the highest score
+  let bestShoeId = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+  
+  const shoe = shoesData.find(s => s.id === bestShoeId);
+  
+  let html = `
+    <div class="quiz-progress">Quiz Complete</div>
+    <div class="quiz-title" style="margin-bottom: 14px;">Your Perfect Match</div>
+    <div class="club-list">
+      <div class="club-card">
+        <img src="${shoe.img}" alt="${shoe.name}">
+        <div class="info">
+          <div>
+            <div class="pc-name">${shoe.name}</div>
+            <div class="club-tags">
+              ${shoe.features.map(f => `<span class="club-tag">${f.trim()}</span>`).join('')}
+            </div>
+          </div>
+          <button class="view-btn">Shop Now</button>
+          <button class="reset-btn" id="restartQuizBtn">Retake Quiz</button>
+        </div>
+      </div>
+    </div>
+  `;
+  
+  quizContainer.innerHTML = html;
+  
+  document.getElementById('restartQuizBtn').addEventListener('click', resetQuiz);
+}
+
+function resetQuiz() {
+  currentStepIndex = 0;
+  scores = { g112: 0, gallivan2r: 0, mg4: 0, gallivanter: 0 };
+  renderQuestion(currentStepIndex);
+}
+
+// Initial render
+renderQuestion(currentStepIndex);
+
+// Launcher / panel open-close logic
+const launcherBtn = document.getElementById('launcherBtn');
+const widgetPanel = document.getElementById('widgetPanel');
+
+document.getElementById('minimizeBtn').addEventListener('click', () => {
+  widgetPanel.classList.remove('open');
+  launcherBtn.classList.remove('hidden');
+});
+
+launcherBtn.addEventListener('click', () => {
+  widgetPanel.classList.add('open');
+  launcherBtn.classList.add('hidden');
+  
+  // Reset quiz on open if they closed it on a result screen
+  if(quizContainer.querySelector('.club-list')) {
+      resetQuiz();
+  }
+});
+</script>
+
+</body>
+</html>
