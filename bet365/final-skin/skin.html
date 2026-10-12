@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;0,900;1,700;1,900&display=swap');
     :root {
         --bg-color: #323232;
         --row-border: #444444;
@@ -15,6 +16,7 @@
     }
     body {
     color: var(--text-main);
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     overflow-x: hidden; /* Prevents scrollbars from appearing during the scale animation */
 }
@@ -43,7 +45,7 @@ body::before {
 /* Keyframes for the 1.5 to 1 scale */
 @keyframes scaleBackground {
     0% {
-        transform: scale(1.5);
+        transform: scale(1.2);
     }
     100% {
         transform: scale(1);
@@ -51,7 +53,7 @@ body::before {
 }
     .container {
       display: grid;
-      grid-template-columns: 1fr 1000px 1fr;
+      grid-template-columns: 1fr 970px 1fr;
       width: 100%;
       min-height: 100vh;
     }
@@ -75,8 +77,8 @@ body::before {
         width: 80%;
     }
 
-    .right{
-        background-image: url(img/pic_1.png);
+    .left{
+        background-image: url(img/playes-pic.png);
         background-position: center;
         background-size: 450px;
         background-repeat: no-repeat;
@@ -89,7 +91,7 @@ body::before {
         width: 100%;
     }
     .bottom {
-        margin: 0 0 50px 0;
+        margin: 0;
         padding: 0;
         width: 100%;
     }
@@ -155,216 +157,398 @@ body::before {
             letter-spacing: 1px;
         }
 
-        /* The section holding odds and icons */
-        .odds-section {
+        #dashboard {
             display: flex;
-            justify-content: center; /* Center the group */
-            align-items: center; /* Center vertically */
-            gap: 5px; /* Space between all elements (odds and icons) */
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            padding: 5px;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 280px;
+            width: 90%;
+            margin:auto;
+            align-items:center;
         }
 
-        /* Specific icon style */
-        .odds-icon {
-            width: 10px;
-            height: 10px;
-            object-fit: contain;
-            opacity: 0.8;
-            filter: drop-shadow(0 0 10px rgba(109, 242, 165, 0.5));
-            align-self: flex-end;
-            margin-bottom: 5px;
-        }
-
-        .odd-container {
+        /* --- Main Card Styling --- */
+        .bet-card {
+            background: linear-gradient(180deg, #122a2770 0%, #0d1e1c 100%);
+            border: 2px solid #5de49c;
+            border-radius: 12px;
+            width: 100%;
+            box-shadow: 0 0 15px rgba(93, 228, 156, 1);
+            overflow: hidden;
             display: flex;
             flex-direction: column;
+        }
+
+        .card-content {
+            padding: 15px;
+            flex-grow: 1;
+            text-align: left;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
             align-items: center;
         }
 
-        .odd-label {
-            color: #9ba6a0;
-            font-size: 1vh;
-            font-family: Arial, sans-serif;
-            font-weight: bold;
-            margin-bottom: 5px;
-            letter-spacing: 1px;
-        }
-
-        .new-odds {
-            color: #ffffff;
-            font-size: 1.5vh;
-            font-weight: 700;
+        .market-name {
+            font-size: 1rem;
+            font-weight: 900;
             font-style: italic;
-            line-height: 1;
-            text-shadow: 0 0 20px rgba(109, 242, 165, 0.4);
+            color: #a7f2e1;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 0;
         }
 
-        #status {
+        .odds-container {
+            text-align: right;
+        }
+
+        .unboosted-odds {
+            color: #88a39e;
+            font-size: 0.7rem;
+            text-decoration: line-through;
+            margin-right: 8px;
+            font-weight: 700;
+        }
+
+        .main-odds {
+            font-size: 1rem;
+            font-weight: 900;
+            color: #f6ca3f;
+        }
+
+        .divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 5px 0;
+            border: none;
+        }
+
+        .event-name {
+            font-size: 0.8rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
             color: #ffffff;
-            font-size: 20px;
-            text-align: center;
-            width: 100%;
+        }
+
+        .event-name .v {
+            color: #5de49c;
+            font-size: 0.8em;
+            margin: 0px;
+            text-transform: lowercase;
+            font-weight: 700;
+        }
+
+        .selections-list {
+            position: relative;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .selections-list::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            bottom: 10px;
+            left: 9px;
+            width: 2px;
+            background-color: #5de49c;
+            z-index: 1;
+        }
+
+        .selection-item {
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+            font-size: 0.8rem;
+            color: #e0e6e5;
+            z-index: 2;
+        }
+
+        .selection-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .check-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #122a27;
+            border: 2px solid #5de49c;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+            z-index: 2;
+        }
+
+        .check-icon svg {
+            width: 12px;
+            height: 12px;
+            fill: none;
+            stroke: #5de49c;
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .card-footer {
+            background-color: #79efae;
+            padding: 5px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #0b1514;
+        }
+
+        .footer-col {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-col.right {
+            text-align: right;
+        }
+
+        .footer-label {
+            font-size: 0.8rem;
+            margin-bottom: 0px;
+            font-weight: 400;
+            color: #1a3830;
+        }
+
+        .footer-val {
+            font-size: 1rem;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            color: #000000;
+        }
+
+        .loading {
+            font-size: 1rem;
+            color: #5de49c;
         }
 
         .error {
-            color: #ff6b6b !important;
+            background: #ff4d4d;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            max-width: 600px;
+            line-height: 1.5;
+        }
+        
+        .no-results {
+            font-size: 1rem;
+            color: #88a39e;
+            text-align: center;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .oddsName{
+            color: #5de49c;
+            margin-left: 10px;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 <div class="container">
       <div class="left">
-          <div class="top"><img src="img/top.png" alt=""></div>
-          <div class="odds-container">
-              <div id="status">Fetching Premier League Odds...</div>
-              <div id="cards-container"></div>
-          </div>
-          <div class="bottom"><img src="img/cta.png" alt=""></div>
+          <div class="top"><img src="img/top-text.png" alt=""></div>
+          <div class="middle-image"></div>
+          <div class="bottom"><img src="img/footer.png" alt=""></div>
       </div>
       
       <div class="middle"></div>
       
       <div class="right">
-          <div class="top"><img src="img/top.png" alt=""></div>
-          <div class="middle-image"></div>
-          <div class="bottom"><img src="img/cta.png" alt=""></div>
+          <div class="top"><img src="img/top-text.png" alt=""></div>
+          <div class="middle-image"><div id="dashboard"><div class="loading">Loading odds data...</div></div></div>
+          <div class="bottom"><img src="img/footer.png" alt=""></div>
       </div>
     </div>
 
     <script>
-        const url = 'https://snack-feeds.b-cdn.net/bet365/feeds/premier-league.xml';
-        
-        const matchLimit = 2; 
+        let globalXmlDoc = null; 
 
-        async function fetchAndParseXML() {
-            try {
-                const response = await fetch(url);
-                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-                
-                const xmlText = await response.text();
-                const parser = new DOMParser();
-                const xmlDoc = parser.parseFromString(xmlText, "text/xml");
-                
-                document.getElementById('status').style.display = 'none';
-                
-                generateCards(xmlDoc, matchLimit);
-                startTimers();
-                
-            } catch (error) {
-                const statusDiv = document.getElementById('status');
-                statusDiv.className = "error";
-                statusDiv.innerHTML = `Error loading XML: ${error.message} <br><br>
-                <span style="font-size: 14px;">(Check console for CORS errors if running locally.)</span>`;
+        document.addEventListener("DOMContentLoaded", () => {
+            const dashboard = document.getElementById('dashboard');
+
+            // Fetches data from the live XML feed
+            fetch('https://snack-feeds.b-cdn.net/bet365/feeds/snack-next-match-boosts.xml')
+                .then(response => {
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    return response.text();
+                })
+                .then(xmlString => {
+                    const parser = new DOMParser();
+                    globalXmlDoc = parser.parseFromString(xmlString, "text/xml");
+                    
+                    // Directly render the dashboard with empty filter and picking 3 cards
+                    renderDashboard('',1);
+                })
+                .catch(error => {
+                    console.error('Error fetching or parsing XML:', error);
+                    dashboard.innerHTML = `
+                        <div class="error">
+                            <strong>Failed to load the XML feed.</strong><br>
+                            If you are viewing this locally, your browser may be blocking the request due to CORS (Cross-Origin Resource Sharing) restrictions.<br>
+                            Error details: ${error.message}
+                        </div>
+                    `;
+                });
+        });
+
+        // Function to shuffle an array (Fisher-Yates algorithm)
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
             }
+            return array;
         }
 
-        function generateCards(xmlDoc, limit) {
-            const container = document.getElementById('cards-container');
-            const events = xmlDoc.getElementsByTagName("Event"); 
+        // Updated function takes a filterText and an optional maxCards limit
+        function renderDashboard(filterText, maxCards = 10) {
+            const dashboard = document.getElementById('dashboard');
+            dashboard.innerHTML = ''; 
             
-            if (events.length === 0) {
-                container.innerHTML = "<div style='color: white;'>No events found in the XML feed.</div>";
-                return;
-            }
+            if (!globalXmlDoc) return;
 
-            const matchesToDisplay = Math.min(limit, events.length);
+            // Get all events
+            const events = Array.from(globalXmlDoc.getElementsByTagName('Event'));
+            let allMarkets = [];
 
-            for (let i = 0; i < matchesToDisplay; i++) {
+            // Collect all markets that match the filter
+            for (let i = 0; i < events.length; i++) {
                 const eventNode = events[i];
-                let eventName = eventNode.getAttribute("Name") || eventNode.getAttribute("name") || "Unknown Event";
-                const startTime = eventNode.getAttribute("StartTime");
+                let rawName = eventNode.getAttribute('Name') || '';
+
+                if (filterText !== 'All' && filterText !== '' && !rawName.includes(filterText)) {
+                    continue; 
+                }
+
+                const markets = eventNode.getElementsByTagName('Market');
+                for (let j = 0; j < markets.length; j++) {
+                    allMarkets.push({
+                        eventNode: eventNode,
+                        marketNode: markets[j],
+                        rawName: rawName
+                    });
+                }
+            }
+            
+            // Randomize the order of ALL markets globally
+            allMarkets = shuffleArray(allMarkets);
+
+            let cardsRendered = 0;
+
+            for (let i = 0; i < allMarkets.length; i++) {
+                if (cardsRendered >= maxCards) break;
+
+                const { eventNode, marketNode, rawName } = allMarkets[i];
+                let formattedName = rawName.replace(' v ', ' <span class="v">v</span> ');
                 
-                eventName = eventName.replace(/\s+v\s+/i, ' <span class="vs">v</span> ');
+                const marketName = marketNode.getAttribute('Name');
+                const marketUnBoosted = marketNode.getAttribute('UnBoostedOdds');
+                const marketOdds = marketNode.getAttribute('Odds');
+                const marketOddsDecimal = marketNode.getAttribute('OddsDecimal');
                 
-                const markets = eventNode.getElementsByTagName("Market");
+                const displayOdds = marketOdds ? marketOdds : '';
                 
-                if (markets.length > 0) {
-                    const marketNode = markets[0]; 
-                    const marketName = marketNode.getAttribute("Name") || marketNode.getAttribute("name") || "Match Winner";
-                    
-                    const participants = marketNode.getElementsByTagName("Participant");
-                    
-                    let homeOdds = "-", drawOdds = "-", awayOdds = "-";
-                    let homeFound = false;
-                    
+                let participantsHtml = '';
+                const participants = marketNode.getElementsByTagName('Participant');
+
+                let calculatedReturn = "--";
+                let oddsForCalculation = marketOddsDecimal; 
+
+                if (participants.length > 0) {
                     for (let k = 0; k < participants.length; k++) {
-                        const p = participants[k];
-                        const pName = p.getAttribute("Name") || p.getAttribute("name") || "";
-                        const pOdds = p.getAttribute("Odds") || p.getAttribute("odds") || "-";
+                        const pName = participants[k].getAttribute('Name');
+                        const pOdds = participants[k].getAttribute('Odds');
                         
-                        if (pName.toLowerCase() === "draw" || pName.toLowerCase() === "x") {
-                            drawOdds = pOdds;
-                        } else if (!homeFound) {
-                            homeOdds = pOdds;
-                            homeFound = true;
-                        } else {
-                            awayOdds = pOdds;
+                        // If marketOddsDecimal is empty/falsy, fallback to the participant's odds
+                        if (!oddsForCalculation) {
+                            oddsForCalculation = pOdds;
+                        }
+
+                        participantsHtml += `
+                            <div class="selection-item">
+                                <div class="check-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </div>
+                                <span>${pName}</span>
+                            </div>
+                        `;
+                    }
+
+                    // Evaluate calculatedReturn now that we have our final oddsForCalculation
+                    if (oddsForCalculation) {
+                        if (oddsForCalculation.includes('/')) {
+                            // Fallback logic in case pOdds represents a fraction (e.g. 5/1)
+                            const [num, den] = oddsForCalculation.split('/');
+                            const decimalOdds = (parseFloat(num) / parseFloat(den)) + 1;
+                            calculatedReturn = (10 * decimalOdds).toFixed(2);
+                        } else if (!isNaN(parseFloat(oddsForCalculation))) {
+                            const returnVal = 10 * parseFloat(oddsForCalculation);
+                            calculatedReturn = returnVal.toFixed(2);
                         }
                     }
 
-                    const card = document.createElement('div');
-                    card.className = 'promo-card';
-                    card.innerHTML = `
-                        <div class="match-title">${eventName}</div>
-                        <div class="timer-display" data-starttime="${startTime}">Loading timer...</div>
-                        <div class="main-market">${marketName}</div>
-                        <div class="odds-section">
-                            <div class="odd-container">
-                                <div class="odd-label">HOME</div>
-                                <div class="new-odds">${homeOdds}</div>
+                    const cardHtml = `
+                        <div class="bet-card">
+                            <div class="card-content">
+                                <div class="card-header">
+                                    <h3 class="market-name">${marketName}</h3>
+                                    <div class="odds-container">
+                                        ${marketUnBoosted ? `<span class="unboosted-odds">${marketUnBoosted}</span>` : ''}
+                                        <span class="main-odds">${displayOdds}</span>
+                                    </div>
+                                </div>
+                                <hr class="divider">
+                                
+                                <div class="event-name">${formattedName}</div>
+                                
+                                <div class="selections-list">
+                                    ${participantsHtml}
+                                </div>
                             </div>
-                            <img src="arrow.gif" class="odds-icon" /> <!-- Icon between Draw and Away -->
-                            <div class="odd-container">
-                                <div class="odd-label">DRAW</div>
-                                <div class="new-odds">${drawOdds}</div>
-                            </div>
-                            <img src="arrow.gif" class="odds-icon" /> <!-- Icon between Draw and Away -->
-                            <div class="odd-container">
-                                <div class="odd-label">AWAY</div>
-                                <div class="new-odds">${awayOdds}</div>
+                            
+                            <div class="card-footer">
+                                <div class="footer-col">
+                                    <span class="footer-label">Stake</span>
+                                    <span class="footer-val">£10.00</span>
+                                </div>
+                                <div class="footer-col">
+                                    <span class="footer-label">To Return</span>
+                                    <span class="footer-val">£${calculatedReturn}</span>
+                                </div>
                             </div>
                         </div>
                     `;
-                    container.appendChild(card);
+
+                    dashboard.innerHTML += cardHtml;
+                    cardsRendered++;
                 }
             }
-        }
 
-        function startTimers() {
-            setInterval(() => {
-                document.querySelectorAll('.timer-display').forEach(timerEl => {
-                    const timeStr = timerEl.getAttribute('data-starttime');
-                    if (!timeStr) return;
-                    
-                    const [datePart, timePart] = timeStr.split(' ');
-                    const [day, month, shortYear] = datePart.split('/');
-                    const [hour, minute, second] = timePart.split(':');
-                    const year = "20" + shortYear; 
-                    
-                    const eventDate = new Date(`${year}-${month}-${day}T${hour}:${minute}:${second}`);
-                    const now = new Date();
-                    const diff = eventDate - now;
-                    
-                    if (diff <= 0) {
-                        timerEl.innerText = "Match Started";
-                        timerEl.style.color = "#ff6b6b";
-                    } else {
-                        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-                        const h = Math.floor((diff / (1000 * 60 * 60)) % 24).toString().padStart(2, '0');
-                        const m = Math.floor((diff / 1000 / 60) % 60).toString().padStart(2, '0');
-                        const s = Math.floor((diff / 1000) % 60).toString().padStart(2, '0');
-                        
-                        const dayLabel = d === 1 ? 'Day' : 'Days';
-                        
-                        timerEl.innerText = `${d} ${dayLabel} ${h}:${m}:${s} to kick off`;
-                    }
-                });
-            }, 1000);
+            if (cardsRendered === 0) {
+                dashboard.innerHTML = `<div class="no-results">No markets found for ${filterText}.</div>`;
+            }
         }
-
-        fetchAndParseXML();
     </script>
 </body>
 </html>

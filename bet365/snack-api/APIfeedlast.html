@@ -238,7 +238,7 @@
             const dashboard = document.getElementById('dashboard');
 
             // Fetches data from the live XML feed
-            fetch('https://snack-feeds.b-cdn.net/bet365/feeds/snack-next-match-boosts.xml')
+            fetch('https://snack-feeds.b-cdn.net/bet365/feeds/snack-next-bet-builder.xml')
                 .then(response => {
                     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                     return response.text();
@@ -247,7 +247,7 @@
                     const parser = new DOMParser();
                     globalXmlDoc = parser.parseFromString(xmlString, "text/xml");
                     
-                    // Directly render the dashboard with empty filter and picking 3 cards
+                    // 'Name of team to filter', leave empty for default maxCards
                     renderDashboard('',);
                 })
                 .catch(error => {
@@ -262,7 +262,7 @@
                 });
         });
 
-        // Function to shuffle an array (Fisher-Yates algorithm)
+        // Function to shuffle an array
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
