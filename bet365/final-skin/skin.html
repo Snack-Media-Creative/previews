@@ -79,8 +79,8 @@ body::before {
 
     .left{
         background-image: url(img/playes-pic.png);
-        background-position: center;
-        background-size: 450px;
+        background-position: 50% 75%;
+        background-size: 550px;
         background-repeat: no-repeat;
     }
 
@@ -386,7 +386,7 @@ body::before {
             const dashboard = document.getElementById('dashboard');
 
             // Fetches data from the live XML feed
-            fetch('https://snack-feeds.b-cdn.net/bet365/feeds/snack-next-match-boosts.xml')
+            fetch('https://snack-feeds.b-cdn.net/bet365/feeds/snack-next-bet-builder.xml')
                 .then(response => {
                     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                     return response.text();
