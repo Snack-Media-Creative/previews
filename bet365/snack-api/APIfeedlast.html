@@ -18,7 +18,8 @@
             gap: 20px;
             color: white;
             min-height: 100vh;
-        }
+            background:black;
+           }
 
         h1 {
             color: #5de49c;
@@ -40,11 +41,11 @@
 
         /* --- Main Card Styling --- */
         .bet-card {
-            background: linear-gradient(180deg, #122a27 0%, #0d1e1c 100%);
-            border: 2px solid #5de49c;
+            background: linear-gradient(180deg, #122a27cd 0%, #0d1e1c82 100%);
+            border: 1px solid #ffffff;
             border-radius: 12px;
             width: 100%;
-            box-shadow: 0 0 15px rgba(93, 228, 156, 1);
+            box-shadow: 0 0 15px rgba(93, 228, 156, 1),0 0 0 1px #5de49c,0 0 0 2px #5de49c inset,0 0 15px #5de49c inset;
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -386,7 +387,7 @@
                         <a class="bet-card" href="${escapeAttr(betslipUrl)}" target="_blank" rel="noopener">
                             <div class="card-content">
                                 <div class="card-header">
-                                    <h3 class="market-name">${marketName}</h3>
+                                    <h3 class="market-name"><spam style="color: #ffffff;">BET</spam> BUILDER</h3>
                                     <div class="odds-container">
                                         ${marketUnBoosted ? `<span class="unboosted-odds">${marketUnBoosted}</span>` : ''}
                                         <span class="main-odds">${displayOdds}</span>
@@ -427,8 +428,8 @@
         }
 
         // Selections lists that overflow ease to the bottom, hold there, then restart from the top
-        const SCROLL_DURATION_MS = 3000;
-        const SCROLL_HOLD_MS = 3000;
+        const SCROLL_DURATION_MS = 5000;
+        const SCROLL_HOLD_MS = 5000;
         let autoScrollLists = [];
 
         function refreshAutoScrollLists() {
