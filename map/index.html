@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Store Locator</title>
+  
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    
+    button {
+      background-color: #0066cc;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    button:hover {
+      background-color: #0052a3;
+    }
+
+    #status-text {
+      color: #666;
+      font-style: italic;
+    }
+
+    /* The map must have a defined height */
+    #map { 
+      height: 500px; 
+      width: 100%; 
+      margin-top: 20px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      display: none; /* Hidden until location is found */
+    }
+  </style>
+</head>
+<body>
+  <h2>Find the Nearest Store</h2>
+  <button id="find-btn">Locate Me</button>
+  <p id="status-text"></p>
+  <div id="store-result"></div>
+  
+  <!-- Map Container -->
+  <div id="map"></div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- Our custom logic -->
+  <script src="locator.js"></script>
+</body>
+</html>

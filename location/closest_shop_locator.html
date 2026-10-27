@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Closest Shop Locator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        
+        .bg-dark-btn {
+            background-color: #312e36;
+        }
+        .bg-dark-btn:hover {
+            background-color: #242228;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center py-8 px-4">
+
+    <!-- Control Panel for Testing -->
+    <div id="test-panel" class="fixed top-4 right-4 z-50 w-80 bg-white rounded-xl shadow-lg p-4 border border-gray-200 transition-opacity">
+        <div class="flex justify-between items-center mb-3">
+            <label for="location-test" class="block text-sm font-semibold text-gray-700">
+                🧪 Test Location Override:
+            </label>
+            <button onclick="document.getElementById('test-panel').style.display='none'" class="text-gray-400 hover:text-gray-800 transition-colors">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+        </div>
+        <select id="location-test" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50">
+            <option value="ip">Use My Real IP Location</option>
+            <option value="51.55,-0.1">User in North London (N1)</option>
+            <option value="51.45,-0.1">User in South London (SW2)</option>
+            <option value="51.507,-0.127">User in Central London (WC2)</option>
+            <option value="51.53,0.05">User in East London (E2)</option>
+            <option value="51.49,-0.22">User in West London (W6)</option>
+            <option value="51.368,-0.365">User in Esher (KT10)</option>
+        </select>
+        <p id="status-text" class="text-xs text-gray-500 mt-2">Fetching location...</p>
+    </div>
+
+    <!-- Main Container (Will dynamically render the accordion) -->
+    <div id="venues-container" class="w-full max-w-[400px] bg-white rounded-none shadow-md overflow-hidden relative hidden flex-col">
+        <!-- JS populates this -->
+    </div>
+
+    <!-- Loading State -->
+    <div id="loading-state" class="w-full max-w-[400px] h-[500px] bg-white rounded-none shadow-md flex items-center justify-center">
+        <div class="animate-pulse flex flex-col items-center">
+            <div class="h-8 w-8 bg-gray-300 rounded-full mb-4"></div>
+            <p class="text-gray-500 font-medium">Locating nearest shop...</p>
+        </div>
+    </div>
+
+    <script>
+        const shops = [
+            { name: "PXG London South Store", address: "Unit 1A Sandown Industrial Park Mill Road<br>Esher, KT10 8BL<br>GB", lat: 51.3684, lon: -0.3653, email: "uk.info@pxg.com", image: "https://placehold.co/600x400/e2e8f0/475569?text=PXG+South+Store" },
+            { name: "Central London Golf Hub", address: "15 Oxford Street<br>London, W1D 2DZ<br>GB", lat: 51.5162, lon: -0.1332, email: "central@shop.com", image: "https://placehold.co/600x400/e2e8f0/475569?text=Central+London" },
+            { name: "Camden Town Equipment", address: "42 Camden High Street<br>London, NW1 0JH<br>GB", lat: 51.5348, lon: -0.1402, email: "camden@shop.com", image: "https://placehold.co/600x400/e2e8f0/475569?text=Camden+Town" },
+            { name: "Stratford East Store", address: "Westfield Stratford City, Montfichet Rd<br>London, E20 1EJ<br>GB", lat: 51.5436, lon: -0.0053, email: "east@shop.com", image: "https://placehold.co/600x400/e2e8f0/475569?text=Stratford+East" },
+            { name: "Hammersmith West Hub", address: "144 King Street<br>London, W6 0QU<br>GB", lat: 51.4930, lon: -0.2268, email: "west@shop.com", image: "https://placehold.co/600x400/e2e8f0/475569?text=Hammersmith" },
+            { name: "Brixton South Supply", address: "Brixton Village Market<br>London, SW9 8PS<br>GB", lat: 51.4627, lon: -0.1147, email: "brixton@shop.com", image: "https://placehold.co/600x400/e2e8f0/475569?text=Brixton" },
+            { name: "Wembley Sports Park", address: "Wembley Park Blvd<br>London, HA9 0QL<br>GB", lat: 51.5583, lon: -0.2817, email: "wembley@shop.com", image: "https://placehold.co/600x400/e2e8f0/475569?text=Wembley" },
+            { name: "Canary Wharf Exclusive", address: "Cabot Square<br>London, E14 4QS<br>GB", lat: 51.5050, lon: -0.0210, email: "wharf@shop.com", image: "https://placehold.co/600x400/e2e8f0/475569?text=Canary+Wharf" },
+            { name: "Richmond Park Outfitters", address: "Sheen Road<br>Richmond, TW9 1AD<br>GB", lat: 51.4616, lon: -0.3013, email: "richmond@shop.com", image: "https://placehold.co/600x400/e2e8f0/475569?text=Richmond" },
+            { name: "Greenwich Peninsula Store", address: "The O2 Peninsula Square<br>London, SE10 0DX<br>GB", lat: 51.5028, lon: 0.0031, email: "greenwich@shop.com", image: "https://placehold.co/600x400/e2e8f0/475569?text=Greenwich" }
+        ];
+
+        let currentUserLat = null;
+        let currentUserLon = null;
+        let sortedShopsGlobal = [];
+        let expandedIndex = 0; // Tracks which card is currently open (0 = closest)
+
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371; 
+            const dLat = (lat2 - lat1) * (Math.PI / 180);
+            const dLon = (lon2 - lon1) * (Math.PI / 180);
+            const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            return 2 * R * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        }
+
+        // Toggles which venue is expanded
+        window.setExpanded = function(index) {
+            expandedIndex = index;
+            renderAccordion();
+        }
+
+        function renderAccordion() {
+            const container = document.getElementById('venues-container');
+            const topSixShops = sortedShopsGlobal.slice(0, 6);
+            
+            container.innerHTML = topSixShops.map((shop, index) => {
+                // Expanded "Main" View
+                if (index === expandedIndex) {
+                    return `
+                        <div class="bg-white w-full flex flex-col ${index !== 0 ? 'border-t border-gray-200' : ''}">
+                            <div class="relative h-56 w-full bg-gray-200">
+                                <img src="${shop.image}" alt="Shop Cover" class="w-full h-full object-cover">
+                                <button onclick="setExpanded(-1)" class="absolute top-4 right-4 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow hover:bg-gray-100 transition-colors">
+                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M13 1L1 13M1 1L13 13" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="p-6 pt-5">
+                                <h2 class="text-[22px] font-bold text-gray-900 mb-1 tracking-tight">${shop.name}</h2>
+                                <p class="text-gray-500 text-[15px] leading-relaxed mb-6">${shop.address}</p>
+                                <div class="flex flex-col gap-3 mb-4">
+                                    <button class="w-full bg-dark-btn text-white py-3.5 rounded-[20px] font-semibold text-[13px] tracking-wide flex justify-center items-center gap-2 transition-colors">
+                                        BOOK NOW 
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                                    </button>
+                                    <button class="w-full bg-dark-btn text-white py-3.5 rounded-[20px] font-semibold text-[13px] tracking-wide flex justify-center items-center gap-2 transition-colors">
+                                        STORE DETAILS 
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                                    </button>
+                                </div>
+                                <div class="flex gap-3">
+                                    <button class="flex-1 bg-[#f4f4f5] hover:bg-gray-200 text-gray-800 py-2.5 rounded-[20px] text-[13px] font-semibold flex items-center justify-center gap-2 border border-gray-100 transition-colors">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                                        Directions
+                                    </button>
+                                    <button class="flex-1 bg-[#f4f4f5] hover:bg-gray-200 text-gray-800 py-2.5 rounded-[20px] text-[13px] font-semibold flex items-center justify-center gap-2 border border-gray-100 transition-colors">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                        <span>${shop.email}</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } 
+                // Collapsed "Small" View
+                else {
+                    return `
+                        <div onclick="setExpanded(${index})" class="bg-[#fafafa] px-6 py-5 ${index !== 0 ? 'border-t border-gray-200' : ''} flex flex-col cursor-pointer hover:bg-gray-100 transition-colors">
+                            <div class="flex justify-between items-start mb-1">
+                                <h3 class="text-black text-[16px] font-semibold">${shop.name}</h3>
+                                <span class="text-[11px] font-bold text-gray-500 bg-gray-200 px-2 py-1 rounded tracking-wide">${shop.distance.toFixed(1)} km</span>
+                            </div>
+                            <p class="text-gray-500 text-[14px] leading-relaxed mb-4">
+                                ${shop.address}
+                            </p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-700 text-[14px] font-medium">+44 1932 977777</span>
+                                <a href="#" onclick="event.stopPropagation()" class="text-black text-[14px] font-semibold flex items-center gap-1 hover:underline">
+                                    Visit Website ↗
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                }
+            }).join('');
+        }
+
+        function findAndDisplayClosestShop() {
+            if (!currentUserLat || !currentUserLon) return;
+
+            sortedShopsGlobal = shops.map(shop => ({
+                ...shop,
+                distance: calculateDistance(currentUserLat, currentUserLon, shop.lat, shop.lon)
+            })).sort((a, b) => a.distance - b.distance);
+
+            // Always expand the closest shop by default when locations update
+            expandedIndex = 0;
+            renderAccordion();
+
+            document.getElementById('loading-state').classList.add('hidden');
+            document.getElementById('venues-container').classList.remove('hidden');
+            document.getElementById('venues-container').classList.add('flex');
+            
+            document.getElementById('status-text').innerText = 
+                `Found nearest: ${sortedShopsGlobal[0].name} (${sortedShopsGlobal[0].distance.toFixed(1)} km away from ${currentUserLat.toFixed(3)}, ${currentUserLon.toFixed(3)})`;
+        }
+
+        async function fetchIpLocation() {
+            document.getElementById('status-text').innerText = "Fetching your location via IP...";
+            document.getElementById('venues-container').classList.add('hidden');
+            document.getElementById('venues-container').classList.remove('flex');
+            document.getElementById('loading-state').classList.remove('hidden');
+
+            try {
+                const response = await fetch('https://ipapi.co/json/');
+                const data = await response.json();
+                
+                if (data.latitude && data.longitude) {
+                    currentUserLat = data.latitude;
+                    currentUserLon = data.longitude;
+                    findAndDisplayClosestShop();
+                } else {
+                    throw new Error("Invalid location data");
+                }
+            } catch (error) {
+                console.error("Error fetching IP location:", error);
+                document.getElementById('status-text').innerText = "Failed to fetch IP. Defaulting to Central London.";
+                currentUserLat = 51.5072;
+                currentUserLon = -0.1276;
+                findAndDisplayClosestShop();
+            }
+        }
+
+        document.getElementById('location-test').addEventListener('change', (e) => {
+            const val = e.target.value;
+            if (val === 'ip') {
+                fetchIpLocation();
+            } else {
+                const [lat, lon] = val.split(',');
+                currentUserLat = parseFloat(lat);
+                currentUserLon = parseFloat(lon);
+                findAndDisplayClosestShop();
+            }
+        });
+
+        window.onload = () => {
+            fetchIpLocation();
+        };
+    </script>
+</body>
+</html>

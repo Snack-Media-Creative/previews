@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Email Signature Generator</title>
+<style>
+  :root{
+    --bg:#f4f5f8; --panel:#ffffff; --ink:#1c2030; --muted:#6b7285; --line:#e3e6ee;
+    --brand:#4f46e5; --ok:#12a150; --warn:#d98a00; --radius:12px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  button{font:inherit;cursor:pointer;border-radius:8px;border:1px solid var(--line);background:#fff;color:var(--ink);padding:8px 12px;transition:background .15s,border-color .15s,transform .1s}
+  button:hover{background:#f0f1f6}
+  button:active{transform:scale(.97)}
+  button.primary{background:var(--brand);border-color:var(--brand);color:#fff;font-weight:600}
+  button.primary:hover{filter:brightness(1.08)}
+  button.primary.done{background:var(--ok);border-color:var(--ok)}
+
+  header{padding:14px 24px;background:var(--panel);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+  header h1{margin:0;font-size:18px}
+  header .sub{margin:2px 0 0;color:var(--muted);font-size:12.5px}
+  .progress{flex:1;min-width:240px;max-width:460px}
+  .bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+  .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand),#8b5cf6);border-radius:99px;transition:width .4s cubic-bezier(.3,.8,.3,1)}
+  .progress .meta{display:flex;justify-content:space-between;gap:10px;margin-top:5px;font-size:12px;color:var(--muted)}
+  .progress .meta b{color:var(--ink)}
+  .hbtns{display:flex;gap:8px;margin-left:auto}
+
+  .app{display:grid;grid-template-columns:minmax(340px,450px) 1fr;gap:20px;padding:20px 24px;max-width:1400px;margin:0 auto;align-items:start}
+  @media (max-width:900px){.app{grid-template-columns:1fr;padding:14px}.sticky{position:static!important}}
+
+  /* accordion panels */
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:12px;overflow:hidden}
+  .acc-h{width:100%;display:flex;align-items:center;gap:10px;border:0;border-radius:0;background:none;padding:14px 16px;text-align:left}
+  .acc-h:hover{background:#fafbfd}
+  .acc-t{font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink)}
+  .badge{margin-left:auto;font-size:11.5px;color:var(--muted);background:#f0f1f6;border-radius:99px;padding:2px 9px;min-width:34px;text-align:center}
+  .badge.full{background:#e3f6ea;color:var(--ok)}
+  .chev{transition:transform .25s;color:var(--muted)}
+  .acc.open .chev{transform:rotate(180deg)}
+  .acc-b{display:grid;grid-template-rows:0fr;transition:grid-template-rows .28s ease}
+  .acc.open .acc-b{grid-template-rows:1fr}
+  .acc-i{overflow:hidden;min-height:0}
+  .acc-in{padding:2px 16px 16px}
+
+  label{display:block;font-size:12px;color:var(--muted);margin-bottom:4px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .grid .full{grid-column:1/-1}
+  .fld{position:relative;border-radius:9px}
+  input[type=text],input[type=email],input[type=tel],select,textarea{
+    width:100%;padding:8px 32px 8px 10px;border:1px solid var(--line);border-radius:8px;font:inherit;color:var(--ink);background:#fff;transition:border-color .15s,box-shadow .15s}
+  select{padding-right:10px}
+  textarea{resize:vertical;min-height:54px;padding-right:10px}
+  input:focus,select:focus,textarea:focus{outline:0;border-color:var(--brand);box-shadow:0 0 0 3px color-mix(in srgb,var(--brand) 22%,transparent)}
+  .st{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:13px;font-weight:700;pointer-events:none;opacity:0;transition:opacity .2s}
+  .st.ok{opacity:1;color:var(--ok)} .st.bad{opacity:1;color:var(--warn)}
+  input[type=color]{width:44px;height:34px;padding:2px;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer}
+  input[type=range]{width:100%;accent-color:var(--brand)}
+  .small{font-size:12px;color:var(--muted)}
+  .flash{animation:flash 1s ease}
+  @keyframes flash{0%,60%{box-shadow:0 0 0 4px color-mix(in srgb,var(--brand) 35%,transparent);background:color-mix(in srgb,var(--brand) 8%,transparent)}100%{box-shadow:0 0 0 0 transparent}}
+
+  /* contact rows */
+  #contactList{display:flex;flex-direction:column;gap:8px}
+  .crow{display:flex;align-items:flex-end;gap:8px;padding:8px;border:1px solid var(--line);border-radius:10px;background:#fff;transition:opacity .2s,box-shadow .2s}
+  .crow.dragging{opacity:.5;box-shadow:0 6px 18px rgba(0,0,0,.12)}
+  .crow.off{opacity:.55;background:#fafbfd}
+  .crow.off input{text-decoration:line-through;color:var(--muted)}
+  .cmain{flex:1;min-width:0}
+  .grip{padding:6px 4px;border:0;background:none;color:var(--muted);cursor:grab;letter-spacing:-2px;font-size:16px;line-height:1;align-self:center;margin-top:14px}
+  .grip:hover{color:var(--ink);background:none}
+  .sw{position:relative;display:inline-block;width:36px;height:20px;margin:0 0 8px;flex:none}
+  .sw input{opacity:0;position:absolute;inset:0;width:100%;height:100%;margin:0;cursor:pointer;z-index:2}
+  .sw span{position:absolute;inset:0;background:#cfd3de;border-radius:99px;transition:background .2s}
+  .sw span::after{content:"";position:absolute;left:2px;top:2px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .2s}
+  .sw input:checked + span{background:var(--brand)}
+  .sw input:checked + span::after{transform:translateX(16px)}
+  .sw input:focus-visible + span{box-shadow:0 0 0 3px color-mix(in srgb,var(--brand) 30%,transparent)}
+
+  /* social chips */
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+  .chip{border-radius:99px;padding:6px 12px;font-size:13px}
+  .chip.on{background:color-mix(in srgb,var(--brand) 12%,#fff);border-color:var(--brand);color:var(--brand);font-weight:600}
+  .chip.on::before{content:"✓ "}
+  .srow{display:flex;align-items:flex-end;gap:8px;margin-bottom:8px;animation:pop .25s ease}
+  .srow .fld{flex:1}
+  .srow > div{flex:1;min-width:0}
+  .srow .x{padding:6px 10px;color:var(--muted);margin-bottom:0}
+  .srow[hidden]{display:none!important}
+  @keyframes pop{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+
+  /* drop zones */
+  .drop{display:flex;gap:14px;align-items:center;border:2px dashed var(--line);border-radius:12px;padding:12px;cursor:pointer;transition:border-color .15s,background .15s}
+  .drop:hover,.drop:focus-visible{border-color:var(--brand);outline:0}
+  .drop.over{border-color:var(--brand);background:color-mix(in srgb,var(--brand) 8%,#fff);border-style:solid}
+  .dz-text{display:flex;flex-direction:column;gap:2px;font-size:12.5px;color:var(--muted)}
+  .dz-text b{color:var(--ink);font-size:13.5px}
+  .stage{position:relative;width:120px;height:120px;flex:none;background:#eef0f6 center/cover no-repeat;border-radius:50%;overflow:hidden;display:grid;place-items:center;touch-action:none}
+  .stage.shape-rounded{border-radius:18px} .stage.shape-square{border-radius:0}
+  .stage canvas{position:absolute;inset:0;width:100%;height:100%;display:none}
+  .stage.has canvas{display:block;cursor:grab}
+  .stage.has.grab canvas{cursor:grabbing}
+  .stage .ph{font-size:34px;color:#b7bccb}
+  .stage.has .ph{display:none}
+  .cropctl{margin-top:10px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fafbfd}
+  .cropctl .r{display:flex;gap:10px;align-items:center;justify-content:space-between;margin-top:6px}
+  .bgprev{width:120px;height:60px;flex:none;border-radius:8px;background:#eef0f6 center/cover no-repeat;display:grid;place-items:center;color:#b7bccb;font-size:26px}
+  .bgprev.has span{display:none}
+  .mini{padding:4px 10px;font-size:12px}
+  hr{border:0;border-top:1px solid var(--line);margin:16px 0}
+  .urlrow{margin-top:8px}
+
+  .seg{display:flex;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+  .seg button{flex:1;border:0;border-radius:0;padding:7px 4px;font-size:13px}
+  .seg button + button{border-left:1px solid var(--line)}
+  .seg button.active{background:var(--brand);color:#fff}
+
+  /* layouts + swatches */
+  .layouts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .layouts button{padding:8px 4px 6px;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:12px;color:var(--muted)}
+  .layouts svg{width:100%;height:auto;color:#aab0c2}
+  .layouts button.active{border-color:var(--brand);background:color-mix(in srgb,var(--brand) 9%,#fff);color:var(--brand);font-weight:600}
+  .layouts button.active svg{color:var(--brand)}
+  .swatches{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .sws{width:28px;height:28px;border-radius:50%;padding:0;border:3px solid #fff;box-shadow:0 0 0 1px var(--line)}
+  .sws.active{box-shadow:0 0 0 2px var(--ink)}
+
+  /* preview */
+  .sticky{position:sticky;top:14px}
+  .preview-wrap{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--panel)}
+  .preview-bar{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 14px;border-bottom:1px solid var(--line)}
+  .preview-bar strong{font-size:13px}
+  .hint{font-size:12px;color:var(--brand);background:color-mix(in srgb,var(--brand) 9%,#fff);padding:3px 10px;border-radius:99px}
+  .email-mock{padding:18px 22px;background:#fff;color:#333;transition:background .2s}
+  .email-mock.dark{background:#1b1d26;color:#cfd3e0}
+  .email-mock .fake{color:inherit;opacity:.65;font:14px/1.5 Arial,sans-serif;margin:0 0 22px}
+  #sig{overflow:auto;padding:4px}
+  #sig [data-edit]{cursor:pointer}
+  #sig [data-edit]:hover{outline:2px dashed var(--brand);outline-offset:2px}
+  #sig .hl{outline:2px solid var(--brand)!important;outline-offset:2px}
+  .actions{display:flex;gap:8px;flex-wrap:wrap;padding:12px 14px;border-top:1px solid var(--line);background:#fafbfd}
+  .note{margin:14px 0 0;padding:12px 14px;border-radius:10px;background:#fff8e6;border:1px solid #f2dfa4;color:#6b5513;font-size:12.5px}
+  details.code{margin-top:14px}
+  details.code summary{cursor:pointer;color:var(--muted);font-size:13px}
+  details.code textarea{width:100%;min-height:160px;margin-top:8px;font:12px/1.4 ui-monospace,Menlo,Consolas,monospace;padding:8px}
+  #toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:#1c2030;color:#fff;padding:10px 16px;border-radius:999px;opacity:0;pointer-events:none;transition:.25s;font-size:13px;z-index:10}
+  #toast.show{opacity:1;transform:translateX(-50%)}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>Email Signature Generator</h1>
+    <p class="sub">Fill in your details, or click anything in the preview to edit it.</p>
+  </div>
+  <div class="progress" aria-live="polite">
+    <div class="bar"><i id="barFill"></i></div>
+    <div class="meta"><span id="tip"></span><b id="pct">0%</b></div>
+  </div>
+  <div class="hbtns">
+    <button id="btnSample" type="button">Load sample</button>
+    <button id="btnReset" type="button">Reset</button>
+  </div>
+</header>
+
+<div class="app">
+  <div id="form"></div>
+
+  <div class="sticky">
+    <div class="preview-wrap">
+      <div class="preview-bar">
+        <strong>Live preview</strong>
+        <span class="hint">Click any part to edit it</span>
+        <select id="previewBg" style="width:auto;padding:6px 10px">
+          <option value="light">Light email</option>
+          <option value="dark">Dark email</option>
+        </select>
+      </div>
+      <div class="email-mock" id="mock">
+        <p class="fake">Hi there,<br><br>Thanks for getting in touch — I'll send the details over shortly.<br><br>Best regards,</p>
+        <div id="sig"></div>
+      </div>
+      <div class="actions">
+        <button class="primary" type="button" id="btnCopy">Copy signature</button>
+        <button type="button" id="btnCopyHtml">Copy HTML code</button>
+        <button type="button" id="btnDownload">Download .html</button>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Tip:</strong> uploaded images are embedded in the signature, which works for previewing and for apps like Apple Mail,
+      but Gmail and Outlook often block embedded images. For best results, host your images online and paste their URLs instead.
+      Outlook desktop ignores background images, so Banner and Card fall back to your accent colour there.
+    </div>
+
+    <details class="code">
+      <summary>View HTML source</summary>
+      <textarea id="source" readonly></textarea>
+    </details>
+  </div>
+</div>
+
+<input type="file" id="photoFile" accept="image/*" hidden>
+<input type="file" id="bgFile" accept="image/*" hidden>
+<div id="toast"></div>
+
+<script>
+(function(){
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+  const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  const url = u => /^(https?:|mailto:|tel:)/i.test(u) ? u : 'https://' + u;
+  const clamp = (n,a,b) => Math.max(a, Math.min(b, n));
+
+  const CONTACT = {
+    phone:  {label:'Phone',   tag:'T', ph:'+44 20 7272 7582', type:'tel',   v:'phone', href:v=>'tel:'+v.replace(/[^\d+]/g,'')},
+    mobile: {label:'Mobile',  tag:'M', ph:'+44 7700 900123',  type:'tel',   v:'phone', href:v=>'tel:'+v.replace(/[^\d+]/g,'')},
+    email:  {label:'Email',   tag:'E', ph:'name@snack-media.com',    type:'email', v:'email', href:v=>'mailto:'+v},
+    website:{label:'Website', tag:'W', ph:'www.snack-media.com',     type:'text',  v:'url',   href:v=>url(v)},
+    address:{label:'Address', tag:'A', ph:'5-13 Hatton Wall, London, EC1N 8HX', type:'text', v:'', href:null}
+  };
+  const SOCIAL = {
+    linkedin:{name:'LinkedIn', ph:'linkedin.com/in/name'},
+    twitter: {name:'X / Twitter', short:'X', ph:'x.com/name'},
+    instagram:{name:'Instagram', ph:'instagram.com/name'},
+    facebook:{name:'Facebook', ph:'facebook.com/name'},
+    github:  {name:'GitHub', ph:'github.com/name'},
+    youtube: {name:'YouTube', ph:'youtube.com/@name'}
+  };
+  const SWATCHES = ['#4f46e5','#0ea5e9','#10b981','#f59e0b','#ef4444','#ec4899','#7c3aed','#111827'];
+  const VAL = {
+    email: v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v),
+    url:   v => /^(https?:\/\/)?([\w-]+\.)+[a-z]{2,}(\/\S*)?$/i.test(v),
+    phone: v => { const n = v.replace(/\D/g,'').length; return n >= 6 && n <= 15; }
+  };
+  const DEFAULTS = {
+    name:'',title:'',company:'',tagline:'',phone:'',mobile:'',email:'',website:'',address:'',
+    linkedin:'',twitter:'',instagram:'',facebook:'',github:'',youtube:'',
+    photoSize:88,photoShape:'circle',bgHeight:80,overlay:55,
+    accent:'#4f46e5',textColor:'#333333',font:'Arial, Helvetica, sans-serif',width:520,disclaimer:''
+  };
+  const SAMPLE = {
+    name:'Your Name',title:'Title Here',company:'Snack Media',tagline:'We create the difference',
+    phone:'+44 20 7272 7582',mobile:'+44 7700 900123',email:'name@snack-media.com',website:'www.snack-media.com',
+    address:'5-13 Hatton Wall, London, EC1N 8HX',linkedin:'linkedin.com/in/name',twitter:'x.com/name'
+  };
+
+  const S = { order:Object.keys(CONTACT), show:{}, socials:[], layout:'classic', photo:'', bg:'' };
+  Object.keys(CONTACT).forEach(k => S.show[k] = true);
+  const P = { img:null, zoom:1, x:.5, y:.5 };
+  let activeKey = null, lastZone = 'photo';
+
+  /* ====================== FORM MARKUP ====================== */
+  const fld = (id, label, ph, o={}) =>
+    `<div class="${o.cls||''}"><label for="${id}">${label}</label><div class="fld"><input type="${o.type||'text'}" id="${id}" data-f ${o.v?`data-v="${o.v}"`:''} placeholder="${esc(ph)}" autocomplete="off"><span class="st"></span></div></div>`;
+  const sec = (id, title, body, open) =>
+    `<section class="panel acc ${open?'open':''}" data-sec="${id}"><button type="button" class="acc-h" aria-expanded="${!!open}"><span class="acc-t">${title}</span><span class="badge" id="b-${id}"></span><span class="chev">▾</span></button><div class="acc-b"><div class="acc-i"><div class="acc-in">${body}</div></div></div></section>`;
+  const thumb = {
+    classic:'<svg viewBox="0 0 64 40"><circle cx="12" cy="20" r="7" fill="currentColor"/><rect x="23" y="9" width="1.6" height="22" fill="currentColor"/><rect x="29" y="10" width="26" height="4" rx="1" fill="currentColor"/><rect x="29" y="18" width="20" height="3" rx="1" fill="currentColor" opacity=".6"/><rect x="29" y="24" width="24" height="3" rx="1" fill="currentColor" opacity=".6"/></svg>',
+    stacked:'<svg viewBox="0 0 64 40"><circle cx="12" cy="9" r="5" fill="currentColor"/><rect x="6" y="16" width="52" height="1.6" fill="currentColor"/><rect x="6" y="21" width="26" height="4" rx="1" fill="currentColor"/><rect x="6" y="28" width="34" height="3" rx="1" fill="currentColor" opacity=".6"/></svg>',
+    banner:'<svg viewBox="0 0 64 40"><rect x="4" y="3" width="56" height="10" rx="2" fill="currentColor" opacity=".45"/><circle cx="12" cy="26" r="6" fill="currentColor"/><rect x="23" y="20" width="30" height="4" rx="1" fill="currentColor"/><rect x="23" y="27" width="22" height="3" rx="1" fill="currentColor" opacity=".6"/></svg>',
+    card:'<svg viewBox="0 0 64 40"><rect x="2" y="2" width="60" height="36" rx="5" fill="currentColor" opacity=".35"/><circle cx="14" cy="20" r="6" fill="currentColor"/><rect x="25" y="14" width="28" height="4" rx="1" fill="currentColor"/><rect x="25" y="22" width="20" height="3" rx="1" fill="currentColor" opacity=".7"/></svg>'
+  };
+
+  function buildForm(){
+    const about =
+      `<div class="grid">${fld('name','Full name','Your Name',{cls:'full'})}${fld('title','Job title','Title here')}${fld('company','Company','Snack Media')}${fld('tagline','Tagline / quote','We create the difference',{cls:'full'})}</div>`;
+
+    const rows = Object.entries(CONTACT).map(([k,c]) =>
+      `<div class="crow" data-k="${k}"><button type="button" class="grip" title="Drag to reorder (or use ↑ ↓ keys)" aria-label="Reorder ${c.label}">⋮⋮</button>` +
+      `<div class="cmain"><label for="${k}">${c.label}</label><div class="fld"><input type="${c.type}" id="${k}" data-f ${c.v?`data-v="${c.v}"`:''} placeholder="${esc(c.ph)}" autocomplete="off"><span class="st"></span></div></div>` +
+      `<label class="sw" title="Show in signature"><input type="checkbox" data-show="${k}" checked aria-label="Show ${c.label}"><span></span></label></div>`).join('');
+    const contact = `<div id="contactList">${rows}</div><p class="small" style="margin:10px 0 0">Drag ⋮⋮ to reorder · use the switch to hide a line.</p>`;
+
+    const chips = Object.entries(SOCIAL).map(([k,s]) => `<button type="button" class="chip" data-chip="${k}">${s.name}</button>`).join('');
+    const srows = Object.entries(SOCIAL).map(([k,s]) =>
+      `<div class="srow" data-s="${k}" hidden><div><label for="${k}">${s.name}</label><div class="fld"><input type="text" id="${k}" data-f data-v="url" placeholder="${esc(s.ph)}" autocomplete="off"><span class="st"></span></div></div><button type="button" class="x" data-rm="${k}" title="Remove">✕</button></div>`).join('');
+    const social = `<p class="small" style="margin:0 0 10px">Tap a network to add it.</p><div class="chips" id="chips">${chips}</div>${srows}`;
+
+    const images =
+      `<label>Profile picture</label>
+       <div class="drop" id="photoDrop" data-z="photo" tabindex="0">
+         <div class="stage" id="stage"><canvas id="cropCv" width="280" height="280"></canvas><span class="ph">👤</span></div>
+         <div class="dz-text"><b>Drop a photo here</b><span>or click to browse</span><span>or paste with Ctrl/⌘ + V</span></div>
+       </div>
+       <div class="cropctl" id="cropCtl" hidden>
+         <label for="zoom" style="margin:0">Zoom · <span id="zoomVal">1.0×</span></label>
+         <input type="range" id="zoom" min="1" max="3" step="0.05" value="1">
+         <div class="r"><span class="small">Drag the photo to reposition · scroll to zoom</span><button type="button" class="mini" id="photoClear">Remove</button></div>
+       </div>
+       <div class="urlrow"><div class="fld"><input type="text" id="photoUrl" placeholder="…or paste an image URL"></div></div>
+       <div class="grid" style="margin-top:12px">
+         <div><label for="photoSize">Photo size · <span id="photoSizeVal"></span>px</label><input type="range" id="photoSize" data-f min="48" max="140" step="2" value="88"></div>
+         <div><label>Photo shape</label><div class="seg" id="shapeSeg"><button type="button" data-shape="circle">Circle</button><button type="button" data-shape="rounded">Rounded</button><button type="button" data-shape="square">Square</button></div><input type="hidden" id="photoShape" data-f value="circle"></div>
+       </div>
+       <hr>
+       <label>Background image <span class="small">(Banner &amp; Card layouts)</span></label>
+       <div class="drop" id="bgDrop" data-z="bg" tabindex="0">
+         <div class="bgprev" id="bgPrev"><span>🖼</span></div>
+         <div class="dz-text"><b>Drop a background here</b><span>or click to browse</span></div>
+       </div>
+       <div class="row" style="display:flex;gap:8px;margin-top:8px"><div class="fld" style="flex:1"><input type="text" id="bgUrl" placeholder="…or paste an image URL"></div><button type="button" class="mini" id="bgClear">Remove</button></div>
+       <div class="grid" style="margin-top:12px">
+         <div><label for="bgHeight">Banner height · <span id="bgHeightVal"></span>px</label><input type="range" id="bgHeight" data-f min="40" max="160" step="4" value="80"></div>
+         <div><label for="overlay">Card darkness · <span id="overlayVal"></span>%</label><input type="range" id="overlay" data-f min="0" max="90" step="5" value="55"></div>
+       </div>`;
+
+    const style =
+      `<label>Layout</label>
+       <div class="layouts" id="layouts">${['classic','stacked','banner','card'].map(l=>`<button type="button" data-layout="${l}">${thumb[l]}<span>${l[0].toUpperCase()+l.slice(1)}</span></button>`).join('')}</div>
+       <label style="margin-top:14px">Accent colour</label>
+       <div class="swatches" id="swatches">${SWATCHES.map(c=>`<button type="button" class="sws" data-c="${c}" style="background:${c}" aria-label="${c}"></button>`).join('')}<input type="color" id="accent" data-f value="#4f46e5" aria-label="Custom accent colour"></div>
+       <div class="grid" style="margin-top:14px">
+         <div><label for="textColor">Text colour</label><input type="color" id="textColor" data-f value="#333333"></div>
+         <div><label for="font">Font</label><select id="font" data-f>
+           ${[['Arial, Helvetica, sans-serif','Arial'],['Verdana, Geneva, sans-serif','Verdana'],['Tahoma, Geneva, sans-serif','Tahoma'],["'Trebuchet MS', Helvetica, sans-serif",'Trebuchet MS'],["Georgia, 'Times New Roman', serif",'Georgia'],["'Times New Roman', Times, serif",'Times New Roman'],["'Courier New', Courier, monospace",'Courier New']].map(([v,n])=>`<option value="${esc(v)}" style="font-family:${esc(v)}">${n}</option>`).join('')}
+         </select></div>
+         <div class="full"><label for="width">Width · <span id="widthVal"></span>px</label><input type="range" id="width" data-f min="380" max="640" step="10" value="520"></div>
+         <div class="full"><label for="disclaimer">Disclaimer (optional)</label><textarea id="disclaimer" data-f placeholder="This email is confidential and intended only for the named recipient."></textarea></div>
+       </div>`;
+
+    $('form').innerHTML =
+      sec('about','1 · About you',about,true) +
+      sec('contact','2 · Contact lines',contact,true) +
+      sec('social','3 · Social links',social,false) +
+      sec('images','4 · Images',images,false) +
+      sec('style','5 · Style',style,false);
+  }
+  buildForm(); // must run before any code below looks up form elements
+
+  /* ====================== DATA ====================== */
+  function getData(){
+    const d = {};
+    $$('[data-f]').forEach(f => d[f.id] = f.type==='range' ? +f.value : f.value.trim());
+    d.order = S.order.slice(); d.show = {...S.show}; d.socials = S.socials.slice();
+    d.photo = S.photo; d.bg = S.bg; d.layout = S.layout;
+    return d;
+  }
+
+  /* ====================== SIGNATURE HTML ====================== */
+  function build(d, pv){
+    const E = k => pv ? ` data-edit="${k}"` : '';
+    const dark = d.layout === 'card';
+    const ink = dark ? '#ffffff' : d.textColor;
+    const acc = dark ? '#ffffff' : d.accent;
+    const font = d.font.replace(/"/g,"'");
+    const base = `font-family:${font};font-size:13px;line-height:1.5;color:${ink};`;
+    const radius = d.photoShape==='circle' ? '50%' : d.photoShape==='rounded' ? '14px' : '0';
+
+    const photo = d.photo
+      ? `<img${E('photo')} src="${esc(d.photo)}" width="${d.photoSize}" height="${d.photoSize}" alt="${esc(d.name||'Photo')}" style="display:block;width:${d.photoSize}px;height:${d.photoSize}px;object-fit:cover;border-radius:${radius};border:0;">`
+      : '';
+
+    const rows = d.order.filter(k => d.show[k] && d[k]).map(k => {
+      const c = CONTACT[k], v = d[k], h = c.href ? c.href(v) : null;
+      return `<tr><td valign="top" style="padding:1px 8px 1px 0;color:${acc};font-weight:bold;font-size:12px;width:14px;${base}">${c.tag}</td>` +
+             `<td valign="top"${E(k)} style="padding:1px 0;${base}">${h?`<a href="${esc(h)}" style="color:${ink};text-decoration:none;">${esc(v)}</a>`:esc(v)}</td></tr>`;
+    }).join('');
+
+    const socials = d.socials.filter(k => d[k]).map(k =>
+      `<a${E(k)} href="${esc(url(d[k]))}" style="color:${acc};text-decoration:none;font-weight:bold;">${SOCIAL[k].short||SOCIAL[k].name}</a>`
+    ).join(`<span style="color:${ink};opacity:.5;"> &nbsp;|&nbsp; </span>`);
+
+    const roleParts = [];
+    if(d.title)   roleParts.push(`<span${E('title')}>${esc(d.title)}</span>`);
+    if(d.company) roleParts.push(`<span${E('company')}>${esc(d.company)}</span>`);
+
+    const details =
+      `<table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;${base}">` +
+      (d.name ? `<tr><td${E('name')} style="font-size:20px;font-weight:bold;color:${dark?'#ffffff':d.accent};line-height:1.2;font-family:${font};">${esc(d.name)}</td></tr>` : '') +
+      (roleParts.length ? `<tr><td style="padding-top:2px;${base}">${roleParts.join(' &middot; ')}</td></tr>` : '') +
+      (d.tagline ? `<tr><td${E('tagline')} style="padding-top:4px;font-style:italic;opacity:.85;${base}">${esc(d.tagline)}</td></tr>` : '') +
+      (rows ? `<tr><td style="padding-top:8px;"><table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">${rows}</table></td></tr>` : '') +
+      (socials ? `<tr><td style="padding-top:8px;font-size:12px;${base}">${socials}</td></tr>` : '') +
+      `</table>`;
+
+    const sideBySide =
+      `<table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;"><tr>` +
+      (photo ? `<td valign="top" style="padding-right:18px;">${photo}</td>` : '') +
+      `<td valign="top" style="${photo?`border-left:3px solid ${acc};padding-left:18px;`:''}">${details}</td></tr></table>`;
+
+    const stacked =
+      `<table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">` +
+      (photo ? `<tr><td style="padding-bottom:10px;">${photo}</td></tr>` : '') +
+      `<tr><td style="border-top:3px solid ${acc};padding-top:10px;">${details}</td></tr></table>`;
+
+    let body;
+    if(d.layout === 'stacked'){
+      body = stacked;
+    } else if(d.layout === 'banner'){
+      const bgStyle = d.bg
+        ? `background-color:${d.accent};background-image:url('${esc(d.bg)}');background-size:cover;background-position:center;`
+        : `background-color:${d.accent};`;
+      body =
+        `<table cellpadding="0" cellspacing="0" border="0" width="${d.width}" style="border-collapse:collapse;width:${d.width}px;max-width:100%;">` +
+        `<tr><td${E('bg')} height="${d.bgHeight}" bgcolor="${d.accent}" ${d.bg?`background="${esc(d.bg)}"`:''} style="height:${d.bgHeight}px;${bgStyle}font-size:0;line-height:0;">&nbsp;</td></tr>` +
+        `<tr><td style="padding:16px 0 0 0;">${sideBySide}</td></tr></table>`;
+    } else if(d.layout === 'card'){
+      const a = (d.overlay/100).toFixed(2);
+      const bgImg = d.bg ? `background-image:linear-gradient(rgba(0,0,0,${a}),rgba(0,0,0,${a})),url('${esc(d.bg)}');background-size:cover;background-position:center;` : '';
+      const fb = d.bg ? '#222222' : d.accent;
+      body =
+        `<table cellpadding="0" cellspacing="0" border="0" width="${d.width}" style="border-collapse:collapse;width:${d.width}px;max-width:100%;">` +
+        `<tr><td${E('bg')} bgcolor="${fb}" ${d.bg?`background="${esc(d.bg)}"`:''} style="background-color:${fb};${bgImg}padding:22px;border-radius:10px;">${sideBySide}</td></tr></table>`;
+    } else {
+      body = sideBySide;
+    }
+
+    const disclaimer = d.disclaimer
+      ? `<table cellpadding="0" cellspacing="0" border="0" width="${d.width}" style="border-collapse:collapse;width:${d.width}px;max-width:100%;"><tr><td${E('disclaimer')} style="padding-top:12px;font-family:${font};font-size:10px;line-height:1.4;color:#8a8f9c;">${esc(d.disclaimer).replace(/\n/g,'<br>')}</td></tr></table>`
+      : '';
+
+    return `<table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;"><tr><td>${body}${disclaimer}</td></tr></table>`;
+  }
+  const cleanHtml = () => build(getData(), false);
+
+  /* ====================== RENDER ====================== */
+  let saveT;
+  function render(){
+    const d = getData();
+    ['photoSize','bgHeight','overlay','width'].forEach(k => { const el=$(k+'Val'); if(el) el.textContent = d[k]; });
+    $('sig').innerHTML = build(d, true);
+    $('source').value = build(d, false);
+    applyHl();
+
+    // layout / swatches / shape
+    $$('#layouts button').forEach(b => b.classList.toggle('active', b.dataset.layout === S.layout));
+    $$('#swatches .sws').forEach(b => b.classList.toggle('active', b.dataset.c.toLowerCase() === d.accent.toLowerCase()));
+    $$('#shapeSeg button').forEach(b => b.classList.toggle('active', b.dataset.shape === d.photoShape));
+    const stage = $('stage');
+    stage.className = 'stage shape-' + d.photoShape + (P.img ? ' has' : '') + (stage.classList.contains('grab')?' grab':'');
+    stage.style.backgroundImage = (!P.img && S.photo) ? `url("${S.photo}")` : '';
+    $('cropCtl').hidden = !P.img;
+    const bp = $('bgPrev'); bp.classList.toggle('has', !!S.bg); bp.style.backgroundImage = S.bg ? `url("${S.bg}")` : '';
+
+    updateMeta(d);
+    clearTimeout(saveT); saveT = setTimeout(save, 400);
+  }
+
+  function updateMeta(d){
+    const filled = k => !!d[k];
+    const setB = (id, text, full) => { const b=$('b-'+id); b.textContent = text; b.classList.toggle('full', !!full); };
+    const a = ['name','title','company','tagline'].filter(filled).length;
+    setB('about', a+'/4', a===4);
+    const c = Object.keys(CONTACT).filter(k => d.show[k] && d[k]).length;
+    setB('contact', c+'/5', c===5);
+    const s = d.socials.filter(k => d[k]).length;
+    setB('social', s ? s+' linked' : 'none', false);
+    const im = (d.photo?1:0) + (d.bg?1:0);
+    setB('images', im+'/2', im===2);
+    setB('style', d.layout, false);
+
+    const checks = [
+      [!!d.name, 'Start with your name — it headlines the signature.'],
+      [!!d.title && !!d.company, 'Add your job title and company.'],
+      [VAL.email(d.email||''), 'Add a valid email address.'],
+      [!!(d.phone||d.mobile), 'Add a phone number so people can reach you.'],
+      [!!d.website, 'Add your website.'],
+      [!!d.photo, 'Drop in a profile photo to make it personal.'],
+      [s > 0, 'Pick a social network to link to.']
+    ];
+    const done = checks.filter(x => x[0]).length;
+    const pct = Math.round(done / checks.length * 100);
+    $('barFill').style.width = pct + '%';
+    $('pct').textContent = pct + '%';
+    const next = checks.find(x => !x[0]);
+    $('tip').textContent = next ? next[1] : 'Looking great — copy it into your email app!';
+  }
+
+  /* ====================== VALIDATION ICONS ====================== */
+  function status(input){
+    const t = input.dataset.v, el = input.parentElement.querySelector('.st'); if(!el) return;
+    const v = input.value.trim();
+    if(!t || !v){ el.className='st'; el.textContent=''; el.title=''; return; }
+    const ok = VAL[t](v);
+    el.className = 'st ' + (ok ? 'ok' : 'bad');
+    el.textContent = ok ? '✓' : '!';
+    el.title = ok ? '' : (t==='email' ? 'This doesn\'t look like a valid email' : t==='phone' ? 'Check this phone number' : 'Check this web address');
+  }
+
+  /* ====================== PREVIEW ⇄ FORM LINKING ====================== */
+  function applyHl(){
+    $$('#sig .hl').forEach(n => n.classList.remove('hl'));
+    if(activeKey) $$(`#sig [data-edit="${activeKey}"]`).forEach(n => n.classList.add('hl'));
+  }
+  function openSec(id){
+    const s = document.querySelector(`[data-sec="${id}"]`); if(!s) return false;
+    const was = s.classList.contains('open');
+    s.classList.add('open'); s.querySelector('.acc-h').setAttribute('aria-expanded','true');
+    return !was;
+  }
+  function scrollFlash(el){
+    if(!el) return;
+    el.scrollIntoView({behavior:'smooth', block:'center'});
+    el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash');
+    setTimeout(() => el.classList.remove('flash'), 1100);
+  }
+  function focusKey(k){
+    if(k === 'photo' || k === 'bg'){
+      const wait = openSec('images');
+      setTimeout(() => { const z=$(k+'Drop'); scrollFlash(z); z.focus({preventScroll:true}); }, wait?280:0);
+      return;
+    }
+    const inp = $(k); if(!inp) return;
+    let wait = openSec(inp.closest('[data-sec]').dataset.sec);
+    if(SOCIAL[k] && !S.socials.includes(k)){ setSocial(k, true); }
+    setTimeout(() => { inp.focus({preventScroll:true}); scrollFlash(inp.closest('.crow, .srow, .fld')); }, wait?280:30);
+  }
+  $('sig').addEventListener('click', e => {
+    if(e.target.closest('a')) e.preventDefault();
+    const t = e.target.closest('[data-edit]'); if(t) focusKey(t.dataset.edit);
+  });
+  document.addEventListener('focusin', e => {
+    const id = e.target.id;
+    activeKey = (e.target.matches('[data-f]') && id) ? id : (e.target.dataset && e.target.dataset.z) || null;
+    applyHl();
+  });
+  document.addEventListener('focusout', () => { activeKey = null; applyHl(); });
+
+  /* ====================== ACCORDION ====================== */
+  $('form').addEventListener('click', e => {
+    const h = e.target.closest('.acc-h');
+    if(h){ const s = h.parentElement; const o = s.classList.toggle('open'); h.setAttribute('aria-expanded', o); }
+  });
+
+  /* ====================== INPUT HANDLING ====================== */
+  $('form').addEventListener('input', e => {
+    const t = e.target;
+    if(t.id === 'photoUrl'){ P.img = null; S.photo = t.value.trim(); render(); return; }
+    if(t.id === 'bgUrl'){ S.bg = t.value.trim(); render(); return; }
+    if(t.id === 'zoom'){ setZoom(+t.value); return; }
+    if(t.matches('[data-f]')){ status(t); render(); }
+  });
+  $('form').addEventListener('change', e => {
+    const t = e.target;
+    if(t.matches('[data-show]')){
+      const k = t.dataset.show; S.show[k] = t.checked;
+      t.closest('.crow').classList.toggle('off', !t.checked); render();
+    }
+  });
+  $('form').addEventListener('click', e => {
+    const lay = e.target.closest('[data-layout]'); if(lay){ S.layout = lay.dataset.layout; render(); return; }
+    const sw = e.target.closest('.sws'); if(sw){ $('accent').value = sw.dataset.c; render(); return; }
+    const sh = e.target.closest('[data-shape]'); if(sh){ $('photoShape').value = sh.dataset.shape; render(); return; }
+    const chip = e.target.closest('[data-chip]'); if(chip){ setSocial(chip.dataset.chip, !S.socials.includes(chip.dataset.chip), true); return; }
+    const rm = e.target.closest('[data-rm]'); if(rm){ setSocial(rm.dataset.rm, false); return; }
+    if(e.target.closest('#photoClear')){ clearPhoto(); return; }
+    if(e.target.closest('#bgClear')){ S.bg=''; $('bgUrl').value=''; render(); return; }
+  });
+
+  function setSocial(k, on, focus){
+    const i = S.socials.indexOf(k);
+    if(on && i < 0) S.socials.push(k);
+    if(!on && i >= 0){ S.socials.splice(i,1); }
+    syncSocialUI();
+    if(on && focus) setTimeout(() => $(k).focus(), 30);
+    render();
+  }
+  function syncSocialUI(){
+    $$('[data-chip]').forEach(c => c.classList.toggle('on', S.socials.includes(c.dataset.chip)));
+    $$('.srow').forEach(r => { r.hidden = !S.socials.includes(r.dataset.s); });
+  }
+
+  /* ====================== DRAG-REORDER CONTACT ROWS ====================== */
+  const list = $('contactList');
+  let dragRow = null;
+  list.addEventListener('mousedown', e => { const g = e.target.closest('.grip'); if(g) g.closest('.crow').draggable = true; });
+  list.addEventListener('dragstart', e => {
+    const r = e.target.closest('.crow'); if(!r) return;
+    dragRow = r; r.classList.add('dragging'); e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', r.dataset.k);
+  });
+  list.addEventListener('dragover', e => {
+    if(!dragRow) return; e.preventDefault();
+    const rest = $$('.crow:not(.dragging)', list);
+    const after = rest.find(el => { const b = el.getBoundingClientRect(); return e.clientY < b.top + b.height/2; });
+    after ? list.insertBefore(dragRow, after) : list.appendChild(dragRow);
+  });
+  list.addEventListener('dragend', () => {
+    if(!dragRow) return;
+    dragRow.classList.remove('dragging'); dragRow.draggable = false; dragRow = null;
+    S.order = $$('.crow', list).map(r => r.dataset.k); render();
+  });
+  list.addEventListener('keydown', e => {
+    const g = e.target.closest('.grip'); if(!g || !['ArrowUp','ArrowDown'].includes(e.key)) return;
+    e.preventDefault();
+    const row = g.closest('.crow');
+    if(e.key === 'ArrowUp' && row.previousElementSibling) list.insertBefore(row, row.previousElementSibling);
+    if(e.key === 'ArrowDown' && row.nextElementSibling) list.insertBefore(row.nextElementSibling, row);
+    S.order = $$('.crow', list).map(r => r.dataset.k); g.focus(); render();
+  });
+  function applyOrderUI(){
+    S.order.forEach(k => list.appendChild(list.querySelector(`[data-k="${k}"]`)));
+    $$('[data-show]').forEach(cb => { cb.checked = !!S.show[cb.dataset.show]; cb.closest('.crow').classList.toggle('off', !cb.checked); });
+  }
+
+  /* ====================== IMAGES ====================== */
+  const cv = $('cropCv'), cx = cv.getContext('2d'), stage = $('stage');
+  function paintPhoto(){
+    if(!P.img) return;
+    const W = P.img.width, H = P.img.height, base = Math.min(W,H) / P.zoom;
+    const sx = (W - base) * P.x, sy = (H - base) * P.y;
+    cx.fillStyle = '#fff'; cx.fillRect(0,0,280,280);
+    cx.drawImage(P.img, sx, sy, base, base, 0, 0, 280, 280);
+    S.photo = cv.toDataURL('image/jpeg', .9);
+  }
+  function setZoom(z){
+    P.zoom = clamp(z, 1, 3); $('zoom').value = P.zoom; $('zoomVal').textContent = P.zoom.toFixed(1) + '×';
+    paintPhoto(); render();
+  }
+  function clearPhoto(){
+    P.img = null; S.photo = ''; $('photoUrl').value = ''; cx.clearRect(0,0,280,280); render();
+  }
+  function handleFile(file, kind){
+    if(!file || !file.type.startsWith('image/')){ toast('Please choose an image file'); return; }
+    const img = new Image(), u = URL.createObjectURL(file);
+    img.onload = () => {
+      if(kind === 'photo'){
+        P.img = img; P.zoom = 1; P.x = P.y = .5; $('zoom').value = 1; $('zoomVal').textContent = '1.0×';
+        $('photoUrl').value = ''; paintPhoto();
+        openSec('images'); toast('Photo added — drag it to reposition');
+      } else {
+        const k = Math.min(1, 1000 / img.width), c = document.createElement('canvas');
+        c.width = Math.round(img.width * k); c.height = Math.round(img.height * k);
+        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+        S.bg = c.toDataURL('image/jpeg', .85); $('bgUrl').value = '';
+        toast('Background added');
+        if(S.layout === 'classic' || S.layout === 'stacked'){ S.layout = 'banner'; }
+      }
+      URL.revokeObjectURL(u); render();
+    };
+    img.onerror = () => { URL.revokeObjectURL(u); toast('Could not read that image'); };
+    img.src = u;
+  }
+  ['photo','bg'].forEach(kind => {
+    const z = $(kind + 'Drop'), input = $(kind + 'File');
+    z.addEventListener('click', e => { if(kind==='photo' && P.img && e.target.closest('#stage')) return; input.click(); });
+    z.addEventListener('keydown', e => { if(e.key==='Enter' || e.key===' '){ e.preventDefault(); input.click(); } });
+    z.addEventListener('dragenter', e => { e.preventDefault(); z.classList.add('over'); });
+    z.addEventListener('dragover',  e => { e.preventDefault(); z.classList.add('over'); });
+    z.addEventListener('dragleave', e => { if(!z.contains(e.relatedTarget)) z.classList.remove('over'); });
+    z.addEventListener('drop', e => { e.preventDefault(); z.classList.remove('over'); handleFile(e.dataTransfer.files[0], kind); });
+    z.addEventListener('mouseenter', () => { lastZone = kind; activeKey = kind; applyHl(); });
+    z.addEventListener('mouseleave', () => { if(document.activeElement !== z){ activeKey = null; applyHl(); } });
+    input.addEventListener('change', e => { handleFile(e.target.files[0], kind); e.target.value = ''; });
+  });
+  window.addEventListener('dragover', e => { if(e.dataTransfer && [...e.dataTransfer.types].includes('Files')) e.preventDefault(); });
+  window.addEventListener('drop', e => { if(e.dataTransfer && [...e.dataTransfer.types].includes('Files')) e.preventDefault(); });
+  document.addEventListener('paste', e => {
+    const it = [...(e.clipboardData ? e.clipboardData.items : [])].find(i => i.type.startsWith('image/'));
+    if(it){ e.preventDefault(); handleFile(it.getAsFile(), lastZone); }
+  });
+
+  // pan & zoom the profile picture
+  let pan = null;
+  stage.addEventListener('pointerdown', e => {
+    if(!P.img) return;
+    pan = {x:e.clientX, y:e.clientY, px:P.x, py:P.y}; stage.setPointerCapture(e.pointerId); stage.classList.add('grab'); e.stopPropagation();
+  });
+  stage.addEventListener('pointermove', e => {
+    if(!pan) return;
+    const base = Math.min(P.img.width, P.img.height) / P.zoom, mx = P.img.width - base, my = P.img.height - base;
+    if(mx > 0) P.x = clamp(pan.px - ((e.clientX - pan.x) / 120) * base / mx, 0, 1);
+    if(my > 0) P.y = clamp(pan.py - ((e.clientY - pan.y) / 120) * base / my, 0, 1);
+    paintPhoto(); render();
+  });
+  const endPan = () => { pan = null; stage.classList.remove('grab'); };
+  stage.addEventListener('pointerup', endPan); stage.addEventListener('pointercancel', endPan);
+  stage.addEventListener('wheel', e => { if(!P.img) return; e.preventDefault(); setZoom(P.zoom + (e.deltaY < 0 ? .1 : -.1)); }, {passive:false});
+
+  /* ====================== COPY / DOWNLOAD / TOAST ====================== */
+  function toast(msg){
+    const t = $('toast'); t.textContent = msg; t.classList.add('show');
+    clearTimeout(toast._t); toast._t = setTimeout(() => t.classList.remove('show'), 2200);
+  }
+  function flashBtn(btn, label){
+    const old = btn.textContent; btn.textContent = label; btn.classList.add('done');
+    setTimeout(() => { btn.textContent = old; btn.classList.remove('done'); }, 1800);
+  }
+  async function copyRich(){
+    const html = cleanHtml(), tmp = document.createElement('div');
+    tmp.innerHTML = html;
+    try{
+      await navigator.clipboard.write([new ClipboardItem({
+        'text/html': new Blob([html], {type:'text/html'}),
+        'text/plain': new Blob([tmp.innerText || tmp.textContent], {type:'text/plain'})
+      })]);
+    }catch(err){
+      tmp.style.cssText = 'position:fixed;left:-9999px;top:0;';
+      document.body.appendChild(tmp);
+      const r = document.createRange(); r.selectNodeContents(tmp);
+      const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+      let ok = false; try{ ok = document.execCommand('copy'); }catch(_){}
+      s.removeAllRanges(); tmp.remove();
+      if(!ok){ toast('Copy failed — try “Copy HTML code” instead'); return; }
+    }
+    flashBtn($('btnCopy'), 'Copied ✓'); toast('Signature copied — paste it into your email settings');
+  }
+  $('btnCopy').onclick = copyRich;
+  $('btnCopyHtml').onclick = async () => {
+    try{ await navigator.clipboard.writeText(cleanHtml()); }
+    catch(e){ const t=$('source'); t.select(); document.execCommand('copy'); }
+    flashBtn($('btnCopyHtml'), 'Copied ✓'); toast('HTML code copied');
+  };
+  $('btnDownload').onclick = () => {
+    const doc = `<!DOCTYPE html>\n<html><head><meta charset="utf-8"><title>Email signature</title></head>\n<body>\n${cleanHtml()}\n</body></html>`;
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([doc], {type:'text/html'})); a.download = 'email-signature.html'; a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  };
+  $('previewBg').onchange = e => $('mock').classList.toggle('dark', e.target.value === 'dark');
+
+  /* ====================== STATE: save / load / reset ====================== */
+  function save(){
+    try{ localStorage.setItem('sigGen2', JSON.stringify(getData())); }catch(e){}
+  }
+  function applyData(d){
+    $$('[data-f]').forEach(f => { f.value = d[f.id] !== undefined ? d[f.id] : DEFAULTS[f.id]; status(f); });
+    S.order = Array.isArray(d.order) ? d.order.filter(k => CONTACT[k]) : Object.keys(CONTACT);
+    Object.keys(CONTACT).forEach(k => { if(!S.order.includes(k)) S.order.push(k); S.show[k] = d.show ? d.show[k] !== false : true; });
+    S.socials = Array.isArray(d.socials) ? d.socials.filter(k => SOCIAL[k]) : [];
+    S.layout = d.layout || 'classic'; S.photo = d.photo || ''; S.bg = d.bg || '';
+    P.img = null;
+    $('photoUrl').value = /^https?:/i.test(S.photo) ? S.photo : '';
+    $('bgUrl').value = /^https?:/i.test(S.bg) ? S.bg : '';
+    applyOrderUI(); syncSocialUI(); render();
+  }
+  $('btnSample').onclick = () => {
+    const keep = {photo:S.photo, bg:S.bg};
+    applyData({...DEFAULTS, ...SAMPLE, socials:['linkedin','twitter'], layout:S.layout, ...keep}); toast('Sample loaded');
+  };
+  $('btnReset').onclick = () => { applyData({...DEFAULTS, socials:[], layout:'classic'}); toast('Form cleared'); };
+
+  /* ====================== INIT ====================== */
+  let saved = null;
+  try{ saved = JSON.parse(localStorage.getItem('sigGen2') || 'null'); }catch(e){}
+  applyData(saved && (saved.name || saved.email) ? saved : {...DEFAULTS, ...SAMPLE, socials:['linkedin','twitter']});
+})();
+</script>
+</body>
+</html>
