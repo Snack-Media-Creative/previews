@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OpenStreetMap Custom Icon</title>
+    <!-- 1. Load Leaflet's CSS and JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <!-- 2. Set the size of your map container -->
+    <style>
+        #map { height: 500px; width: 100%; }
+    </style>
+</head>
+<body>
+    
+    <!-- 3. Create a div to hold the map -->
+    <div id="map"></div>
+
+    <script>
+        // 4. Initialize the map and set the starting coordinates and zoom level
+        const map = L.map('map').setView([51.505, -0.09], 13);
+
+        // 5. Load the OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // 6. Define your custom icon
+        const customIcon = L.icon({
+            iconUrl: 'logo-icon.svg', // Replace with your own image URL
+            shadowUrl: 'https://leafletjs.com/examples/custom-icons/circle.png',
+            
+            iconSize:     [38, 95], // size of the icon
+            shadowSize:   [50, 64], // size of the shadow
+            iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+            shadowAnchor: [4, 62],  // the same for the shadow
+            popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
+
+        // 7. Add the marker to the map using your custom icon
+        L.marker([51.5, -0.09], {icon: customIcon}).addTo(map)
+            .bindPopup("Hello! I am a custom icon.");
+    </script>
+</body>
+</html>
