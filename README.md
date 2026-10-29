@@ -1,2 +1,2 @@
-# preview Email for Mizuno
-Previews for Mizuno Email May 2025
+# preview Email for Snack/Mediadrive
+Previews for Snack / Mediadive Clients
