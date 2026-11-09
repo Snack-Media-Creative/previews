@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Premier League Odds Widget · AdKit test page</title>
+<!--
+  AdKit test page for "Custom HTML Widget".
+  Open this file in a browser to try the widget: it runs in a frame the same size and place
+  as on a publisher's site (bottom left, 420 x 120, resized when it opens), with the same
+  AdKit attributes and JavaScript API.
+
+  Edit the widget between the ADKIT WIDGET START and ADKIT WIDGET END lines below.
+  Upload this whole file back to AdKit: only the widget part is published. The rest of this
+  page (the mock site and its styling) is saved with the format for your next download,
+  and never reaches publishers.
+-->
+<style>
+  /* Test page styling: a mock publisher site. Change it to look like the real site. */
+  body { margin: 0; font-family: system-ui, sans-serif; background: #f4f5f7; color: #1f2933; }
+  .adkit-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 10px 16px; background: #0a100d; color: #fff; font-size: 13px; }
+  .adkit-bar strong { color: #4ade80; }
+  .adkit-bar label { margin-left: auto; display: flex; align-items: center; gap: 6px; cursor: pointer; }
+  .site-header { height: 64px; background: #fff; border-bottom: 1px solid #e2e6ed; display: flex; align-items: center; padding: 0 24px; font-weight: 700; }
+  .site-main { max-width: 760px; margin: 32px auto; padding: 0 24px 240px; }
+  .site-main .line { height: 12px; border-radius: 4px; background: #dfe3ea; margin: 0 0 14px; }
+  .site-main .block { height: 220px; border-radius: 8px; background: #e6e9ef; margin: 24px 0; }
+  .adkit-events { position: fixed; top: 56px; right: 16px; width: 300px; max-width: calc(100vw - 32px); background: #fff; border: 1px solid #e2e6ed; border-radius: 8px; font-size: 12px; box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+  .adkit-events h2 { margin: 0; padding: 8px 12px; font-size: 12px; border-bottom: 1px solid #e2e6ed; }
+  .adkit-events ul { list-style: none; margin: 0; padding: 6px 12px; min-height: 24px; color: #52606d; }
+  .adkit-events li { padding: 2px 0; }
+  /* The widget's frame: positioned and sized like AdKit's loader. */
+  #adkit-frame { position: fixed; left: 0; bottom: 0; border: 0; background: transparent; max-width: 100%; max-height: 100%; z-index: 2147483000; color-scheme: normal; }
+  #adkit-frame.adkit-outline { outline: 2px dashed #e11d48; outline-offset: -2px; }
+</style>
+</head>
+<body>
+<div class="adkit-bar">
+  <span><strong>AdKit test page</strong> · Premier League Odds Widget</span>
+  <span>Edit the widget between the ADKIT WIDGET markers, then upload this file to AdKit.</span>
+  <label><input type="checkbox" id="adkit-outline"> Show the widget's frame</label>
+</div>
+<header class="site-header">Example site</header>
+<main class="site-main">
+  <div class="line" style="width: 60%; height: 28px"></div>
+  <div class="line"></div><div class="line"></div><div class="line" style="width: 80%"></div>
+  <div class="block"></div>
+  <div class="line"></div><div class="line"></div><div class="line" style="width: 70%"></div>
+  <div class="block"></div>
+  <div class="line"></div><div class="line" style="width: 50%"></div>
+</main>
+<aside class="adkit-events"><h2>Widget events</h2><ul id="adkit-log"></ul></aside>
+
+<iframe id="adkit-frame" title="Custom HTML Widget" sandbox="allow-scripts"></iframe>
+
+<template id="adkit-widget">
+<!-- ADKIT WIDGET START: everything up to ADKIT WIDGET END is the widget -->
+<style>
+  :root {
+    --primary: #6366f1;
+    --primary-hover: #4f46e5;
+    --primary-light: #eef2ff;
+    --border-light: #e5e7eb;
+    --text-dark: #111827;
+    --text-muted: #4b5563;
+    --gold: #facc15;
+    --gold-hover: #fde047;
+    --navy-dark: #0B1D40;
+    --navy-light: #142852;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-dark);
+    background: transparent;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Collapsed Launcher */
+  .launcher {
+    position: fixed;
+    left: 16px;
+    bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 18px;
+    border: 1px solid #e2e8f0;
+    border-radius: 999px;
+    cursor: pointer;
+    background: #5c2d91;
+    color: #111827;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .launcher:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px -6px rgba(93, 46, 142, 0.25);
+    border-color: #a855f7;
+  }
+  .launcher-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .launcher-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+  .launcher-star-img {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    display: block;
+  }
+  .launcher-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .launcher-title-img {
+    height: 15px;
+    width: auto;
+    max-width: 140px;
+    object-fit: contain;
+    display: block;
+    margin-bottom: 2px;
+  }
+  .launcher-sub {
+    font-size: 11px;
+    font-weight: 700;
+    color: #ffffff;
+  }
+  .launcher-arrow {
+    font-size: 11px;
+    color: #ffffff;
+    margin-left: 2px;
+  }
+
+  /* Expanded Panel */
+  .panel {
+    display: none;
+    position: fixed;
+    left: 10px;
+    right: 10px;
+    top: 10px;
+    bottom: 10px;
+    flex-direction: column;
+    overflow: hidden;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 24px 60px -15px rgba(11, 29, 64, 0.5);
+    border: 1px solid rgba(11, 29, 64, 0.12);
+  }
+
+  /* AdKit toggles .wt-open on the root document element */
+  .wt-open .launcher { display: none; }
+  .wt-open .panel { display: flex; }
+
+  /* Header */
+  .panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 18px;
+    background: #5c2d91;
+    border-bottom: 1px solid #e2e8f0;
+    color: #111827;
+    flex-shrink: 0;
+  }
+  .header-brand {
+    display: flex;
+    align-items: center;
+  }
+  .header-logo-img {
+    height: 32px;
+    width: auto;
+    max-width: 160px;
+    object-fit: contain;
+    display: block;
+  }
+  .panel-close-btn {
+    border: 0;
+    background: #f1f5f9;
+    color: #475569;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .panel-close-btn:hover {
+    background: #e2e8f0;
+    color: #0f172a;
+  }
+
+  /* Promotional Bonus Banner */
+  .promo-strip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
+    background: linear-gradient(90deg, #1e1b4b 0%, #312e81 100%);
+    color: #ffffff;
+    font-size: 12px;
+    flex-shrink: 0;
+    border-bottom: 1px solid #4338ca;
+  }
+  .promo-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+  }
+  .promo-badge {
+    background: var(--gold);
+    color: #111827;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+  }
+  .promo-cta {
+    background: var(--gold);
+    color: #111827;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 5px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.15s ease, transform 0.15s ease;
+    white-space: nowrap;
+  }
+  .promo-cta:hover {
+    background: var(--gold-hover);
+    transform: translateY(-1px);
+  }
+
+  /* Scrollable Body */
+  .panel-body {
+    flex: 1;
+    padding: 12px;
+    overflow-y: auto;
+    background: #f8fafc;
+  }
+
+  /* Match Card Styles from index.html & template */
+  .match-card {
+    border: 1px solid var(--primary);
+    border-radius: 8px;
+    padding: 14px;
+    margin-bottom: 10px;
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  }
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+  }
+  .match-title {
+    font-size: 14px;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--text-dark);
+    line-height: 1.25;
+    padding-right: 6px;
+  }
+  .match-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    flex-shrink: 0;
+  }
+  .more-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: color 0.15s ease;
+  }
+  .more-link:hover {
+    color: var(--primary-hover);
+  }
+  .more-link svg {
+    fill: currentColor;
+    width: 14px;
+    height: 14px;
+  }
+  .match-date {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-top: 2px;
+  }
+
+  /* Odds Row & Boxes */
+  .odds-row {
+    display: flex;
+    gap: 8px;
+  }
+  .odd-box {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+    padding: 8px 10px;
+    background: #fafafa;
+    text-decoration: none;
+    transition: all 0.15s ease;
+    cursor: pointer;
+  }
+  .odd-box:hover {
+    border-color: var(--primary);
+    background: var(--primary-light);
+    transform: translateY(-1px);
+  }
+  .odd-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 4px;
+  }
+  .odd-value {
+    color: var(--primary);
+    font-weight: 800;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+
+  /* Footer & Disclaimer */
+  .panel-footer {
+    padding: 8px 14px;
+    background: #ffffff;
+    border-top: 1px solid #e2e8f0;
+    font-size: 10px;
+    line-height: 1.35;
+    color: #000000;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .panel-footer p {
+    margin: 0;
+  }
+
+  /* Responsive Rules */
+  @media (max-width: 360px) {
+    .odds-row {
+      flex-direction: column;
+      gap: 6px;
+    }
+    .card-header {
+      flex-direction: column;
+      gap: 6px;
+    }
+    .match-meta {
+      align-items: flex-start;
+      margin-top: 4px;
+    }
+  }
+</style>
+
+<!-- Collapsed Launcher Button -->
+<button class="launcher" data-wt-expand aria-label="Open Premier League Odds">
+  <div class="launcher-left">
+    <span class="launcher-icon">
+      <img src="star.png" style="width: 22px; height: 22px;" alt="Star icon" class="launcher-star-img">
+    </span>
+    <div class="launcher-text">
+      <img src="holliwood-text.png" style="height: 15px; width: auto; max-width: 140px;" alt="Premier League Odds" class="launcher-title-img">
+      <span class="launcher-sub">Premier League Odds &bull; Bet Now</span>
+    </div>
+  </div>
+  <span class="launcher-arrow" aria-hidden="true">&#x25B2;</span>
+</button>
+
+<!-- Expanded Panel -->
+<div class="panel">
+  <header class="panel-header">
+    <div class="header-brand">
+      <img src="main-logo.png" style="height: 32px; width: auto; max-width: 160px;" alt="Premier League Odds" class="header-logo-img">
+    </div>
+    <button class="panel-close-btn" data-wt-collapse title="Close widget" aria-label="Close">&minus;</button>
+  </header>
+
+  <div class="promo-strip">
+    <div class="promo-info">
+      <span class="promo-badge">BONUS</span>
+      <span>50 Spins + 25 Sign-Up Offer</span>
+    </div>
+    <a href="https://www.hollywoodbets.net" class="promo-cta" data-wt-label="Promo Banner: Bet Now">Bet Now</a>
+  </div>
+
+  <main class="panel-body">
+    <div id="feed-container">
+      <!-- Matches dynamically injected here -->
+    </div>
+  </main>
+
+  <footer class="panel-footer">
+    <p>Hollywoodbets is a licensed operator. Ts &amp; Cs apply. Winners know when to stop. 18+ only. NRGP counselling: 0800 006 008.</p>
+  </footer>
+</div>
+
+<script>
+(function() {
+  var FALLBACK_FEED = {"tournamentMarkets":[{"tournamentID":3092452,"eventID":9600309,"eventDetailID":773036307,"eventDetailNumber":1,"eventDetailName":"IPSWICH","eventDetailNameExtra":null,"eventDetailOfferedOdds":2.75,"fracOfferedOdd":"11/4","eventDetailOdd":2.75,"eventDetailOverrideOdds":false,"fK_EventDetailStatusID":1,"eventBetTypeDetailMapID":849368079,"eventDetailStartingOdd":2.1,"fracStartingOdd":"21/10","eventDetailPreviousOdd":2.75,"fracPreviousOdd":"11/4","eventBetTypeMapID":233771348,"eventStatusID":1,"betTypeID":15,"betTypeDesc":"Full Time","countryName":"England","tournamentName":"PREMIER LEAGUE","eventNumber":0,"eventDateTime":"2026-11-08T16:00:00","eventName":"IPSWICH vs BOURNEMOUTH"},{"tournamentID":3092452,"eventID":9600309,"eventDetailID":773036308,"eventDetailNumber":2,"eventDetailName":"DRAW","eventDetailNameExtra":null,"eventDetailOfferedOdds":2.4,"fracOfferedOdd":"24/10","eventDetailOdd":2.4,"eventDetailOverrideOdds":false,"fK_EventDetailStatusID":1,"eventBetTypeDetailMapID":849368080,"eventDetailStartingOdd":2.5,"fracStartingOdd":"5/2","eventDetailPreviousOdd":2.4,"fracPreviousOdd":"24/10","eventBetTypeMapID":233771348,"eventStatusID":1,"betTypeID":15,"betTypeDesc":"Full Time","countryName":"England","tournamentName":"PREMIER LEAGUE","eventNumber":0,"eventDateTime":"2026-11-08T16:00:00","eventName":"IPSWICH vs BOURNEMOUTH"},{"tournamentID":3092452,"eventID":9600309,"eventDetailID":773036309,"eventDetailNumber":3,"eventDetailName":"BOURNEMOUTH","eventDetailNameExtra":null,"eventDetailOfferedOdds":0.95,"fracOfferedOdd":"19/20","eventDetailOdd":0.95,"eventDetailOverrideOdds":false,"fK_EventDetailStatusID":1,"eventBetTypeDetailMapID":849368081,"eventDetailStartingOdd":1.25,"fracStartingOdd":"5/4","eventDetailPreviousOdd":0.95,"fracPreviousOdd":"19/20","eventBetTypeMapID":233771348,"eventStatusID":1,"betTypeID":15,"betTypeDesc":"Full Time","countryName":"England","tournamentName":"PREMIER LEAGUE","eventNumber":0,"eventDateTime":"2026-11-08T16:00:00","eventName":"IPSWICH vs BOURNEMOUTH"},{"tournamentID":3092452,"eventID":9600311,"eventDetailID":773036971,"eventDetailNumber":1,"eventDetailName":"BRIGHTON","eventDetailNameExtra":null,"eventDetailOfferedOdds":0.9,"fracOfferedOdd":"9/10","eventDetailOdd":0.9,"eventDetailOverrideOdds":false,"fK_EventDetailStatusID":1,"eventBetTypeDetailMapID":849368741,"eventDetailStartingOdd":0.85,"fracStartingOdd":"17/20","eventDetailPreviousOdd":0.9,"fracPreviousOdd":"9/10","eventBetTypeMapID":233771646,"eventStatusID":1,"betTypeID":15,"betTypeDesc":"Full Time","countryName":"England","tournamentName":"PREMIER LEAGUE","eventNumber":0,"eventDateTime":"2026-11-08T16:00:00","eventName":"BRIGHTON vs BRENTFORD"},{"tournamentID":3092452,"eventID":9600311,"eventDetailID":773036972,"eventDetailNumber":2,"eventDetailName":"DRAW","eventDetailNameExtra":null,"eventDetailOfferedOdds":2.55,"fracOfferedOdd":"51/20","eventDetailOdd":2.55,"eventDetailOverrideOdds":false,"fK_EventDetailStatusID":1,"eventBetTypeDetailMapID":849368742,"eventDetailStartingOdd":2.9,"fracStartingOdd":"29/10","eventDetailPreviousOdd":2.55,"fracPreviousOdd":"51/20","eventBetTypeMapID":233771646,"eventStatusID":1,"betTypeID":15,"betTypeDesc":"Full Time","countryName":"England","tournamentName":"PREMIER LEAGUE","eventNumber":0,"eventDateTime":"2026-11-08T16:00:00","eventName":"BRIGHTON vs BRENTFORD"},{"tournamentID":3092452,"eventID":9600311,"eventDetailID":773036973,"eventDetailNumber":3,"eventDetailName":"BRENTFORD","eventDetailNameExtra":null,"eventDetailOfferedOdds":2.75,"fracOfferedOdd":"11/4","eventDetailOdd":2.75,"eventDetailOverrideOdds":false,"fK_EventDetailStatusID":1,"eventBetTypeDetailMapID":849368743,"eventDetailStartingOdd":3,"fracStartingOdd":"3/1","eventDetailPreviousOdd":2.75,"fracPreviousOdd":"11/4","eventBetTypeMapID":233771646,"eventStatusID":1,"betTypeID":15,"betTypeDesc":"Full Time","countryName":"England","tournamentName":"PREMIER LEAGUE","eventNumber":0,"eventDateTime":"2026-11-08T16:00:00","eventName":"BRIGHTON vs BRENTFORD"},{"tournamentID":3092452,"eventID":9600312,"eventDetailID":773034374,"eventDetailNumber":1,"eventDetailName":"SUNDERLAND","eventDetailNameExtra":null,"eventDetailOfferedOdds":2.65,"fracOfferedOdd":"26/10","eventDetailOdd":2.65,"eventDetailOverrideOdds":false,"fK_EventDetailStatusID":1,"eventBetTypeDetailMapID":849366171,"eventDetailStartingOdd":3.2,"fracStartingOdd":"32/10","eventDetailPreviousOdd":2.65,"fracPreviousOdd":"26/10","eventBetTypeMapID":233770490,"eventStatusID":1,"betTypeID":15,"betTypeDesc":"Full Time","countryName":"England","tournamentName":"PREMIER LEAGUE","eventNumber":0,"eventDateTime":"2026-11-08T16:00:00","eventName":"SUNDERLAND vs CHELSEA"},{"tournamentID":3092452,"eventID":9600312,"eventDetailID":773034375,"eventDetailNumber":2,"eventDetailName":"DRAW","eventDetailNameExtra":null,"eventDetailOfferedOdds":2.3,"fracOfferedOdd":"23/10","eventDetailOdd":2.3,"eventDetailOverrideOdds":false,"fK_EventDetailStatusID":1,"eventBetTypeDetailMapID":849366172,"eventDetailStartingOdd":2.6,"fracStartingOdd":"26/10","eventDetailPreviousOdd":2.3,"fracPreviousOdd":"23/10","eventBetTypeMapID":233770490,"eventStatusID":1,"betTypeID":15,"betTypeDesc":"Full Time","countryName":"England","tournamentName":"PREMIER LEAGUE","eventNumber":0,"eventDateTime":"2026-11-08T16:00:00","eventName":"SUNDERLAND vs CHELSEA"},{"tournamentID":3092452,"eventID":9600312,"eventDetailID":773034376,"eventDetailNumber":3,"eventDetailName":"CHELSEA","eventDetailNameExtra":null,"eventDetailOfferedOdds":1.01,"fracOfferedOdd":"1/1","eventDetailOdd":1.01,"eventDetailOverrideOdds":false,"fK_EventDetailStatusID":1,"eventBetTypeDetailMapID":849366173,"eventDetailStartingOdd":0.85,"fracStartingOdd":"17/20","eventDetailPreviousOdd":1.01,"fracPreviousOdd":"1/1","eventBetTypeMapID":233770490,"eventStatusID":1,"betTypeID":15,"betTypeDesc":"Full Time","countryName":"England","tournamentName":"PREMIER LEAGUE","eventNumber":0,"eventDateTime":"2026-11-08T16:00:00","eventName":"SUNDERLAND vs CHELSEA"},{"tournamentID":3092452,"eventID":9600316,"eventDetailID":773036410,"eventDetailNumber":1,"eventDetailName":"CRYSTAL PALACE","eventDetailNameExtra":null,"eventDetailOfferedOdds":4,"fracOfferedOdd":"4/1","eventDetailOdd":4,"eventDetailOverrideOdds":false,"fK_EventDetailStatusID":1,"eventBetTypeDetailMapID":849368182,"eventDetailStartingOdd":3.7,"fracStartingOdd":"37/10","eventDetailPreviousOdd":4,"fracPreviousOdd":"4/1","eventBetTypeMapID":233771390,"eventStatusID":1,"betTypeID":15,"betTypeDesc":"Full Time","countryName":"England","tournamentName":"PREMIER LEAGUE","eventNumber":0,"eventDateTime":"2026-11-08T16:00:00","eventName":"CRYSTAL PALACE vs LIVERPOOL"},{"tournamentID":3092452,"eventID":9600316,"eventDetailID":773036411,"eventDetailNumber":2,"eventDetailName":"DRAW","eventDetailNameExtra":null,"eventDetailOfferedOdds":3,"fracOfferedOdd":"3/1","eventDetailOdd":3,"eventDetailOverrideOdds":false,"fK_EventDetailStatusID":1,"eventBetTypeDetailMapID":849368183,"eventDetailStartingOdd":3.4,"fracStartingOdd":"34/10","eventDetailPreviousOdd":2.95,"fracPreviousOdd":"29/10","eventBetTypeMapID":233771390,"eventStatusID":1,"betTypeID":15,"betTypeDesc":"Full Time","countryName":"England","tournamentName":"PREMIER LEAGUE","eventNumber":0,"eventDateTime":"2026-11-08T16:00:00","eventName":"CRYSTAL PALACE vs LIVERPOOL"},{"tournamentID":3092452,"eventID":9600316,"eventDetailID":773036412,"eventDetailNumber":3,"eventDetailName":"LIVERPOOL","eventDetailNameExtra":null,"eventDetailOfferedOdds":0.6,"fracOfferedOdd":"6/10","eventDetailOdd":0.6,"eventDetailOverrideOdds":false,"fK_EventDetailStatusID":1,"eventBetTypeDetailMapID":849368184,"eventDetailStartingOdd":0.65,"fracStartingOdd":"13/20","eventDetailPreviousOdd":0.6,"fracPreviousOdd":"6/10","eventBetTypeMapID":233771390,"eventStatusID":1,"betTypeID":15,"betTypeDesc":"Full Time","countryName":"England","tournamentName":"PREMIER LEAGUE","eventNumber":0,"eventDateTime":"2026-11-08T16:00:00","eventName":"CRYSTAL PALACE vs LIVERPOOL"},{"tournamentID":3092452,"eventID":9600314,"eventDetailID":773036240,"eventDetailNumber":1,"eventDetailName":"MAN UTD","eventDetailNameExtra":null,"eventDetailOfferedOdds":1.2,"fracOfferedOdd":"12/10","eventDetailOdd":1.2,"eventDetailOverrideOdds":false,"fK_EventDetailStatusID":1,"eventBetTypeDetailMapID":849368010,"eventDetailStartingOdd":1.2,"fracStartingOdd":"12/10","eventDetailPreviousOdd":1.2,"fracPreviousOdd":"12/10","eventBetTypeMapID":233771318,"eventStatusID":1,"betTypeID":15,"betTypeDesc":"Full Time","countryName":"England","tournamentName":"PREMIER LEAGUE","eventNumber":0,"eventDateTime":"2026-11-08T18:30:00","eventName":"MAN UTD vs ASTON VILLA"},{"tournamentID":3092452,"eventID":9600314,"eventDetailID":773036241,"eventDetailNumber":2,"eventDetailName":"DRAW","eventDetailNameExtra":null,"eventDetailOfferedOdds":2.35,"fracOfferedOdd":"47/20","eventDetailOdd":2.35,"eventDetailOverrideOdds":false,"fK_EventDetailStatusID":1,"eventBetTypeDetailMapID":849368011,"eventDetailStartingOdd":2.7,"fracStartingOdd":"26/10","eventDetailPreviousOdd":2.35,"fracPreviousOdd":"47/20","eventBetTypeMapID":233771318,"eventStatusID":1,"betTypeID":15,"betTypeDesc":"Full Time","countryName":"England","tournamentName":"PREMIER LEAGUE","eventNumber":0,"eventDateTime":"2026-11-08T18:30:00","eventName":"MAN UTD vs ASTON VILLA"},{"tournamentID":3092452,"eventID":9600314,"eventDetailID":773036242,"eventDetailNumber":3,"eventDetailName":"ASTON VILLA","eventDetailNameExtra":null,"eventDetailOfferedOdds":2.1,"fracOfferedOdd":"21/10","eventDetailOdd":2.1,"eventDetailOverrideOdds":false,"fK_EventDetailStatusID":1,"eventBetTypeDetailMapID":849368012,"eventDetailStartingOdd":2.1,"fracStartingOdd":"21/10","eventDetailPreviousOdd":2.1,"fracPreviousOdd":"21/10","eventBetTypeMapID":233771318,"eventStatusID":1,"betTypeID":15,"betTypeDesc":"Full Time","countryName":"England","tournamentName":"PREMIER LEAGUE","eventNumber":0,"eventDateTime":"2026-11-08T18:30:00","eventName":"MAN UTD vs ASTON VILLA"}]};
+
+  function renderMatches(data, container) {
+    if (!data || !data.tournamentMarkets) return;
+    var events = {};
+    data.tournamentMarkets.forEach(function(market) {
+      if (market.betTypeID === 15) {
+        if (!events[market.eventID]) {
+          events[market.eventID] = {
+            id: market.eventID,
+            name: market.eventName,
+            date: new Date(market.eventDateTime),
+            odds: {}
+          };
+        }
+        events[market.eventID].odds[market.eventDetailNumber] = {
+          label: market.eventDetailName,
+          value: market.eventDetailOfferedOdds
+        };
+      }
+    });
+
+    container.innerHTML = '';
+    Object.keys(events).forEach(function(id) {
+      var match = events[id];
+      var day = String(match.date.getDate()).padStart(2, '0');
+      var month = String(match.date.getMonth() + 1).padStart(2, '0');
+      var hours = String(match.date.getHours()).padStart(2, '0');
+      var minutes = String(match.date.getMinutes()).padStart(2, '0');
+      var formattedDate = day + '/' + month + ' - ' + hours + ':' + minutes;
+
+      var home = match.odds[1] || { label: 'Home', value: '-' };
+      var draw = match.odds[2] || { label: 'Draw', value: '-' };
+      var away = match.odds[3] || { label: 'Away', value: '-' };
+
+      var cardHtml = '<div class="match-card">'
+        + '<div class="card-header">'
+        +   '<div class="match-title">' + match.name + '</div>'
+        +   '<div class="match-meta">'
+        +     '<a href="https://www.hollywoodbets.net" class="more-link" data-wt-label="More Odds: ' + match.name + '">'
+        +       '<svg viewBox="0 0 24 24"><path d="M4 10h4v10H4zM10 4h4v16h-4zM16 14h4v6h-4z"></path></svg>'
+        +       'more &gt;'
+        +     '</a>'
+        +     '<div class="match-date">' + formattedDate + '</div>'
+        +   '</div>'
+        + '</div>'
+        + '<div class="odds-row">'
+        +   '<a href="https://www.hollywoodbets.net" class="odd-box" data-wt-label="' + match.name + ' - ' + home.label + ': ' + home.value + '">'
+        +     '<span class="odd-label">' + home.label + '</span>'
+        +     '<span class="odd-value">' + home.value + '</span>'
+        +   '</a>'
+        +   '<a href="https://www.hollywoodbets.net" class="odd-box" data-wt-label="' + match.name + ' - ' + draw.label + ': ' + draw.value + '">'
+        +     '<span class="odd-label">' + draw.label + '</span>'
+        +     '<span class="odd-value">' + draw.value + '</span>'
+        +   '</a>'
+        +   '<a href="https://www.hollywoodbets.net" class="odd-box" data-wt-label="' + match.name + ' - ' + away.label + ': ' + away.value + '">'
+        +     '<span class="odd-label">' + away.label + '</span>'
+        +     '<span class="odd-value">' + away.value + '</span>'
+        +   '</a>'
+        + '</div>'
+        + '</div>';
+      container.insertAdjacentHTML('beforeend', cardHtml);
+    });
+  }
+
+  async function loadFeed() {
+    var container = document.getElementById('feed-container');
+    if (!container) return;
+    var data = null;
+    try {
+      var res = await fetch('feed/premier-league-feed-2026-11-08.json');
+      if (res.ok) {
+        data = await res.json();
+      }
+    } catch (err) {
+      // Fallback seamlessly if CSP connect-src or local file:// blocks fetch
+    }
+
+    if (!data || !data.tournamentMarkets || data.tournamentMarkets.length === 0) {
+      data = FALLBACK_FEED;
+    }
+
+    renderMatches(data, container);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadFeed);
+  } else {
+    loadFeed();
+  }
+})();
+</script>
+<!-- ADKIT WIDGET END -->
+</template>
+
+<script>
+/* AdKit test page: runs the widget like AdKit does on a publisher's site. You don't need to edit this. */
+(function () {
+  var COLLAPSED = {"width":420,"height":120}, EXPANDED = {"width":430,"height":680}, MAX = {"width":1200,"height":1200};
+  var CSP = "default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline' https:; img-src 'self' data: https: blob:; font-src https: data:; media-src https:; connect-src 'self' data: https:; frame-src 'none'; form-action 'none'; base-uri 'none'";
+  var BRIDGE = "(function () {\n  var root = document.documentElement;\n  function post(m) { m.__wt = 1; parent.postMessage(m, '*'); }\n  function size(o) { o = o || {}; return { width: Number(o.width) || undefined, height: Number(o.height) || undefined }; }\n  var api = {\n    isOpen: function () { return root.classList.contains('wt-open'); },\n    expand: function (o) { var s = size(o); root.classList.add('wt-open'); post({ type: 'expand', width: s.width, height: s.height }); },\n    collapse: function () { root.classList.remove('wt-open'); post({ type: 'collapse' }); },\n    toggle: function (o) { api.isOpen() ? api.collapse() : api.expand(o); },\n    click: function (url, label) { post({ type: 'click', url: String(url || ''), label: String(label || '').slice(0, 120) }); },\n    track: function (label) { post({ type: 'interaction', label: String(label || '').slice(0, 120) }); }\n  };\n  window.AdKit = window.WidgetTrack = api; // WidgetTrack: pre-rename name, kept for existing code\n  if (false) root.classList.add('wt-open');\n  function text(el) { return (el.getAttribute('data-wt-label') || el.textContent || '').replace(/\\s+/g, ' ').trim().slice(0, 120); }\n  function opts(el) { return { width: el.getAttribute('data-wt-width'), height: el.getAttribute('data-wt-height') }; }\n  document.addEventListener('click', function (e) {\n    var el = e.target && e.target.closest && e.target.closest('a[href],[data-wt-expand],[data-wt-collapse],[data-wt-toggle],[data-wt-track]');\n    if (!el) return;\n    if (el.hasAttribute('data-wt-expand')) { e.preventDefault(); api.expand(opts(el)); return; }\n    if (el.hasAttribute('data-wt-collapse')) { e.preventDefault(); api.collapse(); return; }\n    if (el.hasAttribute('data-wt-toggle')) { e.preventDefault(); api.toggle(opts(el)); return; }\n    if (el.tagName === 'A') {\n      var href = el.getAttribute('href') || '';\n      if (/^https?:\\/\\//i.test(href)) { e.preventDefault(); api.click(href, text(el)); return; }\n    }\n    if (el.hasAttribute('data-wt-track')) api.track(el.getAttribute('data-wt-track') || text(el));\n  }, true);\n})();";
+  var MACROS = {"WIDGET_ID":"w-1793894464824","WIDGET_NAME":"Premier League Odds","WIDGET_TITLE":"Premier League Odds","SITE":"example.com","ROUTE":"direct"};
+  MACROS.CACHEBUSTER = String(Math.floor(Math.random() * 1e10));
+  MACROS.TIMESTAMP = String(Date.now());
+
+  var frame = document.getElementById('adkit-frame');
+  var source = document.getElementById('adkit-widget');
+  var log = document.getElementById('adkit-log');
+  if (!frame || !source) return;
+
+  function note(text) {
+    console.log('[AdKit test page] ' + text);
+    if (!log) return;
+    var li = document.createElement('li');
+    li.textContent = new Date().toLocaleTimeString() + '  ' + text;
+    log.insertBefore(li, log.firstChild);
+    while (log.children.length > 8) log.removeChild(log.lastChild);
+  }
+  function size(s) { frame.style.width = s.width + 'px'; frame.style.height = s.height + 'px'; }
+  function clamp(w, h) {
+    return {
+      width: Math.min(MAX.width, Math.max(120, Number(w) || EXPANDED.width)),
+      height: Math.min(MAX.height, Math.max(60, Number(h) || EXPANDED.height))
+    };
+  }
+
+  var code = source.innerHTML.replace(/\{\{\s*([A-Z_]+)\s*\}\}/g, function (whole, name) {
+    return Object.prototype.hasOwnProperty.call(MACROS, name) ? MACROS[name] : whole;
+  });
+  frame.srcdoc = '<!doctype html><html><head><meta charset="utf-8">'
+    + '<meta http-equiv="Content-Security-Policy" content="' + CSP + '">'
+    + '<meta name="viewport" content="width=device-width, initial-scale=1">'
+    + '<style>html,body{margin:0;background:transparent}</style>'
+    + '<script>' + BRIDGE + '<\/script></head><body>' + code + '</body></html>';
+  size(COLLAPSED);
+
+  window.addEventListener('message', function (e) {
+    if (e.source !== frame.contentWindow) return;
+    var d = e.data;
+    if (!d || d.__wt !== 1) return;
+    if (d.type === 'expand') { var s = clamp(d.width, d.height); size(s); note('Opened (' + s.width + ' x ' + s.height + ')'); }
+    else if (d.type === 'collapse') { size(COLLAPSED); note('Closed'); }
+    else if (d.type === 'click' && /^https?:\/\//i.test(d.url || '')) {
+      note('Click: ' + (d.label || d.url) + ' -> ' + d.url + ' (AdKit counts it and adds UTMs)');
+      window.open(d.url, '_blank', 'noopener');
+    }
+    else if (d.type === 'interaction') { note('Interaction: ' + (d.label || 'Custom interaction')); }
+  });
+
+  var outline = document.getElementById('adkit-outline');
+  if (outline) outline.addEventListener('change', function () { frame.classList.toggle('adkit-outline', outline.checked); });
+})();
+</script>
+</body>
+</html>
