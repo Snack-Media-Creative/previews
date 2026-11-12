@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;0,900;1,700;1,900&display=swap">
+
+<style>
+    /* ---------- Skin layout (from the approved Adnami skin.html) ---------- */
+
+    .b365-skin {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        font-family: 'Roboto', Arial, sans-serif;
+    }
+
+    /* Background: zooms 1.2 -> 1 over 20s, then holds */
+    .b365-bg {
+        position: absolute;
+        top: 0; right: 0; bottom: 0; left: 0;
+        overflow: hidden;
+        z-index: 0;
+        background: linear-gradient(180deg, #253d34 0%, #2c6f55 30%, #173d2e 60%, #31926b 86%, #34a87a 100%);
+    }
+
+    .b365-bg-img {
+        position: absolute;
+        top: 0; right: 0; bottom: 0; left: 0;
+        background: url('https://aka.clipcentric.com/resfile.phtml?f=9315&t=1792179263&s=5PT0aBp0') center center / cover no-repeat;
+        transform-origin: center center;
+        animation: b365BgZoom 20s ease-out forwards;
+    }
+
+    @keyframes b365BgZoom {
+        from { transform: scale(1.2); }
+        to { transform: scale(1); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .b365-bg-img { animation: none; }
+    }
+
+    /* Gutters either side of the site content (VideoCelts: 1200px) */
+    .b365-grid {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: 1fr 1200px 1fr;
+        width: 100%;
+        height: 100vh;
+    }
+
+    .b365-middle {
+        pointer-events: none;
+    }
+
+    .b365-col {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        height: 100vh;
+        text-align: center;
+        cursor: pointer;
+        overflow: hidden;
+    }
+
+    .b365-col img {
+        display: block;
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .b365-left {
+        background: url('https://aka.clipcentric.com/resfile.phtml?f=9312&t=1792179116&s=JH5LFgue') 50% 75% / 550px no-repeat;
+    }
+
+    .b365-top {
+        width: 100%;
+        margin-top: 50px;
+    }
+
+    .b365-bottom {
+        width: 100%;
+    }
+
+    .b365-mid {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+
+    /* ---------------------------- Odds card ----------------------------- */
+
+    .b365-odds {
+        width: 90%;
+        max-width: 280px;
+        margin: auto;
+        font-family: 'Roboto', Arial, sans-serif;
+        color: #ffffff;
+    }
+
+    .b365-odds[hidden] {
+        display: none;
+    }
+
+    .b365-odds .bet-card {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        cursor: pointer;
+        background: linear-gradient(180deg, #122a27cd 0%, #0d1e1c82 100%);
+        border: 1px solid #ffffff;
+        border-radius: 12px;
+        box-shadow:
+            0 0 15px rgba(93, 228, 156, 1),
+            0 0 0 1px #5de49c,
+            0 0 0 2px #5de49c inset,
+            0 0 15px #5de49c inset;
+    }
+
+    .b365-odds .card-content {
+        padding: 15px;
+        text-align: left;
+    }
+
+    .b365-odds .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .b365-odds .market-name {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 900;
+        font-style: italic;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        color: #a7f2e1;
+    }
+
+    .b365-odds .market-name span {
+        color: #ffffff;
+    }
+
+    .b365-odds .odds-container {
+        text-align: right;
+        white-space: nowrap;
+    }
+
+    .b365-odds .unboosted-odds {
+        margin-right: 8px;
+        font-size: 11px;
+        font-weight: 700;
+        text-decoration: line-through;
+        color: #88a39e;
+    }
+
+    .b365-odds .main-odds {
+        font-size: 16px;
+        font-weight: 900;
+        color: #f6ca3f;
+    }
+
+    .b365-odds .divider {
+        height: 1px;
+        margin: 5px 0;
+        border: none;
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .b365-odds .event-name {
+        margin-bottom: 10px;
+        font-size: 13px;
+        font-weight: 900;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+    }
+
+    .b365-odds .event-name .v {
+        font-size: 0.8em;
+        font-weight: 700;
+        text-transform: lowercase;
+        color: #5de49c;
+    }
+
+    .b365-odds .selections-list {
+        position: relative;
+        max-height: 150px;   /* about 5 selections; longer lists scroll */
+        overflow: hidden;
+    }
+
+    .b365-odds .selections-list::before {
+        content: '';
+        position: absolute;
+        top: 15px;
+        bottom: 10px;
+        left: 9px;
+        width: 2px;
+        background-color: #5de49c;
+    }
+
+    .b365-odds .selection-item {
+        position: relative;
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+        font-size: 13px;
+        color: #e0e6e5;
+    }
+
+    .b365-odds .selection-item:last-child {
+        margin-bottom: 0;
+    }
+
+    .b365-odds .check-icon {
+        display: flex;
+        flex-shrink: 0;
+        justify-content: center;
+        align-items: center;
+        width: 20px;
+        height: 20px;
+        margin-right: 15px;
+        border: 2px solid #5de49c;
+        border-radius: 50%;
+        background-color: #122a27;
+    }
+
+    .b365-odds .check-icon svg {
+        width: 12px;
+        height: 12px;
+        fill: none;
+        stroke: #5de49c;
+        stroke-width: 3;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    .b365-odds .card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        padding: 5px 20px;
+        background-color: #79efae;
+    }
+
+    .b365-odds .footer-col {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .b365-odds .footer-col.right {
+        text-align: right;
+    }
+
+    .b365-odds .footer-label {
+        font-size: 13px;
+        color: #1a3830;
+    }
+
+    .b365-odds .footer-val {
+        font-size: 16px;
+        font-weight: 900;
+        letter-spacing: -0.5px;
+        color: #000000;
+    }
+</style>
+</head>
+<body>
+<div class="b365-skin">
+
+    <div class="b365-bg"><div class="b365-bg-img"></div></div>
+
+    <div class="b365-grid">
+
+        <div class="b365-col b365-left">
+            <div class="b365-top"><img src="https://aka.clipcentric.com/resfile.phtml?f=9313&t=1792179162&s=eaQDjYff" alt=""></div>
+            <div class="b365-mid"></div>
+            <div class="b365-bottom"><img src="https://aka.clipcentric.com/file/2326788/orig/1792758076/OJVRhOv1?f=auto" alt=""></div>
+        </div>
+
+        <div class="b365-middle"></div>
+
+        <div class="b365-col b365-right">
+            <div class="b365-top"><img src="https://aka.clipcentric.com/resfile.phtml?f=9313&t=1792179162&s=eaQDjYff" alt=""></div>
+            <div class="b365-mid"><div class="b365-odds" id="b365-odds" hidden></div></div>
+            <div class="b365-bottom"><img src="https://aka.clipcentric.com/file/2326788/orig/1792758076/OJVRhOv1?f=auto" alt=""></div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+!function () {
+
+    'use strict';
+
+    /* --------------------------- Layer setup ---------------------------- */
+
+    const SKIN_LAYER = 'skin';
+
+    let ready = false;
+
+    function setup(layer) {
+
+        if (ready) {
+            return;
+        }
+
+        ready = true;
+
+        const topDoc = layer.ownerDocument;
+
+        /* Fill the window, behind the content */
+        CCAD.addStyle('.cc-b365-skin { position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; margin: 0 !important; transform: none !important; scale: none !important; z-index: -1 !important; }', undefined, true);
+        CCAD.addStyle('.cc-b365-skin > *, .cc-b365-skin iframe { width: 100% !important; height: 100% !important; }', undefined, true);
+
+        /* Anything painted on <body> / <html> would cover a layer placed
+           behind the content, so clear it while the skin is on */
+        CCAD.addStyle('body.cc-b365-skin-on, html.cc-b365-skin-on { background: transparent !important; }', undefined, true);
+        CCAD.addClass(topDoc.body, 'cc-b365-skin-on');
+        CCAD.addClass(topDoc.documentElement, 'cc-b365-skin-on');
+
+        /* Stop Clipcentric resizing the layer to its editor size */
+        CCAD.enableSizing(SKIN_LAYER, false);
+    }
+
+    function moveBehind() {
+
+        const layer = CCAD.getLayer(SKIN_LAYER);
+
+        if (!layer) {
+            return;
+        }
+
+        setup(layer);
+
+        const topBody = layer.ownerDocument.body;
+
+        if (layer.parentNode !== topBody) {
+            CCAD.insertLayer(SKIN_LAYER, topBody, topBody.firstChild);
+        }
+
+        if (!CCAD.hasClass(layer, 'cc-b365-skin')) {
+            CCAD.addClass(layer, 'cc-b365-skin');
+        }
+    }
+
+    moveBehind();
+
+    window.addEventListener('resize', moveBehind);
+    CCAD.addEventListener('layeropen', moveBehind);
+
+    CCAD.onAdUnload(function () {
+        window.removeEventListener('resize', moveBehind);
+        CCAD.removeEventListener('layeropen', moveBehind);
+    });
+
+    /* ------------------------------ Clicks ------------------------------ */
+
+    /* The skin sits behind the page, so the site's own <body> catches every
+       click before it can reach this layer. Clicks are handled instead by
+       transparent click zones on the top page, over the two gutters and the
+       odds card, which sit above the page but never over the site content.
+       Clicks on visible background around the content ("Background") are
+       picked up from the page itself. */
+    const CLICK_URL = 'http://bet365.com/?utm_medium=CPM&utm_source=DISPLAY&utm_campaign=FOOTBALL&affiliate=365_04185872',
+          CONTENT_WIDTH = 1200;
+
+    let zones = null,
+        cardUrl = null;
+
+    function makeZone(topDoc, label, getUrl) {
+
+        const zone = topDoc.createElement('div');
+
+        zone.className = 'cc-b365-zone';
+        zone.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            CCAD.click(getUrl(), label);
+        });
+
+        topDoc.body.appendChild(zone);
+
+        return zone;
+    }
+
+    function onPageClick(e) {
+        const t = e.target;
+        if (t === t.ownerDocument.body || t === t.ownerDocument.documentElement) {
+            CCAD.click(CLICK_URL, 'Background');
+        }
+    }
+
+    function setZone(zone, left, top, width, height) {
+        zone.style.left = Math.round(left) + 'px';
+        zone.style.top = Math.round(top) + 'px';
+        zone.style.width = Math.max(0, Math.round(width)) + 'px';
+        zone.style.height = Math.max(0, Math.round(height)) + 'px';
+    }
+
+    function updateZones() {
+
+        const layer = CCAD.getLayer(SKIN_LAYER);
+
+        if (!layer) {
+            return;
+        }
+
+        const topDoc = layer.ownerDocument;
+
+        if (!zones) {
+
+            CCAD.addStyle('.cc-b365-zone { position: fixed; z-index: 99; cursor: pointer; background: transparent; }', undefined, true);
+            CCAD.addStyle('.cc-b365-zone-card { z-index: 100; }', undefined, true);
+
+            zones = {
+                left: makeZone(topDoc, 'Gutter', function () { return CLICK_URL; }),
+                right: makeZone(topDoc, 'Gutter', function () { return CLICK_URL; }),
+                card: makeZone(topDoc, 'Bet Slip', function () { return cardUrl || CLICK_URL; })
+            };
+
+            zones.card.classList.add('cc-b365-zone-card');
+
+            topDoc.addEventListener('click', onPageClick);
+        }
+
+        const vw = topDoc.documentElement.clientWidth,
+              vh = topDoc.defaultView.innerHeight,
+              gutter = Math.max(0, (vw - CONTENT_WIDTH) / 2);
+
+        setZone(zones.left, 0, 0, gutter, vh);
+        setZone(zones.right, vw - gutter, 0, gutter, vh);
+
+        /* The skin fills the window from the top-left corner, so positions
+           inside it are window positions */
+        const card = document.querySelector('.bet-card');
+
+        if (card && card.offsetWidth && gutter) {
+            const r = card.getBoundingClientRect();
+            setZone(zones.card, r.left, r.top, r.width, r.height);
+        } else {
+            setZone(zones.card, 0, 0, 0, 0);
+        }
+    }
+
+    /* Keep the zones in place */
+    let zoneTimers = [];
+
+    function settleZones() {
+        zoneTimers.forEach(clearTimeout);
+        zoneTimers = [0, 100, 500, 1000, 2000, 4000].map(function (d) {
+            return setTimeout(updateZones, d);
+        });
+    }
+
+    settleZones();
+
+    window.addEventListener('resize', updateZones);
+    CCAD.addEventListener('layeropen', settleZones);
+
+    CCAD.onAdUnload(function () {
+
+        zoneTimers.forEach(clearTimeout);
+        window.removeEventListener('resize', updateZones);
+        CCAD.removeEventListener('layeropen', settleZones);
+
+        if (zones) {
+            const topDoc = zones.left.ownerDocument;
+            topDoc.removeEventListener('click', onPageClick);
+            [zones.left, zones.right, zones.card].forEach(function (zone) {
+                if (zone.parentNode) {
+                    zone.parentNode.removeChild(zone);
+                }
+            });
+        }
+    });
+
+    /* ---------------------------- Odds card ----------------------------- */
+
+    const FEED_URL = 'https://snack-feeds.b-cdn.net/bet365/feeds/snack-next-bet-builder.xml',
+          FALLBACK_URL = CLICK_URL,
+          STAKE = 10,
+          MAX_SELECTIONS = 5,          /* prefer bet builders with up to this many selections */
+          SCROLL_MS = 5000,            /* long lists: scroll down over 5s, hold 5s, back up */
+          HOLD_MS = 5000;
+
+    function getContainer() {
+        const byId = document.getElementById('b365-odds');
+
+        if (byId) {
+            return byId;
+        }
+
+        const layer = CCAD.getLayer(SKIN_LAYER);
+        return layer ? layer.querySelector('#b365-odds') : null;
+    }
+
+    function el(tag, className, text) {
+        const node = document.createElement(tag);
+
+        if (className) {
+            node.className = className;
+        }
+
+        if (text != null) {
+            node.textContent = text;
+        }
+
+        return node;
+    }
+
+    function calculateReturn(odds) {
+        if (!odds) {
+            return '--';
+        }
+
+        if (odds.indexOf('/') > -1) {
+            const parts = odds.split('/'),
+                  decimal = parseFloat(parts[0]) / parseFloat(parts[1]) + 1;
+
+            return isNaN(decimal) ? '--' : (STAKE * decimal).toFixed(2);
+        }
+
+        const value = parseFloat(odds);
+        return isNaN(value) ? '--' : (STAKE * value).toFixed(2);
+    }
+
+    function pickRandomMarket(xml) {
+        const markets = [];
+
+        Array.prototype.forEach.call(xml.getElementsByTagName('Event'), function (eventNode) {
+            Array.prototype.forEach.call(eventNode.getElementsByTagName('Market'), function (marketNode) {
+                markets.push({
+                    eventName: eventNode.getAttribute('Name') || '',
+                    market: marketNode
+                });
+            });
+        });
+
+        if (!markets.length) {
+            return null;
+        }
+
+        /* Prefer bet builders that fit the card without scrolling */
+        const short = markets.filter(function (m) {
+            return m.market.getElementsByTagName('Participant').length <= MAX_SELECTIONS;
+        });
+
+        const pool = short.length ? short : markets;
+
+        return pool[Math.floor(Math.random() * pool.length)];
+    }
+
+    function buildEventName(name) {
+        const wrap = el('div', 'event-name'),
+              parts = name.split(' v ');
+
+        if (parts.length === 2) {
+            wrap.appendChild(document.createTextNode(parts[0] + ' '));
+            wrap.appendChild(el('span', 'v', 'v'));
+            wrap.appendChild(document.createTextNode(' ' + parts[1]));
+        } else {
+            wrap.textContent = name;
+        }
+
+        return wrap;
+    }
+
+    function buildSelection(name) {
+        const item = el('div', 'selection-item'),
+              icon = el('div', 'check-icon');
+
+        icon.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+        item.appendChild(icon);
+        item.appendChild(el('span', null, name));
+
+        return item;
+    }
+
+    function buildCard(pick) {
+        const market = pick.market,
+              unboosted = market.getAttribute('UnBoostedOdds'),
+              odds = market.getAttribute('Odds') || '',
+              betslipUrl = market.getAttribute('betslip') || FALLBACK_URL,
+              participants = market.getElementsByTagName('Participant');
+
+        let oddsForReturn = market.getAttribute('OddsDecimal');
+
+        /* Card */
+        const card = el('div', 'bet-card'),
+              content = el('div', 'card-content');
+
+        card.setAttribute('role', 'link');
+
+        /* Header: BET BUILDER + odds */
+        const header = el('div', 'card-header'),
+              title = el('h3', 'market-name'),
+              oddsWrap = el('div', 'odds-container');
+
+        title.appendChild(el('span', null, 'BET'));
+        title.appendChild(document.createTextNode(' BUILDER'));
+
+        if (unboosted) {
+            oddsWrap.appendChild(el('span', 'unboosted-odds', unboosted));
+        }
+        oddsWrap.appendChild(el('span', 'main-odds', odds));
+
+        header.appendChild(title);
+        header.appendChild(oddsWrap);
+        content.appendChild(header);
+        content.appendChild(el('hr', 'divider'));
+
+        /* Event + selections */
+        content.appendChild(buildEventName(pick.eventName));
+
+        const list = el('div', 'selections-list');
+
+        Array.prototype.forEach.call(participants, function (p) {
+            if (!oddsForReturn) {
+                oddsForReturn = p.getAttribute('Odds');
+            }
+            list.appendChild(buildSelection(p.getAttribute('Name') || ''));
+        });
+
+        content.appendChild(list);
+        card.appendChild(content);
+
+        /* Footer: stake / return */
+        const footer = el('div', 'card-footer'),
+              stakeCol = el('div', 'footer-col'),
+              returnCol = el('div', 'footer-col right');
+
+        stakeCol.appendChild(el('span', 'footer-label', 'Stake'));
+        stakeCol.appendChild(el('span', 'footer-val', '£' + STAKE.toFixed(2)));
+        returnCol.appendChild(el('span', 'footer-label', 'To Return'));
+        returnCol.appendChild(el('span', 'footer-val', '£' + calculateReturn(oddsForReturn)));
+
+        footer.appendChild(stakeCol);
+        footer.appendChild(returnCol);
+        card.appendChild(footer);
+
+        /* Click: deep link to this bet slip (handled by the card click zone) */
+        cardUrl = betslipUrl;
+
+        return card;
+    }
+
+    function hide(container, reason) {
+        container.hidden = true;
+        CCAD.track(reason);
+    }
+
+    function render(container, xmlString) {
+
+        const xml = new DOMParser().parseFromString(xmlString, 'text/xml');
+
+        const pick = pickRandomMarket(xml);
+
+        if (!pick) {
+            hide(container, 'Odds Feed Empty');
+            return;
+        }
+
+        container.textContent = '';
+        container.appendChild(buildCard(pick));
+        container.hidden = false;
+
+        startAutoScroll(container.querySelector('.selections-list'));
+        settleZones();
+    }
+
+    /* Long selection lists scroll down and back up so every selection is seen
+       while the card stays a fixed size (this is what the Adnami build intended) */
+    let scrollFrame = null;
+
+    function startAutoScroll(list) {
+
+        if (!list || list.scrollHeight <= list.clientHeight + 1) {
+            return;
+        }
+
+        if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            list.style.overflowY = 'auto';
+            return;
+        }
+
+        const cycle = (SCROLL_MS + HOLD_MS) * 2;
+
+        function tick(now) {
+
+            const t = now % cycle,
+                  range = list.scrollHeight - list.clientHeight;
+
+            let progress;
+
+            if (t < SCROLL_MS) {
+                progress = t / SCROLL_MS;
+            } else if (t < SCROLL_MS + HOLD_MS) {
+                progress = 1;
+            } else if (t < SCROLL_MS * 2 + HOLD_MS) {
+                progress = 1 - (t - SCROLL_MS - HOLD_MS) / SCROLL_MS;
+            } else {
+                progress = 0;
+            }
+
+            /* ease in-out */
+            list.scrollTop = range * (1 - Math.cos(progress * Math.PI)) / 2;
+
+            scrollFrame = requestAnimationFrame(tick);
+        }
+
+        scrollFrame = requestAnimationFrame(tick);
+
+        CCAD.onAdUnload(function () {
+            cancelAnimationFrame(scrollFrame);
+        });
+    }
+
+    const container = getContainer();
+
+    if (!container) {
+        return;
+    }
+
+    fetch(FEED_URL)
+        .then(function (response) {
+            if (!response.ok) {
+                throw new Error('HTTP ' + response.status);
+            }
+            return response.text();
+        })
+        .then(function (xmlString) {
+            render(container, xmlString);
+        })
+        .catch(function () {
+            hide(container, 'Odds Feed Error');
+        });
+
+}();
+</script>
+
+</body>
+</html>
